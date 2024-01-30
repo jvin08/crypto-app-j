@@ -2,7 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+
+/* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
@@ -30,4 +31,24 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+} */
+.loading {
+    width: 1rem;
+    height: 1rem;
+    margin: 0 5px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    border-top-color: hsl(205, 78%, 60%);
+    animation: spinner 0.6s linear infinite;
 }
+@keyframes spinRight {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  @keyframes spinner {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
