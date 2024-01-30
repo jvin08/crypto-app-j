@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
-
+//this is a home page
 const Home = () => {
   return (
     <div className='flex items-center '>
