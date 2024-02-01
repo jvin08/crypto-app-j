@@ -11,7 +11,6 @@ export const TopNavbar: React.FC = () => {
     const { data: dataBTC, error: errorBTC, isLoading: isLoadingBTC } = useGetCoinsDataQuery('')
     const newData = data?.data
     const btcData = dataBTC?.[0]
-// console.log(dataBTC);
 
     const market = {
         totalMarket: Number((btcData?.market_cap / (newData?.market_cap_percentage['btc'] / 100) / Math.pow(10,12)).toFixed(2)) ,

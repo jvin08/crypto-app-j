@@ -2,9 +2,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-      loader: 'default',
-      path: '/_next/image',
-      domains: ['assets.coingecko.com'], // Add the domain of the remote server
+        remotePatterns: [
+            {
+            protocol: 'https',
+            hostname: '**.coingecko.com',
+            port: '',
+        }
+    ]
+    //   domains: ['assets.coingecko.com'], // Add the domain of the remote server
     },
   };
   

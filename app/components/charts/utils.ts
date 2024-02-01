@@ -1,9 +1,12 @@
 
 export const options = {
     responsive: true,
+    maintainAspectRatio: false,
+    hitRadius: 50,
     scales: {
       y: {
         display: false, // Hide Y-axis values
+        
         ticks: {
           display: false,
         },
@@ -12,7 +15,7 @@ export const options = {
         // You can customize the X-axis as needed
         display: false,
         ticks: {
-          display: true,          
+          display: false,
         },
         grid: {
           display: false, // Hide grid lines on X-axis
@@ -27,15 +30,14 @@ export const options = {
     },
   };
 
-export const getChartData = (time: number[], prices: number[]) => {
+export const getChartData = (time: number[], prices: number[], pricesTwo: number[]) => {
   return {
     labels: time,
     datasets: [
         {
         fill: true,
-        tension: 0.55,
+        tension: 0.75,
         label: "$",
-        stepSize: 10,
         data: prices,
         borderColor: "#7878FA",
         borderWidth: 1.5,
@@ -43,10 +45,25 @@ export const getChartData = (time: number[], prices: number[]) => {
         backgroundColor: (context: any) => {
             const gradient = context.chart.ctx.createLinearGradient(0, 0, 0, 400);
             gradient.addColorStop(0, "#7878FA");
-            gradient.addColorStop(0.75, "#E6E8EC");
+            gradient.addColorStop(0.55, "#FFFFFF");
             return gradient;
         },
         },
+        {
+            fill: true,
+            tension: 0.75,
+            label: "$",
+            data: pricesTwo,
+            borderColor: "#D878FA",
+            borderWidth: 1.5,
+            pointRadius: 0,
+            backgroundColor: (context: any) => {
+                const gradient = context.chart.ctx.createLinearGradient(0, 0, 0, 400);
+                gradient.addColorStop(0, "#D878FA");
+                gradient.addColorStop(0.55, "#FFFFFF");
+                return gradient;
+            },
+            },
     ],
     };
 
@@ -60,6 +77,7 @@ function getDatesWithHalfYearInterval() {
       newDate.setFullYear(currentDate.getFullYear() - (5-i));
       dates.push(newDate.toISOString().split('T')[0].slice(5,7) + "/" + newDate.toISOString().split('T')[0].slice(2,4))
     }
+    dates.push(currentDate.toISOString().split('T')[0].slice(5,7) + "/" + currentDate.toISOString().split('T')[0].slice(2,4))
     return dates;
   }
   export const fiveYears = getDatesWithHalfYearInterval();
@@ -79,9 +97,10 @@ function getDatesWithHalfYearInterval() {
       dates.push(formatDate(currentDate));
       currentDate.setMonth(currentDate.getMonth() - interval);
     }
+    dates.push(formatDate(currentDate))
     return dates.reverse();
   }
-  export const oneYear = generateDatesWithInterval(2, 7);
+  export const oneYear = generateDatesWithInterval(2, 6);
   
   //one month, 14days, 7days
   function formatDates(date: Date) {
@@ -99,13 +118,13 @@ function getDatesWithHalfYearInterval() {
       dates.push(formatDates(currentDate));
       currentDate.setDate(currentDate.getDate() + interval);
     }
-  
+    dates.push(formatDates(currentDate))
     return dates;
   }
   
   // 14days - 3 and 15, 7 days - 1 and 7, 31 day - 7 and 31
-  export const oneMonth = generateDatesWithIntervals(7, 5);
-  export const fourteenDays = generateDatesWithIntervals(3,5)
+  export const oneMonth = generateDatesWithIntervals(6, 5);
+  export const fourteenDays = generateDatesWithIntervals(2,7)
   export const sevenDays = generateDatesWithIntervals(1,7)
 
   //one day
@@ -123,7 +142,7 @@ function getDatesWithHalfYearInterval() {
       hoursArray.push(formatHour(currentHour));
       currentHour.setHours(currentHour.getHours() + interval);
     }
-  
+    hoursArray.push(formatHour(currentHour))
     return hoursArray;
   }
   

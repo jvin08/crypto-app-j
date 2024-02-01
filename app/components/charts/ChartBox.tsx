@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { useGetCoinsIntervalDataQuery } from "../../lib/marketSlice"
 import CustomButton from '../coinsConvertor/CustomButton'
 import { uid } from 'uid'
 import { LineChart } from './LineChart'
@@ -17,7 +16,7 @@ const ChartBox = () => {
 
 
   return (
-    <div>
+    <div >
         <LineChart range={days} />
         <div className='bg-cryptoblue-200 p-0.5 rounded-md flex w-fit mt-9'>
             {units.map((unit: string, index)=>{

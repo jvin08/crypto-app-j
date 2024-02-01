@@ -1,11 +1,6 @@
 import React from 'react'
 import EmblaCarousel from './EmblaCarousel'
 import { EmblaOptionsType } from 'embla-carousel'
-import {  useGetCoinsDataQuery } from "../../lib/marketSlice"
-
-import './embla.module.css'
-import './sandbox.module.css'
-import './base.module.css'
 
 const OPTIONS: EmblaOptionsType = {
     align: 'start',
