@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { setCompare, selectCompare } from '@/app/lib/dynamicValuesSlice'
+import { setCompare, selectCompare, setCoinOneSymbol, setCoinTwoSymbol } from '@/app/lib/dynamicValuesSlice'
 
 const Compare = () => {
     const dispatch = useDispatch()
@@ -7,7 +7,13 @@ const Compare = () => {
 
     const handleClick = (e: any) => {
         e.preventDefault()
-        dispatch(setCompare(!shouldCompare))
+        if(shouldCompare){
+            dispatch(setCoinOneSymbol(['bitcoin','btc']))
+            dispatch(setCoinTwoSymbol(['','']))
+            dispatch(setCompare(false))
+        } else {
+            dispatch(setCompare(true))
+        }
     }
 
 

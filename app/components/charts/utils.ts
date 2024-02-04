@@ -1,73 +1,4 @@
 
-export const options = {
-    responsive: true,
-    maintainAspectRatio: false,
-    hitRadius: 50,
-    scales: {
-      y: {
-        display: false, // Hide Y-axis values
-        
-        ticks: {
-          display: false,
-        },
-      },
-      x: {
-        // You can customize the X-axis as needed
-        display: false,
-        ticks: {
-          display: false,
-        },
-        grid: {
-          display: false, // Hide grid lines on X-axis
-        },
-      },
-    },
-    plugins: {
-      legend: {
-        display: false,
-      },
-
-    },
-  };
-
-export const getChartData = (time: number[], prices: number[], pricesTwo: number[]) => {
-  return {
-    labels: time,
-    datasets: [
-        {
-        fill: true,
-        tension: 0.75,
-        label: "$",
-        data: prices,
-        borderColor: "#7878FA",
-        borderWidth: 1.5,
-        pointRadius: 0,
-        backgroundColor: (context: any) => {
-            const gradient = context.chart.ctx.createLinearGradient(0, 0, 0, 400);
-            gradient.addColorStop(0, "#7878FA");
-            gradient.addColorStop(0.55, "#FFFFFF");
-            return gradient;
-        },
-        },
-        {
-            fill: true,
-            tension: 0.75,
-            label: "$",
-            data: pricesTwo,
-            borderColor: "#D878FA",
-            borderWidth: 1.5,
-            pointRadius: 0,
-            backgroundColor: (context: any) => {
-                const gradient = context.chart.ctx.createLinearGradient(0, 0, 0, 400);
-                gradient.addColorStop(0, "#D878FA");
-                gradient.addColorStop(0.55, "#FFFFFF");
-                return gradient;
-            },
-            },
-    ],
-    };
-
-}
 //five years
 function getDatesWithHalfYearInterval() {
     const currentDate = new Date();
@@ -77,7 +8,6 @@ function getDatesWithHalfYearInterval() {
       newDate.setFullYear(currentDate.getFullYear() - (5-i));
       dates.push(newDate.toISOString().split('T')[0].slice(5,7) + "/" + newDate.toISOString().split('T')[0].slice(2,4))
     }
-    dates.push(currentDate.toISOString().split('T')[0].slice(5,7) + "/" + currentDate.toISOString().split('T')[0].slice(2,4))
     return dates;
   }
   export const fiveYears = getDatesWithHalfYearInterval();
@@ -123,6 +53,7 @@ function getDatesWithHalfYearInterval() {
   }
   
   // 14days - 3 and 15, 7 days - 1 and 7, 31 day - 7 and 31
+  export const oneQuater = generateDatesWithInterval(1, 3)
   export const oneMonth = generateDatesWithIntervals(6, 5);
   export const fourteenDays = generateDatesWithIntervals(2,7)
   export const sevenDays = generateDatesWithIntervals(1,7)

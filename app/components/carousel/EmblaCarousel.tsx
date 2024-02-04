@@ -26,6 +26,7 @@ interface Coin  {
 
 }
 const EmblaCarousel: React.FC<PropType> = (props) => {
+    
     const shouldCompare = useSelector(selectCompare)
     const {  options } = props
     const [emblaRef, emblaApi] = useEmblaCarousel(options)
@@ -47,9 +48,8 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     e.preventDefault()
     if(shouldCompare){
         if(coinTwo[0]===''){
-            dispatch(setCoinOneSymbol([data?.[0].id, data?.[0].symbol]))
             dispatch(setCoinTwoSymbol(selectedCoin))
-        } else {
+        } else if (selectedCoin[0] !== coinTwo[0] && selectedCoin[0] !== coinOne[0]) {
             dispatch(setCoinOneSymbol(coinTwo))
             dispatch(setCoinTwoSymbol(selectedCoin))
         }

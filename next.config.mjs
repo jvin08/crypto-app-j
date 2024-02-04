@@ -9,7 +9,6 @@ const nextConfig = {
             port: '',
         }
     ]
-    //   domains: ['assets.coingecko.com'], // Add the domain of the remote server
     },
   };
   
