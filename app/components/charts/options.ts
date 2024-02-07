@@ -81,7 +81,7 @@ export const options = {
         backgroundColor: (context: any) => {
             const gradient = context.chart.ctx.createLinearGradient(0, 0, 0, 400);
             gradient.addColorStop(0, "#7878FA");
-            gradient.addColorStop(0.68, "rgba(120, 120, 250, 0.05)");
+            gradient.addColorStop(0.6, "rgba(120, 120, 250, 0)");
             return gradient;
         },
         },
@@ -96,7 +96,7 @@ export const options = {
             backgroundColor: (context: any) => {
                 const gradient = context.chart.ctx.createLinearGradient(0, 0, 0, 400);
                 gradient.addColorStop(0, "#D878FA");
-                gradient.addColorStop(0.68, "rgba(216, 120, 250, 0.05)");
+                gradient.addColorStop(0.6, "rgba(216, 120, 250, 0)");
                 return gradient;
             },
             },
@@ -141,13 +141,13 @@ let period = volumeOne?.length
         case period < 300:
             dataOne = volumeOne?.filter(item => {
                 const minutes = new Date(item[0]).getMinutes()
-                if(minutes >= 0 &&  minutes < 6 || minutes > 25 && minutes < 35 || minutes > 55 && minutes <= 0){
+                if(minutes >= 0 &&  minutes < 6 || minutes > 55 && minutes <= 0){
                     return item
                 }
             })
             dataTwo = volumeTwo?.filter(item => {
                 const minutes = new Date(item[0]).getMinutes()
-                if(minutes >= 0 &&  minutes < 6 || minutes > 25 && minutes < 35 || minutes > 55 && minutes <= 0){
+                if(minutes >= 0 &&  minutes < 6 || minutes > 55 && minutes <= 0){
                     return item
                 }
             })
@@ -169,13 +169,13 @@ let period = volumeOne?.length
             case period < 367: 
             dataOne = volumeOne?.filter(item=>{
                 const day = new Date(item[0]).getDay()
-                if(day === 1 || day === 15){
+                if(day === 1){
                     return item
                 }
             })
             dataTwo = volumeTwo?.filter(item=>{
                 const day = new Date(item[0]).getDay()
-                if(day === 1 || day === 15){
+                if(day === 1){
                     return item
                 }
             })
@@ -236,7 +236,7 @@ let period = volumeOne?.length
         backgroundColor: (context: any) => {
             const gradient = context.chart.ctx.createLinearGradient(0, 0, 0, 400);
             gradient.addColorStop(0, "#7878FA");
-            gradient.addColorStop(0.68, "rgba(120, 120, 250, 0.05)");
+            gradient.addColorStop(0.68, "rgba(120, 120, 250, 0)");
             return gradient;
         },
         },
@@ -251,7 +251,7 @@ let period = volumeOne?.length
             backgroundColor: (context: any) => {
                 const gradient = context.chart.ctx.createLinearGradient(0, 0, 0, 400);
                 gradient.addColorStop(0, "#D878FA");
-                gradient.addColorStop(0.68, "rgba(216, 120, 250, 0.05)");
+                gradient.addColorStop(0.68, "rgba(216, 120, 250, 0)");
                 return gradient;
             },
             },

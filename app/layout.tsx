@@ -8,7 +8,7 @@ import { TopNavbar } from "./components/topnavbar/TopNavbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const store = setupStore('')
+const store = setupStore()
 
 
 export default function RootLayout({
@@ -18,7 +18,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-        
+        <head>
+            <title>Crypto App</title>            
+        </head>
       <body className={`${inter.className} h-full bg-cryptoblue-400`}>
             
         <Provider store={store}>

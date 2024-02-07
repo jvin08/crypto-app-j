@@ -26,16 +26,19 @@ ChartJS.register(
   Legend,
 );
 import { useGetCoinsIntervalDataQuery } from "../../lib/marketSlice"
-import { selectCoinOneSymbol, selectCoinTwoSymbol, selectCompare } from '../../lib/dynamicValuesSlice' 
+import { selectCoinOneSymbol, selectCoinTwoSymbol, selectCompare, selectCurrency } from '../../lib/dynamicValuesSlice' 
 import {  fiveYears, oneYear, oneQuater, oneMonth, fourteenDays, sevenDays, oneDay } from "./utils";
 import { options, barOptions, getChartData, barChartData } from './options'
 import { Header, VolumeHeader } from "./Header";  
+import { selectDarkmode } from "../../lib/dynamicValuesSlice"
+import clsx from "clsx";
 
 export function Charts({range}:{range: number}) { 
     const coin = useSelector(selectCoinOneSymbol)
     const coinTwo = useSelector(selectCoinTwoSymbol)
     const compare = useSelector(selectCompare)
-
+    const currency = useSelector(selectCurrency)
+    const darkmode = useSelector(selectDarkmode)
     //key - chart duration, value - time's step(index of array timeIntervals) minutes or days
     const intervalIndex: { [key: string]: number } = {
         '1': 0,
@@ -50,8 +53,8 @@ export function Charts({range}:{range: number}) {
     const timeIntervals = [oneDay, sevenDays, fourteenDays, oneMonth, oneQuater, oneYear, fiveYears]
 
 
-    const queryPart = `${coin[0]}/market_chart?vs_currency=usd&days=${range}`
-    const queryPartTwo = `${coinTwo[0]}/market_chart?vs_currency=usd&days=${range}`
+    const queryPart = `${coin[0]}/market_chart?vs_currency=${currency.label.toLowerCase()}&days=${range}`
+    const queryPartTwo = `${coinTwo[0]}/market_chart?vs_currency=${currency.label.toLowerCase()}&days=${range}`
 
     const { data, error, isLoading } = useGetCoinsIntervalDataQuery(queryPart)  
     const { data: dataTwo } = useGetCoinsIntervalDataQuery(queryPartTwo)  
@@ -84,7 +87,10 @@ const todayVolume = (Number(volumeOne?.slice(-1)[0][1]) / Math.pow(10,9)).toFixe
 const todayVolumeTwo = compare ? (Number(volumeTwo?.slice(-1)[0][1]) / Math.pow(10,9)).toFixed(3) : ''
 const showCoinTwo = compare && coinTwo[0] !== ''
   return (<div className="flex w-full justify-between">
-                <div className="w-[calc(50%-1rem)] mb-10  rounded-xl bg-cryptoblue-100">
+                <div className={clsx("w-[calc(50%-1rem)] mb-10  rounded-xl ", {
+                    'bg-cryptodark-350': darkmode,
+                    'bg-cryptoblue-100': !darkmode,
+                })}>
                     <div className={compare ? "p-5 pb-10" : "p-5 pb-12"}>
                         <Header dataOne={coin} price={coinOnePrices?.slice(-1)} compare={compare} />
 
@@ -99,16 +105,19 @@ const showCoinTwo = compare && coinTwo[0] !== ''
                         <div className="flex">
                             <p className={compare ? "mt-8 text-cryptoblue-900" : "hidden"}>
                                 <span className="bg-cryptoblue-800 px-2.5 mr-2 rounded-sm"></span>
-                                    {coin[0] + ' $' + priceOne}
+                                    {coin[0] + ` ${currency.sign}` + priceOne}
                             </p>
                             <p className={showCoinTwo ? "mt-8 text-cryptoblue-900" : "hidden"}>
                                 <span className="bg-cryptoblue-700 px-2.5 mr-2 ml-6 rounded-sm"></span>
-                                    {coinTwo[0] + ' $' + priceTwo}
+                                    {coinTwo[0] + ` ${currency.sign}` + priceTwo}
                             </p>
                         </div>
                     </div>
                 </div>
-                <div className="w-[calc(50%-1rem)] mb-10 rounded-xl bg-cryptoblue-100">
+                <div className={clsx("w-[calc(50%-1rem)] mb-10  rounded-xl ", {
+                    'bg-cryptodark-300': darkmode,
+                    'bg-cryptoblue-100': !darkmode,
+                })}>
                     <div className={compare ? "p-5 pb-10" : "p-5 pb-12"}>
                     <VolumeHeader volume={volumeOne?.slice(-1)} compare={compare}/>
 
@@ -123,11 +132,11 @@ const showCoinTwo = compare && coinTwo[0] !== ''
                         <div className="flex">
                             <p className={compare ? "mt-8 text-cryptoblue-900" : "hidden"}>
                                 <span className="bg-cryptoblue-800 px-2.5 mr-2 rounded-sm"></span>
-                                    {coin[0] + ' $' + todayVolume + ' bln'}
+                                    {coin[0] + ` ${currency.sign}` + todayVolume + ' bln'}
                             </p>
                             <p className={showCoinTwo ? "mt-8 text-cryptoblue-900" : "hidden"}>
                                 <span className="bg-cryptoblue-700 px-2.5 mr-2 ml-6 rounded-sm"></span>
-                                    {coinTwo[0] + ' $' + todayVolumeTwo + ' bln'}
+                                    {coinTwo[0] + ` ${currency.sign}` + todayVolumeTwo + ' bln'}
                             </p>
                         </div>
                     </div>

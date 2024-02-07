@@ -1,11 +1,13 @@
 import React from 'react'
 import EmblaCarousel from './EmblaCarousel'
 import { EmblaOptionsType } from 'embla-carousel'
+import Autoplay from 'embla-carousel-autoplay'
 
 const OPTIONS: EmblaOptionsType = {
     align: 'start',
     dragFree: true,
-    containScroll: 'trimSnaps'
+    containScroll: 'trimSnaps',
+    loop: true,
 }
 
 const Carousel = () => {

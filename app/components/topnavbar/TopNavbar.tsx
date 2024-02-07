@@ -1,14 +1,20 @@
 import Coins from "./Coins"
+import { useSelector } from "react-redux"
 import { useGetMarketDataQuery, useGetCoinsDataQuery } from "../../lib/marketSlice"
+import { selectCurrency, selectDarkmode } from "@/app/lib/dynamicValuesSlice"
 import Exchange from "./Exchange"
 import Volume from "./Volume"
 import Cap from "./Cap"
 import FirstCoin from "./FirstCoin"
 import SecondCoin from "./SecondCoin"
+import clsx from "clsx"
 
 export const TopNavbar: React.FC = () => {
+    const currency = useSelector(selectCurrency)
+    const darkmode = useSelector(selectDarkmode)
+    const query = currency.label.toLowerCase()
     const { data, error, isLoading } = useGetMarketDataQuery('')
-    const { data: dataBTC, error: errorBTC, isLoading: isLoadingBTC } = useGetCoinsDataQuery('')
+    const { data: dataBTC, error: errorBTC, isLoading: isLoadingBTC } = useGetCoinsDataQuery(query)
     const newData = data?.data
     const btcData = dataBTC?.[0]
 
@@ -23,7 +29,10 @@ export const TopNavbar: React.FC = () => {
 }
 
   return (
-    <div className='bg-cryptoblue-900 flex justify-center text-xs text-cryptoblue-100 py-3'>
+    <div className={clsx('flex justify-center text-xs text-cryptoblue-100 py-3',{
+        'bg-cryptodark-300': darkmode,
+        'bg-cryptoblue-900': !darkmode,
+    })}>
         <Coins quantity={market.coins}/>
         <Exchange quantity={market.exchange} />
         <Volume quantity={market.totalMarket} isLoading={isLoading} />

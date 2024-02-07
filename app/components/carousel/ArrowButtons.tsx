@@ -14,7 +14,8 @@ import React, {
   }
   
   export const usePrevNextButtons = (
-    emblaApi: EmblaCarouselType | undefined
+    emblaApi: EmblaCarouselType | undefined,
+    onButtonClick?: (emblaApi: EmblaCarouselType) => void
   ): UsePrevNextButtonsType => {
     const [prevBtnDisabled, setPrevBtnDisabled] = useState(true)
     const [nextBtnDisabled, setNextBtnDisabled] = useState(true)
@@ -22,12 +23,15 @@ import React, {
     const onPrevButtonClick = useCallback(() => {
       if (!emblaApi) return
       emblaApi.scrollPrev()
-    }, [emblaApi])
+      if (onButtonClick) onButtonClick(emblaApi)
+
+    }, [emblaApi, onButtonClick])
   
     const onNextButtonClick = useCallback(() => {
       if (!emblaApi) return
       emblaApi.scrollNext()
-    }, [emblaApi])
+      if (onButtonClick) onButtonClick(emblaApi)
+    }, [emblaApi, onButtonClick])
   
     const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
       setPrevBtnDisabled(!emblaApi.canScrollPrev())
@@ -82,7 +86,7 @@ import React, {
     const { children, ...restProps } = props
   
     return (
-        <div className='rounded-full bg-gradient-to-t from-cryptoblue-600 to-cryptoblue-800 p-px'>
+        <div className='rounded-full bg-gradient-to-t from-cryptoblue-600 to-cryptoblue-800 opacity-80 p-px'>
             <button
                 className="z-10 bg-cryptoblue-500 rounded-full text-cryptoblue-100  items-center justify-center cursor-pointer w-9 h-9 bg-opacity-80 touch-manipulation inline-flex no-underline border-0"
                 type="button"
