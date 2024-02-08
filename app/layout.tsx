@@ -1,5 +1,4 @@
 'use client'
-import Head from "next/head";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/navbar/Navbar";
@@ -9,8 +8,7 @@ import { TopNavbar } from "./components/topnavbar/TopNavbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const store = setupStore()
-
+const store = setupStore('')
 
 
 export default function RootLayout({
@@ -20,7 +18,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+        
       <body className={`${inter.className} h-full bg-cryptoblue-400`}>
+            
         <Provider store={store}>
             <TopNavbar />
             <Navbar />

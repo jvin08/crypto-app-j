@@ -1,17 +1,18 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import type { PreloadedState } from 'redux'
 import { marketApi } from './marketSlice'
+import  dynamicValuesReducer  from './dynamicValuesSlice'
 
 const rootReducer = combineReducers({
-  [marketApi.reducerPath]: marketApi.reducer,
+    [marketApi.reducerPath]: marketApi.reducer,
+    dynamicValues: dynamicValuesReducer,
 })
 
-export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
+export const setupStore = (preloadedState: any) => {
   return configureStore({
     reducer: rootReducer,
     middleware: (getDefaultMiddleware) =>
       // adding the api middleware enables caching, invalidation, polling and other features of `rtk-query`
-      getDefaultMiddleware().concat(marketApi.middleware),
+    getDefaultMiddleware().concat(marketApi.middleware),
     preloadedState,
   })
 }
