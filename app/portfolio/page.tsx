@@ -1,13 +1,9 @@
-'use client'
-import React from 'react'
-
-import Head from 'next/head'
-
-
+"use client";
+import React from "react";
+import Head from "next/head";
 const Portfolio = () => {
-
   return (
-    <div className='px-12'>
+    <div className="px-12">
         <Head>
             <title>Crypto App</title>
             <meta name="description" content="Crypto App" />
@@ -15,7 +11,6 @@ const Portfolio = () => {
         </Head>
       Portfolio Page
     </div>
-  )
-}
-
-export default Portfolio
+  );
+};
+export default Portfolio;

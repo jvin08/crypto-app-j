@@ -1,5 +1,4 @@
-import React from 'react'
-
+import React from "react";
 const Logo = () => {
   return (
     <svg width="36" height="20" viewBox="0 0 36 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -13,7 +12,6 @@ const Logo = () => {
         </clipPath>
         </defs>
     </svg>
-  )
-}
-
-export default Logo
+  );
+};
+export default Logo;
