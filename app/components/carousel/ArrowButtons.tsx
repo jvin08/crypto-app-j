@@ -3,64 +3,57 @@ import React, {
     useCallback,
     useEffect,
     useState
-  } from 'react'
-  import { EmblaCarouselType } from 'embla-carousel'
-  
+  } from "react";
+  import { EmblaCarouselType } from "embla-carousel";  
   type UsePrevNextButtonsType = {
     prevBtnDisabled: boolean
     nextBtnDisabled: boolean
     onPrevButtonClick: () => void
     onNextButtonClick: () => void
   }
-  
   export const usePrevNextButtons = (
-    emblaApi: EmblaCarouselType | undefined
+    emblaApi: EmblaCarouselType | undefined,
+    onButtonClick?: () => void
   ): UsePrevNextButtonsType => {
-    const [prevBtnDisabled, setPrevBtnDisabled] = useState(true)
-    const [nextBtnDisabled, setNextBtnDisabled] = useState(true)
-  
+    const [prevBtnDisabled, setPrevBtnDisabled] = useState(true);
+    const [nextBtnDisabled, setNextBtnDisabled] = useState(true);
     const onPrevButtonClick = useCallback(() => {
-      if (!emblaApi) return
-      emblaApi.scrollPrev()
-    }, [emblaApi])
-  
+      if (!emblaApi) return;
+      emblaApi.scrollPrev();
+      if (onButtonClick) onButtonClick();
+    }, [emblaApi, onButtonClick]);
     const onNextButtonClick = useCallback(() => {
-      if (!emblaApi) return
-      emblaApi.scrollNext()
-    }, [emblaApi])
-  
+      if (!emblaApi) return;
+      emblaApi.scrollNext();
+      if (onButtonClick) onButtonClick(emblaApi);
+    }, [emblaApi, onButtonClick]);
     const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
-      setPrevBtnDisabled(!emblaApi.canScrollPrev())
-      setNextBtnDisabled(!emblaApi.canScrollNext())
-    }, [])
-  
+      setPrevBtnDisabled(!emblaApi.canScrollPrev());
+      setNextBtnDisabled(!emblaApi.canScrollNext());
+    }, []);
     useEffect(() => {
-      if (!emblaApi) return
-  
-      onSelect(emblaApi)
-      emblaApi.on('reInit', onSelect)
-      emblaApi.on('select', onSelect)
-    }, [emblaApi, onSelect])
-  
+      if (!emblaApi) return;
+      onSelect(emblaApi);
+      emblaApi.on("reInit", onSelect);
+      emblaApi.on("select", onSelect);
+    }, [emblaApi, onSelect]);
     return {
       prevBtnDisabled,
       nextBtnDisabled,
       onPrevButtonClick,
       onNextButtonClick
-    }
-  }
-  
+    };
+  };
   type PropType = PropsWithChildren<
     React.DetailedHTMLProps<
       React.ButtonHTMLAttributes<HTMLButtonElement>,
       HTMLButtonElement
     >
   >
-  
   export const PrevButton: React.FC<PropType> = (props) => {
-    const { children, ...restProps } = props
+    const { children, ...restProps } = props;
     return (
-        <div className='rounded-full bg-gradient-to-t from-cryptoblue-600 to-cryptoblue-800 opacity-80 p-px'>
+        <div className="rounded-full bg-gradient-to-t from-cryptoblue-600 to-cryptoblue-800 opacity-80 p-px">
             <button
                 className="z-10 bg-cryptoblue-500 rounded-full text-cryptoblue-100  items-center justify-center cursor-pointer w-9 h-9 bg-opacity-80 touch-manipulation inline-flex no-underline border-0"
                 type="button"
@@ -75,14 +68,12 @@ import React, {
                 {children}
             </button>
         </div>
-    )
-  }
-  
+    );
+  };
   export const NextButton: React.FC<PropType> = (props) => {
-    const { children, ...restProps } = props
-  
+    const { children, ...restProps } = props;
     return (
-        <div className='rounded-full bg-gradient-to-t from-cryptoblue-600 to-cryptoblue-800 p-px'>
+        <div className="rounded-full bg-gradient-to-t from-cryptoblue-600 to-cryptoblue-800 opacity-80 p-px">
             <button
                 className="z-10 bg-cryptoblue-500 rounded-full text-cryptoblue-100  items-center justify-center cursor-pointer w-9 h-9 bg-opacity-80 touch-manipulation inline-flex no-underline border-0"
                 type="button"
@@ -97,6 +88,5 @@ import React, {
                 {children}
             </button>
       </div>
-    )
-  }
-  
+    );
+  };

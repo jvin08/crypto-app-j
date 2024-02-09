@@ -1,16 +1,13 @@
-'use client'
+"use client";
+import React from "react";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/navbar/Navbar";
-import { setupStore } from './lib/store'
-import { Provider } from 'react-redux'
+import { setupStore } from "./lib/store";
+import { Provider } from "react-redux";
 import { TopNavbar } from "./components/topnavbar/TopNavbar";
-
 const inter = Inter({ subsets: ["latin"] });
-
-const store = setupStore('')
-
-
+const store = setupStore();
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -18,9 +15,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-        
-      <body className={`${inter.className} h-full bg-cryptoblue-400`}>
-            
+        <head>
+            <title>Crypto App</title>            
+        </head>
+      <body className={`${inter.className} h-full bg-cryptoblue-400`}> 
         <Provider store={store}>
             <TopNavbar />
             <Navbar />
