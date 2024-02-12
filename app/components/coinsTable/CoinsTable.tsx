@@ -4,16 +4,17 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { useSelector } from "react-redux";
 import {  selectCurrency } from "../../lib/dynamicValuesSlice";
 import { useGetTableCoinsDataQuery } from "@/app/lib/marketSlice";
+import { uid } from "uid";
+import Header from "./Header";
 const CoinsTable = () => {
     const [page, setPage] = useState(1);
     const [coins, setCoins] = useState<any[]>([]);
     const currency = useSelector(selectCurrency);
-    const { data } = useGetTableCoinsDataQuery({queryKey: currency.label.toLowerCase(), page: page});
+    const queryCurrency = currency.label.toLowerCase();
+    const { data } = useGetTableCoinsDataQuery({queryCurrency, page});
     useEffect(() => {
         if(data) {
-            setCoins((coins) => {
-                return [...coins, ...data];
-            });
+            setCoins(coins => [...coins, ...data]);
         }
     }, [data]);
     const fetchMoreData = () => {
@@ -21,6 +22,7 @@ const CoinsTable = () => {
     };
   return (
     <div>
+      <Header />
         <InfiniteScroll
           dataLength={coins.length}
           next={fetchMoreData}
@@ -28,7 +30,7 @@ const CoinsTable = () => {
           loader={<h4>Loading...</h4>}
         >
           {coins?.map((coin: any, index: number) => (
-                <CoinCard key={index} coin={index+1} />
+                <CoinCard key={uid()} coin={coin} index={index} />
           ))}
         </InfiniteScroll>
       </div>
