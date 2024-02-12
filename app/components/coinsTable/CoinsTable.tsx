@@ -4,7 +4,6 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { useSelector } from "react-redux";
 import {  selectCurrency } from "../../lib/dynamicValuesSlice";
 import { useGetTableCoinsDataQuery } from "@/app/lib/marketSlice";
-import { uid } from "uid";
 import Header from "./Header";
 const CoinsTable = () => {
     const [page, setPage] = useState(1);
@@ -30,7 +29,7 @@ const CoinsTable = () => {
           loader={<h4>Loading...</h4>}
         >
           {coins?.map((coin: any, index: number) => (
-                <CoinCard key={uid()} coin={coin} index={index} />
+                <CoinCard key={index} coin={coin} index={index} />
           ))}
         </InfiniteScroll>
       </div>

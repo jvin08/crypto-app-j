@@ -92,7 +92,6 @@ export const options = {
     return (
       <div className="ml-8">
         {isLoaded ? <Line options={options} data={chartData} width={100} height={60} /> : <div className="loading"></div>}
-        {/* <div className="flex w-28 justify-center"><div className="loading"></div></div> */}
       </div>
     );
   };
