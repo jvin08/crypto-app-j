@@ -16,7 +16,7 @@ export const marketApi = createApi({
         query: (query) => `coins/${query}&${apiKey}`
     }),
     getTableCoinsData: builder.query({
-        query: (currency, page=1) => `coins/markets?vs_currency=usd&${page}&order=market_cap_desc&per_page=9&sparkline=true&${apiKey}`
+        query: ({currency="usd", page=1}) => `coins/markets?vs_currency=${currency}&page=${page}&order=market_cap_desc&per_page=50&sparkline=true&price_change_percentage=1h%2C24h%2C7d&${apiKey}`
     }),
   }),
 });
