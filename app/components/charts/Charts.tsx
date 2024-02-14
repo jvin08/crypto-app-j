@@ -12,10 +12,9 @@ import {
   Filler,
   Legend,
 } from "chart.js/auto";
-import { Interaction } from "chart.js"
-import { CrosshairPlugin, Interpolate } from 'chartjs-plugin-crosshair';
+import { Interaction } from "chart.js";
+import { CrosshairPlugin, Interpolate } from "chartjs-plugin-crosshair";
 import { Bar, Line } from "react-chartjs-2";
-
 import { useGetCoinsIntervalDataQuery } from "../../lib/marketSlice";
 import { selectCoinOneSymbol, selectCoinTwoSymbol, selectCompare, selectCurrency } from "../../lib/dynamicValuesSlice" ;
 import {  fiveYears, oneYear, oneQuater, oneMonth, fourteenDays, sevenDays, oneDay } from "./utils";
@@ -35,7 +34,7 @@ ChartJS.register(
     Legend,
     CrosshairPlugin,
   );
-Interaction.modes.interpolate = Interpolate
+Interaction.modes.interpolate = Interpolate;
 export function Charts({range}:{range: number}) { 
     const coin = useSelector(selectCoinOneSymbol);
     const coinTwo = useSelector(selectCoinTwoSymbol);
