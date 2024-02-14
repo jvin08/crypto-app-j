@@ -12,19 +12,9 @@ import {
   Filler,
   Legend,
 } from "chart.js/auto";
+import { Interaction } from "chart.js";
+import { CrosshairPlugin, Interpolate } from "chartjs-plugin-crosshair";
 import { Bar, Line } from "react-chartjs-2";
-import { uid } from "uid";
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  BarElement,
-  Title,
-  Tooltip,
-  Filler,
-  Legend,
-);
 import { useGetCoinsIntervalDataQuery } from "../../lib/marketSlice";
 import { selectCoinOneSymbol, selectCoinTwoSymbol, selectCompare, selectCurrency } from "../../lib/dynamicValuesSlice" ;
 import {  fiveYears, oneYear, oneQuater, oneMonth, fourteenDays, sevenDays, oneDay } from "./utils";
@@ -32,6 +22,19 @@ import { options, barOptions, getChartData, barChartData } from "./options";
 import { Header, VolumeHeader } from "./Header";  
 import { selectDarkmode } from "../../lib/dynamicValuesSlice";
 import clsx from "clsx";
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    BarElement,
+    Title,
+    Tooltip,
+    Filler,
+    Legend,
+    CrosshairPlugin,
+  );
+Interaction.modes.interpolate = Interpolate;
 export function Charts({range}:{range: number}) { 
     const coin = useSelector(selectCoinOneSymbol);
     const coinTwo = useSelector(selectCoinTwoSymbol);
@@ -87,8 +90,8 @@ const showCoinTwo = compare && coinTwo[0] !== "";
                         <div className={compare ? "h-52" : "h-64"}>
                             <Line options={options} data={lineChartData} height={216} />
                             <div className="flex justify-between my-2">
-                                {timeIntervals[intervalIndex[range]].map((item:string)=>{
-                                    return <p key={uid()} className="text-[10px] text-cryptoblue-500">{item}</p>;
+                                {timeIntervals[intervalIndex[range]].map((item:string, index: number)=>{
+                                    return <p key={index+item} className="text-[10px] text-cryptoblue-500">{item}</p>;
                                     })}
                             </div>
                         </div>
@@ -113,8 +116,8 @@ const showCoinTwo = compare && coinTwo[0] !== "";
                         <div className={compare ? "h-52" : "h-64"}>
                             <Bar options={barOptions} data={barData} height={216} />
                             <div className="flex justify-between my-2">
-                                {timeIntervals[intervalIndex[range]].map((item:string)=>{
-                                    return <p key={uid()} className="text-[10px] text-cryptoblue-500">{item}</p>;
+                                {timeIntervals[intervalIndex[range]].map((item:string, index: number)=>{
+                                    return <p key={index + item} className="text-[10px] text-cryptoblue-500">{item}</p>;
                                     })}
                             </div>
                         </div>
