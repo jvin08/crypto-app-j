@@ -25,7 +25,7 @@ import React, {
     const onNextButtonClick = useCallback(() => {
       if (!emblaApi) return;
       emblaApi.scrollNext();
-      if (onButtonClick) onButtonClick(emblaApi);
+      if (onButtonClick) onButtonClick();
     }, [emblaApi, onButtonClick]);
     const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
       setPrevBtnDisabled(!emblaApi.canScrollPrev());

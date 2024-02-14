@@ -1,7 +1,24 @@
 export const options = {
+    interaction: {
+        intersect: false,
+        mode: "x",
+    },
+    plugins: {
+        tooltip: {
+          intersect: false,
+        },
+        crosshair: {
+            line: {
+                color: "#7878FA",
+                dashPattern: [15, 5],
+            }
+        },
+        legend: {
+          display: false,
+        },
+    },  
     responsive: true,
     maintainAspectRatio: false,
-    hitRadius: 50,
     scales: {
       y: {
         display: false, // Hide Y-axis values
@@ -12,7 +29,6 @@ export const options = {
       x: {
         // You can customize the X-axis as needed
         display: false,
-        categoryPercentage: 0.55,
         ticks: {
           display: false,
         },
@@ -20,12 +36,7 @@ export const options = {
           display: false, // Hide grid lines on X-axis
         },
       },
-    },
-    plugins: {
-      legend: {
-        display: false,
-      },
-    },
+    }, 
   };
   export const barOptions = {
     responsive: true,
@@ -57,6 +68,12 @@ export const options = {
       legend: {
         display: false,
       },
+      crosshair: {
+        line: {
+            color: "#7878FA",
+            dashPattern: [15, 5],
+        }
+    },
     },
   };
   export const getChartData = (time: number[], prices: number[], pricesTwo: number[], coinOne: string, coinTwo: string) => {
