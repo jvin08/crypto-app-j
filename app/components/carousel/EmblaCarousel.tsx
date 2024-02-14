@@ -36,10 +36,10 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     const coinTwo = useSelector(selectCoinTwoSymbol);
     const currency = useSelector(selectCurrency);
     const onButtonClick = useCallback((emblaApi: EmblaCarouselType) => {
-        const { autoplay } = emblaApi.plugins();
-        if (!autoplay) return;
-        // if (autoplay.options.stopOnInteraction !== false) autoplay.stop()
-      }, []);
+      const { autoplay } = emblaApi !== undefined ? emblaApi.plugins() : { autoplay: undefined };
+      if (!autoplay) return;
+      // if (autoplay.options.stopOnInteraction !== false) autoplay.stop()
+    }, []);
     const {
       prevBtnDisabled,
       nextBtnDisabled,
