@@ -9,7 +9,7 @@ export const options = {
         },
         crosshair: {
             line: {
-                color: "#6161D6",
+                color: "#7878FA",
                 dashPattern: [15, 5],
             }
         },
@@ -70,7 +70,7 @@ export const options = {
       },
       crosshair: {
         line: {
-            color: "#6161D6",
+            color: "#7878FA",
             dashPattern: [15, 5],
         }
     },
