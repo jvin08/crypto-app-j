@@ -1,7 +1,7 @@
 export const options = {
     interaction: {
         intersect: false,
-        mode: "x",
+        mode: "x" as "x",
     },
     plugins: {
         tooltip: {
