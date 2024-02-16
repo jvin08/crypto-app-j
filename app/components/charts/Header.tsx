@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { selectDarkmode, selectCurrency } from "../../lib/dynamicValuesSlice";
 import clsx from "clsx";
-export const Header = ({dataOne, price, compare } : {dataOne: string, price: string, compare: boolean}) => {
+export const Header = ({dataOne, price, compare } : {dataOne: string, price: number, compare: boolean}) => {
     const darkmode = useSelector(selectDarkmode);
     const currency = useSelector(selectCurrency);
     const coinLastPrice = currency.sign + Number(price).toFixed(3);
@@ -33,7 +33,7 @@ export const Header = ({dataOne, price, compare } : {dataOne: string, price: str
 export const VolumeHeader = ({volume, compare } : {volume: number[][], compare: boolean}) => {
     const darkmode = useSelector(selectDarkmode);
     const currency = useSelector(selectCurrency);
-    const volumeToShow = currency.sign + (Number(volume?.[0][1]) / Math.pow(10,9)).toFixed(3)  + "bln";
+    const volumeToShow = currency.sign + (Number(volume?.[0]?.[1]) / Math.pow(10,9)).toFixed(3)  + "bln";
     const dateNow = new Date().toLocaleString("default", { month: "long" }) + " " + new Date().getDate() + ", " + new Date().getUTCFullYear();
     return (
             <div>

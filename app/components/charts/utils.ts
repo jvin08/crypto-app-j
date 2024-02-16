@@ -68,3 +68,5 @@ function getDatesWithHalfYearInterval() {
   }
   // Example: Generate an array of hours with a 4-hour interval for the last 24 hours
   export const oneDay = generateHoursWithInterval(4, 24);
+  export const getPriceFooterData = (data: number[][]) => Number(data?.slice(-1)).toFixed(3);
+  export const getVolumeFooterData = (data: number[][]) => (Number(data?.slice(-1)[0][1]) / Math.pow(10,9)).toFixed(3);

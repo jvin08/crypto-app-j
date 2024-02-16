@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { useSelector } from "react-redux";
 import {
   Chart as ChartJS,
@@ -16,7 +16,7 @@ import {CrosshairPlugin} from "chartjs-plugin-crosshair";
 import { Bar, Line } from "react-chartjs-2";
 import { useGetCoinsIntervalDataQuery } from "../../lib/marketSlice";
 import { selectCoinOneSymbol, selectCoinTwoSymbol, selectCompare, selectCurrency } from "../../lib/dynamicValuesSlice" ;
-import {  fiveYears, oneYear, oneQuater, oneMonth, fourteenDays, sevenDays, oneDay } from "./utils";
+import {  fiveYears, oneYear, oneQuater, oneMonth, fourteenDays, sevenDays, oneDay, getPriceFooterData, getVolumeFooterData } from "./utils";
 import { options, barOptions, getChartData, barChartData } from "./options";
 import { Header, VolumeHeader } from "./Header";  
 import { selectDarkmode } from "../../lib/dynamicValuesSlice";
@@ -54,6 +54,8 @@ export function Charts({range}:{range: number}) {
     const queryPartTwo = `${coinTwo[0]}/market_chart?vs_currency=${currency.label.toLowerCase()}&days=${range}`;
     const { data } = useGetCoinsIntervalDataQuery(queryPart);
     const { data: dataTwo } = useGetCoinsIntervalDataQuery(queryPartTwo);
+    const [ priceIndex, setPriceIndex ] = useState<number>(data?.prices.length - 1);
+    const [ volumeIndex, setVolumeIndex ] = useState<number>(data?.total_volumes.length - 1);
     const myData = data?.prices;
     const myDataTwo = dataTwo?.prices;
     const volumeOne = data?.total_volumes.map((volume: number[])=>{
@@ -73,18 +75,24 @@ export function Charts({range}:{range: number}) {
     }) : [];
 const lineChartData = getChartData(timePoints, coinOnePrices, coinTwoPrices, coin[0], coinTwo[0]);
 const barData = barChartData(volumeOne, volumeTwo, coin[0], coinTwo[0]);
-const priceOne = Number(coinOnePrices?.slice(-1)).toFixed(3);
-const priceTwo = compare ? Number(coinTwoPrices?.slice(-1)).toFixed(3) : "";
-const todayVolume = (Number(volumeOne?.slice(-1)[0][1]) / Math.pow(10,9)).toFixed(3);
-const todayVolumeTwo = compare ? (Number(volumeTwo?.slice(-1)[0][1]) / Math.pow(10,9)).toFixed(3) : "";
+const priceOne = getPriceFooterData(coinOnePrices);
+const priceTwo = compare ? getPriceFooterData(coinTwoPrices) : "";
+const todayVolume = getVolumeFooterData(volumeOne);
+const todayVolumeTwo = compare ? getVolumeFooterData(volumeTwo) : "";
 const showCoinTwo = compare && coinTwo[0] !== "";
+options.onHover = (event: any, price: any) => {
+    setPriceIndex(price[0]?.index);
+};
+barOptions.onHover = (event: any, volume: any) => {
+    !isNaN(volume[0]?.index) && setVolumeIndex(volume[0]?.index);
+};
   return (<div className="flex w-full justify-between">
                 <div className={clsx("w-[calc(50%-1rem)] mb-10  rounded-xl ", {
                     "bg-cryptodark-350": darkmode,
                     "bg-cryptoblue-100": !darkmode,
                 })}>
-                    <div className={compare ? "p-5 pb-10" : "p-5 pb-12"}>
-                        <Header dataOne={coin} price={coinOnePrices?.slice(-1)} compare={compare} />
+                    <div className={compare ? "p-5 pb-10 relative" : "p-5 pb-12 relative"}>
+                        <Header dataOne={coin} price={coinOnePrices?.[priceIndex] || coinOnePrices?.slice(-1)[0]} compare={compare} />
                         <div className={compare ? "h-52" : "h-64"}>
                             <Line options={options} data={lineChartData} height={216} />
                             <div className="flex justify-between my-2">
@@ -109,8 +117,8 @@ const showCoinTwo = compare && coinTwo[0] !== "";
                     "bg-cryptodark-300": darkmode,
                     "bg-cryptoblue-100": !darkmode,
                 })}>
-                    <div className={compare ? "p-5 pb-10" : "p-5 pb-12"}>
-                    <VolumeHeader volume={volumeOne?.slice(-1)} compare={compare}/>
+                    <div className={compare ? "p-5 pb-10 relative" : "p-5 pb-12 relative"}>
+                    <VolumeHeader volume={[volumeOne?.[volumeIndex]] || volumeOne?.slice(-1)} compare={compare}/>
                         <div className={compare ? "h-52" : "h-64"}>
                             <Bar options={barOptions} data={barData} height={216} />
                             <div className="flex justify-between my-2">

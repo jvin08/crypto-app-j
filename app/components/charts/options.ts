@@ -1,17 +1,42 @@
 export const options = {
+    onHover:{} as any,
     interaction: {
         intersect: false,
         mode: "x" as "x",
     },
+    elements: {
+        point: {
+          radius: 0,
+        },
+        line: {
+          tension: 1,
+        },
+    },
     plugins: {
         tooltip: {
           intersect: false,
+          callbacks: {
+            label: () => {
+              return "";
+            }
+          }
         },
         crosshair: {
             line: {
                 color: "#7878FA",
-                dashPattern: [15, 5],
-            }
+                dashPattern: [5, 5],
+                width: 0.5,
+            },
+            sync: {
+                enabled: false,
+            },
+            zoom: {
+                enabled: true,                             
+                zoomboxBackgroundColor: "rgba(120, 120, 250, 0.2)",
+                zoomboxBorderColor: "#7878FA",
+                zoomButtonText: "Reset Zoom",
+                zoomButtonClass: "reset-zoom",
+              },
         },
         legend: {
           display: false,
@@ -39,6 +64,11 @@ export const options = {
     }, 
   };
   export const barOptions = {
+    onHover: {} as any,
+    interaction: {
+        intersect: false,
+        mode: "x" as "x",
+    },
     responsive: true,
     maintainAspectRatio: false,
     hitRadius: 50,
@@ -68,11 +98,30 @@ export const options = {
       legend: {
         display: false,
       },
+      tooltip: {
+        intersect: false,
+        callbacks: {
+          label: () => {
+            return "";
+          }
+        }
+      },
       crosshair: {
         line: {
             color: "#7878FA",
-            dashPattern: [15, 5],
-        }
+            dashPattern: [5, 5],
+            width: 0.5,
+        },
+        sync: {
+            enabled: false,
+        },
+        zoom: {
+            enabled: true,                             
+            zoomboxBackgroundColor: "rgba(120, 120, 250, 0.2)",
+            zoomboxBorderColor: "#7878FA",
+            zoomButtonText: "Reset Zoom",
+            zoomButtonClass: "reset-zoom",
+          },
     },
     },
   };
@@ -85,7 +134,7 @@ export const options = {
         {
         fill: true,
         tension: 0.75,
-        label: ` - ${coinOne} $`,
+        label: "",
         data: prices,
         borderColor: "#7878FA",
         borderWidth: borderWidth,
@@ -223,7 +272,7 @@ const period = volumeOne?.length;
         default:
             break;
     }
-    const timePoints = dataOne?.map(item=> new Date(item[0]));
+    const timePoints = dataOne?.map(item=> new Date(item[0]).toISOString().slice(0,20));
     const volumesOne = dataOne?.map(item=> item[1]);
     const volumesTwo = dataTwo?.map(item=> item[1]);
     const updatedVolumesTwo = coinTwo === "" ? [] : volumesTwo;
@@ -235,7 +284,7 @@ const period = volumeOne?.length;
         {
         fill: true,
         tension: 0.75,
-        label: ` - ${coinOne} $`,
+        label: "",
         data: volumesOne,
         borderColor: "#7878FA",
         borderWidth: borderWidth,
@@ -243,14 +292,14 @@ const period = volumeOne?.length;
         backgroundColor: (context: any) => {
             const gradient = context.chart.ctx.createLinearGradient(0, 0, 0, 400);
             gradient.addColorStop(0, "#7878FA");
-            gradient.addColorStop(0.68, "rgba(120, 120, 250, 0)");
+            gradient.addColorStop(0.6, "rgba(120, 120, 250, 0)");
             return gradient;
         },
         },
         {
             fill: true,
             tension: 0.75,
-            label: ` - ${coinTwo} $`,
+            label: "",
             data: updatedVolumesTwo,
             borderColor: "#D878FA",
             borderWidth: borderWidth,
