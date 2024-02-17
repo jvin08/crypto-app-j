@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { EmblaOptionsType, EmblaCarouselType } from "embla-carousel";
+import { EmblaOptionsType } from "embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import {
@@ -35,11 +35,13 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     const coinOne = useSelector(selectCoinOneSymbol);
     const coinTwo = useSelector(selectCoinTwoSymbol);
     const currency = useSelector(selectCurrency);
-    const onButtonClick = useCallback((emblaApi: EmblaCarouselType) => {
-        const { autoplay } = emblaApi.plugins();
-        if (!autoplay) return;
-        // if (autoplay.options.stopOnInteraction !== false) autoplay.stop()
-      }, []);
+    const onButtonClick = useCallback(() => {
+      const { autoplay } = emblaApi !== undefined ? emblaApi.plugins() : { autoplay: undefined };
+      if (!autoplay) return;
+      const autoplayOptions = autoplay.options as { stopOnInteraction?: boolean };
+      const autoplayStop = autoplay.stop as () => void;
+      if (autoplayOptions.stopOnInteraction !== false) autoplayStop;
+    }, [emblaApi]);
     const {
       prevBtnDisabled,
       nextBtnDisabled,
