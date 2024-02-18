@@ -29,7 +29,7 @@ const CoinsTable = () => {
           loader={<h4>Loading...</h4>}
         >
           {coins?.map((coin: any, index: number) => (
-                <CoinCard key={coin.name} coin={coin} index={index} />
+                <CoinCard key={coin.name+index} coin={coin} index={index} />
           ))}
         </InfiniteScroll>
       </div>
