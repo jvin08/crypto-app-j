@@ -7,10 +7,10 @@ export const Header = ({dataOne, price, compare, priceDate } : {dataOne: string,
     const currency = useSelector(selectCurrency);
     const coinLastPrice = currency.sign + Number(price).toFixed(3);
     const firstCoinName = dataOne?.[0][0].toUpperCase() + dataOne?.[0].slice(1);
-    const dateNow = new Date(priceDate).toLocaleString("default", { month: "long" }) + " " + new Date(priceDate).getDate() + ", " + new Date(priceDate).getUTCFullYear();
+    const dateNow = new Date(priceDate).toLocaleString("default", { month: "long" }).slice(0,3) + " " + new Date(priceDate).getDate() + ", " + new Date(priceDate).getUTCFullYear();
     return (
             <div>
-                {compare ? <p className={clsx("text-2xl font-bold", {
+                {compare ? <p className={clsx("text-2xl font-bold tabular-nums", {
                     "text-cryptodark-550": darkmode,
                 })}>{dateNow}</p> : <p className={clsx("text-xl",{
                     "text-cryptodark-550": darkmode,
@@ -24,7 +24,7 @@ export const Header = ({dataOne, price, compare, priceDate } : {dataOne: string,
                             {compare ? <p className={clsx("text-sm",{
                                 "text-cryptoblue-100": !darkmode,
                                 "text-cryptoblue-350": darkmode,
-                            })}>.</p> : <p className={clsx("text-sm",{
+                            })}>.</p> : <p className={clsx("text-sm tabular-nums ",{
                                 "text-cryptodark-100": darkmode,
                             })}>{dateNow}</p>}
                         </div>             
@@ -34,7 +34,7 @@ export const VolumeHeader = ({volume, compare, volumeDate } : {volume: number[][
     const darkmode = useSelector(selectDarkmode);
     const currency = useSelector(selectCurrency);
     const volumeToShow = currency.sign + (Number(volume?.[1]) / Math.pow(10,9)).toFixed(3)  + "bln";
-    const dateNow = new Date(volumeDate).toLocaleString("default", { month: "long" }) + " " + new Date(volumeDate).getDate() + ", " + new Date(volumeDate).getUTCFullYear();
+    const dateNow = new Date(volumeDate).toLocaleString("default", { month: "long" }).slice(0,3) + " " + new Date(volumeDate).getDate() + ", " + new Date(volumeDate).getUTCFullYear();
     return (
             <div>
                 {compare ? <p className={clsx("text-2xl font-bold", {
