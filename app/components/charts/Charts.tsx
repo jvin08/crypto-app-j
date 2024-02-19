@@ -16,7 +16,15 @@ import {CrosshairPlugin} from "chartjs-plugin-crosshair";
 import { Bar, Line } from "react-chartjs-2";
 import { useGetCoinsIntervalDataQuery } from "../../lib/marketSlice";
 import { selectCoinOneSymbol, selectCoinTwoSymbol, selectCompare, selectCurrency } from "../../lib/dynamicValuesSlice" ;
-import {  fiveYears, oneYear, oneQuater, oneMonth, fourteenDays, sevenDays, oneDay, getPriceFooterData, getVolumeFooterData, capitalize } from "./utils";
+import { 
+    getPriceFooterData, 
+    getVolumeFooterData, 
+    capitalize, 
+    fiveYearFormat ,
+    oneDayFormat,
+    formatStandardDate,
+    adjustedDataSet,
+} from "./utils";
 import { options, barOptions, getChartData, barChartData } from "./options";
 import { Header, VolumeHeader } from "./Header";  
 import { selectDarkmode } from "../../lib/dynamicValuesSlice";
@@ -40,16 +48,6 @@ export function Charts({range}:{range: number}) {
     const currency = useSelector(selectCurrency);
     const darkmode = useSelector(selectDarkmode);
     //key - chart duration, value - time"s step(index of array timeIntervals) minutes or days
-    const intervalIndex: { [key: string]: number } = {
-        "1": 0,
-        "7": 1,
-        "14": 2,
-        "31": 3,
-        "93": 4,
-        "365": 5,
-        "1825": 6,
-      };
-    const timeIntervals = [oneDay, sevenDays, fourteenDays, oneMonth, oneQuater, oneYear, fiveYears];
     const queryPart = `${coin[0]}/market_chart?vs_currency=${currency.label.toLowerCase()}&days=${range}`;
     const queryPartTwo = `${coinTwo[0]}/market_chart?vs_currency=${currency.label.toLowerCase()}&days=${range}`;
     const { data } = useGetCoinsIntervalDataQuery(queryPart);
@@ -58,14 +56,36 @@ export function Charts({range}:{range: number}) {
     const [ volumeIndex, setVolumeIndex ] = useState<number>(data?.prices.length - 1);
     const myData = data?.prices;
     const myDataTwo = dataTwo?.prices;
-    const volumeOne = data?.total_volumes.map((volume: number[])=>{
+    let volumeOne = data?.total_volumes.map((volume: number[])=>{
         return volume;
     });
-    const volumeTwo = compare ? dataTwo?.total_volumes.map((volume: number[])=>{
+    let volumeTwo = compare ? dataTwo?.total_volumes.map((volume: number[])=>{
         return volume;
     }) : [];
-    const timePoints = myData?.map((item:number[],)=>{
-        return new Date(item[0]).toISOString().slice(0,20);
+    if(range === 1825 && volumeOne?.length !== volumeTwo?.length && coinTwo[0] !== "") {
+        const { dataOne, dataTwo } = adjustedDataSet(volumeOne, volumeTwo);
+        volumeOne = dataOne;
+        volumeTwo = dataTwo;
+    }
+    const timePoints = myData?.map((item:number[])=>{
+        switch (range) {
+            case 1:
+                return oneDayFormat(new Date(item[0]));
+            case 1825:
+                return fiveYearFormat(new Date(item[0]));
+            default:
+                return formatStandardDate(new Date(item[0]));
+        }
+    });
+    const barTimePoints = volumeOne?.map((item:number[])=>{
+        switch (range) {
+            case 1:
+                return oneDayFormat(new Date(item[0]));
+            case 1825:
+                return fiveYearFormat(new Date(item[0]));
+            default:
+                return formatStandardDate(new Date(item[0]));
+        }
     });
     const coinOnePrices = myData?.map((item:number[])=>{
         return item[1];
@@ -74,7 +94,7 @@ export function Charts({range}:{range: number}) {
         return item[1];
     }) : [];
 const lineChartData = getChartData(timePoints, coinOnePrices, coinTwoPrices, coin[0], coinTwo[0]);
-const barData = barChartData(volumeOne, volumeTwo, coin[0], coinTwo[0]);
+const barData = barChartData(barTimePoints, volumeOne, volumeTwo);
 const priceOne = getPriceFooterData(coinOnePrices, priceIndex);
 const priceTwo = compare ? getPriceFooterData(coinTwoPrices, priceIndex) : "";
 const todayVolume = getVolumeFooterData(volumeOne, volumeIndex);
@@ -101,11 +121,6 @@ barOptions.animations = false;
                         />
                         <div className={compare ? "h-52" : "h-64"}>
                             <Line options={options} data={lineChartData} height={216} />
-                            <div className="flex justify-between my-2">
-                                {timeIntervals[intervalIndex[range]].map((item:string, index: number)=>{
-                                    return <p key={index+item} className="text-[10px] text-cryptoblue-500">{item}</p>;
-                                    })}
-                            </div>
                         </div>
                         <div className="flex">
                             <p className={compare ? "mt-8 text-cryptoblue-900" : "hidden"}>
@@ -129,11 +144,6 @@ barOptions.animations = false;
                     />}
                         <div className={compare ? "h-52" : "h-64"}>
                             <Bar options={barOptions} data={barData} height={216} />
-                            <div className="flex justify-between my-2">
-                                {timeIntervals[intervalIndex[range]].map((item:string, index: number)=>{
-                                    return <p key={index + item} className="text-[10px] text-cryptoblue-500">{item}</p>;
-                                    })}
-                            </div>
                         </div>
                         <div className="flex">
                             <p className={compare ? "mt-8 text-cryptoblue-900" : "hidden"}>

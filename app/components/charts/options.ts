@@ -9,17 +9,30 @@ export const options = {
           radius: 0,
         },
         line: {
-          tension: 1,
+          tension: 5,
         },
     },
     plugins: {
         tooltip: {
+          backgroundColor: "rgba(0, 0, 0, 0)",
+          titleFont: {
+            family: "Arial",
+            size: 10,
+            color: "yellow",
+          },
           intersect: false,
           callbacks: {
             label: () => {
               return "";
             }
-          }
+          },
+          borderWidth: 0.3,
+          padding: {
+            top: 2,
+            left: 5,
+            right: 5,
+          },
+          cornerRadius: 5,
         },
         crosshair: {
             line: {
@@ -52,10 +65,9 @@ export const options = {
         },
       },
       x: {
-        // You can customize the X-axis as needed
-        display: false,
+        display: true,
         ticks: {
-          display: false,
+          maxTicksLimit: 8,
         },
         grid: {
           display: false, // Hide grid lines on X-axis
@@ -82,12 +94,12 @@ export const options = {
       },
       x: {
         // You can customize the X-axis as needed
-        display: false,
+        display: true,
         stacked: true,
         barPercentage: 0.6, // Adjust this value to control the width of the bars
         categoryPercentage: 0.59,// Adjust this value to lift the bars more from the x-axis
         ticks: {
-          display: false,
+          maxTicksLimit: 8, // Max number of X-axis ticks
         },
         grid: {
           display: false, // Hide grid lines on X-axis
@@ -165,29 +177,17 @@ export const options = {
     ],
     };
 };
-export const barChartData = (volumeOne: number[][], volumeTwo: number[][], coinOne: string, coinTwo: string) => {
-let dataOne: number[][] = [];
-let dataTwo: number[][] = [];
-const period = volumeOne?.length;
-    switch (true) {
-      case period < 746: 
-        dataOne = volumeOne;
-        dataTwo = coinTwo === "" ? [] : volumeTwo;
-        break;
-      case period < 2000: // 5 years, adjust those that don't have 5 years of data
-        dataOne = Array(1826-volumeOne?.length).fill([0,0]).concat(volumeOne);
-        dataTwo = coinTwo === "" ? [] :  Array(1826-volumeTwo?.length).fill([0,0]).concat(volumeTwo);
-        break;
-    }
+export const barChartData = (barTimePoints: string[], volumeOne: number[][], volumeTwo: number[][]) => {
+  const period = volumeOne?.length;
     const borderWidth = 0; 
     return {
-    labels: dataOne?.map((item)=>new Date(item[0]).toISOString().slice(0,20)),
+    labels: barTimePoints,
     datasets: [
         {
         fill: true,
         tension: 0.75,
         label: "",
-        data: dataOne?.map((item)=>item[1]),
+        data: volumeOne?.map((item)=>item[1]),
         borderColor: "#7878FA",
         borderWidth: borderWidth,
         borderRadius: 6,
@@ -203,7 +203,7 @@ const period = volumeOne?.length;
             fill: true,
             tension: 0,
             label: "",
-            data: dataTwo?.map((item)=>item[1]),
+            data: volumeTwo?.map((item)=>item[1]),
             borderColor: "#D878FA",
             borderWidth: borderWidth,
             borderRadius: 6,
