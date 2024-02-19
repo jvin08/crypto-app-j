@@ -2,12 +2,12 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { selectDarkmode, selectCurrency } from "../../lib/dynamicValuesSlice";
 import clsx from "clsx";
-export const Header = ({dataOne, price, compare } : {dataOne: string, price: string, compare: boolean}) => {
+export const Header = ({dataOne, price, compare, priceDate } : {dataOne: string, price: number, compare: boolean, priceDate: string}) => {
     const darkmode = useSelector(selectDarkmode);
     const currency = useSelector(selectCurrency);
     const coinLastPrice = currency.sign + Number(price).toFixed(3);
     const firstCoinName = dataOne?.[0][0].toUpperCase() + dataOne?.[0].slice(1);
-    const dateNow = new Date().toLocaleString("default", { month: "long" }) + " " + new Date().getDate() + ", " + new Date().getUTCFullYear();
+    const dateNow = new Date(priceDate).toLocaleString("default", { month: "long" }) + " " + new Date(priceDate).getDate() + ", " + new Date(priceDate).getUTCFullYear();
     return (
             <div>
                 {compare ? <p className={clsx("text-2xl font-bold", {
@@ -30,11 +30,11 @@ export const Header = ({dataOne, price, compare } : {dataOne: string, price: str
                         </div>             
             );
 };
-export const VolumeHeader = ({volume, compare } : {volume: number[][], compare: boolean}) => {
+export const VolumeHeader = ({volume, compare, volumeDate } : {volume: number[][], compare: boolean, volumeDate: number}) => {
     const darkmode = useSelector(selectDarkmode);
     const currency = useSelector(selectCurrency);
-    const volumeToShow = currency.sign + (Number(volume?.[0][1]) / Math.pow(10,9)).toFixed(3)  + "bln";
-    const dateNow = new Date().toLocaleString("default", { month: "long" }) + " " + new Date().getDate() + ", " + new Date().getUTCFullYear();
+    const volumeToShow = currency.sign + (Number(volume?.[1]) / Math.pow(10,9)).toFixed(3)  + "bln";
+    const dateNow = new Date(volumeDate).toLocaleString("default", { month: "long" }) + " " + new Date(volumeDate).getDate() + ", " + new Date(volumeDate).getUTCFullYear();
     return (
             <div>
                 {compare ? <p className={clsx("text-2xl font-bold", {

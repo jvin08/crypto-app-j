@@ -1,3 +1,4 @@
+export const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 //five years
 function getDatesWithHalfYearInterval() {
     const currentDate = new Date();
@@ -68,3 +69,5 @@ function getDatesWithHalfYearInterval() {
   }
   // Example: Generate an array of hours with a 4-hour interval for the last 24 hours
   export const oneDay = generateHoursWithInterval(4, 24);
+  export const getPriceFooterData = (data: number[][], index: number) => Number(data?.[index] || data?.slice(-1)[0]).toFixed(3);
+  export const getVolumeFooterData = (data: number[][], index: number) => (Number(data?.[index]?.[1] || data?.slice(-1)[0][1]) / Math.pow(10,9)).toFixed(3);

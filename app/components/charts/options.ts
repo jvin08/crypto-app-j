@@ -1,17 +1,42 @@
 export const options = {
+    onHover:{} as any,
     interaction: {
         intersect: false,
         mode: "x" as "x",
     },
+    elements: {
+        point: {
+          radius: 0,
+        },
+        line: {
+          tension: 1,
+        },
+    },
     plugins: {
         tooltip: {
           intersect: false,
+          callbacks: {
+            label: () => {
+              return "";
+            }
+          }
         },
         crosshair: {
             line: {
                 color: "#7878FA",
-                dashPattern: [15, 5],
-            }
+                dashPattern: [5, 5],
+                width: 0.25,
+            },
+            sync: {
+                enabled: false,
+            },
+            zoom: {
+                enabled: true,                             
+                zoomboxBackgroundColor: "rgba(120, 120, 250, 0.2)",
+                zoomboxBorderColor: "#7878FA",
+                zoomButtonText: "Reset Zoom",
+                zoomButtonClass: "reset-zoom",
+              },
         },
         legend: {
           display: false,
@@ -39,9 +64,14 @@ export const options = {
     }, 
   };
   export const barOptions = {
+    onHover: {} as any,
+    animations: {} as any,
+    interaction: {
+        intersect: false,
+        mode: "x" as "x",
+    },
     responsive: true,
     maintainAspectRatio: false,
-    hitRadius: 50,
     scales: {
       y: {
         display: false, // Hide Y-axis values
@@ -68,11 +98,31 @@ export const options = {
       legend: {
         display: false,
       },
+      tooltip: {
+        position: "average" as "average",
+        intersect: false,
+        callbacks: {
+          label: () => {
+            return "";
+          }
+        }
+      },
       crosshair: {
         line: {
             color: "#7878FA",
-            dashPattern: [15, 5],
-        }
+            dashPattern: [5, 5],
+            width: 0.25,
+        },
+        sync: {
+            enabled: false,
+        },
+        zoom: {
+            enabled: true,                             
+            zoomboxBackgroundColor: "rgba(120, 120, 250, 0.2)",
+            zoomboxBorderColor: "#7878FA",
+            zoomButtonText: "Reset Zoom",
+            zoomButtonClass: "reset-zoom",
+          },
     },
     },
   };
@@ -85,7 +135,7 @@ export const options = {
         {
         fill: true,
         tension: 0.75,
-        label: ` - ${coinOne} $`,
+        label: "",
         data: prices,
         borderColor: "#7878FA",
         borderWidth: borderWidth,
@@ -120,145 +170,48 @@ let dataOne: number[][] = [];
 let dataTwo: number[][] = [];
 const period = volumeOne?.length;
     switch (true) {
-        case period < 95: 
-        dataOne = volumeOne?.filter(item=>{
-            const day = new Date(item[0]).getDay();
-            if(day === 1 || day === 5 || day === 10 || day === 15 || day === 20 || day === 25){
-                return item;
-            }
-        });
-        dataTwo = volumeTwo?.filter(item=>{
-            const day = new Date(item[0]).getDay();
-            if(day === 1 || day === 5 || day === 10 || day === 15 || day === 20 || day === 25){
-                return item;
-            }
-        });
+      case period < 746: 
+        dataOne = volumeOne;
+        dataTwo = coinTwo === "" ? [] : volumeTwo;
         break;
-        case period < 170:
-            dataOne = volumeOne?.filter(item=>{
-                const hours = new Date(item[0]).getHours();
-                if(hours === 0 || hours === 6 || hours === 12 || hours === 18){
-                    return item;
-                }
-            });
-            dataTwo = volumeTwo?.filter(item=>{
-                const hours = new Date(item[0]).getHours();
-                if(hours === 0 || hours === 6 || hours === 12 || hours === 18){
-                    return item;
-                }
-            });
-            break;
-        case period < 300:
-            dataOne = volumeOne?.filter(item => {
-                const minutes = new Date(item[0]).getMinutes();
-                if(minutes >= 0 &&  minutes < 6 || minutes > 55 && minutes <= 0){
-                    return item;
-                }
-            });
-            dataTwo = volumeTwo?.filter(item => {
-                const minutes = new Date(item[0]).getMinutes();
-                if(minutes >= 0 &&  minutes < 6 || minutes > 55 && minutes <= 0){
-                    return item;
-                }
-            });
-            break;
-        case period < 338: 
-            dataOne = volumeOne?.filter(item=>{
-                const hours = new Date(item[0]).getHours();
-                if(hours === 0 || hours === 12){
-                    return item;
-                }
-            });
-            dataTwo = volumeTwo?.filter(item=>{
-                const hours = new Date(item[0]).getHours();
-                if(hours === 0 || hours === 12){
-                    return item;
-                }
-            });
-            break;
-            case period < 367: 
-            dataOne = volumeOne?.filter(item=>{
-                const day = new Date(item[0]).getDay();
-                if(day === 1){
-                    return item;
-                }
-            });
-            dataTwo = volumeTwo?.filter(item=>{
-                const day = new Date(item[0]).getDay();
-                if(day === 1){
-                    return item;
-                }
-            });
-            break;
-            case period < 746: 
-            dataOne = volumeOne?.filter(item=>{
-                const hours = new Date(item[0]).getHours();
-                if(hours === 12){
-                    return item;
-                }
-            });
-            dataTwo = volumeTwo?.filter(item=>{
-                const hours = new Date(item[0]).getHours();
-                if(hours === 12){
-                    return item;
-                }
-            });
-            break;
-            case period < 2000: 
-            dataOne = volumeOne?.filter((item, index)=>{
-                const day = new Date(item[0]).getDay();
-                const month = new Date(item[0]).getMonth();
-                if(day === 1 && month === 1 || day === 1 && month === 4 || day === 1 && month === 8 || index === 0 || index === volumeOne?.length-1){
-                    return item;
-                }
-            });
-            dataTwo = volumeTwo?.filter((item, index)=>{
-                const day = new Date(item[0]).getDay();
-                const month = new Date(item[0]).getMonth();
-                if(day === 1 && month === 1 || day === 1 && month === 4 || day === 1 && month === 8 || index === 0 || index === volumeOne?.length-1){
-                    return item;
-                }
-            });
-            break;
-        default:
-            break;
+      case period < 2000: // 5 years, adjust those that don't have 5 years of data
+        dataOne = Array(1826-volumeOne?.length).fill([0,0]).concat(volumeOne);
+        dataTwo = coinTwo === "" ? [] :  Array(1826-volumeTwo?.length).fill([0,0]).concat(volumeTwo);
+        break;
     }
-    const timePoints = dataOne?.map(item=> new Date(item[0]));
-    const volumesOne = dataOne?.map(item=> item[1]);
-    const volumesTwo = dataTwo?.map(item=> item[1]);
-    const updatedVolumesTwo = coinTwo === "" ? [] : volumesTwo;
-    const borderWidth = 0;
-    // console.log("length ", volumeOne?.length)              
+    const borderWidth = 0; 
     return {
-    labels: timePoints,
+    labels: dataOne?.map((item)=>new Date(item[0]).toISOString().slice(0,20)),
     datasets: [
         {
         fill: true,
         tension: 0.75,
-        label: ` - ${coinOne} $`,
-        data: volumesOne,
+        label: "",
+        data: dataOne?.map((item)=>item[1]),
         borderColor: "#7878FA",
         borderWidth: borderWidth,
-        pointRadius: 0,
+        borderRadius: 6,
+        categoryPercentage: 0.75,
         backgroundColor: (context: any) => {
-            const gradient = context.chart.ctx.createLinearGradient(0, 0, 0, 400);
+            const gradient = context.chart.ctx.createLinearGradient(0, 0, 0, 380);
             gradient.addColorStop(0, "#7878FA");
-            gradient.addColorStop(0.68, "rgba(120, 120, 250, 0)");
+            gradient.addColorStop((period > 746 ? 0.8 : period === 365 ? 0.7 : 0.6), "rgba(120, 120, 250, 0)");
             return gradient;
         },
         },
         {
             fill: true,
-            tension: 0.75,
-            label: ` - ${coinTwo} $`,
-            data: updatedVolumesTwo,
+            tension: 0,
+            label: "",
+            data: dataTwo?.map((item)=>item[1]),
             borderColor: "#D878FA",
             borderWidth: borderWidth,
-            pointRadius: 0,
+            borderRadius: 6,
+            categoryPercentage: 0.75,
             backgroundColor: (context: any) => {
-                const gradient = context.chart.ctx.createLinearGradient(0, 0, 0, 400);
+                const gradient = context.chart.ctx.createLinearGradient(0, 0, 0, 300);
                 gradient.addColorStop(0, "#D878FA");
-                gradient.addColorStop(0.68, "rgba(216, 120, 250, 0)");
+                gradient.addColorStop((period > 746 ? 0.8 : period === 365 ? 0.7 : 0.6), "rgba(216, 120, 250, 0)");
                 return gradient;
             },
             },
