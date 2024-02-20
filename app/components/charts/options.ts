@@ -13,47 +13,47 @@ export const options = {
         },
     },
     plugins: {
-        tooltip: {
-          backgroundColor: "rgba(0, 0, 0, 0)",
-          titleFont: {
-            family: "Arial",
-            size: 10,
-            color: "yellow",
-          },
-          intersect: false,
-          callbacks: {
-            label: () => {
-              return "";
-            }
-          },
-          borderWidth: 0.3,
-          padding: {
-            top: 2,
-            left: 5,
-            right: 5,
-          },
-          cornerRadius: 5,
+      tooltip: {
+        backgroundColor: "rgba(0, 0, 0, 0)",
+        titleColor: "#7878FA",
+        titleFont: {
+          family: "Arial",
+          size: 12,
         },
-        crosshair: {
-            line: {
-                color: "#7878FA",
-                dashPattern: [5, 5],
-                width: 0.25,
+        intersect: false,
+        callbacks: {
+          label: () => {
+            return "";
+          }
+        },
+        borderWidth: 0.3,
+        padding: {
+          top: 2,
+          left: 5,
+          right: 5,
+        },
+        cornerRadius: 5,
+      },
+      crosshair: {
+          line: {
+              color: "#7878FA",
+              dashPattern: [5, 5],
+              width: 0.25,
+          },
+          sync: {
+              enabled: false,
+          },
+          zoom: {
+              enabled: true,                             
+              zoomboxBackgroundColor: "rgba(120, 120, 250, 0.2)",
+              zoomboxBorderColor: "#7878FA",
+              zoomButtonText: "Reset Zoom",
+              zoomButtonClass: "reset-zoom",
             },
-            sync: {
-                enabled: false,
-            },
-            zoom: {
-                enabled: true,                             
-                zoomboxBackgroundColor: "rgba(120, 120, 250, 0.2)",
-                zoomboxBorderColor: "#7878FA",
-                zoomButtonText: "Reset Zoom",
-                zoomButtonClass: "reset-zoom",
-              },
-        },
-        legend: {
-          display: false,
-        },
+      },
+      legend: {
+        display: false,
+      },
     },  
     responsive: true,
     maintainAspectRatio: false,
@@ -68,6 +68,8 @@ export const options = {
         display: true,
         ticks: {
           maxTicksLimit: 8,
+          color: "#9B9AB6",
+          fontSize: 8,
         },
         grid: {
           display: false, // Hide grid lines on X-axis
@@ -93,13 +95,16 @@ export const options = {
         },
       },
       x: {
-        // You can customize the X-axis as needed
         display: true,
         stacked: true,
         barPercentage: 0.6, // Adjust this value to control the width of the bars
         categoryPercentage: 0.59,// Adjust this value to lift the bars more from the x-axis
         ticks: {
           maxTicksLimit: 8, // Max number of X-axis ticks
+          color: "#9B9AB6", // X-axis ticks color
+        },
+        scaleLabel: {
+          color: "purple", // Hide the X-axis label
         },
         grid: {
           display: false, // Hide grid lines on X-axis
@@ -111,7 +116,12 @@ export const options = {
         display: false,
       },
       tooltip: {
-        position: "average" as "average",
+        backgroundColor: "rgba(0, 0, 0, 0)",
+        titleColor: "#7878FA",
+        titleFont: {
+          family: "Arial",
+          size: 12,
+        },
         intersect: false,
         callbacks: {
           label: () => {
@@ -155,7 +165,7 @@ export const options = {
         backgroundColor: (context: any) => {
             const gradient = context.chart.ctx.createLinearGradient(0, 0, 0, 400);
             gradient.addColorStop(0, "#7878FA");
-            gradient.addColorStop(0.6, "rgba(120, 120, 250, 0)");
+            gradient.addColorStop(0.55, "rgba(120, 120, 250, 0)");
             return gradient;
         },
         },
@@ -170,7 +180,7 @@ export const options = {
             backgroundColor: (context: any) => {
                 const gradient = context.chart.ctx.createLinearGradient(0, 0, 0, 400);
                 gradient.addColorStop(0, "#D878FA");
-                gradient.addColorStop(0.6, "rgba(216, 120, 250, 0)");
+                gradient.addColorStop(0.55, "rgba(216, 120, 250, 0)");
                 return gradient;
             },
             },
@@ -211,7 +221,7 @@ export const barChartData = (barTimePoints: string[], volumeOne: number[][], vol
             backgroundColor: (context: any) => {
                 const gradient = context.chart.ctx.createLinearGradient(0, 0, 0, 300);
                 gradient.addColorStop(0, "#D878FA");
-                gradient.addColorStop((period > 746 ? 0.8 : period === 365 ? 0.7 : 0.6), "rgba(216, 120, 250, 0)");
+                gradient.addColorStop((period > 746 ? 0.65 : period === 365 ? 0.55 : 0.6), "rgba(216, 120, 250, 0)");
                 return gradient;
             },
             },

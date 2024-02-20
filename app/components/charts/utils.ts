@@ -9,8 +9,8 @@ export function formatStandardDate(date: Date) {
 }
 export function fiveYearFormat(date: Date) {
     const month = date.getMonth() + 1; // Month is zero-based
-    const day = date.getDate();
-    return `${month.toString().padStart(2, "0")}/${day.toString().padStart(2, "0")}`;
+    const year = date.getFullYear();
+    return `${month.toString().padStart(2, "0")}/${year.toString().slice(-2)}`;
   }
   export const getPriceFooterData = (data: number[][], index: number) => Number(data?.[index] || data?.slice(-1)[0]).toFixed(3);
   export const getVolumeFooterData = (data: number[][], index: number) => (Number(data?.[index]?.[1] || data?.slice(-1)[0][1]) / Math.pow(10,9)).toFixed(3);

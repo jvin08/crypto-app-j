@@ -107,6 +107,7 @@ barOptions.onHover = (_: any, volume: any) => {
     setVolumeIndex(prevIndex => volume?.[0]?.index ?? prevIndex);
 };
 barOptions.animations = false;
+ChartJS.defaults.font.size = 9;
   return (<div className="flex w-full justify-between">
                 <div className={clsx("w-[calc(50%-1rem)] mb-10  rounded-xl ", {
                     "bg-cryptodark-350": darkmode,
