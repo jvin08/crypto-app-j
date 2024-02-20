@@ -9,38 +9,51 @@ export const options = {
           radius: 0,
         },
         line: {
-          tension: 1,
+          tension: 5,
         },
     },
     plugins: {
-        tooltip: {
-          intersect: false,
-          callbacks: {
-            label: () => {
-              return "";
-            }
+      tooltip: {
+        backgroundColor: "rgba(0, 0, 0, 0)",
+        titleColor: "#7878FA",
+        titleFont: {
+          family: "Arial",
+          size: 12,
+        },
+        intersect: false,
+        callbacks: {
+          label: () => {
+            return "";
           }
         },
-        crosshair: {
-            line: {
-                color: "#7878FA",
-                dashPattern: [5, 5],
-                width: 0.25,
-            },
-            sync: {
-                enabled: false,
-            },
-            zoom: {
-                enabled: true,                             
-                zoomboxBackgroundColor: "rgba(120, 120, 250, 0.2)",
-                zoomboxBorderColor: "#7878FA",
-                zoomButtonText: "Reset Zoom",
-                zoomButtonClass: "reset-zoom",
-              },
+        borderWidth: 0.3,
+        padding: {
+          top: 2,
+          left: 5,
+          right: 5,
         },
-        legend: {
-          display: false,
-        },
+        cornerRadius: 5,
+      },
+      crosshair: {
+          line: {
+              color: "#7878FA",
+              dashPattern: [5, 5],
+              width: 0.25,
+          },
+          sync: {
+              enabled: false,
+          },
+          zoom: {
+              enabled: true,                             
+              zoomboxBackgroundColor: "rgba(120, 120, 250, 0.2)",
+              zoomboxBorderColor: "#7878FA",
+              zoomButtonText: "Reset Zoom",
+              zoomButtonClass: "reset-zoom",
+            },
+      },
+      legend: {
+        display: false,
+      },
     },  
     responsive: true,
     maintainAspectRatio: false,
@@ -52,10 +65,11 @@ export const options = {
         },
       },
       x: {
-        // You can customize the X-axis as needed
-        display: false,
+        display: true,
         ticks: {
-          display: false,
+          maxTicksLimit: 8,
+          color: "#9B9AB6",
+          fontSize: 8,
         },
         grid: {
           display: false, // Hide grid lines on X-axis
@@ -81,13 +95,16 @@ export const options = {
         },
       },
       x: {
-        // You can customize the X-axis as needed
-        display: false,
+        display: true,
         stacked: true,
         barPercentage: 0.6, // Adjust this value to control the width of the bars
         categoryPercentage: 0.59,// Adjust this value to lift the bars more from the x-axis
         ticks: {
-          display: false,
+          maxTicksLimit: 8, // Max number of X-axis ticks
+          color: "#9B9AB6", // X-axis ticks color
+        },
+        scaleLabel: {
+          color: "purple", // Hide the X-axis label
         },
         grid: {
           display: false, // Hide grid lines on X-axis
@@ -99,7 +116,12 @@ export const options = {
         display: false,
       },
       tooltip: {
-        position: "average" as "average",
+        backgroundColor: "rgba(0, 0, 0, 0)",
+        titleColor: "#7878FA",
+        titleFont: {
+          family: "Arial",
+          size: 12,
+        },
         intersect: false,
         callbacks: {
           label: () => {
@@ -143,7 +165,7 @@ export const options = {
         backgroundColor: (context: any) => {
             const gradient = context.chart.ctx.createLinearGradient(0, 0, 0, 400);
             gradient.addColorStop(0, "#7878FA");
-            gradient.addColorStop(0.6, "rgba(120, 120, 250, 0)");
+            gradient.addColorStop(0.55, "rgba(120, 120, 250, 0)");
             return gradient;
         },
         },
@@ -158,36 +180,24 @@ export const options = {
             backgroundColor: (context: any) => {
                 const gradient = context.chart.ctx.createLinearGradient(0, 0, 0, 400);
                 gradient.addColorStop(0, "#D878FA");
-                gradient.addColorStop(0.6, "rgba(216, 120, 250, 0)");
+                gradient.addColorStop(0.55, "rgba(216, 120, 250, 0)");
                 return gradient;
             },
             },
     ],
     };
 };
-export const barChartData = (volumeOne: number[][], volumeTwo: number[][], coinOne: string, coinTwo: string) => {
-let dataOne: number[][] = [];
-let dataTwo: number[][] = [];
-const period = volumeOne?.length;
-    switch (true) {
-      case period < 746: 
-        dataOne = volumeOne;
-        dataTwo = coinTwo === "" ? [] : volumeTwo;
-        break;
-      case period < 2000: // 5 years, adjust those that don't have 5 years of data
-        dataOne = Array(1826-volumeOne?.length).fill([0,0]).concat(volumeOne);
-        dataTwo = coinTwo === "" ? [] :  Array(1826-volumeTwo?.length).fill([0,0]).concat(volumeTwo);
-        break;
-    }
+export const barChartData = (barTimePoints: string[], volumeOne: number[][], volumeTwo: number[][]) => {
+  const period = volumeOne?.length;
     const borderWidth = 0; 
     return {
-    labels: dataOne?.map((item)=>new Date(item[0]).toISOString().slice(0,20)),
+    labels: barTimePoints,
     datasets: [
         {
         fill: true,
         tension: 0.75,
         label: "",
-        data: dataOne?.map((item)=>item[1]),
+        data: volumeOne?.map((item)=>item[1]),
         borderColor: "#7878FA",
         borderWidth: borderWidth,
         borderRadius: 6,
@@ -203,7 +213,7 @@ const period = volumeOne?.length;
             fill: true,
             tension: 0,
             label: "",
-            data: dataTwo?.map((item)=>item[1]),
+            data: volumeTwo?.map((item)=>item[1]),
             borderColor: "#D878FA",
             borderWidth: borderWidth,
             borderRadius: 6,
@@ -211,7 +221,7 @@ const period = volumeOne?.length;
             backgroundColor: (context: any) => {
                 const gradient = context.chart.ctx.createLinearGradient(0, 0, 0, 300);
                 gradient.addColorStop(0, "#D878FA");
-                gradient.addColorStop((period > 746 ? 0.8 : period === 365 ? 0.7 : 0.6), "rgba(216, 120, 250, 0)");
+                gradient.addColorStop((period > 746 ? 0.65 : period === 365 ? 0.55 : 0.6), "rgba(216, 120, 250, 0)");
                 return gradient;
             },
             },

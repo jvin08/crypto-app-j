@@ -1,73 +1,32 @@
 export const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
-//five years
-function getDatesWithHalfYearInterval() {
-    const currentDate = new Date();
-    const dates = [];
-    for (let i = 0; i <= 5; i++) {
-      const newDate = new Date(currentDate);
-      newDate.setFullYear(currentDate.getFullYear() - (5-i));
-      dates.push(newDate.toISOString().split("T")[0].slice(5,7) + "/" + newDate.toISOString().split("T")[0].slice(2,4));
-    }
-    return dates;
-  }
-  export const fiveYears = getDatesWithHalfYearInterval();
-  //one year
-  function formatDate(date: Date) {
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear().toString().slice(-2);
-    return `${month.toString().padStart(2, "0")}/${year}`;
-  }
-  function generateDatesWithInterval(interval: number, numberOfDates: number) {
-    const dates = [];
-    const currentDate = new Date();
-    currentDate.setMonth(currentDate.getMonth()); // Start from 12 months ago
-    for (let i = 0; i < numberOfDates; i++) {
-      dates.push(formatDate(currentDate));
-      currentDate.setMonth(currentDate.getMonth() - interval);
-    }
-    dates.push(formatDate(currentDate));
-    return dates.reverse();
-  }
-  export const oneYear = generateDatesWithInterval(2, 6);
-  //one month, 14days, 7days
-  function formatDates(date: Date) {
+export function oneDayFormat(date: Date) {
+  const hours = String(date.getUTCHours()).padStart(2, "0"); // Get hours and pad with leading zero if needed
+  const minutes = String(date.getUTCMinutes()).padStart(2, "0"); // Get minutes and pad with leading zero if needed
+  return `${hours}:${minutes}`;
+}
+export function formatStandardDate(date: Date) {
+  return new Intl.DateTimeFormat("en", { day: "2-digit", month: "short" }).format(date);
+}
+export function fiveYearFormat(date: Date) {
     const month = date.getMonth() + 1; // Month is zero-based
-    const day = date.getDate();
-    return `${month.toString().padStart(2, "0")}/${day.toString().padStart(2, "0")}`;
+    const year = date.getFullYear();
+    return `${month.toString().padStart(2, "0")}/${year.toString().slice(-2)}`;
   }
-  function generateDatesWithIntervals(interval: number, numberOfDates: number) {
-    const dates = [];
-    const currentDate = new Date();
-    currentDate.setDate(currentDate.getDate() - numberOfDates * interval); // Start from 31 days ago
-    for (let i = 0; i < numberOfDates; i++) {
-      dates.push(formatDates(currentDate));
-      currentDate.setDate(currentDate.getDate() + interval);
-    }
-    dates.push(formatDates(currentDate));
-    return dates;
-  }
-  // 14days - 3 and 15, 7 days - 1 and 7, 31 day - 7 and 31
-  export const oneQuater = generateDatesWithInterval(1, 3);
-  export const oneMonth = generateDatesWithIntervals(6, 5);
-  export const fourteenDays = generateDatesWithIntervals(2,7);
-  export const sevenDays = generateDatesWithIntervals(1,7);
-  //one day
-  function formatHour(date: Date) {
-    const hours = date.getHours().toString().padStart(2, "0");
-    return `${hours}:00`;
-  }
-  function generateHoursWithInterval(interval: number, numberOfHours: number) {
-    const hoursArray = [];
-    const currentHour = new Date();
-    currentHour.setHours(currentHour.getHours() - numberOfHours);
-    for (let i = 0; i < numberOfHours; i += interval) {
-      hoursArray.push(formatHour(currentHour));
-      currentHour.setHours(currentHour.getHours() + interval);
-    }
-    hoursArray.push(formatHour(currentHour));
-    return hoursArray;
-  }
-  // Example: Generate an array of hours with a 4-hour interval for the last 24 hours
-  export const oneDay = generateHoursWithInterval(4, 24);
   export const getPriceFooterData = (data: number[][], index: number) => Number(data?.[index] || data?.slice(-1)[0]).toFixed(3);
   export const getVolumeFooterData = (data: number[][], index: number) => (Number(data?.[index]?.[1] || data?.slice(-1)[0][1]) / Math.pow(10,9)).toFixed(3);
+  export const adjustedDataSet = (dataOne: number[][], dataTwo: number[][]) => {
+    const max = dataTwo.length ? Math.max(dataOne?.length, dataTwo?.length) : dataOne?.length;
+    const dataOneUpdated = Array(max-dataOne?.length).fill([null,null]).concat(dataOne);
+    const dataTwoUpdated = Array(max-dataTwo?.length).fill([null,null]).concat(dataTwo);
+    for (let i = 0; i < max; i++) {
+      if (dataOneUpdated[i][0] === null) {
+        dataOneUpdated[i][0] = dataTwoUpdated[i][0];
+        dataOneUpdated[i][1] = 0;
+      }
+      if (dataTwoUpdated[i][0] === null) {
+        dataTwoUpdated[i][0] = dataOneUpdated[i][0];
+        dataTwoUpdated[i][1] = 0;
+      }
+    }
+    return { dataOne: dataOneUpdated, dataTwo: dataTwoUpdated };
+  };
