@@ -27,9 +27,11 @@ const DropdownSearch = ({query, toggleHidden, clearSearch} : {query: string, tog
     <div className="box-border text-sm w-[14.62rem] left-0 top-10 border-cryptodark-800 border-[0.01rem] text-cryptodark-100 bg-cryptodark-200 absolute z-50 rounded" ref={ref}>
         {coinsForRender?.map((coin: Coin) => {
             return (
-                <div key={coin.id} className="flex items-center pl-4 pb-3 first:pt-3">
-                    <Image src={coin.thumb} alt={coin.name} width={20} height={20} className="mr-4"/>
-                    <p className="truncate pr-4">{coin.name}</p>
+                <div key={coin.id} className="first:pt-2 p-1">
+                    <div className="flex items-center pl-3 py-1 hover:bg-cryptodark-400">
+                        <Image src={coin.thumb} alt={coin.name} width={20} height={20} className="mr-3"/>
+                        <p className="truncate pr-4">{coin.name}</p>
+                    </div>
                 </div>
             );
         })}
