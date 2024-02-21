@@ -20,7 +20,7 @@ const Search = () => {
         clearTimeout(debounceTimer);
         debounceTimer = setTimeout(() => {
             setSearchTerm(e.target.value);
-        }, 300);
+        }, 500);
     };
   return (
     <div className="ml-4 relative">
@@ -39,7 +39,7 @@ const Search = () => {
         value={searchTerm}
         onChange={handleChange}
         onClick={toggleHidden}
-        className={clsx("pl-10 h-10 box-border rounded", {
+        className={clsx("pl-12 h-10 box-border rounded text-sm", {
             "bg-cryptoblue-200 focus:border-cryptoblue-900": !darkmode,
             "bg-cryptodark-200 text-cryptodark-100 focus:border-cryptodark-620 focus:outline-none focus:shadow-inner": darkmode,
         })} />
