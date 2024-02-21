@@ -7,7 +7,7 @@ type Coin = {
     symbol: string;
     thumb: string;
 };
-const DropdownSearch = ({query, toggleHidden} : {query: string, toggleHidden: ()=>void}) => {
+const DropdownSearch = ({query, toggleHidden, clearSearch} : {query: string, toggleHidden: ()=>void, clearSearch: ()=>void}) => {
     const { data } = useGetSearchCoinsDataQuery(query);
     const coinsForRender = data?.coins.slice(0,10);
     const ref = useRef<HTMLDivElement>(null);
@@ -15,6 +15,7 @@ const DropdownSearch = ({query, toggleHidden} : {query: string, toggleHidden: ()
         const handleClickOutside = (event: MouseEvent) => {
             if (ref.current && !ref.current.contains(event.target as Node)) {
                 toggleHidden();
+                clearSearch();
             }
         };
         document.addEventListener("mousedown", handleClickOutside);
@@ -27,7 +28,7 @@ const DropdownSearch = ({query, toggleHidden} : {query: string, toggleHidden: ()
         {coinsForRender?.map((coin: Coin) => {
             return (
                 <div key={coin.id} className="flex items-center pl-10 pb-3">
-                    <Image src={coin.thumb} alt={coin.name} className="w-4 h-4 mr-4"/>
+                    <Image src={coin.thumb} alt={coin.name} width={20} height={20} className="mr-4"/>
                     <p>{coin.name}</p>
                 </div>
             );

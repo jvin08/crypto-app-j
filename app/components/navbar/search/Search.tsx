@@ -10,6 +10,9 @@ const Search = () => {
   const toggleHidden = () => {
     setHidden(!hidden);
   };
+  const clearSearch = () => {
+    setSearchTerm("");
+  };
   let debounceTimer: NodeJS.Timeout;
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target;
@@ -40,7 +43,7 @@ const Search = () => {
             "bg-cryptoblue-200 focus:border-cryptoblue-900": !darkmode,
             "bg-cryptodark-200 text-cryptodark-100 focus:border-cryptodark-620 focus:outline-none focus:shadow-inner": darkmode,
         })} />
-        {!hidden && <SearchResults query={searchTerm} toggleHidden={toggleHidden} />}
+        {!hidden && <SearchResults query={searchTerm} toggleHidden={toggleHidden} clearSearch={clearSearch} />}
 </div>
   );
 };
