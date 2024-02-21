@@ -22,7 +22,7 @@ const DropdownSearch = ({query, toggleHidden, clearSearch} : {query: string, tog
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
-    },[toggleHidden]);
+    },[toggleHidden, clearSearch]);
   return (
     <div className="w-[16.2rem] left-0 top-10 text-cryptodark-100 bg-cryptodark-200 absolute z-50 rounded py-3" ref={ref}>
         {coinsForRender?.map((coin: Coin) => {
