@@ -21,6 +21,9 @@ export const marketApi = createApi({
     getSearchCoinsData: builder.query({
       query: (query) => `search?query=${query}&${apiKey}`
     }),
+    getTenCoinsPrices: builder.query({
+      query: (query, currency="usd") => `simple/price?ids=${query}&include_24hr_change=true&vs_currencies=${currency}&${apiKey}`
+    }),
   }),
 });
 export const { 
@@ -29,4 +32,5 @@ export const {
     useGetCoinsIntervalDataQuery,
     useGetTableCoinsDataQuery,
     useGetSearchCoinsDataQuery,
+    useGetTenCoinsPricesQuery,
 } = marketApi;
