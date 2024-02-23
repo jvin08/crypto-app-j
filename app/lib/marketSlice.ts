@@ -10,13 +10,16 @@ export const marketApi = createApi({
       query: () => "global",
     }),
     getCoinsData: builder.query({
-        query: (query) => `coins/markets?vs_currency=${query}&order=market_cap_desc&per_page=20&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d&${apiKey}`
+      query: (query) => `coins/markets?vs_currency=${query}&order=market_cap_desc&per_page=20&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d&${apiKey}`
     }),
     getCoinsIntervalData: builder.query({
-        query: (query) => `coins/${query}&${apiKey}`
+      query: (query) => `coins/${query}&${apiKey}`
     }),
     getTableCoinsData: builder.query({
-        query: ({currency="usd", page=1}) => `coins/markets?vs_currency=${currency}&page=${page}&order=market_cap_desc&per_page=50&sparkline=true&price_change_percentage=1h%2C24h%2C7d&${apiKey}`
+      query: ({currency="usd", page=1}) => `coins/markets?vs_currency=${currency}&page=${page}&order=market_cap_desc&per_page=50&sparkline=true&price_change_percentage=1h%2C24h%2C7d&${apiKey}`
+    }),
+    getSearchCoinsData: builder.query({
+      query: (query) => `search?query=${query}&${apiKey}`
     }),
   }),
 });
@@ -24,5 +27,6 @@ export const {
     useGetMarketDataQuery, 
     useGetCoinsDataQuery, 
     useGetCoinsIntervalDataQuery,
-    useGetTableCoinsDataQuery
+    useGetTableCoinsDataQuery,
+    useGetSearchCoinsDataQuery,
 } = marketApi;
