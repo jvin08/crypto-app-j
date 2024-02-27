@@ -11,13 +11,15 @@ const CoinCard = ({coin, index}: {coin: any, index: number}) => {
     const currency = useSelector(selectCurrency);
   return (
     <div>
-      <div className={clsx("bg-cryptodark-350 w-full h-20 text-center my-3 py-6 pl-6 pr-8 rounded-xl flex items-center text-xs",{
-        "text-cryptoblue-400": darkmode,
-        "text-cryptodark-400": !darkmode,
+      <div className={clsx("w-full h-20 text-center my-3 py-6 pl-6 pr-8 rounded-xl flex items-center text-xs",{
+        "text-cryptoblue-400 bg-cryptodark-350": darkmode,
+        "text-cryptodark-400 bg-cryptoblue-100": !darkmode,
     })}>
         <div className="w-1/2 flex items-center">
           <p className="mr-5">{index + 1}</p>
-          <Image src={coin.image} alt={coin.name} width={30} height={30} />
+          <div className="relative w-[1.9rem] h-[1.9rem]">
+            <Image src={coin.image} alt={coin.name} fill sizes="30px, 30px" />
+          </div>
           <p className="w-1/6 flex justify-start ml-4 text-left">{coin.name} ({coin.symbol.toUpperCase()})</p>
           <p className="text-left w-1/12 ml-auto mr-5">{currency.sign + "" + coin.current_price.toFixed(2)}</p>
           <PricePercentage price={coin.price_change_percentage_1h_in_currency} />
