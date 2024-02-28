@@ -28,7 +28,7 @@ const DropdownSearch = ({query, toggleHidden, clearSearch} : {query: string, tog
         pricesStore[price[0]] = [prices[price[0]][currency.label.toLowerCase()], goingUp, coinSymbol];
     });
     const ref = useRef<HTMLDivElement>(null);
-    const handleClickCoin = (e: any, coin: Coin) => {
+    const handleClickCoin = (e: React.MouseEvent<HTMLDivElement>, coin: Coin) => {
         e.preventDefault();
         if(shouldCompare){
             if(coinTwo[0]===""){
@@ -68,7 +68,7 @@ const DropdownSearch = ({query, toggleHidden, clearSearch} : {query: string, tog
                     <div className={clsx("flex items-center pl-3 py-1 hover:rounded-sm",{
                         "bg-cryptoblue-100 hover:bg-cryptoblue-400": !darkmode,
                         "hover:bg-cryptodark-400": darkmode,
-                    })} onClick={(e:any)=>handleClickCoin(e, coin)}>
+                    })} onClick={(e:React.MouseEvent<HTMLDivElement>)=>handleClickCoin(e, coin)}>
                         {coin.thumb.includes("https") && <Image src={coin.thumb} alt={coin.name} width={20} height={20} className="mr-3"/>}
                         <p className="truncate pr-4">{coin.name}</p>
                         <svg className="ml-auto mr-0" transform={priceGoingUp ? "rotate(0)" : "rotate(180)"} width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
