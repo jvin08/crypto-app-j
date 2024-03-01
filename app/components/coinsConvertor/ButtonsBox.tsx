@@ -6,13 +6,13 @@ import clsx from "clsx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 const ButtonsBox = () => {
-    const pathname = usePathname();
-    const active = pathname === "/" ? false : true;
-    const darkmode = useSelector(selectDarkmode);
+  const pathname = usePathname();
+  const active = pathname === "/" ? false : true;
+  const darkmode = useSelector(selectDarkmode);
   return (
     <div className={clsx("p-1 rounded-md flex w-fit", {
-        "bg-cryptoblue-100": !darkmode,
-        "bg-cryptodark-150": darkmode,
+      "bg-cryptoblue-100": !darkmode,
+      "bg-cryptodark-150": darkmode,
     })}>
       <Link href="/"><CustomButton name="Coins"  handleClick={()=>{}} active={active} width="w-64" padding="py-2"/></Link>
       <Link href="/convertor"><CustomButton name="Convertor" handleClick={()=>{}} active={!active} width="w-64" padding="py-2" /></Link>

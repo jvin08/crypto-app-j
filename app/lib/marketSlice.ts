@@ -27,10 +27,10 @@ export const marketApi = createApi({
   }),
 });
 export const { 
-    useGetMarketDataQuery, 
-    useGetCoinsDataQuery, 
-    useGetCoinsIntervalDataQuery,
-    useGetTableCoinsDataQuery,
-    useGetSearchCoinsDataQuery,
-    useGetTenCoinsPricesQuery,
+  useGetMarketDataQuery, 
+  useGetCoinsDataQuery, 
+  useGetCoinsIntervalDataQuery,
+  useGetTableCoinsDataQuery,
+  useGetSearchCoinsDataQuery,
+  useGetTenCoinsPricesQuery,
 } = marketApi;

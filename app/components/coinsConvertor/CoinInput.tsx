@@ -2,15 +2,15 @@ import React, {useState} from "react";
 import clsx from "clsx";
 import Image from "next/image";
 const CoinInput = ({header="You buy", darkmode, coin}: {header: string, darkmode: boolean, coin: string[]}) => {
-    const [inputValue, setInputValue] = useState("");
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        e.preventDefault();
-        if(!isNaN(Number(e.target.value))) setInputValue(e.target.value);
-    };
-    return (
+  const [inputValue, setInputValue] = useState("");
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    if(!isNaN(Number(e.target.value))) setInputValue(e.target.value);
+  };
+  return (
     <div className={clsx("p-3 w-1/2 rounded-md",{
-        "text-cryptoblue-100 bg-cryptoblue-100": !darkmode,
-        "text-cryptodark-100 bg-cryptodark-350": darkmode,
+      "text-cryptoblue-100 bg-cryptoblue-100": !darkmode,
+      "text-cryptodark-100 bg-cryptodark-350": darkmode,
     })}>
       <p className="text-sm text-cryptodark-110">{header}</p>
       <div className={clsx("flex items-center pb-2 pt-8",{

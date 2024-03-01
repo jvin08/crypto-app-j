@@ -13,7 +13,8 @@
     "no-multiple-empty-lines": ["error", { "max": 0 }], // Disallows multiple empty lines
     "no-extra-semi": "error", // Disallows unnecessary semicolons
     "camelcase": "error", // Enforces camelCase naming convention
-    "no-undef":"off"
+    "no-undef":"off",
+    "indent": ["error", 2] // Enforces 2 spaces for indentation
   },
   "plugins":["react"],
 

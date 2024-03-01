@@ -7,14 +7,14 @@ import Image from "next/image";
 import StatusBar from "./StatusBar";
 import Chart from "./Chart";
 const CoinCard = ({coin, index}: {coin: any, index: number}) => {
-    const darkmode = useSelector(selectDarkmode);
-    const currency = useSelector(selectCurrency);
+  const darkmode = useSelector(selectDarkmode);
+  const currency = useSelector(selectCurrency);
   return (
     <div>
       <div className={clsx("w-full h-20 text-center my-3 py-6 pl-6 pr-8 rounded-xl flex items-center text-xs",{
         "text-cryptoblue-400 bg-cryptodark-350": darkmode,
         "text-cryptodark-400 bg-cryptoblue-100": !darkmode,
-    })}>
+      })}>
         <div className="w-1/2 flex items-center">
           <p className="mr-5">{index + 1}</p>
           <div className="relative w-[1.9rem] h-[1.9rem]">

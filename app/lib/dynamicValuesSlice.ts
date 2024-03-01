@@ -1,34 +1,34 @@
 import { createSlice } from "@reduxjs/toolkit";
 const dynamicValuesSlice = createSlice({
-    name: "dynamicValues",
-    initialState: {
-        coinOneSymbol: ["bitcoin","btc"],
-        coinTwoSymbol: ["",""],
-        compare: false,
-        currency: {
-            id:1, 
-            label: "USD", 
-            sign: "$"
-        },
-        darkmode: true,
+  name: "dynamicValues",
+  initialState: {
+    coinOneSymbol: ["bitcoin","btc"],
+    coinTwoSymbol: ["",""],
+    compare: false,
+    currency: {
+      id:1, 
+      label: "USD", 
+      sign: "$"
     },
-    reducers: {
-        setCoinOneSymbol: (state, action) => {
-            state.coinOneSymbol = action.payload;
-        },
-        setCoinTwoSymbol: (state, action) => {
-            state.coinTwoSymbol = action.payload;
-        },
-        setCompare:(state, action) => {
-            state.compare = action.payload;
-        },
-        setCurrency:(state, action) => {
-            state.currency = action.payload;
-        },
-        setDarkmode:(state, action) => {
-            state.darkmode = action.payload;
-        }
+    darkmode: true,
+  },
+  reducers: {
+    setCoinOneSymbol: (state, action) => {
+      state.coinOneSymbol = action.payload;
+    },
+    setCoinTwoSymbol: (state, action) => {
+      state.coinTwoSymbol = action.payload;
+    },
+    setCompare:(state, action) => {
+      state.compare = action.payload;
+    },
+    setCurrency:(state, action) => {
+      state.currency = action.payload;
+    },
+    setDarkmode:(state, action) => {
+      state.darkmode = action.payload;
     }
+  }
 });
 export const { setCoinOneSymbol, setCoinTwoSymbol, setCompare, setCurrency, setDarkmode } = dynamicValuesSlice.actions;
 export const selectCoinOneSymbol = (state: any) => state.dynamicValues.coinOneSymbol;
