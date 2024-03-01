@@ -1,8 +1,11 @@
 import React, {useState} from "react";
 import clsx from "clsx";
 import Image from "next/image";
+import { useGetOneCoinDataQuery } from "@/app/lib/marketSlice";
 const CoinInput = ({header="You buy", darkmode, coin}: {header: string, darkmode: boolean, coin: string[]}) => {
   const [inputValue, setInputValue] = useState("");
+  const queryPart = `${coin[0]}`;
+  const { data } = useGetOneCoinDataQuery(queryPart);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     if(!isNaN(Number(e.target.value))) setInputValue(e.target.value);
@@ -18,7 +21,7 @@ const CoinInput = ({header="You buy", darkmode, coin}: {header: string, darkmode
         "border-b-[1px] border-cryptodark-100": darkmode,
       })}>
         <div className="flex items-center w-10 h-10">
-          <Image className="m-auto" src={""} alt={coin[0]} width={30} height={30} />
+          <Image className="m-auto" src={data?.image?.thumb} alt={coin[0]} width={30} height={30} />
         </div>
         <p>{coin[0][0]?.toUpperCase() + coin[0].slice(1)}</p>
         <p className="ml-1">({coin[1]?.toUpperCase()})</p>
