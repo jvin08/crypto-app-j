@@ -15,16 +15,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-        <head>
-            <title>Crypto App</title>            
-        </head>
+      <head>
+        <title>Crypto App</title>            
+      </head>
       <body className={`${inter.className} h-full bg-cryptoblue-400`}> 
         <Provider store={store}>
-            <TopNavbar />
-            <Navbar />
-            {children}
+          <TopNavbar />
+          <Navbar />
+          {children}
         </Provider>
-        </body>
+      </body>
     </html>
   );
 }

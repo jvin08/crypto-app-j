@@ -11,12 +11,12 @@ const Convertor = () => {
     <div className={clsx("w-full py-9 px-12", {
       "bg-cryptoblue-400": !darkmode,
       "bg-cryptodark-400": darkmode,
-  })}>
-     <ButtonsBox />
-     <p className={clsx("text-xl mt-8",{
+    })}>
+      <ButtonsBox />
+      <p className={clsx("text-xl mt-8",{
         "text-cryptoblue-810": !darkmode,
         "text-cryptodark-550": darkmode,
-     })}>Online currency convertor</p>
+      })}>Online currency convertor</p>
       <Time darkmode={darkmode} />
     </div>
   );

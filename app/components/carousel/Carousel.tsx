@@ -2,10 +2,10 @@ import React from "react";
 import EmblaCarousel from "./EmblaCarousel";
 import { EmblaOptionsType } from "embla-carousel";
 const OPTIONS: EmblaOptionsType = {
-    align: "start",
-    dragFree: true,
-    containScroll: "trimSnaps",
-    loop: true,
+  align: "start",
+  dragFree: true,
+  containScroll: "trimSnaps",
+  loop: true,
 };
 const Carousel = () => {
   return (
