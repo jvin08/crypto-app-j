@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import ButtonsBox from "../components/coinsConvertor/ButtonsBox";
+import CoinInputsBox from "../components/coinsConvertor/CoinInputsBox";
 import Time from "../components/coinsConvertor/Time";
 import clsx from "clsx";
 import { useSelector } from "react-redux";
@@ -18,6 +19,7 @@ const Convertor = () => {
         "text-cryptodark-550": darkmode,
       })}>Online currency convertor</p>
       <Time darkmode={darkmode} />
+      <CoinInputsBox />
     </div>
   );
 };
