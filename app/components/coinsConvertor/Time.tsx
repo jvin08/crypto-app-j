@@ -11,7 +11,7 @@ const Time = ({darkmode}: {darkmode: boolean}) => {
     hour12: false // Use 24-hour format
   });
   return (
-    <div className={clsx("text-base",{
+    <div className={clsx("text-xs",{
       "text-cryptoblue-810 opacity-[.8]": !darkmode,
       "text-cryptodark-510": darkmode,
     })}>
