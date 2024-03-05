@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import CustomButton from "../coinsConvertor/CustomButton";
+import CustomButton from "../coinsConverter/CustomButton";
 import { uid } from "uid";
 import { Charts } from "./Charts";
 import clsx from "clsx";

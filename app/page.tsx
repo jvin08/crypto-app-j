@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import ButtonsBox from "./components/coinsConvertor/ButtonsBox";
+import ButtonsBox from "./components/coinsConverter/ButtonsBox";
 import Compare from "./components/compare/Compare";
 import Carousel from "./components/carousel/Carousel";
 import ChartBox from "./components/charts/ChartBox";

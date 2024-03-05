@@ -15,7 +15,7 @@ const ButtonsBox = () => {
       "bg-cryptodark-150": darkmode,
     })}>
       <Link href="/"><CustomButton name="Coins"  handleClick={()=>{}} active={active} width="w-64" padding="py-2"/></Link>
-      <Link href="/convertor"><CustomButton name="Convertor" handleClick={()=>{}} active={!active} width="w-64" padding="py-2" /></Link>
+      <Link href="/converter"><CustomButton name="Convertor" handleClick={()=>{}} active={!active} width="w-64" padding="py-2" /></Link>
     </div>
   );
 };
