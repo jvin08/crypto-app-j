@@ -3,6 +3,7 @@ import React from "react";
 import ButtonsBox from "./components/coinsConverter/ButtonsBox";
 import Compare from "./components/compare/Compare";
 import Carousel from "./components/carousel/Carousel";
+import { Charts } from "./components/charts/Charts";
 import ChartBox from "./components/charts/ChartBox";
 import CoinsTable from "./components/coinsTable/CoinsTable";
 import Head from "next/head";
@@ -23,7 +24,7 @@ const Home = () => {
       <ButtonsBox />
       <Compare />
       <Carousel />
-      <ChartBox />
+      <ChartBox Charts={Charts} />
       <CoinsTable />
     </div>
   );

@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import CustomButton from "../coinsConverter/CustomButton";
 import { uid } from "uid";
-import { Charts } from "./Charts";
 import clsx from "clsx";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "../../lib/dynamicValuesSlice";
-const ChartBox = () => {
+const ChartBox = ({Charts}: {Charts: any}) => {
   const darkmode = useSelector(selectDarkmode);
   const [days, setDays ] = useState(1);
   const intervals = [1, 7, 14, 31, 93, 365, 1825];
