@@ -1,8 +1,9 @@
 import React from "react";
-const ReverseButton = () => {
+const ReverseButton = ({flipCoins}: {flipCoins: ()=>void}) => {
   return (
     <div 
       className="absolute top-[calc(50%-24px)] left-[calc(50%-24px)] cursor-pointer hover:opacity-60"
+      onClick={flipCoins}
     >
       <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect width="48" height="48" rx="24" fill="white"/>

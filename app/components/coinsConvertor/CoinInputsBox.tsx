@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import CoinInput from "./CoinInput";
+import ReverseButton from "./ReverseButton";
 import clsx from "clsx";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useGetOneCoinDataQuery } from "@/app/lib/marketSlice";
-import { selectCurrency, selectDarkmode, selectCoinOneSymbol, selectCoinTwoSymbol } from "@/app/lib/dynamicValuesSlice";
+import { selectCurrency, selectDarkmode, selectCoinOneSymbol, selectCoinTwoSymbol, setCoinOneSymbol, setCoinTwoSymbol } from "@/app/lib/dynamicValuesSlice";
 const CoinInputsBox = () => {
   const darkmode = useSelector(selectDarkmode);
   const currency = useSelector(selectCurrency);
   const coinOneSymbol = useSelector(selectCoinOneSymbol);
   const coinTwoSymbol = useSelector(selectCoinTwoSymbol);
+  const dispatch = useDispatch();
   const queryCoinOne = `${coinOneSymbol[0]}`;
   const { data: coinOne } = useGetOneCoinDataQuery(queryCoinOne);
   const priceOne = coinOne?.market_data?.current_price[currency.label.toLowerCase()];
@@ -18,6 +20,12 @@ const CoinInputsBox = () => {
   const priceTwo = coinTwo?.market_data?.current_price[currency.label.toLowerCase()];
   const [inputOne, setInputOne] = useState(priceOne && 1);
   const [inputTwo, setInputTwo] = useState(priceOne && Number((inputOne * priceOne / priceTwo).toFixed(5)));
+  const flipCoins = () => {
+    dispatch(setCoinOneSymbol(coinTwoDefault));
+    dispatch(setCoinTwoSymbol(coinOneSymbol));
+    setInputOne(inputTwo);
+    setInputTwo(inputOne);
+  };
   const handleChangeOne = (e:React.ChangeEvent<HTMLInputElement>) => {
     if(!isNaN(Number(e.target.value))) {
       setInputOne(Number(e.target.value));
@@ -44,6 +52,7 @@ const CoinInputsBox = () => {
         handleChange={handleChangeOne}
         margin="mr-3"
       />
+      <ReverseButton flipCoins={flipCoins} />
       <CoinInput 
         header="You sell" 
         darkmode={darkmode} 

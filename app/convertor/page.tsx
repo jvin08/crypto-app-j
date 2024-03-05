@@ -14,7 +14,7 @@ const Convertor = () => {
       "bg-cryptodark-400": darkmode,
     })}>
       <ButtonsBox />
-      <p className={clsx("text-xl mt-8",{
+      <p className={clsx("text-sm mt-8",{
         "text-cryptoblue-810": !darkmode,
         "text-cryptodark-550": darkmode,
       })}>Online currency convertor</p>
