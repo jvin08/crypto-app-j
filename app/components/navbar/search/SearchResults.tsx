@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { useGetSearchCoinsDataQuery, useGetTenCoinsPricesQuery } from "@/app/lib/marketSlice";
-import { selectDarkmode, selectCompare, selectCoinOneSymbol, selectCoinTwoSymbol, setCoinOneSymbol, setCoinTwoSymbol, selectCurrency } from "@/app/lib/dynamicValuesSlice";
+import { selectDarkmode, selectCoinOneSymbol, setCoinOneSymbol, setCoinTwoSymbol, selectCurrency } from "@/app/lib/dynamicValuesSlice";
 import clsx from "clsx";
 type Coin = {
   name: string;
@@ -15,9 +15,7 @@ const DropdownSearch = ({query, toggleHidden, clearSearch} : {query: string, tog
   const currency = useSelector(selectCurrency);
   const { data } = useGetSearchCoinsDataQuery(query);
   const darkmode = useSelector(selectDarkmode);
-  const shouldCompare = useSelector(selectCompare);
   const coinOne = useSelector(selectCoinOneSymbol);
-  const coinTwo = useSelector(selectCoinTwoSymbol);
   const coinsForRender = data?.coins.slice(0,10);
   const queryTenCoins = coinsForRender?.map((coin: Coin) => coin.id).join("%2C");
   const { data: prices } = useGetTenCoinsPricesQuery(queryTenCoins, currency);
@@ -30,17 +28,8 @@ const DropdownSearch = ({query, toggleHidden, clearSearch} : {query: string, tog
   const ref = useRef<HTMLDivElement>(null);
   const handleClickCoin = (e: React.MouseEvent<HTMLDivElement>, coin: Coin) => {
     e.preventDefault();
-    if(shouldCompare){
-      if(coinTwo[0]===""){
-        dispatch(setCoinTwoSymbol([coin.id, coin.symbol]));
-      } else if (coin.id !== coinTwo[0] && coin.id !== coinOne[0]) {
-        dispatch(setCoinOneSymbol(coinTwo));
-        dispatch(setCoinTwoSymbol([coin.id, coin.symbol]));
-      }
-    } else {
-      dispatch(setCoinOneSymbol([coin.id, coin.symbol]));
-      dispatch(setCoinTwoSymbol(["",""]));
-    }
+    dispatch(setCoinOneSymbol([coin.id, coin.symbol]));
+    dispatch(setCoinTwoSymbol(coinOne));
     toggleHidden();
     clearSearch();
   };

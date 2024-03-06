@@ -1,12 +1,12 @@
 "use client";
 import React from "react";
-import ButtonsBox from "../components/coinsConvertor/ButtonsBox";
-import CoinInputsBox from "../components/coinsConvertor/CoinInputsBox";
-import Time from "../components/coinsConvertor/Time";
+import ButtonsBox from "../components/coinsConverter/ButtonsBox";
+import CoinInputsBox from "../components/coinsConverter/CoinInputsBox";
+import Time from "../components/coinsConverter/Time";
 import clsx from "clsx";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "../lib/dynamicValuesSlice";
-const Convertor = () => {
+const Converter = () => {
   const darkmode = useSelector(selectDarkmode);
   return (
     <div className={clsx("w-full py-9 px-12", {
@@ -23,4 +23,4 @@ const Convertor = () => {
     </div>
   );
 };
-export default Convertor;
+export default Converter;

@@ -17,7 +17,7 @@ const CoinInput = ({header="You buy", darkmode, coin, price, image, inputValue, 
         "border-b-[1px] border-cryptodark-100": darkmode,
       })}>
         <div className="flex items-center">
-          <div className="flex items-center w-10 h-10 mr-3">
+          <div className="flex items-center w-10 h-10">
             {image && <Image src={image} alt="coin" width={30} height={30} />}
           </div>
           <p>{coin[0][0]?.toUpperCase() + coin[0].slice(1)}</p>
