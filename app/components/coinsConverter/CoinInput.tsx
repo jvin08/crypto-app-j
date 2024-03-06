@@ -26,7 +26,12 @@ const CoinInput = ({header="You buy", darkmode, coin, price, image, inputValue, 
           <p>{coin[0][0]?.toUpperCase() + coin[0].slice(1)}</p>
           <p className="ml-1">({coin[1]?.toUpperCase()})</p>
           <svg className="cursor-pointer" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M7.99935 9.66699L11.3327 6.33366L4.66602 6.33366L7.99935 9.66699Z" fill="white"/>
+            <path d="M7.99935 9.66699L11.3327 6.33366L4.66602 6.33366L7.99935 9.66699Z" 
+              fill={clsx("",{
+                "white": darkmode,
+                "#3D3D7E": !darkmode,
+              })}
+            />
           </svg>
         </div>
         <input 
@@ -38,7 +43,7 @@ const CoinInput = ({header="You buy", darkmode, coin, price, image, inputValue, 
             "bg-cryptoblue-100": !darkmode,
           })} placeholder="e.g. 1.00"/>
       </div>
-      <Price price={price} currency={currency} darkMode={darkmode}/>
+      <Price price={price} currency={currency} darkMode={darkmode} coin={coin}/>
     </div>
   );
 };
