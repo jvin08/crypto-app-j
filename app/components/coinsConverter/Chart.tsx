@@ -75,7 +75,14 @@ const Chart = ({range}:{range: number}) => {
       "bg-cryptodark-350": darkmode,
       "bg-cryptoblue-100": !darkmode,
     })}>
-      <h2 className="ml-8 mt-5 text-cryptodark-100">{capitalize(coin[0])} ({coin[1].toUpperCase()}) <span className="text-cryptodark-550">to</span> {capitalize(defaultCoinTwo[0])} ({defaultCoinTwo[1].toUpperCase()}) - {coinToCoinPrices?.[priceIndex]?.toFixed(5)}</h2>
+      <h2 className={clsx("ml-8 mt-5",{
+        "text-cryptodark-100": darkmode,
+        "text-cryptoblue-900": !darkmode,
+      })}>{capitalize(coin[0])} ({coin[1].toUpperCase()}) <span 
+          className={clsx("",{
+            "text-cryptodark-550 opacity-80": darkmode,
+            "text-cryptoblue-900 opacity-70": !darkmode,
+          })}>to</span> {capitalize(defaultCoinTwo[0])} ({defaultCoinTwo[1].toUpperCase()}) - {coinToCoinPrices?.[priceIndex || coinToCoinPrices.length-1]?.toFixed(5)}</h2>
       <div className="h-64 p-5">
         <Line options={options} data={lineChartData} height={216} />
       </div>

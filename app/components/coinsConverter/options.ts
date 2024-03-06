@@ -40,10 +40,6 @@ export const options = {
         dashPattern: [5, 5],
         width: 0.25,
       },
-      horizontalLine: {
-        enabled: true,
-        color: "rgba(0, 0, 255, 0.5)", // Customize horizontal crosshair color
-      },
       sync: {
         enabled: false,
       },

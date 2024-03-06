@@ -8,12 +8,15 @@ const CoinInput = ({header="You buy", darkmode, coin, price, image, inputValue, 
   const currency = useSelector(selectCurrency);
   return (
     <div className={clsx(`${margin} p-6 w-1/2 rounded-xl`,{
-      "text-cryptoblue-100 bg-cryptoblue-100": !darkmode,
+      "text-cryptoblue-900 bg-cryptoblue-100": !darkmode,
       "text-cryptodark-100 bg-cryptodark-350": darkmode,
     })}>
-      <p className="text-xs font-thin text-cryptodark-110">{header}</p>
+      <p className={clsx("text-xs",{
+        "text-cryptodark-350 font-normal": !darkmode,
+        "text-cryptodark-110 font-thin": darkmode,
+      })}>{header}</p>
       <div className={clsx("flex items-center justify-between pb-2 pt-8",{
-        "border-b-[1px] border-cryptoblue-200": !darkmode,
+        "border-b-[1px] border-cryptoblue-900": !darkmode,
         "border-b-[1px] border-cryptodark-100": darkmode,
       })}>
         <div className="flex items-center">
@@ -26,9 +29,16 @@ const CoinInput = ({header="You buy", darkmode, coin, price, image, inputValue, 
             <path d="M7.99935 9.66699L11.3327 6.33366L4.66602 6.33366L7.99935 9.66699Z" fill="white"/>
           </svg>
         </div>
-        <input type="text" value={inputValue} onChange={handleChange} className="bg-cryptodark-350 focus:outline-none w-28 pl-auto text-right" placeholder="e.g. 1.00"/>
+        <input 
+          type="text" 
+          value={inputValue} 
+          onChange={handleChange} 
+          className={clsx("focus:outline-none w-28 pl-auto text-right",{
+            "bg-cryptodark-350": darkmode,
+            "bg-cryptoblue-100": !darkmode,
+          })} placeholder="e.g. 1.00"/>
       </div>
-      <Price price={price} currency={currency} />
+      <Price price={price} currency={currency} darkMode={darkmode}/>
     </div>
   );
 };
