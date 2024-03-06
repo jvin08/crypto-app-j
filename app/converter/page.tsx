@@ -2,10 +2,13 @@
 import React from "react";
 import ButtonsBox from "../components/coinsConverter/ButtonsBox";
 import CoinInputsBox from "../components/coinsConverter/CoinInputsBox";
-import Time from "../components/coinsConverter/Time";
+import dynamic from "next/dynamic";
 import clsx from "clsx";
+import ChartBox from "../components/charts/ChartBox";
+import Chart from "../components/coinsConverter/Chart";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "../lib/dynamicValuesSlice";
+const Time = dynamic(() => import("../components/coinsConverter/Time"), { ssr: false });
 const Converter = () => {
   const darkmode = useSelector(selectDarkmode);
   return (
@@ -20,6 +23,7 @@ const Converter = () => {
       })}>Online currency convertor</p>
       <Time darkmode={darkmode} />
       <CoinInputsBox />
+      <ChartBox Charts={Chart} />
     </div>
   );
 };
