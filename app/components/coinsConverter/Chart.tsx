@@ -83,8 +83,12 @@ const Chart = ({range}:{range: number}) => {
             "text-cryptodark-550 opacity-80": darkmode,
             "text-cryptoblue-900 opacity-70": !darkmode,
           })}>to</span> {capitalize(defaultCoinTwo[0])} ({defaultCoinTwo[1].toUpperCase()}) - {coinToCoinPrices?.[priceIndex || coinToCoinPrices.length-1]?.toFixed(5)}</h2>
-      <div className="h-64 p-5">
+      <div className="h-64 p-5 relative">
         <Line options={options} data={lineChartData} height={216} />
+        <div className={clsx("absolute border-b-4 w-[calc(100%-30px)] bottom-[43px]",{
+          "border-b-cryptodark-100 ": !darkmode,
+          "border-b-cryptodark-350": darkmode,
+        })}></div>
       </div>
     </div>
   </div>);

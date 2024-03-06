@@ -67,9 +67,12 @@ export const options = {
     x: {
       display: true,
       ticks: {
-        maxTicksLimit: 8,
+        maxTicksLimit: 14,
         color: "#9B9AB6",
+        fontColor: "white",
         fontSize: 8,
+        backdropColor: "red",
+        zeroLineColor: "transparent",
       },
       grid: {
         display: false, // Hide grid lines on X-axis
