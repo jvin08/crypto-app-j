@@ -52,7 +52,7 @@ const CoinInputsBox = () => {
         handleChange={handleChangeOne}
         margin="mr-3"
       />
-      <ReverseButton flipCoins={flipCoins} />
+      <ReverseButton flipCoins={flipCoins} darkMode={darkmode} />
       <CoinInput 
         header="You sell" 
         darkmode={darkmode} 

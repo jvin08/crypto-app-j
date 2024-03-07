@@ -1,8 +1,12 @@
 import React from "react";
-const Price = ({price, currency}:{price:number, currency: any}) => {
+import clsx from "clsx";
+const Price = ({price, currency, darkMode}:{price:number, currency: any, darkMode: boolean}) => {
   return (
     <>
-      <p className="text-xs mt-4 font-thin">1 {currency.label} = {currency.sign}{price}</p>
+      <p className={clsx("text-xs mt-4",{
+        "font-thin": darkMode,
+        "font-normal": !darkMode,
+      })}>1 {currency.label} = {currency.sign}{price}</p>
     </>
   );
 };
