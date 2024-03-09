@@ -3,11 +3,23 @@ import clsx from "clsx";
 import Image from "next/image";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
-import SelectButton from "./SelectButton";
 import SaveButton from "./SaveButton";
+import Search from "./Search";
+import Amount from "./Amount";
+import Date from "./Date";
 const CoinSelect = ({toggleCoinSelect}: {toggleCoinSelect: ()=>void}) => {
-  const darkmode = useSelector(selectDarkmode);
   const btcIMG = "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1696501400";
+  const darkmode = useSelector(selectDarkmode);
+  const [inputAmount, setInputAmount] = React.useState(false);
+  const [selectedCoin, setSelectedCoin] = React.useState(["Bitcoin","BTC"]);
+  const [coinImage, setCoinImage] = React.useState(btcIMG);
+  const handleCoin = (coin: any) => {
+    setCoinImage(coin.thumb);
+    setSelectedCoin([coin.name, coin.symbol]);
+  };
+  const toggleAmount = () => {
+    setInputAmount(!inputAmount);
+  };
   return (
     <div className="absolute top-0 left-0 flex bg-cryptodark-900 bg-opacity-65 backdrop-blur-[1px] w-full h-full">
       <div className={clsx("m-auto w-1/2 h-2/5 z-50 p-8 rounded-lg",{
@@ -30,16 +42,16 @@ const CoinSelect = ({toggleCoinSelect}: {toggleCoinSelect: ()=>void}) => {
           </svg>
         </div>
         <div className="flex justify-between h-5/6 mt-5 pb-3">
-          <div className="bg-cryptodark-350 w-1/3 flex-col pt-12 rounded">
+          <div className="bg-cryptodark-350 w-[30%] flex-col pt-12 rounded">
             <div className="bg-cryptodark-160 w-12 h-12 mx-auto rounded p-3 mb-2">
-              <Image src={btcIMG} alt="coin-image" width={30} height={30} />
+              <Image src={coinImage} alt="coin-image" width={30} height={30} />
             </div>
-            <p className="text-center">Bitcoin (BTC)</p>
+            <p className="text-center">{selectedCoin[0]} ({selectedCoin[1]})</p>
           </div>
-          <div className="w-[19.5rem] text-xs flex flex-col justify-between">
-            <SelectButton toggleSearch={()=>{}} darkmode={darkmode} name="Select coin" />
-            <SelectButton toggleSearch={()=>{}} darkmode={darkmode} name="Purchased Amount" />
-            <SelectButton toggleSearch={()=>{}} darkmode={darkmode} name="Purchased Date" />
+          <div className="w-[67%] text-xs flex flex-col justify-between"> 
+            <Search handleCoin={handleCoin} />
+            <Amount visible={inputAmount} toggleVisible={toggleAmount} />
+            <Date />
             <div className="flex justify-between mt-1">
               <SaveButton name="Cancel" handleClick={toggleCoinSelect} active={false} width="w-[calc(50%-8px)]" padding="py-1"/>
               <SaveButton name="Save and Continue" handleClick={toggleCoinSelect} active={true} width="w-1/2" padding="py-1"/>

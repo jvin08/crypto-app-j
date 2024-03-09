@@ -18,6 +18,7 @@ const Portfolio = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
+      <div className="min-h-[calc(100vh-15rem)] bg-cryptodark-400"></div>
     </div>
   );
 };
