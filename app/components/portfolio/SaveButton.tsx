@@ -22,7 +22,7 @@ const SaveButton = ({name, handleClick, active, width, padding}: Props) => {
         "bg-cryptoblue-600 text-cryptoblue-100": active && !darkmode,
         "bg-cryptoblue-100": !active && !darkmode,
         "bg-cryptodark-750": active && darkmode,
-        "bg-cryptodark-150 text-cryptoblue-100": !active && darkmode,
+        "bg-cryptodark-150 text-cryptoblue-500": !active && darkmode,
       })}>{name}</button>
     </div>
   );

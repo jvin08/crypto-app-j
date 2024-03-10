@@ -18,7 +18,12 @@ const Portfolio = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <div className="min-h-[calc(100vh-15rem)] bg-cryptodark-400"></div>
+      <div className={clsx("min-h-[calc(100vh-15rem)]",{
+        "bg-cryptoblue-400": !darkmode,
+        "bg-cryptodark-400": darkmode,
+      })}>
+        <p className="text-cryptodark-510 text-center mt-10">Portfolio is empty, please add assets...</p>
+      </div>
     </div>
   );
 };

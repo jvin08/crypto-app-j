@@ -2,7 +2,7 @@ import React, {useRef, useState, useEffect } from "react";
 import clsx from "clsx";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
-const Amount = ({visible, toggleVisible}:{visible: boolean, toggleVisible: ()=>void}) => {
+const Amount = ({visible, toggleVisible, getAmount}:{visible: boolean, toggleVisible: ()=>void, getAmount:any}) => {
   const darkmode = useSelector(selectDarkmode);
   const inputRef = useRef<HTMLInputElement>(null);
   const [amount, setAmount] = useState("");
@@ -14,7 +14,10 @@ const Amount = ({visible, toggleVisible}:{visible: boolean, toggleVisible: ()=>v
   };
   const handleBlur = () => {
     toggleVisible();
-    amount && setAmount(Number(amount).toFixed(2));
+    if(amount){
+      setAmount(Number(amount).toFixed(2));
+      getAmount(Number(amount).toFixed(2));
+    }
   };
   useEffect(() => {
     inputRef.current?.focus();
@@ -51,6 +54,7 @@ const Amount = ({visible, toggleVisible}:{visible: boolean, toggleVisible: ()=>v
           value={amount}
           onChange={handleChange}
           onBlur={handleBlur}
+          required
           className={clsx("w-full pl-4 h-8 box-border rounded-sm text-xs focus:outline-none focus:border-[1px]", {
             "bg-cryptoblue-200": !darkmode,
             "bg-cryptodark-200 text-cryptodark-510 focus:border-cryptodark-800 focus:outline-none focus:shadow-inner": darkmode,

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import clsx from "clsx";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
-const Date = () => {
+const Date = ({getTime, getDate}:{getTime: any, getDate: any}) => {
   const [visible, setVisible] = useState(false);
   const darkmode = useSelector(selectDarkmode);
   const toggleVisible = () => {
@@ -10,9 +10,11 @@ const Date = () => {
   };
   const handleDate = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
+    getDate(e.target.value);
   };
   const handleTime = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
+    getTime(e.target.value);
   };
   return (
     <div>
@@ -43,10 +45,10 @@ const Date = () => {
           "bg-cryptoblue-200 text-cryptoblue-900": !darkmode,
           "bg-cryptodark-200 text-cryptodark-510": darkmode,
         })}> 
-          <input type="date" onChange={handleDate} className={clsx("",{
+          <input type="date" onChange={handleDate} required className={clsx("",{
             "bg-cryptodark-200": darkmode,
           })}/>
-          <input type="time" onChange={handleTime} className={clsx("",{
+          <input type="time" onChange={handleTime} required className={clsx("",{
             "bg-cryptodark-200": darkmode,
           })} />
         </div>  
