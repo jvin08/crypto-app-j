@@ -1,20 +1,33 @@
+"use client";
 import React from "react";
 import CoinCard from "./CoinCard";
-import { useGetOneCoinDataQuery } from "../../lib/marketSlice";
+import clsx from "clsx";
+import { useSelector } from "react-redux";
+import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
 const PortfolioList = () => {
-  const { data } = useGetOneCoinDataQuery("bitcoin");
-  const coin = {
-    currentPrice: data?.market_data.current_price.usd,
-    priceChange: data?.market_data.price_change_percentage_24h,
-    marketCap: data?.market_data.market_cap.usd,
-    volume: data?.market_data.total_volume.usd,
-    circulatingSupply: data?.market_data.circulating_supply,
-    maxSupply: data?.market_data.total_supply,
-  };
+  const darkmode = useSelector(selectDarkmode);
+  const [coinData, setCoinData] = React.useState([]);
+  React.useEffect(() => {
+    const fetchData = async () => {
+      // Fetch data from localStorage only on the client-side
+      if (typeof window !== "undefined") {
+        const storedData = localStorage.getItem("coins");
+        const parsedData = storedData ? JSON.parse(storedData) : [];
+        setCoinData(parsedData);
+      }
+    };
+    fetchData();
+  }, []);
   return (
-    <>
-      <CoinCard coin={coin} />
-    </>
+    <div className={clsx("",{
+      "bg-cryptodark-350": darkmode,
+    })}>
+      {
+        coinData.map((coin:any) => {
+          return <CoinCard key={coin.coin} storageData={coin} />;
+        })
+      };
+    </div>
   );
 };
 export default PortfolioList;
