@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import Head from "next/head";
+import PortfolioList from "../components/coinPortfolioItem/PortfolioList";
 const Portfolio = () => {
   return (
     <div className="px-12">
@@ -10,6 +11,7 @@ const Portfolio = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       Portfolio Page
+      <PortfolioList />
     </div>
   );
 };
