@@ -64,7 +64,7 @@ const DropdownSearch = ({query, toggleSearch, clearSearch, handleCoin} : {
               "hover:bg-cryptodark-400": darkmode,
             })} onClick={(e:React.MouseEvent<HTMLDivElement>)=>handleClickCoin(e, coin)}>
               {coin.thumb.includes("https") && <Image src={coin.thumb} alt={coin.name} width={20} height={20} className="mr-3"/>}
-              <p className="truncate pr-4">{coin.name}</p>
+              <p className="truncate pr-4">{coin.id}</p>
               <svg className="ml-auto mr-0" transform={priceGoingUp ? "rotate(0)" : "rotate(180)"} width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M8.00065 6.33301L4.66732 9.66634H11.334L8.00065 6.33301Z" fill={priceGoingUp ? "#00B1A7" : "red"} fillOpacity={1}/>
               </svg>

@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import DataElement from "./DataElement";
+import StatusBar from "./StatusBar";
 import Image from "next/image";
 import clsx from "clsx";
 import { useSelector } from "react-redux";
@@ -12,14 +13,14 @@ const CoinCard = ({storageData}:{storageData:any}) => {
   const coin = {
     currentPrice: data?.market_data.current_price.usd,
     priceChange: data?.market_data.price_change_percentage_24h,
-    marketCapVol: Number(data?.market_data.market_cap.usd) / Number(data?.market_data.total_volume.usd)+"",
+    marketCapVol: (Number(data?.market_data.total_volume.usd) / Number(data?.market_data.market_cap.usd)).toFixed(2)+"",
     circSupVsMaxSup: Number(data?.market_data.circulating_supply) / Number(data?.market_data.total_supply)+"",
   };
   return (
-    <div className="flex text-cryptodark-100 mb-4">
+    <div className="flex text-cryptodark-100 mb-6">
       <div className="w-[calc(25%-2rem)] flex flex-col justify-center items-center bg-cryptodark-300">
-        <div className={clsx("w-10 h-10",{
-          "bg-cryptodark-150": darkmode,
+        <div className={clsx("w-12 h-12 pl-[9px] pt-[10px] mb-4 rounded-lg",{
+          "bg-cryptodark-160": darkmode,
         })}>
           <Image src={storageData.image} width={30} height={30} alt="coin" />
         </div>
@@ -39,10 +40,10 @@ const CoinCard = ({storageData}:{storageData:any}) => {
             </div>
           </div>
           <div className="flex justify-between border-b pb-4">
-            <DataElement name="Current price" value={coin.currentPrice} width="w-1/6" />
-            <DataElement name="Price cgange 24h" value={coin.priceChange} width="w-1/6" />
-            <DataElement name="Market Cap vs Volume" value={coin.marketCapVol}  width="w-1/4"/>
-            <DataElement name="Circ supply vs max supply" value={coin.circSupVsMaxSup}  width="w-1/4"/>
+            <DataElement name="Current price:" value={coin.currentPrice} width="w-1/6" />
+            <DataElement name="Price cgange 24h:" value={coin.priceChange} width="w-1/6" />
+            <StatusBar name="Market Cap vs Volume:" width={coin.marketCapVol} />
+            <DataElement name="Circ supply vs max supply:" value={coin.circSupVsMaxSup}  width="w-1/4"/>
           </div>
         </div>
         <div>
@@ -57,9 +58,9 @@ const CoinCard = ({storageData}:{storageData:any}) => {
           </div>
           <div className="flex justify-between">
             <DataElement name="Coin amount:" value={storageData.amount} width="w-1/6" />
-            <DataElement name="Amount value" value="0.00" width="w-1/6" />
-            <DataElement name="Gain / Loss" value="0.00"  width="w-1/4"/>
-            <DataElement name="Purchase date" value={storageData.purchaseTime}  width="w-1/4" />
+            <DataElement name="Amount value:" value="0.00" width="w-1/6" />
+            <DataElement name="Gain / Loss:" value="0.00"  width="w-1/4"/>
+            <DataElement name="Purchase date:" value={storageData.purchaseTime}  width="w-1/4" />
           </div>
         </div>
       </div>

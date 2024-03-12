@@ -9,7 +9,6 @@ const PortfolioList = () => {
   const [coinData, setCoinData] = React.useState([]);
   React.useEffect(() => {
     const fetchData = async () => {
-      // Fetch data from localStorage only on the client-side
       if (typeof window !== "undefined") {
         const storedData = localStorage.getItem("coins");
         const parsedData = storedData ? JSON.parse(storedData) : [];
@@ -19,15 +18,17 @@ const PortfolioList = () => {
     fetchData();
   }, []);
   return (
-    <div className={clsx("",{
-      "bg-cryptodark-350": darkmode,
+    <>{coinData.length > 0 ? <div className={clsx("mt-5",{
+      "bg-cryptodark-400": darkmode,
     })}>
       {
         coinData.map((coin:any) => {
           return <CoinCard key={coin.coin} storageData={coin} />;
         })
       };
-    </div>
+    </div>:
+      <p className="text-cryptodark-510 text-center mt-10">Portfolio is empty, please add assets...</p>
+    }</>
   );
 };
 export default PortfolioList;

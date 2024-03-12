@@ -19,7 +19,7 @@ const CoinSelect = ({toggleCoinSelect}: {toggleCoinSelect: ()=>void}) => {
   const activeSaveBtn = amount !== "" && purchaseTime !== "" && purchaseDate !== "" && selectedCoin[0] !== "";
   const handleCoin = (coin: any) => {
     setCoinImage(coin.thumb);
-    setSelectedCoin([coin.name, coin.symbol]);
+    setSelectedCoin([coin.id, coin.symbol]);
   };
   const toggleAmount = () => {
     setInputAmount(!inputAmount);
