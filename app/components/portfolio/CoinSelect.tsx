@@ -3,6 +3,7 @@ import clsx from "clsx";
 import Image from "next/image";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
+import { useLocalStorage } from "@/app/components/portfolio/hooks";
 import SaveButton from "./SaveButton";
 import Search from "./Search";
 import Amount from "./Amount";
@@ -10,6 +11,7 @@ import Date from "./Date";
 const CoinSelect = ({toggleCoinSelect}: {toggleCoinSelect: ()=>void}) => {
   const btcIMG = "http://cryptoicons.co/images/coin_icon@2x.png";
   const darkmode = useSelector(selectDarkmode);
+  const [localStorage, setLocalStorage] = useLocalStorage();
   const [inputAmount, setInputAmount] = React.useState(false);
   const [selectedCoin, setSelectedCoin] = React.useState(["",""]);
   const [coinImage, setCoinImage] = React.useState(btcIMG);
@@ -35,7 +37,7 @@ const CoinSelect = ({toggleCoinSelect}: {toggleCoinSelect: ()=>void}) => {
   };
   const saveDataToLocalStorage = () => {
     const time = purchaseDate + "T" + purchaseTime + ":00";
-    const storageObject = {
+    const newCoin = {
       coin: selectedCoin[0],
       symbol: selectedCoin[1],
       amount: amount,
@@ -43,9 +45,7 @@ const CoinSelect = ({toggleCoinSelect}: {toggleCoinSelect: ()=>void}) => {
       image: coinImage,
     };
     if(activeSaveBtn){
-      const currentStorage = JSON.parse(localStorage.getItem("coins") || "[]");
-      const updatedStorage = [...currentStorage, storageObject];
-      localStorage.setItem("coins", JSON.stringify(updatedStorage));
+      setLocalStorage([...localStorage, newCoin]);
       toggleCoinSelect();
     }
   };
