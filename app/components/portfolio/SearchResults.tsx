@@ -1,8 +1,9 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import Image from "next/image";
 import { useSelector } from "react-redux";
 import { useGetSearchCoinsDataQuery, useGetTenCoinsPricesQuery } from "@/app/lib/marketSlice";
 import { selectDarkmode, selectCurrency } from "@/app/lib/dynamicValuesSlice";
+import { useClickOutside } from "./hooks";
 import clsx from "clsx";
 type Coin = {
   name: string;
@@ -17,6 +18,10 @@ const DropdownSearch = ({query, toggleSearch, clearSearch, handleCoin} : {
     handleCoin: any
   }
 ) => {
+  const searchRef = useClickOutside(() => {
+    toggleSearch();
+    clearSearch();
+  });
   const currency = useSelector(selectCurrency);
   const { data } = useGetSearchCoinsDataQuery(query);
   const darkmode = useSelector(selectDarkmode);
@@ -29,32 +34,19 @@ const DropdownSearch = ({query, toggleSearch, clearSearch, handleCoin} : {
     const goingUp = prices[price[0]][`${currency.label.toLowerCase()}_24h_change`] > 0;
     pricesStore[price[0]] = [prices[price[0]][currency.label.toLowerCase()], goingUp, coinSymbol];
   });
-  const ref = useRef<HTMLDivElement>(null);
   const handleClickCoin = (e: React.MouseEvent<HTMLDivElement>, coin: Coin) => {
     e.preventDefault();
     handleCoin(coin);
     toggleSearch();
     clearSearch();
   };
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
-        toggleSearch();
-        clearSearch();
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  },[clearSearch, toggleSearch]);
   const showBorder = coinsForRender !== undefined && coinsForRender.length > 0;
   return (
     <div className={clsx("box-border text-sm w-[19.5rem] left-0 top-9 absolute z-50 rounded-sm",{
       "bg-cryptoblue-100 text-cryptoblue-500": !darkmode,
       "bg-cryptodark-200 text-cryptodark-100": darkmode,
       "border-cryptodark-800 border-[0.01rem]": showBorder,
-    })} ref={ref}>
+    })} ref={searchRef}>
       {coinsForRender?.map((coin: Coin) => {
         const priceGoingUp = pricesStore[coin.id]?.[1];
         return (
