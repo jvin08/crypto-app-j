@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import clsx from "clsx";
 import Image from "next/image";
+import { uid } from "uid";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
 import { useLocalStorage } from "@/app/components/portfolioModal/hooks";
@@ -43,6 +44,7 @@ const CoinSelect = ({toggleCoinSelect, onCoinAdded}: {toggleCoinSelect: ()=>void
       amount: amount,
       purchaseTime: time,
       image: coinImage,
+      id: uid(),
     };
     if(activeSaveBtn){
       setLocalStorage([...localStorage, newCoin]);

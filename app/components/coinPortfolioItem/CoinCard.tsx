@@ -52,7 +52,7 @@ const CoinCard = ({ storageData }:{ storageData:any }) => {
             <div className={clsx("pt-1 pl-1 w-[30px] h-[30px] rounded-sm cursor-pointer",{
               "bg-[#3A3978] hover:border-cryptoblue-800 hover:border-[1px] box-border" : darkmode,
               "bg-cryptoblue-800" : !darkmode,
-            })}>
+            })} data-delete={storageData.id} >
               <svg xmlns="http://www.w3.org/2000/svg"  className="hover:opacity-70" fill="white" width="20" height="20"  viewBox="0 0 45 45" id="delete">
                 <path d="M12 38c0 2.21 1.79 4 4 4h16c2.21 0 4-1.79 4-4V14H12v24zM38 8h-7l-2-2H19l-2 2h-7v4h28V8z">
                 </path>
