@@ -3,7 +3,7 @@ import clsx from "clsx";
 import Image from "next/image";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
-import { useLocalStorage } from "@/app/components/portfolio/hooks";
+import { useLocalStorage } from "@/app/components/portfolioModal/hooks";
 import SaveButton from "./SaveButton";
 import Search from "./Search";
 import Amount from "./Amount";
