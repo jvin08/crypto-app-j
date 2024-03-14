@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import clsx from "clsx";
 import Image from "next/image";
 import { useSelector } from "react-redux";
@@ -8,16 +8,16 @@ import SaveButton from "./SaveButton";
 import Search from "./Search";
 import Amount from "./Amount";
 import Date from "./Date";
-const CoinSelect = ({toggleCoinSelect}: {toggleCoinSelect: ()=>void}) => {
+const CoinSelect = ({toggleCoinSelect, onCoinAdded}: {toggleCoinSelect: ()=>void, onCoinAdded: ()=>void}) => {
   const btcIMG = "http://cryptoicons.co/images/coin_icon@2x.png";
   const darkmode = useSelector(selectDarkmode);
   const [localStorage, setLocalStorage] = useLocalStorage();
-  const [inputAmount, setInputAmount] = React.useState(false);
-  const [selectedCoin, setSelectedCoin] = React.useState(["",""]);
-  const [coinImage, setCoinImage] = React.useState(btcIMG);
-  const [amount, setAmount] = React.useState("");
-  const [purchaseTime, setPurchaseTime] = React.useState("");
-  const [purchaseDate, setPurchaseDate] = React.useState("");
+  const [inputAmount, setInputAmount] = useState(false);
+  const [selectedCoin, setSelectedCoin] = useState(["",""]);
+  const [coinImage, setCoinImage] = useState(btcIMG);
+  const [amount, setAmount] = useState("");
+  const [purchaseTime, setPurchaseTime] = useState("");
+  const [purchaseDate, setPurchaseDate] = useState("");
   const activeSaveBtn = amount !== "" && purchaseTime !== "" && purchaseDate !== "" && selectedCoin[0] !== "";
   const handleCoin = (coin: any) => {
     setCoinImage(coin.thumb);
@@ -36,7 +36,7 @@ const CoinSelect = ({toggleCoinSelect}: {toggleCoinSelect: ()=>void}) => {
     setPurchaseDate(date);
   };
   const saveDataToLocalStorage = () => {
-    const time = purchaseDate + "T" + purchaseTime + ":00";
+    const time = purchaseDate + "T" + purchaseTime;
     const newCoin = {
       coin: selectedCoin[0],
       symbol: selectedCoin[1],
@@ -47,10 +47,11 @@ const CoinSelect = ({toggleCoinSelect}: {toggleCoinSelect: ()=>void}) => {
     if(activeSaveBtn){
       setLocalStorage([...localStorage, newCoin]);
       toggleCoinSelect();
+      onCoinAdded();
     }
   };
   return (
-    <div className="absolute top-0 left-0 flex bg-cryptodark-900 bg-opacity-65 backdrop-blur-[1px] w-full h-full">
+    <div className="absolute top-0 left-0 z-10 flex bg-cryptodark-900 bg-opacity-65 backdrop-blur-[1px] w-full h-full">
       <div className={clsx("m-auto w-1/2 h-2/5 z-50 p-8 rounded-lg",{
         "bg-cryptodark-400": darkmode,
         "bg-cryptoblue-100": !darkmode,

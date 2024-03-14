@@ -23,7 +23,7 @@ const Date = ({getTime, getDate}:{getTime: any, getDate: any}) => {
         "bg-cryptodark-200 text-cryptodark-510": darkmode,
       })}
       >
-        <p>Purchased Amount</p>
+        <p>Purchased Date</p>
         <svg 
           className="cursor-pointer" 
           width="16" 
