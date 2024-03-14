@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
 import { useGetOneCoinDataQuery, useGetCoinDataByDateQuery } from "../../lib/marketSlice";
 import { timeInterval, calculatePrice } from "./utils";
-const CoinCard = ({ storageData }:{ storageData:any }) => {
+const CoinCard = ({ storageData, toggleDeleteModal }:{ storageData:any, toggleDeleteModal: any }) => {
   const darkmode = useSelector(selectDarkmode);
   const { data } = useGetOneCoinDataQuery(storageData.coin);
   const days = timeInterval(storageData.purchaseTime);
@@ -25,6 +25,7 @@ const CoinCard = ({ storageData }:{ storageData:any }) => {
     amountValue: (data?.market_data.current_price.usd * storageData.amount).toFixed(2) + "",
   };
   const buttonColor = darkmode ? "#3A3978" : "#7878FA";
+  const coinData = [gainOrLoss, storageData.coin, storageData.id];
   return (
     <div className={clsx("flex mb-6",{
       "text-cryptodark-100": darkmode,
@@ -50,9 +51,9 @@ const CoinCard = ({ storageData }:{ storageData:any }) => {
           <div className="flex justify-between mb-2 mt-4">
             <h2 className="text-xl">Market Price</h2>
             <div className={clsx("pt-1 pl-1 w-[30px] h-[30px] rounded-sm cursor-pointer",{
-              "bg-[#3A3978] hover:border-cryptoblue-800 hover:border-[1px] box-border" : darkmode,
+              "bg-[#3937a8] hover:border-cryptoblue-800 hover:border-[1px] box-border" : darkmode,
               "bg-cryptoblue-800" : !darkmode,
-            })} data-delete={storageData.id} >
+            })} onClick={(e)=>toggleDeleteModal(e, coinData)} >
               <svg xmlns="http://www.w3.org/2000/svg"  className="hover:opacity-70" fill="white" width="20" height="20"  viewBox="0 0 45 45" id="delete">
                 <path d="M12 38c0 2.21 1.79 4 4 4h16c2.21 0 4-1.79 4-4V14H12v24zM38 8h-7l-2-2H19l-2 2h-7v4h28V8z">
                 </path>

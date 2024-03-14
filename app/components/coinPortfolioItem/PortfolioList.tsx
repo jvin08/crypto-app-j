@@ -1,12 +1,28 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import CoinCard from "./CoinCard";
+import DeleteModal from "../portfolioDeleteModal/DeleteModal";
 import clsx from "clsx";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
+type Coin = {
+  id: string,
+  coin: string,
+  symbol: string,
+  amount: number,
+  purchaseTime: string,
+  image: string,
+}
 const PortfolioList = ({forceUpdate}:{forceUpdate:boolean}) => {
   const darkmode = useSelector(selectDarkmode);
   const [coinData, setCoinData] = useState([]);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [coinProfit, setCoinProfit] = useState(["","",""]);
+  const toggleDeleteModal = (e: MouseEvent, profitData: string[]) => {
+    e.preventDefault();
+    setCoinProfit([profitData[0], profitData[1], profitData[2]]);
+    setShowDeleteModal((prev) => !prev);
+  };
   useEffect(() => {
     const fetchData = async () => {
       if (typeof window !== "undefined") {
@@ -22,8 +38,13 @@ const PortfolioList = ({forceUpdate}:{forceUpdate:boolean}) => {
       "bg-cryptodark-400": darkmode,
     })}>
       {
-        coinData.map((coin:any) => {
-          return <CoinCard key={coin.coin + coin.purchaseTime} storageData={coin} />;
+        coinData.map((coin:Coin) => {
+          return (
+            <div key={coin.id}>
+              {showDeleteModal && <DeleteModal toggleDeleteModal={toggleDeleteModal} gain={coinProfit} />}
+              <CoinCard storageData={coin} toggleDeleteModal={toggleDeleteModal} />
+            </div>
+          );
         })
       };
     </div>:
