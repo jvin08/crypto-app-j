@@ -13,14 +13,13 @@ type Coin = {
   purchaseTime: string,
   image: string,
 }
-const PortfolioList = ({forceUpdate}:{forceUpdate:boolean}) => {
+const PortfolioList = ({forceUpdate, handleCoinAdded}:{forceUpdate:boolean, handleCoinAdded: ()=>void}) => {
   const darkmode = useSelector(selectDarkmode);
   const [coinData, setCoinData] = useState([]);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [coinProfit, setCoinProfit] = useState(["","",""]);
   const toggleDeleteModal = (e: MouseEvent, profitData: string[]) => {
-    e.preventDefault();
-    setCoinProfit([profitData[0], profitData[1], profitData[2]]);
+    profitData && setCoinProfit([profitData[0], profitData[1], profitData[2]]);
     setShowDeleteModal((prev) => !prev);
   };
   useEffect(() => {
@@ -41,7 +40,7 @@ const PortfolioList = ({forceUpdate}:{forceUpdate:boolean}) => {
         coinData.map((coin:Coin) => {
           return (
             <div key={coin.id}>
-              {showDeleteModal && <DeleteModal toggleDeleteModal={toggleDeleteModal} gain={coinProfit} />}
+              {showDeleteModal && <DeleteModal toggleDeleteModal={toggleDeleteModal} gain={coinProfit} handleCoinAdded={handleCoinAdded} />}
               <CoinCard storageData={coin} toggleDeleteModal={toggleDeleteModal} />
             </div>
           );

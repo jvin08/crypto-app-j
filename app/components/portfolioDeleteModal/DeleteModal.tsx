@@ -2,9 +2,17 @@ import React from "react";
 import clsx from "clsx";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";  
-const DeleteModal = ({toggleDeleteModal, gain}:{toggleDeleteModal: any, gain: string[]}) => {
+import { useLocalStorage } from "../portfolioModal/hooks";
+const DeleteModal = ({toggleDeleteModal, gain, handleCoinAdded}:{toggleDeleteModal: any, gain: string[], handleCoinAdded: ()=>void}) => {
+  const [storedValue, setValue] = useLocalStorage();
+  const deleteCoinFromLocalStorage = (id: string) => {
+    setValue(storedValue.filter((coin:any) => coin.id !== id));
+    handleCoinAdded();
+    toggleDeleteModal();
+  };
   const darkmode = useSelector(selectDarkmode);
   const gainText = Number(gain[0]) > 0 ? "Gain" : "Loss";
+  const gainColor = Number(gain[0]) > 0 ? "text-cryptoblue-650" : "text-cryptoblue-750";
   return (
     <div className="fixed top-0 left-0 z-10 flex bg-cryptodark-900 bg-opacity-45 backdrop-blur-[1px] w-full h-full">
       <div className={clsx("m-auto w-1/2 h-1/4 z-50 p-8 rounded-lg",{
@@ -28,11 +36,11 @@ const DeleteModal = ({toggleDeleteModal, gain}:{toggleDeleteModal: any, gain: st
           </svg>
         </div>
         <div className="flex items-center justify-evenly mt-5">
-          <p>Confirm selling {gain[1]} with {gainText}  {gain[0]}</p>
+          <p>Confirm selling {gain[1]} with <span className={gainColor}>{gainText} {gain[0]}</span></p>
           <div className={clsx("pt-1 pl-1 w-[30px] h-[30px] rounded-sm cursor-pointer",{
             "bg-[#3A3978] hover:border-cryptoblue-800 hover:border-[1px] box-border" : darkmode,
             "bg-cryptoblue-800" : !darkmode,
-          })} >
+          })} onClick={()=>deleteCoinFromLocalStorage(gain[2])}>
             <svg xmlns="http://www.w3.org/2000/svg"  className="hover:opacity-70" fill="white" width="20" height="20"  viewBox="0 0 45 45" id="delete">
               <path d="M12 38c0 2.21 1.79 4 4 4h16c2.21 0 4-1.79 4-4V14H12v24zM38 8h-7l-2-2H19l-2 2h-7v4h28V8z">
               </path>

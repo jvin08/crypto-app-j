@@ -51,7 +51,7 @@ const CoinCard = ({ storageData, toggleDeleteModal }:{ storageData:any, toggleDe
           <div className="flex justify-between mb-2 mt-4">
             <h2 className="text-xl">Market Price</h2>
             <div className={clsx("pt-1 pl-1 w-[30px] h-[30px] rounded-sm cursor-pointer",{
-              "bg-[#3937a8] hover:border-cryptoblue-800 hover:border-[1px] box-border" : darkmode,
+              "bg-[#3A3978] hover:border-cryptoblue-800 hover:border-[1px] box-border" : darkmode,
               "bg-cryptoblue-800" : !darkmode,
             })} onClick={(e)=>toggleDeleteModal(e, coinData)} >
               <svg xmlns="http://www.w3.org/2000/svg"  className="hover:opacity-70" fill="white" width="20" height="20"  viewBox="0 0 45 45" id="delete">
