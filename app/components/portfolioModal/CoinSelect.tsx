@@ -9,16 +9,30 @@ import SaveButton from "./SaveButton";
 import Search from "./Search";
 import Amount from "./Amount";
 import Date from "./Date";
-const CoinSelect = ({toggleCoinSelect, onCoinAdded}: {toggleCoinSelect: ()=>void, onCoinAdded: ()=>void}) => {
-  const btcIMG = "http://cryptoicons.co/images/coin_icon@2x.png";
+import BitcoinImg from "../../../public/bitcoin.png";
+type Coin = {
+  id: string,
+  coin: string,
+  symbol: string,
+  amount: number,
+  purchaseTime: string,
+  image: string,
+}
+const CoinSelect = ({toggleCoinSelect, onCoinAdded, id}: {toggleCoinSelect: any, onCoinAdded: ()=>void, id: string}) => {
   const darkmode = useSelector(selectDarkmode);
   const [localStorage, setLocalStorage] = useLocalStorage();
+  const editedCoin = id ? localStorage.find((coin:Coin) => coin.id === id) : "";
   const [inputAmount, setInputAmount] = useState(false);
-  const [selectedCoin, setSelectedCoin] = useState(["",""]);
-  const [coinImage, setCoinImage] = useState(btcIMG);
-  const [amount, setAmount] = useState("");
-  const [purchaseTime, setPurchaseTime] = useState("");
-  const [purchaseDate, setPurchaseDate] = useState("");
+  const initialSelectedCoin = id ? [editedCoin.coin, editedCoin.symbol] : ["", ""]; // Define initial state outside of the component
+  const [selectedCoin, setSelectedCoin] = useState(initialSelectedCoin);
+  const imageState = id ? editedCoin.image : BitcoinImg;
+  const [coinImage, setCoinImage] = useState(imageState);
+  const initialAmount = id ? editedCoin.amount : "";
+  const [amount, setAmount] = useState(initialAmount);
+  const initialPurchaseTime = id ? editedCoin.purchaseTime.slice(11) : "";
+  const [purchaseTime, setPurchaseTime] = useState(initialPurchaseTime);
+  const initialPurchaseDate = id ? editedCoin.purchaseTime.slice(0,11) : "";
+  const [purchaseDate, setPurchaseDate] = useState(initialPurchaseDate);
   const activeSaveBtn = amount !== "" && purchaseTime !== "" && purchaseDate !== "" && selectedCoin[0] !== "";
   const handleCoin = (coin: any) => {
     setCoinImage(coin.thumb);
@@ -44,22 +58,23 @@ const CoinSelect = ({toggleCoinSelect, onCoinAdded}: {toggleCoinSelect: ()=>void
       amount: amount,
       purchaseTime: time,
       image: coinImage,
-      id: uid(),
+      id: id ? id : uid(),
     };
     if(activeSaveBtn){
-      setLocalStorage([...localStorage, newCoin]);
+      id ? setLocalStorage([...localStorage.filter((coin:Coin) => coin.id !== id), newCoin]) :
+        setLocalStorage([...localStorage, newCoin]);
       toggleCoinSelect();
       onCoinAdded();
     }
   };
   return (
-    <div className="absolute top-0 left-0 z-10 flex bg-cryptodark-900 bg-opacity-65 backdrop-blur-[1px] w-full h-full">
+    <div className="fixed top-0 left-0 z-10 flex bg-cryptodark-900 bg-opacity-65 backdrop-blur-[1px] w-full h-full">
       <div className={clsx("m-auto w-1/2 h-2/5 z-50 p-8 rounded-lg",{
-        "bg-cryptodark-400": darkmode,
-        "bg-cryptoblue-100": !darkmode,
+        "bg-cryptodark-400 text-cryptodark-100": darkmode,
+        "bg-cryptoblue-100 text-cryptoblue-900": !darkmode,
       })}>
         <div className="flex justify-between ">
-          <p>Select coins</p>
+          {id ? <p>Edit coin data</p> : <p>Select coins</p>}
           <svg 
             className="cursor-pointer" 
             onClick={toggleCoinSelect}
@@ -88,7 +103,10 @@ const CoinSelect = ({toggleCoinSelect, onCoinAdded}: {toggleCoinSelect: ()=>void
             <p className="text-center">{selectedCoin[0]?selectedCoin[0]:"Your Crypto"} ({selectedCoin[0]?selectedCoin[1]:"ABC"})</p>
           </div>
           <div className="w-[67%] text-xs flex flex-col justify-between"> 
-            <Search handleCoin={handleCoin} />
+            {id ? <p className={clsx("w-full pl-2 pt-2 h-8 rounded-sm text-xs", {
+              "bg-cryptoblue-200": !darkmode,
+              "bg-cryptodark-200 text-cryptodark-510": darkmode,
+            })}>{selectedCoin[0][0].toUpperCase()+selectedCoin[0].slice(1)}</p> : <Search handleCoin={handleCoin} />}
             <Amount visible={inputAmount} toggleVisible={toggleAmount} getAmount={getAmount} />
             <Date getTime={getPurchaseTime} getDate={getPurchaseDate} />
             <div className="flex justify-between mt-1">
