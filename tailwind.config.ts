@@ -8,6 +8,9 @@ const config: Config = {
   ],
   theme: {
     colors: {
+        'dark': {
+          100: '#000000',
+        },
         'cryptoblue': {
             100: '#FFFFFF',
             200: '#EBEBFD',

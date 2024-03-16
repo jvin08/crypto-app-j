@@ -2,7 +2,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        domains: ['cryptoicons.co'], 
         remotePatterns: [
             {
                 protocol: 'https',
@@ -12,6 +11,11 @@ const nextConfig = {
             {
                 protocol: 'https',
                 hostname: '**.cryptoicons.co',
+                port: '',
+            },
+            {
+                protocol: 'https',
+                hostname: 'cryptoicons.co',
                 port: '',
             },
     ]

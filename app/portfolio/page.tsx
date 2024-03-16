@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Head from "next/head";
-import Header from "../components/portfolio/Header";
+import Header from "../components/portfolioModal/Header";
 import PortfolioList from "../components/coinPortfolioItem/PortfolioList";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "../lib/dynamicValuesSlice";
@@ -27,7 +27,7 @@ const Portfolio = () => {
         "bg-cryptoblue-400": !darkmode,
         "bg-cryptodark-400": darkmode,
       })}>
-        <PortfolioList forceUpdate={forceUpdate} />
+        <PortfolioList forceUpdate={forceUpdate} handleCoinAdded={handleCoinAdded} />
       </div>
     </div>
   );

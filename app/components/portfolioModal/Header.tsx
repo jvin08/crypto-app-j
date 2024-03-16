@@ -17,7 +17,7 @@ const Header = ({handleCoinAdded}:{handleCoinAdded: ()=>void}) => {
     })}>
       Your statistics
       <CustomButton name="Add Asset" handleClick={toggleCoinSelect} active={true} width="w-64" padding="py-2"/>
-      {showCoinSelect && <CoinSelect toggleCoinSelect={toggleCoinSelect} onCoinAdded={handleCoinAdded}  />}
+      {showCoinSelect && <CoinSelect toggleCoinSelect={toggleCoinSelect} onCoinAdded={handleCoinAdded}  id="" />}
     </div>
   );
 };
