@@ -12,7 +12,7 @@ const StatusBar = ({name, width}:{name: string, width: string}) => {
         <p className={clsx("text-xs text-right w-1/3",{
           "text-cryptoblue-100": darkmode,
           "text-cryptodark-200": !darkmode,
-        })}>{Number(width) * 100}%</p>
+        })}>{(Number(width) * 100).toFixed(2)}%</p>
         <div className="relative w-2/3">
           <div className="absolute -bottom-1 start-[15%] w-[5rem] h-1.5 z-2 rounded-sm px-px bg-cryptoblue-650 opacity-40"></div>
           <div className={clsx("absolute -bottom-1 start-[15%] h-1.5 rounded-l-sm z-2 px-px",{
