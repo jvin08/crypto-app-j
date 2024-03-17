@@ -1,3 +1,5 @@
+import { ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
 export const timeInterval = (purchaseDate: string) => {
   const date = new Date(purchaseDate).getTime();
   const today = new Date().getTime();
@@ -20,3 +22,6 @@ export const calculatePrice = (prices: number[][], purchaseDate: string) => {
   }
   return closestPrice;
 };
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
