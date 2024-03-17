@@ -11,6 +11,8 @@ const dynamicValuesSlice = createSlice({
       sign: "$"
     },
     darkmode: true,
+    notification: "",
+    showNotification: "hidden",
   },
   reducers: {
     setCoinOneSymbol: (state, action) => {
@@ -27,13 +29,21 @@ const dynamicValuesSlice = createSlice({
     },
     setDarkmode:(state, action) => {
       state.darkmode = action.payload;
+    },
+    setNotification:(state, action) => {
+      state.notification = action.payload;
+    },
+    setShowNotification:(state, action) => {
+      state.showNotification = action.payload;
     }
   }
 });
-export const { setCoinOneSymbol, setCoinTwoSymbol, setCompare, setCurrency, setDarkmode } = dynamicValuesSlice.actions;
+export const { setShowNotification, setCoinOneSymbol, setCoinTwoSymbol, setCompare, setCurrency, setDarkmode, setNotification } = dynamicValuesSlice.actions;
 export const selectCoinOneSymbol = (state: any) => state.dynamicValues.coinOneSymbol;
 export const selectCoinTwoSymbol = (state: any) => state.dynamicValues.coinTwoSymbol;
 export const selectCompare = (state: any) => state.dynamicValues.compare;
 export const selectCurrency = (state: any) => state.dynamicValues.currency;
 export const selectDarkmode = (state: any) => state.dynamicValues.darkmode;
+export const selectNotification = (state: any) => state.dynamicValues.notification;
+export const selectShowNotification = (state: any) => state.dynamicValues.showNotification;
 export default dynamicValuesSlice.reducer;

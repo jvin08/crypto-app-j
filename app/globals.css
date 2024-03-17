@@ -32,6 +32,13 @@ body {
     text-wrap: balance;
   }
 } */
+.notification {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+.notification.visible {
+  opacity: 0.85;
+}
 .reset-zoom {
   position: absolute;
   font-size: 0.65rem;
@@ -40,13 +47,22 @@ body {
   right: 1rem;
 }
 .loading {
-    width: 1rem;
-    height: 1rem;
-    margin: 0 5px;
-    border-radius: 50%;
-    border: 2px solid #ccc;
-    border-top-color: hsl(205, 78%, 60%);
-    animation: spinner 0.6s linear infinite;
+  width: 1rem;
+  height: 1rem;
+  margin: 0 5px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  border-top-color: hsl(205, 78%, 60%);
+  animation: spinner 0.6s linear infinite;
+}
+.loadingBig {
+  width: 5rem;
+  height: 5rem;
+  margin: auto;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  border-top-color: hsl(205, 78%, 60%);
+  animation: spinner 0.6s linear infinite;
 }
 @keyframes spinRight {
     0% { transform: rotate(0deg); }
@@ -58,4 +74,3 @@ body {
       transform: rotate(360deg);
     }
   }
-  
