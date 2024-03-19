@@ -11,7 +11,7 @@ const Header = ({handleCoinAdded}:{handleCoinAdded: ()=>void}) => {
     setShowCoinSelect(!showCoinSelect);
   };
   return (
-    <div className={clsx("flex justify-between items-center pt-6",{
+    <div className={clsx("flex justify-between items-center pt-6 mt-24",{
       "text-cryptodark-100": darkmode,
       "text-cryptoblue-810": !darkmode,
     })}>

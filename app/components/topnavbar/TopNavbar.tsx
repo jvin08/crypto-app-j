@@ -8,6 +8,7 @@ import Volume from "./Volume";
 import Cap from "./Cap";
 import FirstCoin from "./FirstCoin";
 import SecondCoin from "./SecondCoin";
+import Notification from "../notification/Notification";
 import clsx from "clsx";
 export const TopNavbar: React.FC = () => {
   const currency = useSelector(selectCurrency);
@@ -27,16 +28,19 @@ export const TopNavbar: React.FC = () => {
     marketPercentageSecond: Math.floor(newData?.market_cap_percentage["eth"]),
   };
   return (
-    <div className={clsx("flex justify-center text-xs text-cryptoblue-100 py-3",{
-      "bg-cryptodark-300": darkmode,
-      "bg-cryptoblue-900": !darkmode,
-    })}>
-      <Coins quantity={market.coins}/>
-      <Exchange quantity={market.exchange} />
-      <Volume quantity={market.totalMarket} isLoading={isLoading} />
-      <Cap quantity={market.marketCap} percentage={Math.floor(market.marketCap / market.totalMarket)}  isLoading={isLoading} />
-      <FirstCoin quantity={market.marketPercentageFirst} isLoading={isLoading} />
-      <SecondCoin quantity={market.marketPercentageSecond}  isLoading={isLoading} />
+    <div className="fixed w-full z-10">
+      <div className={clsx("flex justify-center text-xs text-cryptoblue-100 py-3",{
+        "bg-cryptodark-300": darkmode,
+        "bg-cryptoblue-900": !darkmode,
+      })}>
+        <Coins quantity={market.coins}/>
+        <Exchange quantity={market.exchange} />
+        <Volume quantity={market.totalMarket} isLoading={isLoading} />
+        <Cap quantity={market.marketCap} percentage={Math.floor(market.marketCap / market.totalMarket)}  isLoading={isLoading} />
+        <FirstCoin quantity={market.marketPercentageFirst} isLoading={isLoading} />
+        <SecondCoin quantity={market.marketPercentageSecond}  isLoading={isLoading} />
+        <Notification />
+      </div>
     </div>
   );
 };

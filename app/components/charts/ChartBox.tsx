@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import CustomButton from "../coinsConverter/CustomButton";
+import CustomButton from "./CustomButton";
 import { uid } from "uid";
 import clsx from "clsx";
 import { useSelector } from "react-redux";

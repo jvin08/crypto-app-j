@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import clsx from "clsx";
 import Image from "next/image";
 import { uid } from "uid";
-import { useSelector } from "react-redux";
-import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { selectDarkmode, setNotification, setShowNotification } from "@/app/lib/dynamicValuesSlice";
 import { useLocalStorage } from "@/app/components/portfolioModal/hooks";
 import SaveButton from "./SaveButton";
 import Search from "./Search";
@@ -34,6 +34,11 @@ const CoinSelect = ({toggleCoinSelect, onCoinAdded, id}: {toggleCoinSelect: any,
   const initialPurchaseDate = id ? editedCoin.purchaseTime.slice(0,11) : "";
   const [purchaseDate, setPurchaseDate] = useState(initialPurchaseDate);
   const activeSaveBtn = amount !== "" && purchaseTime !== "" && purchaseDate !== "" && selectedCoin[0] !== "";
+  const dispatch = useDispatch();
+  const handleNotification = (message: string) => {
+    dispatch(setNotification(message));
+    dispatch(setShowNotification(""));
+  };
   const handleCoin = (coin: any) => {
     setCoinImage(coin.thumb);
     setSelectedCoin([coin.id, coin.symbol]);
@@ -61,6 +66,7 @@ const CoinSelect = ({toggleCoinSelect, onCoinAdded, id}: {toggleCoinSelect: any,
       id: id ? id : uid(),
     };
     if(activeSaveBtn){
+      handleNotification("Portfolio updated!");
       id ? setLocalStorage([...localStorage.filter((coin:Coin) => coin.id !== id), newCoin]) :
         setLocalStorage([...localStorage, newCoin]);
       toggleCoinSelect();

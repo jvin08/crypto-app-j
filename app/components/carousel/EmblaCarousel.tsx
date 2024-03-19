@@ -85,7 +85,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
               "bg-cryptodark-400": coin.id !== coinOne[0] && darkmode || coin.id !== coinTwo[0] && darkmode,
             })}>   
               <div onClick={(e) => handleSelectedCoin(e, [coin.id,coin.symbol])} 
-                className={clsx("flex items-center justify-center h-full w-full ml-[-8] p-3 cursor-pointer z-20 rounded select-none", {
+                className={clsx("flex items-center justify-center h-full w-full ml-[-8] p-3 cursor-pointer -z-20 rounded select-none", {
                   "bg-cryptodark-300 text-cryptodark-100": coin.id !== coinOne[0] && darkmode || coin.id !== coinTwo[0] && darkmode,
                   "bg-cryptodark-750 text-cryptoblue-100": coin.id === coinOne[0] && darkmode || coin.id === coinTwo[0] && darkmode,
                   "bg-cryptoblue-600 text-cryptoblue-100": coin.id === coinOne[0] && !darkmode || coin.id === coinTwo[0] && !darkmode,                    
