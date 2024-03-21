@@ -23,7 +23,7 @@ const PortfolioList = ({forceUpdate, handleCoinAdded}:{forceUpdate:boolean, hand
   const [coinProfit, setCoinProfit] = useState(["","",""]);
   const [coinId, setCoinId] = useState("");
   const toggleCoinEdit = (e: MouseEvent, id: string) => {
-    e.preventDefault();
+    e && e.preventDefault();
     setCoinId(id);
     setShowCoinEdit((prev) => !prev);
   };
