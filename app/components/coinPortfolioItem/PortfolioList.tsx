@@ -22,11 +22,13 @@ const PortfolioList = ({forceUpdate, handleCoinAdded}:{forceUpdate:boolean, hand
   const [showCoinEdit, setShowCoinEdit] = useState(false);
   const [coinProfit, setCoinProfit] = useState(["","",""]);
   const [coinId, setCoinId] = useState("");
-  const toggleCoinEdit = (id: string) => {
+  const toggleCoinEdit = (e: MouseEvent, id: string) => {
+    e.preventDefault();
     setCoinId(id);
     setShowCoinEdit((prev) => !prev);
   };
-  const toggleDeleteModal = (profitData: string[]) => {
+  const toggleDeleteModal = (e: MouseEvent, profitData: string[]) => {
+    e && e.preventDefault();
     profitData && setCoinProfit([profitData[0], profitData[1], profitData[2]]);
     setShowDeleteModal((prev) => !prev);
   };
@@ -55,7 +57,7 @@ const PortfolioList = ({forceUpdate, handleCoinAdded}:{forceUpdate:boolean, hand
               return (
                 <div key={coin.id} className="mb-5">
                   {showDeleteModal && <DeleteModal toggleDeleteModal={toggleDeleteModal} gain={coinProfit} handleCoinAdded={handleCoinAdded} />}
-                  <Link href={`/coin/${coin.id}`}>
+                  <Link href={`/coin/${coin.coin}-${coin.id}`}>
                     <CoinCard storageData={coin} toggleDeleteModal={toggleDeleteModal} toggleEditModal={toggleCoinEdit}/>
                   </Link>
                 </div>
