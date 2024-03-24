@@ -10,7 +10,6 @@ import SpentAmount from "./SpentAmount";
 import { timeInterval } from "./utils";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
-import { formattedDate, formattedTime } from "./utils";
 const Calculator = ({toggleCalculator}:{toggleCalculator:()=>void}) => {
   const darkmode = useSelector(selectDarkmode);
   const [coinImage, setCoinImage] = useState(BitcoinImg);
@@ -23,13 +22,11 @@ const Calculator = ({toggleCalculator}:{toggleCalculator:()=>void}) => {
   const [showGrowInput, setShowGrowInput] = useState(false);
   const [startTime, setStartTime] = useState("");
   const [startDate, setStartDate] = useState("");
-  const [endTime, setEndTime] = useState(formattedTime);
-  const [endDate, setEndDate] = useState(formattedDate);
   const [growRate, setGrowRate] = useState(0);
   const time = startDate + "T" + startTime;
   const days = timeInterval(time);
   const query = `${selectedCoin[0]}/market_chart?vs_currency=usd&days=${days}`;
-  const allowFetchData = selectedCoin[0] !== "" && startDate !== "" && startTime !== "" && endDate !== "" && endTime !== "";
+  const allowFetchData = selectedCoin[0] !== "" && startDate !== "" && startTime !== "";
   const [visible, setAllowFetchData] = useState(false);
   //value cost averaging
   const handleCoin = (coin: any) => {
@@ -44,12 +41,6 @@ const Calculator = ({toggleCalculator}:{toggleCalculator:()=>void}) => {
   };
   const getStartDate = (date: string) => {
     setStartDate(date);
-  };
-  const getEndTime = (time: string) => {
-    setEndTime(time);
-  };
-  const getEndDate = (date: string) => {
-    setEndDate(date);
   };
   const getInterval = (interval: number) => {setInterval(interval);};
   const getGrowRate = (rate: number) => {setGrowRate(rate);};
@@ -96,17 +87,15 @@ const Calculator = ({toggleCalculator}:{toggleCalculator:()=>void}) => {
             <div className="divide-y divide-cryptodark-160">
               <h3 className="text-sm mb-2">Value averaging</h3>
               <p>Start date: <span className="text-[0.65rem] ml-1 text-cryptoblue-650"> {startDate + " " + startTime}</span></p>
-              <p>End date: <span className="text-[0.65rem] ml-1 text-cryptoblue-650"> {endDate + " " + endTime}</span></p>
               <p>Investment interval, days</p>
               <p>Initial investment, $</p>
               <p>Grow rate per interval, %</p>
               <p>Total amount spent, $</p>
-              <p>Potential Gain/Loss, $</p>
+              <p>Coins value, $</p>
             </div>
             <div className="text-center divide-y divide-cryptodark-160 w-[4.5rem]">
               <h3 className="text-sm mb-2">Q-ty</h3>
               <DateInput getTime={getStartTime} getDate={getStartDate} date={startDate} time={startTime} />
-              <DateInput getTime={getEndTime} getDate={getEndDate} date={endDate} time={endTime} />
               <Amount visible={visibleInterval} toggleVisible={displayInterval} getAmount={getInterval} />
               <Amount visible={showInvestment} toggleVisible={displayInvestment} getAmount={getInvestment} />
               <Amount visible={showGrowInput} toggleVisible={toggleGrowRate} getAmount={getGrowRate} />
@@ -116,25 +105,27 @@ const Calculator = ({toggleCalculator}:{toggleCalculator:()=>void}) => {
                   growRate={growRate} 
                   interval={interval}
                   initialAmount={investment}
+                  days={days}
                 /> : 
-                <p>$</p>}
-              <p>$</p>
+                <>
+                  <p>$</p>
+                  <p>$</p>
+                </> 
+              }
             </div>
           </div>
           <div className="text-xs mb-2 flex justify-between w-[calc(50%-0.5rem)]">
             <div className="divide-y divide-cryptodark-160">
               <h3 className="text-sm mb-2">Dollar cost averaging</h3>
               <p>Start date</p>
-              <p>End date</p>
               <p>Investment interval, days</p>
               <p>Initial investment, $</p>
               <p>Investment per interval, $</p>
               <p>Total amount spent, $</p>
-              <p>Potential Gain/Loss, $</p>
+              <p>Coins value, $</p>
             </div>
             <div className="text-center divide-y divide-cryptodark-160 w-[4.5rem]">
               <h3 className="text-sm mb-2">Q-ty</h3>
-              <Triangle />
               <Triangle />
               <Triangle />
               <Triangle />

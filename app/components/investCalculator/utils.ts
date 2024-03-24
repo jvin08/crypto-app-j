@@ -5,11 +5,17 @@ export const timeInterval = (purchaseDate: string) => {
   if(diff < 86400) return 1;
   if(diff > 86400) return Math.ceil(diff / (1000 * 60 * 60 * 24)) + 1;
 };
-const date = new Date();
-const year = date.getFullYear();
-const month = String(date.getMonth() + 1).padStart(2, "0");
-const day = String(date.getDate()).padStart(2, "0");
-const hours = String(date.getHours()).padStart(2, "0");
-const minutes = String(date.getMinutes()).padStart(2, "0");
-export const formattedDate = `${year}-${month}-${day}`;
-export const formattedTime = `${hours}:${minutes}`;
+export const amountInvested = (initialAmount:number, coinPrices:number[], growRate: number) => {
+  let spentAmount = Number(initialAmount);
+  const actualGrowArray = [Number(initialAmount)] as number[];
+  const growArray = [Number(initialAmount)] as number[];
+  for(let i=1;i<coinPrices?.length;i++){
+    const plannedNewValue = growArray[i-1] * (Number(growRate) / 100 + 1);
+    const actualRate = coinPrices[i] / coinPrices[i-1];
+    const newValue = growArray[i-1] * actualRate;
+    spentAmount += plannedNewValue - newValue;
+    growArray.push(plannedNewValue);
+    actualGrowArray.push(newValue);
+  }
+  return [Math.floor(spentAmount), Math.floor(actualGrowArray.slice(-1)?.[0])];
+};

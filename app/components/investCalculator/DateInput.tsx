@@ -3,7 +3,6 @@ import clsx from "clsx";
 import { useSelector } from "react-redux";
 import { useClickOutside } from "../portfolioModal/hooks";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
-import "react-datepicker/dist/react-datepicker.css";
 const DateInput = ({getTime, getDate, date, time}:{getTime: any, getDate: any, date: string, time: string}) => {
   const [visible, setVisible] = useState(false);
   const darkmode = useSelector(selectDarkmode);
