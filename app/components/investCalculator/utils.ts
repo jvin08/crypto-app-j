@@ -32,7 +32,7 @@ export const amountInvestedDCA = (initialAmount:number, coinPrices:number[], gro
 };
 export const filterPrices = (data: any, days: number | undefined, interval: number) =>{
   const coinPrices = data?.prices.filter((item:number[], index:number) => {
-    const adjustedInterval = Number(days) < 91 ? Math.floor(interval * 24) : interval * 1;
+    const adjustedInterval = Number(days) < 91 ? Math.floor(interval * 24) : interval;
     if(index % Number(adjustedInterval) === 0){
       return item;
     }

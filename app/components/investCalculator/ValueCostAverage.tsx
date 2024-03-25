@@ -10,13 +10,13 @@ const ValueCostAverage = ({coin}:{coin: string}) => {
   const [showInvestment, setShowInvestment] = useState(false);
   const [investment, setInvestment] = useState(0);
   const [showGrowInput, setShowGrowInput] = useState(false);
-  const [startTime, setStartTime] = useState("");
-  const [startDate, setStartDate] = useState("");
+  const [startTime, setStartTime] = useState("15:50");
+  const [startDate, setStartDate] = useState("25-02-2024");
   const [growRate, setGrowRate] = useState(0);
   const time = startDate + "T" + startTime;
   const days = timeInterval(time);
   const query = `${coin}/market_chart?vs_currency=usd&days=${days}`;
-  const allowFetchData = coin !== "" && startDate !== "" && startTime !== "";
+  const allowFetchData = coin !== "" && startDate !== "" && startTime !== "" && growRate !== 0 && investment !== 0 && interval !== 0;
   const [visible, setAllowFetchData] = useState(false);
   const displayInterval = () => {setVisibleInterval(!visibleInterval);};
   const displayInvestment = () => {setShowInvestment(!showInvestment);};
@@ -27,9 +27,17 @@ const ValueCostAverage = ({coin}:{coin: string}) => {
   const getStartDate = (date: string) => {
     setStartDate(date);
   };
-  const getInterval = (interval: number) => {setInterval(interval);};
-  const getGrowRate = (rate: number) => {setGrowRate(rate);};
-  const getInvestment = (amount: number) => {setInvestment(amount);};
+  const getInterval = (interval: number) => {
+    setInterval(interval);
+    visible && setAllowFetchData(false);
+  };
+  const getGrowRate = (rate: number) => {
+    setGrowRate(rate);
+    visible && setAllowFetchData(false);
+  };
+  const getInvestment = (amount: number) => {
+    setInvestment(amount);
+  };
   const calculateVCA = () => {
     allowFetchData ? setAllowFetchData(true) : setAllowFetchData(false);
   };

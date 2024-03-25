@@ -8,7 +8,7 @@ const Amount = ({visible, toggleVisible, getAmount}:{visible: boolean, toggleVis
   const [amount, setAmount] = useState("");
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const amount = e.target.value;
-    if (/^\d+?$/.test(amount) || amount === "") {
+    if (/^(?!0)\d+?$/.test(amount) || amount === "") {
       setAmount(amount);
     }
   };

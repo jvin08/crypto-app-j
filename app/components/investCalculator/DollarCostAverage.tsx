@@ -15,7 +15,7 @@ const DollarCostAverage = ({coin}:{coin: string}) => {
   const time = startDate + "T" + startTime;
   const days = timeInterval(time);
   const query = `${coin}/market_chart?vs_currency=usd&days=${days}`;
-  const allowFetchData = coin !== "" && startDate !== "" && startTime !== "";
+  const allowFetchData = coin !== "" && startDate !== "" && startTime !== "" && growAmount !== 0 && investment !== 0 && interval !== 0;
   const [visible, setAllowFetchData] = useState(false);
   const displayInterval = () => {setVisibleInterval(!visibleInterval);};
   const displayInvestment = () => {setShowInvestment(!showInvestment);};
