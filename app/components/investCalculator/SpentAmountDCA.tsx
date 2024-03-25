@@ -1,23 +1,23 @@
 import React from "react";
 import { useGetCoinDataByDateQuery } from "../../lib/marketSlice";
-import { amountInvested, filterPrices } from "./utils";
-const SpentAmount = (
+import { filterPrices, amountInvestedDCA } from "./utils";
+const SpentAmountDCA = (
   {
     query, 
-    growRate, 
+    growAmount, 
     interval, 
     initialAmount,
     days
   }:{
     query:string, 
-    growRate:number, 
+    growAmount:number, 
     interval:number, 
     initialAmount: number,
     days: number | undefined
   }) => {
   const { data } = useGetCoinDataByDateQuery(query);
   const coinPrices = filterPrices(data, days, interval);
-  const spentMoney = amountInvested(initialAmount, coinPrices, growRate);
+  const spentMoney = amountInvestedDCA(initialAmount, coinPrices, growAmount);
   return (
     <>
       <p>{spentMoney[0]}</p>
@@ -25,4 +25,4 @@ const SpentAmount = (
     </>
   );
 };
-export default SpentAmount;
+export default SpentAmountDCA;

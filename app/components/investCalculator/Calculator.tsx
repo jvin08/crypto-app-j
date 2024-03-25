@@ -3,50 +3,17 @@ import clsx from "clsx";
 import Image from "next/image";
 import BitcoinImg from "../../../public/bitcoin.png";
 import Search from "../portfolioModal/Search";
-import Triangle from "./Triangle";
-import Amount from "./Amount";
-import DateInput from "./DateInput";
-import SpentAmount from "./SpentAmount";
-import { timeInterval } from "./utils";
+import ValueCostAverage from "./ValueCostAverage";
+import DollarCostAverage from "./DollarCostAverage";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
 const Calculator = ({toggleCalculator}:{toggleCalculator:()=>void}) => {
   const darkmode = useSelector(selectDarkmode);
   const [coinImage, setCoinImage] = useState(BitcoinImg);
   const [selectedCoin, setSelectedCoin] = useState(["", ""]);
-  //value averaging
-  const [visibleInterval, setVisibleInterval] = useState(false);
-  const [interval, setInterval] = useState(0);
-  const [showInvestment, setShowInvestment] = useState(false);
-  const [investment, setInvestment] = useState(0);
-  const [showGrowInput, setShowGrowInput] = useState(false);
-  const [startTime, setStartTime] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [growRate, setGrowRate] = useState(0);
-  const time = startDate + "T" + startTime;
-  const days = timeInterval(time);
-  const query = `${selectedCoin[0]}/market_chart?vs_currency=usd&days=${days}`;
-  const allowFetchData = selectedCoin[0] !== "" && startDate !== "" && startTime !== "";
-  const [visible, setAllowFetchData] = useState(false);
-  //value cost averaging
   const handleCoin = (coin: any) => {
     setCoinImage(coin.thumb);
     setSelectedCoin([coin.id, coin.symbol]);
-  };
-  const displayInterval = () => {setVisibleInterval(!visibleInterval);};
-  const displayInvestment = () => {setShowInvestment(!showInvestment);};
-  const toggleGrowRate = () => {setShowGrowInput(!showGrowInput);};
-  const getStartTime = (time: string) => {
-    setStartTime(time);
-  };
-  const getStartDate = (date: string) => {
-    setStartDate(date);
-  };
-  const getInterval = (interval: number) => {setInterval(interval);};
-  const getGrowRate = (rate: number) => {setGrowRate(rate);};
-  const getInvestment = (amount: number) => {setInvestment(amount);};
-  const calculateVCA = () => {
-    allowFetchData ? setAllowFetchData(true) : setAllowFetchData(false);
   };
   const closeSvgColor = darkmode ? "white" : "black";
   return (
@@ -83,64 +50,8 @@ const Calculator = ({toggleCalculator}:{toggleCalculator:()=>void}) => {
           </div>
         </div>
         <div className="flex justify-between">
-          <div className="text-xs mb-2 flex justify-between w-[calc(50%-0.5rem)]">
-            <div className="divide-y divide-cryptodark-160">
-              <h3 className="text-sm mb-2">Value averaging</h3>
-              <p>Start date: <span className="text-[0.65rem] ml-1 text-cryptoblue-650"> {startDate + " " + startTime}</span></p>
-              <p>Investment interval, days</p>
-              <p>Initial investment, $</p>
-              <p>Grow rate per interval, %</p>
-              <p>Total amount spent, $</p>
-              <p>Coins value, $</p>
-            </div>
-            <div className="text-center divide-y divide-cryptodark-160 w-[4.5rem]">
-              <h3 className="text-sm mb-2">Q-ty</h3>
-              <DateInput getTime={getStartTime} getDate={getStartDate} date={startDate} time={startTime} />
-              <Amount visible={visibleInterval} toggleVisible={displayInterval} getAmount={getInterval} />
-              <Amount visible={showInvestment} toggleVisible={displayInvestment} getAmount={getInvestment} />
-              <Amount visible={showGrowInput} toggleVisible={toggleGrowRate} getAmount={getGrowRate} />
-              {visible ? 
-                <SpentAmount 
-                  query={query} 
-                  growRate={growRate} 
-                  interval={interval}
-                  initialAmount={investment}
-                  days={days}
-                /> : 
-                <>
-                  <p>$</p>
-                  <p>$</p>
-                </> 
-              }
-            </div>
-          </div>
-          <div className="text-xs mb-2 flex justify-between w-[calc(50%-0.5rem)]">
-            <div className="divide-y divide-cryptodark-160">
-              <h3 className="text-sm mb-2">Dollar cost averaging</h3>
-              <p>Start date</p>
-              <p>Investment interval, days</p>
-              <p>Initial investment, $</p>
-              <p>Investment per interval, $</p>
-              <p>Total amount spent, $</p>
-              <p>Coins value, $</p>
-            </div>
-            <div className="text-center divide-y divide-cryptodark-160 w-[4.5rem]">
-              <h3 className="text-sm mb-2">Q-ty</h3>
-              <Triangle />
-              <Triangle />
-              <Triangle />
-              <Triangle />
-              <p>$</p>
-              <p>$</p>
-            </div>
-          </div>
-        </div>
-        <div className="flex text-sm font-thin">
-          <button 
-            className="border border-cryptodark-160 rounded cursor-pointer m-auto mb-3 w-32"
-            onClick={calculateVCA}
-          >calculate (VCA)</button>
-          <button className="border border-cryptodark-160 rounded cursor-pointer m-auto mb-3 w-32">calculate (DCA)</button>
+          <ValueCostAverage coin={selectedCoin[0]} />
+          <DollarCostAverage coin={selectedCoin[0]} />
         </div>
         <div className="text-xs font-thin">
           <p className="mb-3">Value-cost averaging (VCA) -- is to systematically buy more coins when prices are low and fewer coins when prices are high, thereby potentially increasing the overall return of the investment portfolio over time</p>

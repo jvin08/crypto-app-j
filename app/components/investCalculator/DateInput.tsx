@@ -50,7 +50,7 @@ const DateInput = ({getTime, getDate, date, time}:{getTime: any, getDate: any, d
           "bg-cryptoblue-200 text-cryptoblue-900": !darkmode,
           "bg-cryptodark-200 text-cryptodark-510": darkmode,
         })}> 
-          <input type="date" value={date} onChange={handleDate} className={clsx("absolute -ml-5 w-28 p-2 rounded-lg border bg-cryptoblue-900",{
+          <input type="date" value={date} onChange={handleDate} className={clsx("focus:outline-none absolute -ml-5 w-28 p-2 rounded-lg border bg-cryptoblue-900",{
             "bg-cryptodark-200": darkmode,
           })}/>
           <input type="time" value={time}  onChange={handleTime} className={clsx("focus:outline-none top-6 m-0 absolute -ml-5 w-28 p-2 pt-0 rounded-b-lg border-t-0 border bg-cryptoblue-900",{
