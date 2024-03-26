@@ -7,16 +7,18 @@ const SpentAmountDCA = (
     growAmount, 
     interval, 
     initialAmount,
-    days
+    days,
+    startTime
   }:{
     query:string, 
     growAmount:number, 
     interval:number, 
     initialAmount: number,
-    days: number | undefined
+    days: number | undefined,
+    startTime: string
   }) => {
   const { data } = useGetCoinDataByDateQuery(query);
-  const coinPrices = filterPrices(data, days, interval);
+  const coinPrices = filterPrices(data, days, interval, startTime);
   const spentMoney = amountInvestedDCA(initialAmount, coinPrices, growAmount);
   return (
     <>

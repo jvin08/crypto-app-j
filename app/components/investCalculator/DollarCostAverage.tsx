@@ -3,7 +3,11 @@ import { timeInterval } from "./utils";
 import Amount from "./Amount";
 import DateInput from "./DateInput";
 import SpentAmountDCA from "./SpentAmountDCA";
+import clsx from "clsx";
+import { useSelector } from "react-redux";
+import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
 const DollarCostAverage = ({coin}:{coin: string}) => {
+  const darkmode = useSelector(selectDarkmode);
   const [visibleInterval, setVisibleInterval] = useState(false);
   const [interval, setInterval] = useState(0);
   const [showInvestment, setShowInvestment] = useState(false);
@@ -57,6 +61,7 @@ const DollarCostAverage = ({coin}:{coin: string}) => {
               interval={interval}
               initialAmount={investment}
               days={days}
+              startTime={time}
             /> : 
             <>
               <p>$</p>
@@ -67,7 +72,9 @@ const DollarCostAverage = ({coin}:{coin: string}) => {
       </div> 
       <div className="flex">
         <button 
-          className="text-center text-sm font-thin border border-cryptodark-160 rounded cursor-pointer m-auto mb-3 w-32"
+          className={clsx("text-center text-sm font-thin py-1 box-border border border-cryptodark-160 hover:border-cryptoblue-800 focus:bg-cryptodark-350 rounded-2xl cursor-pointer m-auto mb-3 w-32",{
+            "focus:bg-cryptoblue-100": !darkmode,  
+          })}
           onClick={calculateDCA}
         >calculate (DCA)</button>
       </div>

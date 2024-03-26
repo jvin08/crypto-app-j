@@ -50,7 +50,7 @@ const Amount = ({visible, toggleVisible, getAmount}:{visible: boolean, toggleVis
         <input 
           type="text" 
           ref={inputRef}
-          placeholder="e.g. 1,2..." 
+          placeholder="min 1" 
           value={amount}
           onChange={handleChange}
           onBlur={handleBlur}
