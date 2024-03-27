@@ -28,7 +28,7 @@ const CoinCard = ({ storageData, toggleDeleteModal, toggleEditModal }:{ storageD
   const buttonColor = darkmode ? "#3A3978" : "#7878FA";
   const coinData = [gainOrLoss, storageData.coin, storageData.id];
   return (
-    <BackgroundGradient  className="bg-cryptodark-350">
+    <BackgroundGradient  className="bg-cryptodark-350" outerStyle="relative p-[4px] group" rounded="">
       <div className={clsx("flex cursor-pointer",{
         "text-cryptodark-100": darkmode,
         "text-cryptodark-200": !darkmode,

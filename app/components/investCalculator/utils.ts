@@ -30,8 +30,10 @@ export const amountInvestedDCA = (initialAmount:number, coinPrices:number[], gro
   }
   return [Math.floor(spentAmount), Math.floor(growArray.slice(-1)[0])];
 };
-export const filterPrices = (data: any, days: number | undefined, interval: number) =>{
-  const coinPrices = data?.prices.filter((item:number[], index:number) => {
+export const filterPrices = (data: any, days: number | undefined, interval: number, startTime: string) =>{
+  const time = new Date(startTime).getTime();
+  const slicedData = sliceFromClosestTime(data?.prices, time);
+  const coinPrices = slicedData?.filter((item:number[], index:number) => {
     const adjustedInterval = Number(days) < 91 ? Math.floor(interval * 24) : interval;
     if(index % Number(adjustedInterval) === 0){
       return item;
@@ -42,3 +44,19 @@ export const filterPrices = (data: any, days: number | undefined, interval: numb
   coinPrices?.push(data?.prices.slice(-1)[0][1]);
   return coinPrices;
 };
+function findClosestStartTime(arr: number[][], targetTime: number) {
+  let minDiff = Infinity;
+  let closestIndex = -1;
+  for (let i = 0; i < arr?.length; i++) {
+    const diff = Math.abs(arr[i][0] - targetTime);
+    if (diff < minDiff) {
+      minDiff = diff;
+      closestIndex = i;
+    }
+  }
+  return closestIndex;
+}
+export function sliceFromClosestTime(arr: number[][], targetTime: number) {
+  const closestIndex = findClosestStartTime(arr, targetTime);
+  return arr?.slice(closestIndex);
+}
