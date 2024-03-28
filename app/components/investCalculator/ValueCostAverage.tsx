@@ -65,24 +65,23 @@ const ValueCostAverage = ({coin}:{coin: string}) => {
   const calculateVCA = () => {
     allSetUp && setShouldRenderSpentAmount(true);
   };
+  const pStyle = "my-2 border-b-[1px] border-cryptodark-160 pl-2 pb-2";
   return (
-    <div className=" w-[calc(50%-0.5rem)]">
-      <div className="text-xs mb-2 flex justify-between">
-        <div className="divide-y divide-cryptodark-160">
-          <h3 className="text-sm mb-2">Value averaging</h3>
-          <p>Start date: <span className="text-[0.65rem] ml-1 text-cryptoblue-650"> {state.startDate + " " + state.startTime}</span></p>
-          <p>Investment interval, days</p>
-          <p>Initial investment, $</p>
-          <p>Grow rate per interval, %</p>
-          <p>Total amount spent, $</p>
-          <p>Coins value, $</p>
+    <div className=" w-full">
+      <div className="text-xs flex justify-between">
+        <div className="w-2/3">
+          <p className={`${pStyle} flext justify-end`}>Start date: <span className="text-[0.62rem] ml-24 text-cryptoblue-650"> {state.startDate}</span><span className="text-[0.62rem] ml-10 text-cryptoblue-650">{state.startTime}</span></p>
+          <p className={pStyle}>Contribution interval , days</p>
+          <p className={pStyle}>Initial investment, $</p>
+          <p className={pStyle}>Grow rate per interval, %</p>
+          <p className={pStyle}>Total amount spent on investments, $</p>
+          <p className="pl-2">Coins value today, $</p>
         </div>
-        <div className="text-center divide-y divide-cryptodark-160 w-[4.5rem]">
-          <h3 className="text-sm mb-2">Q-ty</h3>
+        <div className="text-center divide-y divide-cryptodark-160 w-1/4 mt-[1px]">
           <DateInput getTime={getStartTime} getDate={getStartDate} date={state.startDate} time={state.startTime} />
-          <Amount visible={visibleInterval} toggleVisible={displayInterval} getAmount={getInterval} />
-          <Amount visible={showInvestment} toggleVisible={displayInvestment} getAmount={getInvestment} />
-          <Amount visible={showGrowInput} toggleVisible={toggleGrowRate} getAmount={getGrowRate} />
+          <Amount placeholder="Minimum 1day" visible={visibleInterval} toggleVisible={displayInterval} getAmount={getInterval} />
+          <Amount placeholder="Minimum $1" visible={showInvestment} toggleVisible={displayInvestment} getAmount={getInvestment} />
+          <Amount placeholder="Minimum %1" visible={showGrowInput} toggleVisible={toggleGrowRate} getAmount={getGrowRate} />
           {shouldRenderSpentAmount ? 
             <SpentAmount 
               query={query} 
@@ -93,15 +92,15 @@ const ValueCostAverage = ({coin}:{coin: string}) => {
               startTime={time}
             /> : 
             <>
-              <p>$</p>
-              <p>$</p>
+              <p className="py-2">$</p>
+              <p className="py-2">$</p>
             </> 
           }
         </div>
       </div>
       <div className="flex">
         <button 
-          className={clsx("text-center text-sm font-thin py-1 box-border border border-cryptodark-160 hover:border-cryptoblue-800 focus:bg-cryptodark-350 rounded-2xl cursor-pointer m-auto mb-3 w-32",{
+          className={clsx("text-center text-sm font-thin py-1 box-border border border-cryptodark-160 hover:border-cryptoblue-800 focus:bg-cryptodark-350 rounded-lg cursor-pointer ml-auto mb-3 w-32",{
             "focus:bg-cryptoblue-100": !darkmode,  
           })}
           onClick={calculateVCA}

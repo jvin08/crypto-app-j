@@ -12,14 +12,21 @@ const Calculator = ({toggleCalculator}:{toggleCalculator:()=>void}) => {
   const darkmode = useSelector(selectDarkmode);
   const [coinImage, setCoinImage] = useState(BitcoinImg);
   const [selectedCoin, setSelectedCoin] = useState(["", ""]);
+  const [showDCACalculator, setShowDCACalculator] = useState(false);
   const handleCoin = (coin: any) => {
     setCoinImage(coin.thumb);
     setSelectedCoin([coin.id, coin.symbol]);
   };
   const closeSvgColor = darkmode ? "white" : "black";
+  const dcaStyle = showDCACalculator ? "bg-cryptodark-400 cursor-default" : "cursor-pointer rounded-lg  bg-cryptodark-200 text-cryptodark-510 opacity-40";
+  //const dcaLight = showDCACalculator ? "bg-cryptodark-100 cursor-default" : "cursor-pointer rounded-lg  bg-cryptodark-100 text-cryptodark-400 opacity-40";
+  const vcaStyle = showDCACalculator ? "cursor-pointer rounded-lg  bg-cryptodark-200 text-cryptodark-510 opacity-40" : "bg-cryptodark-400 cursor-default";
+  const toggleStrategies = () => {
+    setShowDCACalculator(!showDCACalculator);
+  };
   return (
     <div className="fixed top-0 left-0 z-10 flex bg-cryptodark-900 bg-opacity-65 backdrop-blur-[1px] w-full h-full">
-      <BackgroundGradient animate={true} outerStyle="absolute left-[calc(50%-17.5rem)] top-[6rem] p-[4px] group" rounded="rounded-[2.1rem]">
+      <BackgroundGradient animate={true} outerStyle="absolute left-[calc(50%-17.5rem)] top-[6rem] p-[1px] group" rounded="rounded-[2.1rem]">
         <div className={clsx("m-auto w-[35rem] h-2/3 z-50 p-8 rounded-[2rem]",{
           "bg-cryptodark-400 text-cryptodark-100": darkmode,
           "bg-cryptodark-100 text-cryptoblue-900": !darkmode,
@@ -51,13 +58,28 @@ const Calculator = ({toggleCalculator}:{toggleCalculator:()=>void}) => {
               <Search handleCoin={handleCoin} />
             </div>
           </div>
-          <div className="flex justify-between">
-            <ValueCostAverage coin={selectedCoin[0]} />
-            <DollarCostAverage coin={selectedCoin[0]} />
+          <div className="flex justify-between text-center mt-3">
+            <button 
+              className={`${vcaStyle} text-sm w-1/2 py-2`}
+              onClick={toggleStrategies}
+              disabled={!showDCACalculator}
+            >Value cost averaging</button>
+            <button 
+              className={clsx(`${dcaStyle} text-sm w-1/2 py-2`,{
+                dcaLight: !darkmode,
+              })}
+              onClick={toggleStrategies}
+              disabled={showDCACalculator}
+            >Dollar cost averaging</button>
+          </div>        
+          <div className="flex justify-between mt-0">
+            {!showDCACalculator 
+              ? <ValueCostAverage coin={selectedCoin[0]} />
+              : <DollarCostAverage coin={selectedCoin[0]} />}
           </div>
           <div className="text-xs font-thin">
-            <p className="mb-3">Value-cost averaging (VCA) -- is to systematically buy more coins when prices are low and fewer coins when prices are high, thereby potentially increasing the overall return of the investment portfolio over time</p>
-            <p>Dollar-cost averaging (DCA) -- is to reduce the impact of market volatility on the average cost of acquiring the investment. By consistently investing over time, investors may be able to lower their average cost per coin and potentially benefit from long-term market appreciation</p>
+            {!showDCACalculator ? <p className="mb-3">Value-cost averaging (VCA) -- is an investment strategy focuses on the value of the investment rather than the number of shares or units purchased. In VCA, investors aim to invest a consistent amount of money at regular intervals, but instead of buying a fixed quantity of assets each time.</p>
+              : <p className="mb-3">Dollar-cost averaging (DCA) -- is to reduce the impact of market volatility on the average cost of acquiring the investment. By consistently investing over time, investors may be able to lower their average cost per coin and potentially benefit from long-term market appreciation</p>}
           </div>
         </div>
       </BackgroundGradient>

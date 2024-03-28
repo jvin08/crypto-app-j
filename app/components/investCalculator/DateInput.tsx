@@ -24,9 +24,9 @@ const DateInput = ({getTime, getDate, date, time}:{getTime: any, getDate: any, d
   };
   return (
     <div>
-      {!visible ? <div className={clsx("w-full text-xs flex justify-center py-0 px-0",{
+      {!visible ? <div className={clsx("w-full text-xs flex justify-center py-2 px-0",{
         "bg-cryptoblue-200 text-cryptoblue-900": !darkmode,
-        "bg-cryptodark-200 text-cryptodark-510": darkmode,
+        "bg-cryptodark-400 text-cryptodark-510": darkmode,
       })}
       >
         <svg 
@@ -46,14 +46,14 @@ const DateInput = ({getTime, getDate, date, time}:{getTime: any, getDate: any, d
           />
         </svg>
       </div> :
-        <div ref={dateRef} className={clsx("relative w-full h-[16px] text-xs flex justify-between py-0 px-0",{
+        <div ref={dateRef} className={clsx("relative w-full h-8 text-xs flex justify-between py-0 px-0",{
           "bg-cryptoblue-200 text-cryptoblue-900": !darkmode,
-          "bg-cryptodark-200 text-cryptodark-510": darkmode,
+          "bg-cryptodark-400 text-cryptodark-510": darkmode,
         })}> 
-          <input type="date" value={date} onChange={handleDate} className={clsx("focus:outline-none absolute -ml-5 w-28 p-2 rounded-lg border bg-cryptoblue-900",{
+          <input type="date" value={date} onChange={handleDate} className={clsx("focus:outline-none absolute w-full p-2 rounded-lg border bg-cryptoblue-900",{
             "bg-cryptodark-200": darkmode,
           })}/>
-          <input type="time" value={time}  onChange={handleTime} className={clsx("focus:outline-none top-6 m-0 absolute -ml-5 w-28 p-2 pt-0 rounded-b-lg border-t-0 border bg-cryptoblue-900",{
+          <input type="time" value={time}  onChange={handleTime} className={clsx("focus:outline-none top-6 m-0 absolute w-full p-2 pt-0 rounded-b-lg border-t-0 border bg-cryptoblue-900",{
             "bg-cryptodark-200": darkmode,
           })} />
         </div>  

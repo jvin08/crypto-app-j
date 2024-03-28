@@ -2,7 +2,7 @@ import React, {useRef, useState, useEffect } from "react";
 import clsx from "clsx";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
-const Amount = ({visible, toggleVisible, getAmount}:{visible: boolean, toggleVisible: ()=>void, getAmount:any}) => {
+const Amount = ({visible, toggleVisible, getAmount, placeholder}:{visible: boolean, toggleVisible: ()=>void, getAmount:any, placeholder: string}) => {
   const darkmode = useSelector(selectDarkmode);
   const inputRef = useRef<HTMLInputElement>(null);
   const [amount, setAmount] = useState("");
@@ -24,9 +24,9 @@ const Amount = ({visible, toggleVisible, getAmount}:{visible: boolean, toggleVis
   }, [visible]);
   return (
     <div>
-      {!visible ? <div className={clsx("w-full text-xs flex justify-center py-0 px-2 rounded-sm",{
+      {!visible ? <div className={clsx("w-full text-xs flex justify-center py-2 px-2 rounded-sm",{
         "bg-cryptoblue-200 text-cryptoblue-900": !darkmode,
-        "bg-cryptodark-200 text-cryptodark-510": darkmode,
+        "bg-cryptodark-400 text-cryptodark-510": darkmode,
       })}
       >
         {amount==="" ?  
@@ -50,12 +50,12 @@ const Amount = ({visible, toggleVisible, getAmount}:{visible: boolean, toggleVis
         <input 
           type="text" 
           ref={inputRef}
-          placeholder="min 1" 
+          placeholder={placeholder} 
           value={amount}
           onChange={handleChange}
           onBlur={handleBlur}
           required
-          className={clsx("w-full pl-4 h-4 box-border rounded-sm text-xs focus:outline-none focus:border-[1px]", {
+          className={clsx("w-full pl-4 h-8 box-border rounded-sm text-xs focus:outline-none focus:border-[1px]", {
             "bg-cryptoblue-200": !darkmode,
             "bg-cryptodark-200 text-cryptodark-510 focus:border-cryptodark-800 focus:outline-none focus:shadow-inner": darkmode,
           })} 
