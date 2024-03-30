@@ -13,6 +13,7 @@ const DeleteModal = ({toggleDeleteModal, gain, handleCoinAdded}:{toggleDeleteMod
   const darkmode = useSelector(selectDarkmode);
   const gainText = Number(gain[0]) > 0 ? "Gain" : "Loss";
   const gainColor = Number(gain[0]) > 0 ? "text-cryptoblue-650" : "text-cryptoblue-750";
+  const crossColor = darkmode ? "white" : "black";
   return (
     <div className="fixed top-0 left-0 z-10 flex bg-cryptodark-900 bg-opacity-45 backdrop-blur-[1px] w-full h-full">
       <div className={clsx("m-auto w-1/2 h-1/4 z-50 p-8 rounded-lg",{
@@ -30,9 +31,9 @@ const DeleteModal = ({toggleDeleteModal, gain, handleCoinAdded}:{toggleDeleteMod
             fill="none" 
             xmlns="http://www.w3.org/2000/svg"
           >
-            <path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M9.17188 14.8299L14.8319 9.16992" stroke="white" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M14.8319 14.8299L9.17188 9.16992" stroke="white" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" stroke={crossColor} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M9.17188 14.8299L14.8319 9.16992" stroke={crossColor} strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M14.8319 14.8299L9.17188 9.16992" stroke={crossColor} strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         </div>
         <div className="flex items-center justify-evenly mt-5">

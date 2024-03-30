@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import clsx from "clsx";
+import InputDate from "./InputDate";
+import InputTime from "./InputTime";
 import { useSelector } from "react-redux";
 import { useClickOutside } from "../portfolioModal/hooks";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
@@ -49,13 +51,9 @@ const DateInput = ({getTime, getDate, date, time}:{getTime: any, getDate: any, d
         <div ref={dateRef} className={clsx("relative w-full h-8 text-xs flex justify-between py-0 px-0",{
           "bg-cryptoblue-200 text-cryptoblue-900": !darkmode,
           "bg-cryptodark-400 text-cryptodark-510": darkmode,
-        })}> 
-          <input type="date" value={date} onChange={handleDate} className={clsx("focus:outline-none absolute w-full p-2 rounded-lg border bg-cryptoblue-900",{
-            "bg-cryptodark-200": darkmode,
-          })}/>
-          <input type="time" value={time}  onChange={handleTime} className={clsx("focus:outline-none top-6 m-0 absolute w-full p-2 pt-0 rounded-b-lg border-t-0 border bg-cryptoblue-900",{
-            "bg-cryptodark-200": darkmode,
-          })} />
+        })}>
+          <InputDate date={date} handleDate={handleDate} /> 
+          <InputTime time={time} handleTime={handleTime} />
         </div>  
       }
     </div>

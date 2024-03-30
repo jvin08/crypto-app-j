@@ -19,8 +19,9 @@ const Calculator = ({toggleCalculator}:{toggleCalculator:()=>void}) => {
   };
   const closeSvgColor = darkmode ? "white" : "black";
   const dcaStyle = showDCACalculator ? "bg-cryptodark-400 cursor-default" : "cursor-pointer rounded-lg  bg-cryptodark-200 text-cryptodark-510 opacity-40";
-  //const dcaLight = showDCACalculator ? "bg-cryptodark-100 cursor-default" : "cursor-pointer rounded-lg  bg-cryptodark-100 text-cryptodark-400 opacity-40";
+  const dcaLight = showDCACalculator ? "bg-cryptodark-100 cursor-default" : "cursor-pointer rounded-lg  bg-cryptodark-100 text-cryptodark-520 opacity-40";
   const vcaStyle = showDCACalculator ? "cursor-pointer rounded-lg  bg-cryptodark-200 text-cryptodark-510 opacity-40" : "bg-cryptodark-400 cursor-default";
+  const vcaLight = showDCACalculator ? "cursor-pointer rounded-lg  bg-cryptodark-100 text-cryptodark-520 opacity-40" : "bg-cryptodark-100 cursor-default";
   const toggleStrategies = () => {
     setShowDCACalculator(!showDCACalculator);
   };
@@ -60,14 +61,12 @@ const Calculator = ({toggleCalculator}:{toggleCalculator:()=>void}) => {
           </div>
           <div className="flex justify-between text-center mt-3">
             <button 
-              className={`${vcaStyle} text-sm w-1/2 py-2`}
+              className={`${darkmode ? vcaStyle : vcaLight} text-sm w-1/2 py-2`}
               onClick={toggleStrategies}
               disabled={!showDCACalculator}
             >Value cost averaging</button>
             <button 
-              className={clsx(`${dcaStyle} text-sm w-1/2 py-2`,{
-                dcaLight: !darkmode,
-              })}
+              className={`${darkmode ? dcaStyle : dcaLight} text-sm w-1/2 py-2`}
               onClick={toggleStrategies}
               disabled={showDCACalculator}
             >Dollar cost averaging</button>

@@ -1,12 +1,17 @@
 import Link from "next/link";
 import React from "react";
 import clsx from "clsx";
-import { useSelector } from "react-redux";
-import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { selectDarkmode, setNotification, setShowNotification } from "@/app/lib/dynamicValuesSlice";
 import { usePathname } from "next/navigation";
 const Home = () => {
   const darkmode = useSelector(selectDarkmode);
   const pathname = usePathname();
+  const dispatch = useDispatch();
+  const handleNotification = (message: string) => {
+    dispatch(setNotification(message));
+    dispatch(setShowNotification(""));
+  };
   const active = pathname === "/";
   return (
     <div className="flex items-center ">
@@ -21,7 +26,7 @@ const Home = () => {
         "text-cryptoblue-900" : active && !darkmode,
         "text-cryptoblue-500" : !active,
         "text-cryptodark-100" : active && darkmode,
-      })} href="/">Home</Link>
+      })} href="/" onClick={()=>handleNotification("open home page")}>Home</Link>
     </div>
   );
 };
