@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrency, selectCurrency, selectDarkmode } from "@/app/lib/dynamicValuesSlice";
+import { useClickOutside } from "../../portfolioModal/hooks";
 import clsx from "clsx";
 const currencies = [
   {
@@ -35,6 +36,9 @@ const Dropdown = () => {
   const dispatch = useDispatch();
   const currency = useSelector(selectCurrency);
   const darkmode = useSelector(selectDarkmode);
+  const dropDownRef = useClickOutside(() => {
+    setHidden("hidden");
+  });
   const handleClick = (id: number) => {
     dispatch(setCurrency(currencies[id-1]));
   };
@@ -63,7 +67,7 @@ const Dropdown = () => {
             strokeOpacity={1} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
       </div>
-      <ul className={clsx(`absolute left-0 top-0 rounded-xl p-1.5 ${hidden}`, {
+      <ul ref={dropDownRef} className={clsx(`absolute left-0 top-0 rounded-xl p-1.5 ${hidden}`, {
         "bg-cryptodark-300": darkmode,
         "bg-cryptoblue-200": !darkmode,
       })}>

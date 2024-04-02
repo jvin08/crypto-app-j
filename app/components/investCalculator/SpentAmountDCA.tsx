@@ -22,8 +22,8 @@ const SpentAmountDCA = (
   const spentMoney = amountInvestedDCA(initialAmount, coinPrices, growAmount);
   return (
     <>
-      <p>{spentMoney[0]}</p>
-      <p>{spentMoney[1]}</p>
+      <p className="py-2">{spentMoney[0]}</p>
+      <p className="py-2">{spentMoney[1]}</p>
     </>
   );
 };

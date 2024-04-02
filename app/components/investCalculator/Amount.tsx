@@ -55,7 +55,7 @@ const Amount = ({visible, toggleVisible, getAmount, placeholder}:{visible: boole
           onChange={handleChange}
           onBlur={handleBlur}
           required
-          className={clsx("w-full pl-4 h-8 box-border rounded-sm text-xs focus:outline-none focus:border-[1px]", {
+          className={clsx("w-full pl-2 h-8 box-border rounded-sm text-[0.65rem] focus:outline-none focus:border-[1px]", {
             "bg-cryptoblue-200": !darkmode,
             "bg-cryptodark-200 text-cryptodark-510 focus:border-cryptodark-800 focus:outline-none focus:shadow-inner": darkmode,
           })} 

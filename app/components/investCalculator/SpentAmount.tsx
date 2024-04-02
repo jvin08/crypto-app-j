@@ -8,22 +8,23 @@ const SpentAmount = (
     interval, 
     initialAmount,
     days,
-    startTime
+    startTime,
   }:{
     query:string, 
     growRate:number, 
     interval:number, 
     initialAmount: number,
     days: number | undefined
-    startTime: string
+    startTime: string,
+    endTime: string
   }) => {
   const { data } = useGetCoinDataByDateQuery(query);
   const coinPrices = filterPrices(data, days, interval, startTime);
   const spentMoney = amountInvested(initialAmount, coinPrices, growRate);
   return (
     <>
-      <p>{spentMoney[0]}</p>
-      <p>{spentMoney[1]}</p>
+      <p className="py-2">{spentMoney[0]}</p>
+      <p className="py-2">{spentMoney[1]}</p>
     </>
   );
 };
