@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { timeInterval } from "./utils";
 import Amount from "./Amount";
-import DateInput from "./DateInput";
+import DateInput from "./StartDate";
 import SpentAmountDCA from "./SpentAmountDCA";
 import clsx from "clsx";
 import { useSelector } from "react-redux";

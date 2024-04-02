@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { timeInterval } from "./utils";
 import Amount from "./Amount";
-import DateInput from "./DateInput";
+import DateInput from "./StartDate";
 import SpentAmount from "./SpentAmount";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";

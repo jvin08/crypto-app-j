@@ -2,13 +2,18 @@
 import React from "react";
 import Link from "next/link";
 import clsx from "clsx";
-import { useSelector } from "react-redux";
-import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { selectDarkmode, setNotification, setShowNotification } from "@/app/lib/dynamicValuesSlice";
 import { usePathname } from "next/navigation";
 const Portfolio = () => {
   const darkmode = useSelector(selectDarkmode);
   const pathname = usePathname();
   const active = pathname === "/portfolio";
+  const dispatch = useDispatch();
+  const handleNotification = (message: string) => {
+    dispatch(setNotification(message));
+    dispatch(setShowNotification(""));
+  };
   return (
     <div className="flex items-center ml-20">
       <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -23,7 +28,7 @@ const Portfolio = () => {
         "text-cryptoblue-900" : active && !darkmode,
         "text-cryptoblue-500" : !active,
         "text-cryptodark-100" : active && darkmode,
-      })} href="/portfolio">Portfolio</Link>
+      })} href="/portfolio" onClick={()=>handleNotification("Portfolio page opened")}>Portfolio</Link>
     </div>
   );
 };
