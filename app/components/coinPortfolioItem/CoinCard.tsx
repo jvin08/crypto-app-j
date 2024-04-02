@@ -2,7 +2,7 @@
 import React from "react";
 import DataElement from "./DataElement";
 import StatusBar from "./StatusBar";
-import Image from "next/image";
+import CoinImage from "./CoinImage";
 import clsx from "clsx";
 import { BackgroundGradient } from "./BackgroundGradient";
 import { useSelector } from "react-redux";
@@ -28,24 +28,16 @@ const CoinCard = ({ storageData, toggleDeleteModal, toggleEditModal }:{ storageD
   const buttonColor = darkmode ? "#3A3978" : "#7878FA";
   const coinData = [gainOrLoss, storageData.coin, storageData.id];
   return (
-    <BackgroundGradient  className="bg-cryptodark-350" outerStyle="relative p-[4px] group" rounded="">
+    <BackgroundGradient  className={clsx("",{
+      "bg-cryptoblue-200": !darkmode,
+      "bg-cryptodark-350": darkmode,
+    })} outerStyle="relative p-[4px] group" rounded="">
       <div className={clsx("flex cursor-pointer",{
         "text-cryptodark-100": darkmode,
         "text-cryptodark-200": !darkmode,
       })}>
-        <div className={clsx("w-[calc(25%-2rem)] flex flex-col justify-center items-center", {
-          "bg-cryptodark-300": darkmode,
-          "bg-cryptoblue-200": !darkmode,
-        })}>
-          <div className={clsx("w-12 h-12 pl-[9px] pt-[10px] mb-4 rounded-[15px]",{
-            "bg-cryptodark-160": darkmode,
-            "bg-cryptoblue-100": !darkmode,
-          })}>
-            <Image src={storageData.image} width={30} height={30} alt="coin" />
-          </div>
-          <p>{storageData.coin} ({storageData.symbol})</p>
-        </div>
-        <div className={clsx("w-[calc(75%+2rem)] p-5",{
+        <CoinImage data={storageData} />
+        <div className={clsx("w-[calc(80%+2rem)] p-5",{
           "bg-cryptodark-350": darkmode,
           "bg-cryptoblue-200": !darkmode,
         })}>

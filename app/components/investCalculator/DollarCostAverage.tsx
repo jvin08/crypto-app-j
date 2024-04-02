@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { timeInterval } from "./utils";
+import { timeInterval, info } from "./utils";
 import Amount from "./Amount";
 import DateInput from "./StartDate";
 import SpentAmountDCA from "./SpentAmountDCA";
 import clsx from "clsx";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
+import  { ToolTip } from "./ToolTip";
 const DollarCostAverage = ({coin}:{coin: string}) => {
   const darkmode = useSelector(selectDarkmode);
   const [visibleInterval, setVisibleInterval] = useState(false);
@@ -36,17 +37,17 @@ const DollarCostAverage = ({coin}:{coin: string}) => {
   const calculateDCA = () => {
     allowFetchData ? setAllowFetchData(true) : setAllowFetchData(false);
   };
-  const pStyle = "my-2 border-b-[1px] border-cryptodark-160 pl-2 pb-2";
+  const pStyle = "relative my-2 border-b-[1px] border-cryptodark-160 pl-2 pb-2";
   return (
     <div className="w-full">
       <div className="text-xs flex justify-between">
         <div className="w-2/3">
-          <p className={`${pStyle} flext justify-end`}>Start date: <span className="text-[0.62rem] ml-24 text-cryptoblue-650"> {startDate}</span><span className="text-[0.62rem] ml-10 text-cryptoblue-650">{startTime}</span></p>
-          <p className={pStyle}>Contribution interval, days</p>
-          <p className={pStyle}>Initial investment, $</p>
-          <p className={pStyle}>Investment added each interval, $</p>
-          <p className={pStyle}>Total amount spent on investments, $</p>
-          <p className="pl-2">Coins value, $</p>
+          <p className={`${pStyle} flex justify-end`}>Start date: <ToolTip text={info.startDate} /><span className="text-[0.62rem] ml-24 text-cryptoblue-650"> {startDate}</span><span className="text-[0.62rem] ml-10 text-cryptoblue-650">{startTime}</span></p>
+          <p className={pStyle}>Contribution interval, days <ToolTip text={info.interval} /> </p>
+          <p className={pStyle}>Initial investment, $  <ToolTip text={info.initial} /></p>
+          <p className={pStyle}>Investment added each interval, $  <ToolTip text={info.amountPerInterval} /></p>
+          <p className={pStyle}>Total amount spent on investments, $  <ToolTip text={info.total} /></p>
+          <p className="pl-2 relative">Coins value, $ <ToolTip text={info.value} /></p>
         </div>
         <div className="text-center divide-y divide-cryptodark-160 w-1/4 mt-[1px]">
           {/* <h3 className="text-sm mb-2">Q-ty</h3> */}

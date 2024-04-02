@@ -1,6 +1,6 @@
 // Need to use the React-specific entry point to import createApi
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-const apiKey = "x_cg_demo_api_key=CG-M56s6xLEXVt96rZqLS77E2KE";
+const apiKey = `x_cg_demo_api_key=${process.env.NEXT_PUBLIC_x_cg_demo_api_key}`;
 // Define a service using a base URL and expected endpoints
 export const marketApi = createApi({
   reducerPath: "marketApi",

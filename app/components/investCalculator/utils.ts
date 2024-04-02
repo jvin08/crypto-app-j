@@ -60,3 +60,19 @@ export function sliceFromClosestTime(arr: number[][], targetTime: number) {
   const closestIndex = findClosestStartTime(arr, targetTime);
   return arr?.slice(closestIndex);
 }
+export const info = {
+  startDate: "Start date and time of investments.",
+  endDate: "End date and time of investments.",
+  initial: "The amount of money you invest at the beginning of the period.",
+  groWRate: "The rate at which your investment grows, during one interval. If market growth more than this rate, you will add less money to your investment.",
+  interval: "The number of days between each investment.",
+  total: "The total amount of money you've spent on investments.",
+  value: "The value of your investments today.",
+  amountPerInterval: "The amount of money added at the end of each interval.",
+};
+export const formattedDateTime = (date: Date) => {
+  const currentDate = date;
+  const offset = currentDate.getTimezoneOffset();
+  const localDate = new Date(currentDate.getTime() - (offset * 60000));
+  return localDate.toISOString().slice(0, 16);
+};
