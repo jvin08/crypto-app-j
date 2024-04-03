@@ -9,7 +9,7 @@ export const amountInvested = (initialAmount:number, coinPrices:number[], growRa
   let spentAmount = Number(initialAmount);
   const actualGrowArray = [Number(initialAmount)] as number[];
   const growArray = [Number(initialAmount)] as number[];
-  for(let i=1;i<coinPrices?.length;i++){
+  for(let i=1; i < coinPrices?.length; i++){
     const plannedNewValue = growArray[i-1] * (Number(growRate) / 100 + 1);
     const actualRate = coinPrices[i] / coinPrices[i-1];
     const newValue = growArray[i-1] * actualRate;
@@ -30,9 +30,16 @@ export const amountInvestedDCA = (initialAmount:number, coinPrices:number[], gro
   }
   return [Math.floor(spentAmount), Math.floor(growArray.slice(-1)[0])];
 };
-export const filterPrices = (data: any, days: number | undefined, interval: number, startTime: string) =>{
+export const filterPrices = (
+  data: any, 
+  days: number | undefined, 
+  interval: number, 
+  startTime: string, 
+  endTime: string
+) =>{
   const time = new Date(startTime).getTime();
-  const slicedData = sliceFromClosestTime(data?.prices, time);
+  const endTimeStamp = endTime ? new Date(endTime).getTime() : new Date().getTime();
+  const slicedData = sliceFromClosestTime(data?.prices, time, endTimeStamp);
   const coinPrices = slicedData?.filter((item:number[], index:number) => {
     const adjustedInterval = Number(days) < 91 ? Math.floor(interval * 24) : interval;
     if(index % Number(adjustedInterval) === 0){
@@ -44,7 +51,7 @@ export const filterPrices = (data: any, days: number | undefined, interval: numb
   coinPrices?.push(data?.prices.slice(-1)[0][1]);
   return coinPrices;
 };
-function findClosestStartTime(arr: number[][], targetTime: number) {
+function findClosestTime(arr: number[][], targetTime: number) {
   let minDiff = Infinity;
   let closestIndex = -1;
   for (let i = 0; i < arr?.length; i++) {
@@ -56,9 +63,10 @@ function findClosestStartTime(arr: number[][], targetTime: number) {
   }
   return closestIndex;
 }
-export function sliceFromClosestTime(arr: number[][], targetTime: number) {
-  const closestIndex = findClosestStartTime(arr, targetTime);
-  return arr?.slice(closestIndex);
+export function sliceFromClosestTime(arr: number[][], targetTime: number, endTime: number) {
+  const closestIndex = findClosestTime(arr, targetTime);
+  const endTimeClosestIndex = findClosestTime(arr, endTime);
+  return arr?.slice(closestIndex, endTimeClosestIndex + 1);
 }
 export const info = {
   startDate: "Start date and time of investments.",
@@ -66,8 +74,8 @@ export const info = {
   initial: "The amount of money you invest at the beginning of the period.",
   groWRate: "The rate at which your investment grows, during one interval. If market growth more than this rate, you will add less money to your investment.",
   interval: "The number of days between each investment.",
-  total: "The total amount of money you've spent on investments.",
-  value: "The value of your investments today.",
+  total: "The total amount of money you've spent on investments. Negative value means that you returned your investment completely, and have received returns above it.",
+  value: "The value of all your coins at the end of the investments period.",
   amountPerInterval: "The amount of money added at the end of each interval.",
 };
 export const formattedDateTime = (date: Date) => {
