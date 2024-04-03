@@ -12,7 +12,7 @@ const ButtonsBox = () => {
     dispatch(setShowNotification(""));
   };
   const pathname = usePathname();
-  const active = pathname === "/" ? false : true;
+  const active = pathname === "/" ? true : false;
   const darkmode = useSelector(selectDarkmode);
   return (
     <div className={clsx("mt-24 p-1 rounded-md flex w-fit", {

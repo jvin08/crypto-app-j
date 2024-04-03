@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { timeInterval, info } from "./utils";
 import Amount from "./Amount";
 import SpentAmount from "./SpentAmount";
@@ -42,18 +42,11 @@ const ValueCostAverage = ({coin}:{coin: string}) => {
   const getEndDateTime = (e: any) => {
     updateState("endDateTime", e.target.value);
   };
-  useEffect(() => {
-    if (allSetUp) {
-      setShouldRenderSpentAmount(true);
-    }
-  }, [state.startDateTime, allSetUp]);  
   const getInterval = (interval: string) => {
     updateState("interval", interval);
-    shouldRenderSpentAmount && setShouldRenderSpentAmount(false);
   };
   const getGrowRate = (rate: string) => {
     updateState("growRate", rate);
-    shouldRenderSpentAmount && setShouldRenderSpentAmount(false);
   };
   const getInvestment = (amount: string) => {
     updateState("investment", amount);
@@ -67,9 +60,21 @@ const ValueCostAverage = ({coin}:{coin: string}) => {
       <div className="text-xs flex justify-between">
         <div className="w-[calc(83%-0.5rem)]">
           <div className="flex border-b-[1px] border-cryptodark-160 relative">
-            <input type="datetime-local" className="mr-1 my-2 bg-cryptodark-400 text-cryptoblue-650" onChange={getStartDateTime}/>
+            <input 
+              type="datetime-local" 
+              className={clsx("mr-1 my-2 text-cryptoblue-650",{
+                "bg-cryptodark-400 ": darkmode,
+                "bg-cryptoblue-200 text-cryptoblue-750": !darkmode
+              })} 
+              onChange={getStartDateTime}/>
             <span className="relative mr-8"><DateToolTip text={info.startDate} /></span>
-            <input type="datetime-local" className="my-2 ml-1 bg-cryptodark-400 text-cryptoblue-650" onChange={getEndDateTime} />
+            <input 
+              type="datetime-local" 
+              className={clsx("mr-1 my-2 text-cryptoblue-650",{
+                "bg-cryptodark-400 ": darkmode,
+                "bg-cryptoblue-200 text-cryptoblue-750": !darkmode
+              })}  
+              onChange={getEndDateTime} />
             <span className="relative ml-1"><DateToolTip text={info.endDate} /></span>
           </div>
           <p className={pStyle}>Contribution interval, days <ToolTip text={info.interval} /></p>
@@ -79,7 +84,7 @@ const ValueCostAverage = ({coin}:{coin: string}) => {
           <p className="relative">Coins value, $<ToolTip text={info.value} /></p>
         </div>
         <div className="text-center divide-y divide-cryptodark-160 w-1/6 mt-[1px]">
-          <p className="py-2">Q-ty</p>
+          <p className="py-2 pb-[0.55rem]">Q-ty</p>
           <Amount placeholder="Minimum 1d." visible={visibleInterval} toggleVisible={displayInterval} getAmount={getInterval} />
           <Amount placeholder="Minimum $1" visible={showInvestment} toggleVisible={displayInvestment} getAmount={getInvestment} />
           <Amount placeholder="Minimum %1" visible={showGrowInput} toggleVisible={toggleGrowRate} getAmount={getGrowRate} />

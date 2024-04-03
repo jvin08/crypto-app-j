@@ -113,14 +113,14 @@ export function Charts({range}:{range: number}) {
       "bg-cryptodark-350": darkmode,
       "bg-cryptoblue-100": !darkmode,
     })}>
-      <div className={compare ? "p-5 pb-10 relative" : "p-5 pb-12 relative"}>
+      <div className={compare ? "p-10 relative" : "p-10 pb-12 relative"}>
         <Header 
           dataOne={coin} 
           price={coinOnePrices?.[priceIndex] || coinOnePrices?.slice(-1)[0]} 
           compare={compare} 
           priceDate={data?.prices?.[priceIndex]?.[0] || data?.prices?.[data?.prices?.length-1]?.[0]}
         />
-        <div className={compare ? "h-52" : "h-64"}>
+        <div className={compare ? "h-52 -ml-3" : "-ml-3 h-64"}>
           <Line options={options} data={lineChartData} height={216} />
         </div>
         <div className="flex">
@@ -137,13 +137,13 @@ export function Charts({range}:{range: number}) {
       "bg-cryptodark-300": darkmode,
       "bg-cryptoblue-100": !darkmode,
     })}>
-      <div className={compare ? "p-5 pb-10 relative" : "p-5 pb-12 relative"}>
+      <div className={compare ? "p-10 relative" : "p-10 pb-12 relative"}>
         {data && <VolumeHeader 
           volume={data?.total_volumes?.[volumeIndex] || data?.total_volumes?.[data?.total_volumes?.length-1]} 
           compare={compare}
           volumeDate={data?.total_volumes?.[volumeIndex]?.[0] || data?.total_volumes?.[data?.total_volumes?.length-1]?.[0]}
         />}
-        <div className={compare ? "h-52" : "h-64"}>
+        <div className={compare ? "h-52 -ml-3" : "h-64 -ml-3"}>
           <Bar options={barOptions} data={barData} height={216} />
         </div>
         <div className="flex">

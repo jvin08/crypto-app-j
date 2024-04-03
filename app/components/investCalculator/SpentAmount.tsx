@@ -9,6 +9,7 @@ const SpentAmount = (
     initialAmount,
     days,
     startTime,
+    endTime
   }:{
     query:string, 
     growRate:number, 
@@ -19,7 +20,7 @@ const SpentAmount = (
     endTime: string
   }) => {
   const { data } = useGetCoinDataByDateQuery(query);
-  const coinPrices = filterPrices(data, days, interval, startTime);
+  const coinPrices = filterPrices(data, days, interval, startTime, endTime);
   const spentMoney = amountInvested(initialAmount, coinPrices, growRate);
   return (
     <>
