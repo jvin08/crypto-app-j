@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import CoinSelect from "./CoinSelect";
 import Calculator from "../investCalculator/Calculator";
-import CustomButton from "../coinsConverter/CustomButton";
+import CustomButton from "./CustomButton";
 import clsx from "clsx";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";

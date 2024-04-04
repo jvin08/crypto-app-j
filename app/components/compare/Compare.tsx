@@ -35,8 +35,8 @@ const Compare = () => {
     </>;
   };
   return (
-    <div className="flex justify-between text-xs mt-8 w-full">
-      <p className={clsx({
+    <div className="flex justify-between text-xs mt-10 w-full">
+      <p className={clsx("pt-5",{
         "text-cryptoblue-900": !darkmode,
         "text-cryptoblue-500": darkmode
       })}>Select the currency to view statistics</p>
