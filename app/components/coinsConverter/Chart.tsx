@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -14,14 +14,13 @@ import {
 import {CrosshairPlugin} from "chartjs-plugin-crosshair";
 import { Line } from "react-chartjs-2";
 import { useGetCoinsIntervalDataQuery } from "../../lib/marketSlice";
-import { selectCoinOneSymbol, selectCoinTwoSymbol, selectCurrency } from "../../lib/dynamicValuesSlice" ;
+import { setError, setNotification, setShowNotification, selectCoinOneSymbol, selectCoinTwoSymbol, selectCurrency, selectDarkmode } from "../../lib/dynamicValuesSlice" ;
 import { 
   fiveYearFormat ,
   oneDayFormat,
   formatStandardDate,
 } from "../charts/utils";
 import { options, getChartData } from "./options"; 
-import { selectDarkmode } from "../../lib/dynamicValuesSlice";
 import clsx from "clsx";
 import { capitalize } from "../charts/utils";
 ChartJS.register(
@@ -43,11 +42,26 @@ const Chart = ({range}:{range: number}) => {
   const darkmode = useSelector(selectDarkmode);
   const queryPart = `${coin[0]}/market_chart?vs_currency=${currency.label.toLowerCase()}&days=${range}`;
   const queryPartTwo = `${defaultCoinTwo[0]}/market_chart?vs_currency=${currency.label.toLowerCase()}&days=${range}`;
-  const { data } = useGetCoinsIntervalDataQuery(queryPart);
+  const { data, error } = useGetCoinsIntervalDataQuery(queryPart);
   const { data: dataTwo } = useGetCoinsIntervalDataQuery(queryPartTwo);
   const [ priceIndex, setPriceIndex ] = useState<number>(data?.prices.length - 1);
   const myData = data?.prices;
   const myDataTwo = dataTwo?.prices;
+  const dispatch = useDispatch();
+  const handleNotification = (message: string) => {
+    dispatch(setError(true));
+    dispatch(setNotification(message));
+    dispatch(setShowNotification(""));
+  };
+  useEffect(() => {
+    if(error){
+      handleNotification("Error fetching data");
+      const timer = setTimeout(() => {
+        dispatch(setError(false));
+      }, 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [handleNotification, error, dispatch]);
   //key - timelabels adjustments base on interval
   const timePoints = myData?.map((item:number[])=>{
     switch (range) {

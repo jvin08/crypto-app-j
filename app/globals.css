@@ -34,7 +34,7 @@ body {
 } */
 .notification {
   opacity: 0;
-  transition: opacity 0.5s ease-in-out;
+  transition: opacity 1s ease-in-out;
 }
 .notification.visible {
   opacity: 0.85;
@@ -63,6 +63,21 @@ body {
   border: 2px solid #ccc;
   border-top-color: hsl(205, 78%, 60%);
   animation: spinner 0.6s linear infinite;
+}
+.loadingOne {
+  width: 1rem;
+  height: 1rem;
+  margin: auto;
+}
+.loadingTwo {
+  width: 3rem;
+  height: 3rem;
+  margin: auto;
+}
+.loadingThree {
+  width: 10rem;
+  height: 10rem;
+  margin: auto;
 }
 @keyframes spinRight {
     0% { transform: rotate(0deg); }

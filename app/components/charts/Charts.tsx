@@ -1,5 +1,6 @@
-import React, {useState} from "react";
-import { useSelector } from "react-redux";
+import React, {useEffect, useState} from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setNotification, setShowNotification, setError } from "../../lib/dynamicValuesSlice";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -49,13 +50,29 @@ export function Charts({range}:{range: number}) {
   const darkmode = useSelector(selectDarkmode);
   //key - chart duration, value - time"s step(index of array timeIntervals) minutes or days
   const queryPart = `${coin[0]}/market_chart?vs_currency=${currency.label.toLowerCase()}&days=${range}`;
-  const queryPartTwo = `${coinTwo[0]}/market_chart?vs_currency=${currency.label.toLowerCase()}&days=${range}`;
-  const { data } = useGetCoinsIntervalDataQuery(queryPart);
+  const secondCoin = coinTwo[0] === "" ? ["ethereum","eth"] : coinTwo;
+  const queryPartTwo = `${secondCoin}/market_chart?vs_currency=${currency.label.toLowerCase()}&days=${range}`;
+  const { data, error, isLoading } = useGetCoinsIntervalDataQuery(queryPart);
   const { data: dataTwo } = useGetCoinsIntervalDataQuery(queryPartTwo);
   const [ priceIndex, setPriceIndex ] = useState<number>(data?.prices.length - 1);
   const [ volumeIndex, setVolumeIndex ] = useState<number>(data?.prices.length - 1);
   const myData = data?.prices;
   const myDataTwo = dataTwo?.prices;
+  const dispatch = useDispatch();
+  const handleNotification = (message: string) => {
+    dispatch(setError(true));
+    dispatch(setNotification(message));
+    dispatch(setShowNotification(""));
+  };
+  useEffect(() => {
+    if(error){
+      handleNotification("Error fetching data");
+      const timer = setTimeout(() => {
+        dispatch(setError(false));
+      }, 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [error, dispatch]);
   let volumeOne = data?.total_volumes.map((volume: number[])=>{
     return volume;
   });
@@ -113,48 +130,60 @@ export function Charts({range}:{range: number}) {
       "bg-cryptodark-350": darkmode,
       "bg-cryptoblue-100": !darkmode,
     })}>
-      <div className={compare ? "p-10 relative" : "p-10 pb-12 relative"}>
-        <Header 
-          dataOne={coin} 
-          price={coinOnePrices?.[priceIndex] || coinOnePrices?.slice(-1)[0]} 
-          compare={compare} 
-          priceDate={data?.prices?.[priceIndex]?.[0] || data?.prices?.[data?.prices?.length-1]?.[0]}
-        />
-        <div className={compare ? "h-52 -ml-3" : "-ml-3 h-64"}>
-          <Line options={options} data={lineChartData} height={216} />
-        </div>
-        <div className="flex">
-          <p className={compare ? "mt-8 text-cryptoblue-900" : "hidden"}>
-            <span className="tabular-nums text-[0.75rem] text-cryptoblue-800">{capitalize(coin[0]) + ` ${currency.sign}` + priceOne}</span>  
-          </p>
-          <p className={showCoinTwo ? "mt-8 text-cryptoblue-900" : "hidden"}>
-            <span className="tabular-nums text-[0.75rem] text-cryptoblue-700 ml-5">{capitalize(coinTwo[0]) + ` ${currency.sign}` + priceTwo}</span> 
-          </p>
-        </div>
-      </div>
+      {
+        error || isLoading 
+          ? <div className="w-full flex h-96 px-10">
+            <span className="loading loading-ring loadingThree"></span>
+          </div>
+          : <div className={compare ? "p-10 relative" : "p-10 pb-12 relative"}>
+            <Header 
+              dataOne={coin} 
+              price={coinOnePrices?.[priceIndex] || coinOnePrices?.slice(-1)[0]} 
+              compare={compare} 
+              priceDate={data?.prices?.[priceIndex]?.[0] || data?.prices?.[data?.prices?.length-1]?.[0]}
+            />
+            <div className={compare ? "h-52 -ml-3" : "-ml-3 h-64"}>
+              <Line options={options} data={lineChartData} height={216} />
+            </div>
+            <div className="flex">
+              <p className={compare ? "mt-8 text-cryptoblue-900" : "hidden"}>
+                <span className="tabular-nums text-[0.75rem] text-cryptoblue-800">{capitalize(coin[0]) + ` ${currency.sign}` + priceOne}</span>  
+              </p>
+              <p className={showCoinTwo ? "mt-8 text-cryptoblue-900" : "hidden"}>
+                <span className="tabular-nums text-[0.75rem] text-cryptoblue-700 ml-5">{capitalize(coinTwo[0]) + ` ${currency.sign}` + priceTwo}</span> 
+              </p>
+            </div>
+          </div>
+      }
     </div>
     <div className={clsx("w-[calc(50%-1rem)] mb-10  rounded-xl ", {
       "bg-cryptodark-300": darkmode,
       "bg-cryptoblue-100": !darkmode,
     })}>
-      <div className={compare ? "p-10 relative" : "p-10 pb-12 relative"}>
-        {data && <VolumeHeader 
-          volume={data?.total_volumes?.[volumeIndex] || data?.total_volumes?.[data?.total_volumes?.length-1]} 
-          compare={compare}
-          volumeDate={data?.total_volumes?.[volumeIndex]?.[0] || data?.total_volumes?.[data?.total_volumes?.length-1]?.[0]}
-        />}
-        <div className={compare ? "h-52 -ml-3" : "h-64 -ml-3"}>
-          <Bar options={barOptions} data={barData} height={216} />
-        </div>
-        <div className="flex">
-          <p className={compare ? "mt-8 text-cryptoblue-900" : "hidden"}>
-            <span className="tabular-nums text-[0.75rem] text-cryptoblue-800">{capitalize(coin[0]) + ` ${currency.sign}` + todayVolume + " bln"}</span>
-          </p>
-          <p className={showCoinTwo ? "mt-8 text-cryptoblue-900" : "hidden"}>
-            <span className="tabular-nums text-[0.75rem] text-cryptoblue-700 ml-5">{capitalize(coinTwo[0]) + ` ${currency.sign}` + todayVolumeTwo + " bln"}</span>
-          </p>
-        </div>
-      </div>
+      {
+        error || isLoading 
+          ? <div className="w-full flex h-96 px-10">
+            <span className="loading loading-ring loadingThree"></span>
+          </div>
+          : <div className={compare ? "p-10 relative" : "p-10 pb-12 relative"}>
+            {data && <VolumeHeader 
+              volume={data?.total_volumes?.[volumeIndex] || data?.total_volumes?.[data?.total_volumes?.length-1]} 
+              compare={compare}
+              volumeDate={data?.total_volumes?.[volumeIndex]?.[0] || data?.total_volumes?.[data?.total_volumes?.length-1]?.[0]}
+            />}
+            <div className={compare ? "h-52 -ml-3" : "h-64 -ml-3"}>
+              <Bar options={barOptions} data={barData} height={216} />
+            </div>
+            <div className="flex">
+              <p className={compare ? "mt-8 text-cryptoblue-900" : "hidden"}>
+                <span className="tabular-nums text-[0.75rem] text-cryptoblue-800">{capitalize(coin[0]) + ` ${currency.sign}` + todayVolume + " bln"}</span>
+              </p>
+              <p className={showCoinTwo ? "mt-8 text-cryptoblue-900" : "hidden"}>
+                <span className="tabular-nums text-[0.75rem] text-cryptoblue-700 ml-5">{capitalize(coinTwo[0]) + ` ${currency.sign}` + todayVolumeTwo + " bln"}</span>
+              </p>
+            </div>
+          </div>
+      }
     </div>
   </div>);
 }
