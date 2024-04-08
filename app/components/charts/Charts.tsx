@@ -51,7 +51,7 @@ export function Charts({range}:{range: number}) {
   //key - chart duration, value - time"s step(index of array timeIntervals) minutes or days
   const queryPart = `${coin[0]}/market_chart?vs_currency=${currency.label.toLowerCase()}&days=${range}`;
   const secondCoin = coinTwo[0] === "" ? ["ethereum","eth"] : coinTwo;
-  const queryPartTwo = `${secondCoin}/market_chart?vs_currency=${currency.label.toLowerCase()}&days=${range}`;
+  const queryPartTwo = `${secondCoin[0]}/market_chart?vs_currency=${currency.label.toLowerCase()}&days=${range}`;
   const { data, error, isLoading } = useGetCoinsIntervalDataQuery(queryPart);
   const { data: dataTwo } = useGetCoinsIntervalDataQuery(queryPartTwo);
   const [ priceIndex, setPriceIndex ] = useState<number>(data?.prices.length - 1);

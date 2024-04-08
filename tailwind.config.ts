@@ -23,6 +23,7 @@ const config: Config = {
             670: '#0E393D',
             700: '#D878FA',
             750: '#FE2264',
+            760: '#340010',
             800: '#7878FA',
             810: '#424286',
             900: '#353570',
@@ -55,8 +56,7 @@ const config: Config = {
     extend: {
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
     },
   },

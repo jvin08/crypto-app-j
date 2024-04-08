@@ -1,6 +1,7 @@
 import React from "react";
 import StatusBar from "./StatusBar";
 import Image from "next/image";
+const Loading = () => <div className="loading loading-ring loadingOne"/>;
 const SecondCoin = ({ quantity, isLoading }: {quantity: number, isLoading: boolean}) => {
   const ethIMG = "https://assets.coingecko.com/coins/images/279/large/ethereum.png?1696501628";
   return (
@@ -12,7 +13,7 @@ const SecondCoin = ({ quantity, isLoading }: {quantity: number, isLoading: boole
         alt="Picture of the coin"
         className="border-cryptoblue-100"
       />
-      {isLoading ? <div className="loading"></div> : <p className="ml-2">{quantity}%</p> }
+      {isLoading ? <Loading /> : <p className="ml-2">{quantity}%</p> }
       <StatusBar quantity={quantity} />
     </div>
   );

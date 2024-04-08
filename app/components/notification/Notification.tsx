@@ -30,7 +30,7 @@ const Notification = () => {
     <div className={clsx("notification right-4 z-[100] absolute w-[240px] rounded-md p-[1px] backdrop-blur-2", {
       "visible": isVisible,
       "bg-gradient-to-t from-cryptoblue-670 to-cryptoblue-650": !error,
-      "bg-cryptoblue-750": error,
+      "bg-gradient-to-t from-cryptoblue-760 to-cryptoblue-750": error,
     })}>
       {isLoading ? 
         <div className="z-40 absolute top-4 left-4 loading"></div> :

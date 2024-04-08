@@ -4,7 +4,7 @@ const Cap = ({ quantity, percentage, isLoading }: {quantity: number, percentage:
   return (
     <div className="flex items-center ml-10">
       <p className="ml-2">$</p>
-      {isLoading ? <div className="loading"></div> : <p className="ml-1">{quantity}B</p> }
+      {isLoading ? <div className="loading loading-ring loadingOne"></div> : <p className="ml-1">{quantity}B</p> }
       <StatusBar quantity={percentage}/>
     </div>
   );
