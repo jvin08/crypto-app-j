@@ -12,7 +12,7 @@ const SecondCoin = ({ quantity, isLoading }: {quantity: number, isLoading: boole
         alt="Picture of the coin"
         className="border-cryptoblue-100"
       />
-      {isLoading ? <div className="loading"></div> : <p className="ml-2">{quantity}%</p> }
+      {isLoading ? <div className="loading loading-ring loadingOne"></div> : <p className="ml-2">{quantity}%</p> }
       <StatusBar quantity={quantity} />
     </div>
   );

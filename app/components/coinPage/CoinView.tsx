@@ -20,7 +20,7 @@ const CoinView = ({coinId, id}:{coinId: string, id: string}) => {
   const coinStorage = storageData.filter((coin:any) => coin.id === id)[0];
   const days = timeInterval(storageData.filter((coin:any) => coin.id === id)[0]?.purchaseTime);
   const allPricesFromPurchaseDateQuery = `${data?.id}/market_chart?vs_currency=${currencyLabel}&days=${days}`;
-  const allHistoryPricesQuery = `${data?.id}/market_chart?vs_currency=${currencyLabel}&days=5000`;
+  const allHistoryPricesQuery = `${data?.id}/market_chart?vs_currency=${currencyLabel}&days=365`;
   const { data: pricesByDate } = useGetCoinDataByDateQuery(allPricesFromPurchaseDateQuery);
   const volume24hours = Math.floor(pricesByDate?.total_volumes?.slice(-24)?.reduce((acc:number, curr:number[]) => acc + curr[1], 0));
   const { data: maxPriceRange } = useGetCoinDataByDateQuery(allHistoryPricesQuery);
@@ -80,7 +80,7 @@ const CoinView = ({coinId, id}:{coinId: string, id: string}) => {
           <div className="flex items-center -ml-2">
             <Triangle color="#00B1A7" angle="0" />
             <div className="ml-3 flex justify-between items-center">
-              <p className="text-[0.85rem] p-0 mr-6">All time high: </p>
+              <p className="text-[0.85rem] p-0 mr-6">Last year high: </p>
               <p className="text-[1.2rem] p-0">{currencySign} {maxHistoricalPrice?.[1]?.toFixed(2)}</p>
             </div>
           </div>
@@ -88,14 +88,17 @@ const CoinView = ({coinId, id}:{coinId: string, id: string}) => {
           <div className="flex items-center">
             <Triangle color="#FE2264" angle="180" />
             <div className="ml-3 flex justify-between items-center">
-              <p className="text-[0.85rem] p-0 mr-6 -ml-2">All time low: </p>
+              <p className="text-[0.85rem] p-0 mr-6 -ml-2">Last year low: </p>
               <p className="text-[1.2rem] p-0">{currencySign} {minHistoricalPrice?.[1]?.toFixed(2)}</p>
             </div>
           </div>
           <p className="text-[0.75rem] font-extralight text-cryptodark-510">{new Date(minHistoricalPrice?.[0]).toUTCString()}</p>
         </div>
         <div className="w-3/5">
-          <p className="text-sm font-thin mb-4">{data?.description.en.slice(0,1000)}...</p>
+          <p className={clsx("text-sm mb-4",{
+            "text-cryptodark-400 font-light": !darkmode,
+            "font-thin": darkmode,
+          })}>{data?.description.en.slice(0,1000)}...</p>
           <div className="flex flex-wrap max-w-full text-xs">
             {data?.links?.blockchain_site?.slice(0,3)?.map((link:string) => 
               <Link 

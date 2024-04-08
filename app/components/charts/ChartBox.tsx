@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import CustomButton from "./CustomButton";
-import { uid } from "uid";
 import clsx from "clsx";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "../../lib/dynamicValuesSlice";
@@ -24,7 +23,7 @@ const ChartBox = ({Charts}: {Charts: any}) => {
       })}>
         {units.map((unit: string, index)=>{
           return <CustomButton  
-            key={uid()} 
+            key={unit} 
             name={unit} 
             handleClick={(e)=>toggleActive(e, index)} 
             active={intervals[index] === days} 

@@ -11,7 +11,7 @@ const FirstCoin = ({ quantity, isLoading }: {quantity: number, isLoading: boolea
         height={20}
         alt="Picture of the coin"
       />
-      {isLoading ? <div className="loading"></div> : <p className="ml-2">{quantity}%</p> }
+      {isLoading ? <div className="loading loading-ring loadingOne"></div> : <p className="ml-2">{quantity}%</p> }
       <StatusBar quantity={quantity} />
     </div>
   );

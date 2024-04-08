@@ -6,9 +6,36 @@ import SearchResults from "./SearchResults";
 const Search = () => {
   const [hidden, setHidden] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedOptionIndex, setSelectedOptionIndex] = useState<number>(0);
+  const [keyEnterPressed, setKeyEnterPressed] = useState<boolean>(false);
   const darkmode = useSelector(selectDarkmode);
   const toggleHidden = () => {
     setHidden(!hidden);
+  };
+  const toggleEnterPressed = () => {setKeyEnterPressed(false);};
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if(e.key === "Escape") {
+      clearSearch();
+      e.currentTarget.blur();
+    }
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setSelectedOptionIndex((prevIndex) => {
+        return prevIndex + 1;
+      });
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setSelectedOptionIndex((prevIndex) => {
+        if (prevIndex < 0) return 0;
+        return prevIndex - 1;
+      });
+    } else if (e.key === "Enter") {
+      setKeyEnterPressed(true);
+      const enterPress = setTimeout(() => {
+        toggleEnterPressed();
+      }, 500);
+      return () => clearTimeout(enterPress);
+    } 
   };
   const clearSearch = () => {
     setSearchTerm("");
@@ -39,11 +66,19 @@ const Search = () => {
         value={searchTerm}
         onChange={handleChange}
         onClick={toggleHidden}
-        className={clsx("pl-12 h-10 box-border rounded text-sm focus:outline-none", {
+        onKeyDown={handleKeyDown}
+        className={clsx("pl-12 h-10 w-72 box-border rounded text-sm focus:outline-none", {
           "bg-cryptoblue-200 focus:border-cryptoblue-900": !darkmode,
           "bg-cryptodark-200 text-cryptodark-100 focus:border-cryptodark-620 focus:outline-none focus:shadow-inner": darkmode,
         })} />
-      {!hidden && <SearchResults query={searchTerm} toggleHidden={toggleHidden} clearSearch={clearSearch} />}
+      {!hidden 
+        && <SearchResults 
+          index={selectedOptionIndex} 
+          query={searchTerm} 
+          toggleHidden={toggleHidden} 
+          clearSearch={clearSearch}
+          keyEnterPressed={keyEnterPressed}
+        />}
     </div>
   );
 };

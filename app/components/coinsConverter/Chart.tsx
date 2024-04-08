@@ -42,7 +42,7 @@ const Chart = ({range}:{range: number}) => {
   const darkmode = useSelector(selectDarkmode);
   const queryPart = `${coin[0]}/market_chart?vs_currency=${currency.label.toLowerCase()}&days=${range}`;
   const queryPartTwo = `${defaultCoinTwo[0]}/market_chart?vs_currency=${currency.label.toLowerCase()}&days=${range}`;
-  const { data, error } = useGetCoinsIntervalDataQuery(queryPart);
+  const { data, error, isLoading } = useGetCoinsIntervalDataQuery(queryPart);
   const { data: dataTwo } = useGetCoinsIntervalDataQuery(queryPartTwo);
   const [ priceIndex, setPriceIndex ] = useState<number>(data?.prices.length - 1);
   const myData = data?.prices;
@@ -85,26 +85,34 @@ const Chart = ({range}:{range: number}) => {
     price[0]?.index && setPriceIndex(price[0]?.index);
   };
   return (<div className="flex w-full justify-between">
-    <div className={clsx("w-full mb-10  rounded-xl ", {
-      "bg-cryptodark-350": darkmode,
-      "bg-cryptoblue-100": !darkmode,
-    })}>
-      <h2 className={clsx("ml-8 mt-5",{
-        "text-cryptodark-100": darkmode,
-        "text-cryptoblue-900": !darkmode,
-      })}>{capitalize(coin[0])} ({coin[1].toUpperCase()}) <span 
-          className={clsx("",{
-            "text-cryptodark-550 opacity-80": darkmode,
-            "text-cryptoblue-900 opacity-70": !darkmode,
-          })}>to</span> {capitalize(defaultCoinTwo[0])} ({defaultCoinTwo[1].toUpperCase()}) - {coinToCoinPrices?.[priceIndex || coinToCoinPrices.length-1]?.toFixed(5)}</h2>
-      <div className="h-64 p-5 relative">
-        <Line options={options} data={lineChartData} height={216} />
-        <div className={clsx("absolute border-b-4 w-[calc(100%-30px)] bottom-[43px]",{
-          "border-b-cryptodark-100 ": !darkmode,
-          "border-b-cryptodark-350": darkmode,
-        })}></div>
+    {error || isLoading 
+      ? <div className={clsx("w-full mb-10 py-10 flex rounded-xl", {
+        "bg-cryptodark-350": darkmode,
+        "bg-cryptoblue-100": !darkmode,
+      })}>
+        <span className="loading loading-ring loadingThree"></span>
       </div>
-    </div>
+      : <div className={clsx("w-full mb-10  rounded-xl ", {
+        "bg-cryptodark-350": darkmode,
+        "bg-cryptoblue-100": !darkmode,
+      })}>
+        <h2 className={clsx("ml-10 mt-5",{
+          "text-cryptodark-100": darkmode,
+          "text-cryptoblue-900": !darkmode,
+        })}>{capitalize(coin[0])} ({coin[1].toUpperCase()}) <span 
+            className={clsx("",{
+              "text-cryptodark-550 opacity-80": darkmode,
+              "text-cryptoblue-900 opacity-70": !darkmode,
+            })}>to</span> {capitalize(defaultCoinTwo[0])} ({defaultCoinTwo[1].toUpperCase()}) - {coinToCoinPrices?.[priceIndex || coinToCoinPrices.length-1]?.toFixed(5)}</h2>
+        <div className="h-64 p-10 pt-5 pl-7 relative">
+          <Line options={options} data={lineChartData} height={216} />
+          <div className={clsx("absolute border-b-4 w-[calc(100%-30px)] bottom-[43px]",{
+            "border-b-cryptodark-100 ": !darkmode,
+            "border-b-cryptodark-350": darkmode,
+          })}></div>
+        </div>
+      </div>
+    }
   </div>);
 };
 export default Chart;
