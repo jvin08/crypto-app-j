@@ -68,6 +68,8 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
       dispatch(setCoinTwoSymbol(["",""]));
     }
   };
+  const isCoinOne = (id: string) => id === coinOne[0];
+  const isCoinTwo = (id: string) => id === coinTwo[0];
   return (
     <div className={clsx("mt-5 w-full h-20 bg-cryptoblue-400 rounded",{
       "bg-cryptodark-400": darkmode,
@@ -86,16 +88,16 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
               })}><span className="loading loading-ring loadingTwo"></span></div>))
             : data?.map((coin: Coin) => (
               <div key={coin.id} className={clsx("tracking-widest text-xs mx-1 h-full shrink-0 grow-0 w-[19.6%] min-w-0 p-0.5 relative rounded-md", {
-                "bg-gradient-to-t from-cryptoblue-600 to-cryptoblue-800": coin.id === coinOne[0] && !darkmode || coin.id === coinTwo[0] && !darkmode,
-                "bg-cryptoblue-100": coin.id !== coinOne[0] && !darkmode || coin.id !== coinTwo[0] && !darkmode,
-                "bg-gradient-to-t from-cryptodark-750 to-cryptodark-800": coin.id === coinOne[0] && darkmode || coin.id === coinTwo[0] && darkmode,
-                "bg-cryptodark-400": coin.id !== coinOne[0] && darkmode || coin.id !== coinTwo[0] && darkmode,
+                "bg-gradient-to-t from-cryptoblue-600 to-cryptoblue-800": isCoinOne(coin.id) && !darkmode || isCoinTwo(coin.id) && !darkmode,
+                "bg-cryptoblue-100": !isCoinOne(coin.id) && !darkmode || !isCoinTwo(coin.id) && !darkmode,
+                "bg-gradient-to-t from-cryptodark-750 to-cryptodark-800": isCoinOne(coin.id) && darkmode || isCoinTwo(coin.id) && darkmode,
+                "bg-cryptodark-400": !isCoinOne(coin.id) && darkmode || !isCoinTwo(coin.id) && darkmode,
               })}>   
                 <div onClick={(e) => handleSelectedCoin(e, [coin.id,coin.symbol])} 
                   className={clsx("flex items-center justify-center h-full w-full ml-[-8] p-3 cursor-pointer -z-20 rounded select-none", {
-                    "bg-cryptodark-300 text-cryptodark-100": coin.id !== coinOne[0] && darkmode || coin.id !== coinTwo[0] && darkmode,
-                    "bg-cryptodark-750 text-cryptoblue-100": coin.id === coinOne[0] && darkmode || coin.id === coinTwo[0] && darkmode,
-                    "bg-cryptoblue-600 text-cryptoblue-100": coin.id === coinOne[0] && !darkmode || coin.id === coinTwo[0] && !darkmode,                    
+                    "bg-cryptodark-300 text-cryptodark-100": !isCoinOne(coin.id) && darkmode || !isCoinTwo(coin.id) && darkmode,
+                    "bg-cryptodark-750 text-cryptoblue-100": isCoinOne(coin.id) && darkmode || isCoinTwo(coin.id) && darkmode,
+                    "bg-cryptoblue-600 text-cryptoblue-100": isCoinOne(coin.id) && !darkmode || isCoinTwo(coin.id) && !darkmode,                    
                   })}>
                   <div className="h-16 mt-6">
                     <Image 
