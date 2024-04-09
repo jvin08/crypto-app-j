@@ -15,13 +15,13 @@ const DropdownSearch = ({
   toggleHidden, 
   clearSearch, 
   index,
-  keyEnterPressed,
+  handleCoin
 } : { 
     query: string, 
     toggleHidden: ()=>void, 
     clearSearch: ()=>void, 
     index: number,
-    keyEnterPressed: boolean,
+    handleCoin: any
   }) => {
   const dispatch = useDispatch();
   const currency = useSelector(selectCurrency);
@@ -38,11 +38,8 @@ const DropdownSearch = ({
     pricesStore[price[0]] = [prices[price[0]][currency.label.toLowerCase()], goingUp, coinSymbol];
   });
   const newIndex = index % coinsForRender?.length; 
-  if(keyEnterPressed && prices){
-    // dispatch(setCoinOneSymbol([coinsForRender[newIndex]?.id, coinsForRender[newIndex]?.symbol]));
-    // dispatch(setCoinTwoSymbol(coinOne));
-  }
   const ref = useRef<HTMLDivElement>(null);
+  const itemRef = useRef<HTMLDivElement>(null);
   const handleClickCoin = (e: React.MouseEvent<HTMLDivElement>, coin: Coin) => {
     e.preventDefault();
     dispatch(setCoinOneSymbol([coin.id, coin.symbol]));
@@ -50,6 +47,11 @@ const DropdownSearch = ({
     toggleHidden();
     clearSearch();
   };
+  useEffect(() => {
+    if(itemRef.current){
+      handleCoin(data?.coins[newIndex]?.id, data?.coins[newIndex]?.symbol);
+    }
+  });
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (ref.current && !ref.current.contains(event.target as Node)) {
@@ -79,6 +81,7 @@ const DropdownSearch = ({
               })}
               onClick={(e:React.MouseEvent<HTMLDivElement>)=>handleClickCoin(e, coin)} 
               tabIndex={0}
+              ref={idx === newIndex ? itemRef : null}
             >
               {coin.thumb.includes("https") && <Image src={coin.thumb} alt={coin.name} width={20} height={20} className="mr-3"/>}
               <p className="truncate pr-4">{coin.name}</p>

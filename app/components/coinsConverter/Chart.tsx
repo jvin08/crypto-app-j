@@ -61,7 +61,7 @@ const Chart = ({range}:{range: number}) => {
       }, 4000);
       return () => clearTimeout(timer);
     }
-  }, [handleNotification, error, dispatch]);
+  });
   //key - timelabels adjustments base on interval
   const timePoints = myData?.map((item:number[])=>{
     switch (range) {
