@@ -135,7 +135,6 @@ export function Charts({range}:{range: number}) {
         error || isLoading 
           ? <div className="w-full flex h-96 p-1">
             <Loader />
-            {/* <span className="loading loading-ring loadingThree"></span> */}
           </div>
           : <div className={compare ? "p-10 relative" : "p-10 pb-12 relative"}>
             <Header 
