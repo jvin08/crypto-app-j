@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { EmblaOptionsType } from "embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
+import { SmallLoader } from "../charts/Loader";
 import {
   PrevButton,
   NextButton,
@@ -85,7 +86,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
               <div key={backup+index} className={clsx("tracking-widest text-xs mx-1 h-full shrink-0 grow-0 w-[19.6%] min-w-0 p-0.5 relative rounded-md", {
                 "bg-cryptodark-300": darkmode,
                 "bg-cryptodark-100": !darkmode,
-              })}><span className="loading loading-ring loadingTwo"></span></div>))
+              })}><SmallLoader /></div>))
             : data?.map((coin: Coin) => (
               <div key={coin.id} className={clsx("tracking-widest text-xs mx-1 h-full shrink-0 grow-0 w-[19.6%] min-w-0 p-0.5 relative rounded-md", {
                 "bg-gradient-to-t from-cryptoblue-600 to-cryptoblue-800": isCoinOne(coin.id) && !darkmode || isCoinTwo(coin.id) && !darkmode,
