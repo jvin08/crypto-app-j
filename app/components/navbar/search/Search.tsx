@@ -1,18 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import clsx from "clsx";
-import { useSelector } from "react-redux";
-import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { selectDarkmode, selectCoinOneSymbol, setCoinOneSymbol, setCoinTwoSymbol } from "@/app/lib/dynamicValuesSlice";
 import SearchResults from "./SearchResults";
 const Search = () => {
   const [hidden, setHidden] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedOptionIndex, setSelectedOptionIndex] = useState<number>(0);
-  const [keyEnterPressed, setKeyEnterPressed] = useState<boolean>(false);
+  const [coin, setCoin] = useState(["",""]);
   const darkmode = useSelector(selectDarkmode);
+  const coinOne = useSelector(selectCoinOneSymbol);
+  const dispatch = useDispatch();
   const toggleHidden = () => {
     setHidden(!hidden);
   };
-  const toggleEnterPressed = () => {setKeyEnterPressed(false);};
+  const handleCoin = (coinId: string, coinSymbol: string) => setCoin([coinId, coinSymbol]);
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if(e.key === "Escape") {
       clearSearch();
@@ -30,11 +32,10 @@ const Search = () => {
         return prevIndex - 1;
       });
     } else if (e.key === "Enter") {
-      setKeyEnterPressed(true);
-      const enterPress = setTimeout(() => {
-        toggleEnterPressed();
-      }, 500);
-      return () => clearTimeout(enterPress);
+      toggleHidden();
+      clearSearch();
+      dispatch(setCoinOneSymbol([coin[0], coin[1]]));
+      dispatch(setCoinTwoSymbol(coinOne));
     } 
   };
   const clearSearch = () => {
@@ -49,6 +50,9 @@ const Search = () => {
       setSearchTerm(e.target.value);
     }, 500);
   };
+  useEffect(() => {
+    searchTerm !== "" && setHidden(false);
+  }, [searchTerm]);
   return (
     <div className="ml-4 relative">
       <div className="absolute pointer-events-auto">
@@ -77,7 +81,7 @@ const Search = () => {
           query={searchTerm} 
           toggleHidden={toggleHidden} 
           clearSearch={clearSearch}
-          keyEnterPressed={keyEnterPressed}
+          handleCoin={handleCoin}
         />}
     </div>
   );
