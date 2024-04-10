@@ -51,7 +51,7 @@ const DropdownSearch = ({
     if(itemRef.current){
       handleCoin(data?.coins[newIndex]?.id, data?.coins[newIndex]?.symbol);
     }
-  });
+  },[newIndex, handleCoin, data]);
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (ref.current && !ref.current.contains(event.target as Node)) {

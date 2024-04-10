@@ -15,6 +15,7 @@ import {
 } from "chart.js/auto";
 import {CrosshairPlugin} from "chartjs-plugin-crosshair";
 import { Bar, Line } from "react-chartjs-2";
+import { Loader } from "./Loader";
 import { useGetCoinsIntervalDataQuery } from "../../lib/marketSlice";
 import { selectCoinOneSymbol, selectCoinTwoSymbol, selectCompare, selectCurrency } from "../../lib/dynamicValuesSlice" ;
 import { 
@@ -132,8 +133,9 @@ export function Charts({range}:{range: number}) {
     })}>
       {
         error || isLoading 
-          ? <div className="w-full flex h-96 px-10">
-            <span className="loading loading-ring loadingThree"></span>
+          ? <div className="w-full flex h-96 p-1">
+            <Loader />
+            {/* <span className="loading loading-ring loadingThree"></span> */}
           </div>
           : <div className={compare ? "p-10 relative" : "p-10 pb-12 relative"}>
             <Header 
@@ -162,8 +164,8 @@ export function Charts({range}:{range: number}) {
     })}>
       {
         error || isLoading 
-          ? <div className="w-full flex h-96 px-10">
-            <span className="loading loading-ring loadingThree"></span>
+          ? <div className="w-full flex h-96 p-1">
+            <Loader />
           </div>
           : <div className={compare ? "p-10 relative" : "p-10 pb-12 relative"}>
             {data && <VolumeHeader 

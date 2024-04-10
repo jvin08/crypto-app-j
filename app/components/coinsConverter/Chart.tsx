@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Loader } from "../charts/Loader";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -61,7 +62,7 @@ const Chart = ({range}:{range: number}) => {
       }, 4000);
       return () => clearTimeout(timer);
     }
-  });
+  }, [handleNotification, error, dispatch]);
   //key - timelabels adjustments base on interval
   const timePoints = myData?.map((item:number[])=>{
     switch (range) {
@@ -86,11 +87,11 @@ const Chart = ({range}:{range: number}) => {
   };
   return (<div className="flex w-full justify-between">
     {error || isLoading 
-      ? <div className={clsx("w-full mb-10 py-10 flex rounded-xl", {
+      ? <div className={clsx("w-full mb-10 p-1 flex rounded-xl", {
         "bg-cryptodark-350": darkmode,
         "bg-cryptoblue-100": !darkmode,
       })}>
-        <span className="loading loading-ring loadingThree"></span>
+        <Loader />
       </div>
       : <div className={clsx("w-full mb-10  rounded-xl ", {
         "bg-cryptodark-350": darkmode,

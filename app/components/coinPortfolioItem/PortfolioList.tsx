@@ -33,14 +33,11 @@ const PortfolioList = ({forceUpdate, handleCoinAdded}:{forceUpdate:boolean, hand
     setShowDeleteModal((prev) => !prev);
   };
   useEffect(() => {
-    const fetchData = async () => {
-      if (typeof window !== "undefined") {
-        const storedData = localStorage.getItem("coins");
-        const parsedData = storedData ? JSON.parse(storedData) : [];
-        setCoinData(parsedData);
-      }
-    };
-    fetchData();
+    if (typeof window !== "undefined") {
+      const storedData = localStorage.getItem("coins");
+      const parsedData = storedData ? JSON.parse(storedData) : [];
+      setCoinData(parsedData);
+    }
   }, [forceUpdate]);
   return (
     <>{coinData.length > 0 ? 
@@ -66,7 +63,9 @@ const PortfolioList = ({forceUpdate, handleCoinAdded}:{forceUpdate:boolean, hand
           }
         </div>
       </div> :
-      (<div className="loadingBig"/>)
+      (<div className="w-full flex">
+        <p className="m-auto">You portfolio is currently empty</p>
+      </div>)
     }</>
   );
 };
