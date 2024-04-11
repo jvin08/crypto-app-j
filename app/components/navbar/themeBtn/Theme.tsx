@@ -10,8 +10,8 @@ const Theme = () => {
     dispatch(setDarkmode(!darkmode));
   };
   return (
-    <div className={clsx("p-2.5 pl-3 rounded-xl ml-5 cursor-pointer", {
-      "bg-cryptodark-200": darkmode, "bg-cryptoblue-200": !darkmode
+    <div className={clsx("p-3.5 rounded-xl ml-5 h-12 w-12 cursor-pointer border-[1px]", {
+      "bg-cryptodark-200 border-cryptodark-170": darkmode, "bg-cryptoblue-200": !darkmode
     })} onClick={(e)=>handleClick(e)}>
       {
         darkmode 

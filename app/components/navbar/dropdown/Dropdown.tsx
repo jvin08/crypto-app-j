@@ -46,9 +46,9 @@ const Dropdown = () => {
     setHidden(prev => prev==="hidden" ? "" : "hidden");
   };
   return (
-    <div className="relative text-indigo-600 ml-5 text-xs" onClick={toggleHidden}>
-      <div className={clsx("flex justify-end items-center h-10 rounded-xl px-3", {
-        "bg-cryptodark-200": darkmode,
+    <div className="relative ml-5 text-xs" onClick={toggleHidden}>
+      <div className={clsx("flex items-center h-12 w-[108px] rounded-md border-[1px] px-4", {
+        "bg-cryptodark-200 border-cryptodark-170": darkmode,
         "bg-cryptoblue-200": !darkmode,
       })}>
         <p className={clsx("pl-1.5 pt-0.5 rounded-full w-5 h-5 font-bold", {
@@ -57,7 +57,7 @@ const Dropdown = () => {
           "bg-cryptoblue-900": !darkmode,
           "text-cryptodark-100": !darkmode,
         })}>{currency.sign}</p>
-        <p className={clsx("ml-1", {
+        <p className={clsx("mx-2.5", {
           "text-cryptoblue-900": !darkmode,
           "text-cryptodark-100": darkmode,
         })}>{currency.label}</p>
@@ -67,19 +67,17 @@ const Dropdown = () => {
             strokeOpacity={1} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
       </div>
-      <ul ref={dropDownRef} className={clsx(`absolute left-0 top-0 rounded-xl p-1.5 ${hidden}`, {
-        "bg-cryptodark-300": darkmode,
+      <ul ref={dropDownRef} className={clsx(`absolute left-0 top-0 border-[1px] rounded-md p-1 ${hidden} w-[108px]`, {
+        "bg-cryptodark-200 border-cryptodark-170": darkmode,
         "bg-cryptoblue-200": !darkmode,
       })}>
         {currencies.map((c)=>{
           return <li key={c.id} onClick={()=>handleClick(c.id)} 
-            className={clsx("rounded px-4 py-1.5 cursor-pointer", {
-              "hover:bg-cryptoblue-900": !darkmode,
-              "hover:text-cryptoblue-100": !darkmode,
-              "hover: text-cryptoblue-100": darkmode,
+            className={clsx("rounded-md p-2 cursor-pointer flex justify-center", {
+              "hover:bg-cryptoblue-900 hover:text-cryptoblue-100": !darkmode,
               "hover:bg-cryptodark-400": darkmode,
             })}>
-            <div className="flex justify-end px-0.5">
+            <div className="flex justify-end">
               {c.label === currency.label && <p>✓</p>}
               <p id={c.label} className="ml-1">{c.label}</p>
             </div>

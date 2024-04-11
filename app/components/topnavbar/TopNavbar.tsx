@@ -29,8 +29,8 @@ export const TopNavbar: React.FC = () => {
   };
   return (
     <div className="fixed w-full z-10">
-      <div className={clsx("flex justify-center text-xs text-cryptoblue-100 py-3",{
-        "bg-cryptodark-300": darkmode,
+      <div className={clsx("border-b-[1px] flex justify-center text-xs text-cryptoblue-100 py-[17.6px]",{
+        "bg-cryptodark-300 border-cryptodark-170": darkmode,
         "bg-cryptoblue-900": !darkmode,
       })}>
         <Coins quantity={market.coins}/>
