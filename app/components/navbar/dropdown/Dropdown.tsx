@@ -51,7 +51,7 @@ const Dropdown = () => {
         "bg-cryptodark-200 border-cryptodark-170": darkmode,
         "bg-cryptoblue-200": !darkmode,
       })}>
-        <p className={clsx("pl-1.5 pt-0.5 rounded-full w-5 h-5 font-bold", {
+        <p className={clsx("pl-1 pt-0.5 rounded-full w-5 h-5 font-bold", {
           "bg-cryptodark-100": darkmode,
           "text-cryptoblue-900": darkmode,
           "bg-cryptoblue-900": !darkmode,

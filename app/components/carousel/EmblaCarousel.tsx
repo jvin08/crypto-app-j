@@ -5,7 +5,6 @@ import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import { SmallLoader } from "../charts/Loader";
 import {
-  PrevButton,
   NextButton,
   usePrevNextButtons
 } from "./ArrowButtons";
@@ -44,9 +43,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     if (autoplayOptions.stopOnInteraction !== false) autoplayStop;
   }, [emblaApi]);
   const {
-    prevBtnDisabled,
     nextBtnDisabled,
-    onPrevButtonClick,
     onNextButtonClick
   } = usePrevNextButtons(emblaApi, onButtonClick);
   const queryPart = `${currency?.label.toLowerCase()}`;
@@ -72,7 +69,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
   const isCoinOne = (id: string) => id === coinOne[0];
   const isCoinTwo = (id: string) => id === coinTwo[0];
   return (
-    <div className={clsx("mt-5 w-full h-20 bg-cryptoblue-400 rounded",{
+    <div className={clsx("mt-6 w-full h-20 bg-cryptoblue-400 rounded",{
       "bg-cryptodark-400": darkmode,
       "bg-cryptoblue-400": !darkmode,
     })}>
@@ -83,19 +80,19 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
         })}>
           {error!==undefined || isLoading
             ? carouselBackUpArray.map((backup, index) => (
-              <div key={backup+index} className={clsx("tracking-widest text-xs mx-1 h-full shrink-0 grow-0 w-[19.6%] min-w-0 p-0.5 relative rounded-md", {
+              <div key={backup+index} className={clsx("tracking-widest text-xs mx-1 h-full shrink-0 grow-0 w-[253px] min-w-0 p-[1px] relative rounded-[5px]", {
                 "bg-cryptodark-300": darkmode,
                 "bg-cryptodark-100": !darkmode,
               })}><SmallLoader /></div>))
             : data?.map((coin: Coin) => (
-              <div key={coin.id} className={clsx("tracking-widest text-xs mx-1 h-full shrink-0 grow-0 w-[19.6%] min-w-0 p-0.5 relative rounded-md", {
+              <div key={coin.id} className={clsx("tracking-widest text-xs mx-1 h-full shrink-0 grow-0 w-[253px] min-w-0 p-[1px] relative rounded-[5px]", {
                 "bg-gradient-to-t from-cryptoblue-600 to-cryptoblue-800": isCoinOne(coin.id) && !darkmode || isCoinTwo(coin.id) && !darkmode,
                 "bg-cryptoblue-100": !isCoinOne(coin.id) && !darkmode || !isCoinTwo(coin.id) && !darkmode,
                 "bg-gradient-to-t from-cryptodark-750 to-cryptodark-800": isCoinOne(coin.id) && darkmode || isCoinTwo(coin.id) && darkmode,
-                "bg-cryptodark-400": !isCoinOne(coin.id) && darkmode || !isCoinTwo(coin.id) && darkmode,
+                "bg-cryptodark-300": !isCoinOne(coin.id) && darkmode || !isCoinTwo(coin.id) && darkmode,
               })}>   
                 <div onClick={(e) => handleSelectedCoin(e, [coin.id,coin.symbol])} 
-                  className={clsx("flex items-center justify-center h-full w-full ml-[-8] p-3 cursor-pointer -z-20 rounded select-none", {
+                  className={clsx("flex items-center justify-center h-full w-full p-3 cursor-pointer -z-20 rounded select-none", {
                     "bg-cryptodark-300 text-cryptodark-100": !isCoinOne(coin.id) && darkmode || !isCoinTwo(coin.id) && darkmode,
                     "bg-cryptodark-750 text-cryptoblue-100": isCoinOne(coin.id) && darkmode || isCoinTwo(coin.id) && darkmode,
                     "bg-cryptoblue-600 text-cryptoblue-100": isCoinOne(coin.id) && !darkmode || isCoinTwo(coin.id) && !darkmode,                    
@@ -125,10 +122,10 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
             ))}
         </div>
       </div>
-      <div className="z-0 flex items-center absolute top-4 -left-[1.5%]">
+      {/* <div className="z-0 flex items-center absolute top-4 -left-[1.5%]">
         <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
-      </div>
-      <div className="z-0 flex items-center absolute top-4 -right-[1.5%]">
+      </div> */}
+      <div className="z-0 flex items-center absolute top-4 -right-[2.5%]">
         <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
       </div>
     </div>

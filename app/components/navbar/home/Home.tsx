@@ -22,7 +22,7 @@ const Home = () => {
           } 
           fillOpacity={1} />
       </svg>
-      <Link className={clsx("ml-2 text-sm",{
+      <Link className={clsx("ml-2.5 text-sm",{
         "text-cryptoblue-900" : active && !darkmode,
         "text-cryptoblue-500" : !active,
         "text-cryptodark-100" : active && darkmode,

@@ -8,7 +8,7 @@ const Coin = ({ params } : { params : { coinId: string }}) => {
   const darkmode = useSelector(selectDarkmode);
   const coinId = params.coinId.slice(0,-12);
   return (
-    <div className={clsx("px-12 pt-32",{
+    <div className={clsx("px-[58px] pt-32",{
       "bg-cryptodark-400": darkmode,
       "bg-cryptoblue-400": !darkmode,
     })}>

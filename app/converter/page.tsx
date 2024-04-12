@@ -12,7 +12,7 @@ const Time = dynamic(() => import("../components/coinsConverter/Time"), { ssr: f
 const Converter = () => {
   const darkmode = useSelector(selectDarkmode);
   return (
-    <div className={clsx("w-full py-9 px-12", {
+    <div className={clsx("w-full pt-[56px] px-[58px]", {
       "bg-cryptoblue-400": !darkmode,
       "bg-cryptodark-400": darkmode,
     })}>
