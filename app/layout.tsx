@@ -18,7 +18,7 @@ export default function RootLayout({
       <head>
         <title>Crypto App</title>            
       </head>
-      <body className={`${inter.className} h-full bg-cryptoblue-400`}> 
+      <body className={`${inter.className} h-full bg-cryptodark-400`}> 
         <Provider store={store}>
           <TopNavbar />
           <Navbar />

@@ -8,7 +8,7 @@ const LogoName = () => {
   return (
     <div className="flex items-center font-bold">
       <Logo/> 
-      <p className={clsx("ml-2 text-xl", {
+      <p className={clsx("ml-2 text-[21px]", {
         "text-cryptoblue-100": darkmode,
         "text-cryptoblue-900": !darkmode,
       })}>Logoipsm</p>

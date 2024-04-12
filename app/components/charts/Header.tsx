@@ -18,7 +18,7 @@ export const Header = ({dataOne, price, compare, priceDate } : {dataOne: string,
         "text-cryptodark-400": !darkmode,
       })}>{firstCoinName + " "} ( {dataOne[1].toUpperCase()} ) </p>}
       {compare ? <p className={clsx("text-xl ",{
-        "text-cryptodark-400": darkmode,
+        "text-cryptodark-350": darkmode,
         "text-cryptoblue-100": !darkmode,
       })}>.</p> : <p className={clsx("text-2xl font-bold",{
         "text-cryptodark-100": darkmode,
@@ -26,11 +26,37 @@ export const Header = ({dataOne, price, compare, priceDate } : {dataOne: string,
       })}>{coinLastPrice}</p>}
       {compare ? <p className={clsx("text-sm",{
         "text-cryptoblue-100": !darkmode,
-        "text-cryptoblue-350": darkmode,
+        "text-cryptodark-350": darkmode,
       })}>.</p> : <p className={clsx("text-sm tabular-nums ",{
         "text-cryptodark-100": darkmode,
         "text-cryptodark-400": !darkmode,
       })}>{dateNow}</p>}
+    </div>             
+  );
+};
+export const HeaderBackUp = ({dataOne, compare} : {dataOne: string, compare: boolean}) => {
+  const darkmode = useSelector(selectDarkmode);
+  const firstCoinName = dataOne?.[0][0].toUpperCase() + dataOne?.[0].slice(1);
+  return (
+    <div>
+      {compare ? <p className={clsx("text-2xl font-bold tabular-nums", {
+        "text-cryptodark-350": darkmode,
+        "text-cryptodark-400": !darkmode,
+      })}></p> : <p className={clsx("text-xl",{
+        "text-cryptodark-550": darkmode,
+        "text-cryptodark-400": !darkmode,
+      })}>{firstCoinName + " "} ( {dataOne[1].toUpperCase()} ) </p>}
+      {compare ? <p className={clsx("text-sm ",{
+        "text-cryptodark-550": darkmode,
+        "text-cryptoblue-100": !darkmode,
+      })}>Oops, something went wrong. Please try again later.</p> : <p className={clsx("text-xl",{
+        "text-cryptodark-100": darkmode,
+        "text-cryptodark-400": !darkmode,
+      })}>N/A</p>}
+      <p className={clsx("text-sm",{
+        "text-cryptoblue-100": !darkmode,
+        "text-cryptodark-350": darkmode,
+      })}>.</p>
     </div>             
   );
 };

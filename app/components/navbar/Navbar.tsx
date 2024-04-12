@@ -12,19 +12,21 @@ import clsx from "clsx";
 const Navbar = () => {
   const darkmode = useSelector(selectDarkmode);    
   return (
-    <div className={clsx("z-[1] w-full mt-[56px] fixed flex items-center justify-between px-12 pt-6 pb-4", {
+    <div className={clsx("z-[1] w-full mt-[56px] flex fixed px-[58px] pt-6 pb-4", {
       "bg-cryptoblue-100": !darkmode,
       "bg-cryptodark-400": darkmode,
     })}>
-      <LogoFull />
-      <div className="flex items-center justify-between">
-        <Home />
-        <Portfolio />
-      </div>
-      <div className="flex items-center justify-between">
-        <Search />
-        <Dropdown />
-        <Theme />
+      <div className="w-[1296px] mx-auto flex items-center justify-between ">
+        <LogoFull />
+        <div className="flex items-center justify-between">
+          <Home />
+          <Portfolio />
+        </div>
+        <div className="flex items-center justify-between">
+          <Search />
+          <Dropdown />
+          <Theme />
+        </div>
       </div>
     </div>
   );

@@ -15,7 +15,7 @@ import {
 } from "chart.js/auto";
 import {CrosshairPlugin} from "chartjs-plugin-crosshair";
 import { Bar, Line } from "react-chartjs-2";
-import { Loader } from "./Loader";
+import { ChartsLoader } from "./Loader";
 import { useGetCoinsIntervalDataQuery } from "../../lib/marketSlice";
 import { selectCoinOneSymbol, selectCoinTwoSymbol, selectCompare, selectCurrency } from "../../lib/dynamicValuesSlice" ;
 import { 
@@ -127,64 +127,58 @@ export function Charts({range}:{range: number}) {
   barOptions.animations = false;
   ChartJS.defaults.font.size = 9;
   return (<div className="flex w-full justify-between">
-    <div className={clsx("w-[calc(50%-1rem)] mb-10  rounded-xl ", {
-      "bg-cryptodark-350": darkmode,
-      "bg-cryptoblue-100": !darkmode,
-    })}>
-      {
-        error || isLoading 
-          ? <div className="w-full flex h-96 p-1">
-            <Loader />
+    {error || isLoading 
+      ? <ChartsLoader dataOne={coin} dataTwo={coinTwo} compare={compare} /> 
+      : <div className={clsx("w-[calc(50%-1rem)] mb-10  rounded-xl h-[404px]", {
+        "bg-cryptodark-350": darkmode && !error && !isLoading,
+        "bg-cryptoblue-100": !darkmode && !error && !isLoading,
+      })}>
+        <div className={compare ? "p-10 relative" : "p-10 pb-12 relative"}>
+          <Header 
+            dataOne={coin} 
+            price={coinOnePrices?.[priceIndex] || coinOnePrices?.slice(-1)[0]} 
+            compare={compare} 
+            priceDate={data?.prices?.[priceIndex]?.[0] || data?.prices?.[data?.prices?.length-1]?.[0]}
+          />
+          <div className={compare ? "h-[188px] -ml-3" : "-ml-3 h-[236px]"}>
+            <Line options={options} data={lineChartData} height={216} />
           </div>
-          : <div className={compare ? "p-10 relative" : "p-10 pb-12 relative"}>
-            <Header 
-              dataOne={coin} 
-              price={coinOnePrices?.[priceIndex] || coinOnePrices?.slice(-1)[0]} 
-              compare={compare} 
-              priceDate={data?.prices?.[priceIndex]?.[0] || data?.prices?.[data?.prices?.length-1]?.[0]}
-            />
-            <div className={compare ? "h-52 -ml-3" : "-ml-3 h-64"}>
-              <Line options={options} data={lineChartData} height={216} />
-            </div>
-            <div className="flex">
-              <p className={compare ? "mt-8 text-cryptoblue-900" : "hidden"}>
-                <span className="tabular-nums text-[0.75rem] text-cryptoblue-800">{capitalize(coin[0]) + ` ${currency.sign}` + priceOne}</span>  
-              </p>
-              <p className={showCoinTwo ? "mt-8 text-cryptoblue-900" : "hidden"}>
-                <span className="tabular-nums text-[0.75rem] text-cryptoblue-700 ml-5">{capitalize(coinTwo[0]) + ` ${currency.sign}` + priceTwo}</span> 
-              </p>
-            </div>
+          <div className="flex">
+            <p className={compare ? "mt-8 text-cryptoblue-900" : "hidden"}>
+              <span className="tabular-nums text-[0.75rem] text-cryptoblue-800">{capitalize(coin[0]) + ` ${currency.sign}` + priceOne}</span>  
+            </p>
+            <p className={showCoinTwo ? "mt-8 text-cryptoblue-900" : "hidden"}>
+              <span className="tabular-nums text-[0.75rem] text-cryptoblue-700 ml-5">{capitalize(coinTwo[0]) + ` ${currency.sign}` + priceTwo}</span> 
+            </p>
           </div>
-      }
-    </div>
-    <div className={clsx("w-[calc(50%-1rem)] mb-10  rounded-xl ", {
-      "bg-cryptodark-300": darkmode,
-      "bg-cryptoblue-100": !darkmode,
-    })}>
-      {
-        error || isLoading 
-          ? <div className="w-full flex h-96 p-1">
-            <Loader />
+        </div>
+      </div>}
+    {error || isLoading 
+      ? <ChartsLoader dataOne={coin} dataTwo={coinTwo} compare={compare} /> 
+      : 
+      <div className={clsx("w-[calc(50%-1rem)] mb-10  rounded-xl ", {
+        "bg-cryptodark-300": darkmode,
+        "bg-cryptoblue-100": !darkmode,
+      })}>
+        <div className={compare ? "p-10 relative" : "p-10 pb-12 relative"}>
+          <VolumeHeader 
+            volume={data?.total_volumes?.[volumeIndex] || data?.total_volumes?.[data?.total_volumes?.length-1]} 
+            compare={compare}
+            volumeDate={data?.total_volumes?.[volumeIndex]?.[0] || data?.total_volumes?.[data?.total_volumes?.length-1]?.[0]}
+          />
+          <div className={compare ? "h-[188px] -ml-3" : "h-[236px] -ml-3"}>
+            <Bar options={barOptions} data={barData} height={216} />
           </div>
-          : <div className={compare ? "p-10 relative" : "p-10 pb-12 relative"}>
-            {data && <VolumeHeader 
-              volume={data?.total_volumes?.[volumeIndex] || data?.total_volumes?.[data?.total_volumes?.length-1]} 
-              compare={compare}
-              volumeDate={data?.total_volumes?.[volumeIndex]?.[0] || data?.total_volumes?.[data?.total_volumes?.length-1]?.[0]}
-            />}
-            <div className={compare ? "h-52 -ml-3" : "h-64 -ml-3"}>
-              <Bar options={barOptions} data={barData} height={216} />
-            </div>
-            <div className="flex">
-              <p className={compare ? "mt-8 text-cryptoblue-900" : "hidden"}>
-                <span className="tabular-nums text-[0.75rem] text-cryptoblue-800">{capitalize(coin[0]) + ` ${currency.sign}` + todayVolume + " bln"}</span>
-              </p>
-              <p className={showCoinTwo ? "mt-8 text-cryptoblue-900" : "hidden"}>
-                <span className="tabular-nums text-[0.75rem] text-cryptoblue-700 ml-5">{capitalize(coinTwo[0]) + ` ${currency.sign}` + todayVolumeTwo + " bln"}</span>
-              </p>
-            </div>
+          <div className="flex">
+            <p className={compare ? "mt-8 text-cryptoblue-900" : "hidden"}>
+              <span className="tabular-nums text-[0.75rem] text-cryptoblue-800">{capitalize(coin[0]) + ` ${currency.sign}` + todayVolume + " bln"}</span>
+            </p>
+            <p className={showCoinTwo ? "mt-8 text-cryptoblue-900" : "hidden"}>
+              <span className="tabular-nums text-[0.75rem] text-cryptoblue-700 ml-5">{capitalize(coinTwo[0]) + ` ${currency.sign}` + todayVolumeTwo + " bln"}</span>
+            </p>
           </div>
-      }
-    </div>
-  </div>);
+        </div>
+      </div>}
+  </div>
+  );
 }
