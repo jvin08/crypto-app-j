@@ -12,7 +12,7 @@ const CoinInput = ({header="You buy", darkmode, coin, price, image, inputValue, 
     setShowSearch(!showSearch);
   };
   return (
-    <div className={clsx(`${margin} p-6 w-1/2 rounded-xl`,{
+    <div className={clsx(`${margin} p-6 h-[200px] w-1/2 rounded-xl`,{
       "text-cryptoblue-900 bg-cryptoblue-100": !darkmode,
       "text-cryptodark-100 bg-cryptodark-350": darkmode,
     })}>
@@ -20,7 +20,7 @@ const CoinInput = ({header="You buy", darkmode, coin, price, image, inputValue, 
         "text-cryptodark-350 font-normal": !darkmode,
         "text-cryptodark-110 font-thin": darkmode,
       })}>{header}</p>
-      <div className={clsx("flex items-center justify-between pb-2 pt-8",{
+      <div className={clsx("flex items-center justify-between pb-4 pt-8",{
         "border-b-[1px] border-cryptoblue-900": !darkmode,
         "border-b-[1px] border-cryptodark-100": darkmode,
       })}>

@@ -13,7 +13,7 @@ const Portfolio = () => {
     setForceUpdate((prev) => !prev);
   };
   return (
-    <div className={clsx("w-full py-9 mt-30 px-[58px]", {
+    <div className={clsx("w-[1296px] py-9 pt-[56px] mx-auto mt-30", {
       "bg-cryptoblue-400": !darkmode,
       "bg-cryptodark-400": darkmode,
     })}>

@@ -6,6 +6,7 @@ import Navbar from "./components/navbar/Navbar";
 import { setupStore } from "./lib/store";
 import { Provider } from "react-redux";
 import { TopNavbar } from "./components/topnavbar/TopNavbar";
+import clsx from "clsx";
 const inter = Inter({ subsets: ["latin"] });
 const store = setupStore();
 export default function RootLayout({
@@ -13,18 +14,24 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const [darkmode, setDarkmode] = React.useState(true);
+  const handleDarkmode = (darkMode: boolean) => {
+    setDarkmode(darkMode);
+  };
   return (
     <html lang="en">
       <head>
         <title>Crypto App</title>            
       </head>
-      <body className={`${inter.className} h-full bg-cryptodark-400`}> 
-        <Provider store={store}>
+      <Provider store={store}>
+        <body className={clsx(`${inter.className} h-full`,{
+          "bg-cryptodark-400": darkmode, "bg-cryptoblue-350": !darkmode
+        })}> 
           <TopNavbar />
-          <Navbar />
+          <Navbar handleDarkMode={handleDarkmode} />
           {children}
-        </Provider>
-      </body>
+        </body>
+      </Provider>
     </html>
   );
 }

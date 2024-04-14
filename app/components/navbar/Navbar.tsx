@@ -9,7 +9,7 @@ import Theme from "./themeBtn/Theme";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
 import clsx from "clsx";
-const Navbar = () => {
+const Navbar = ({handleDarkMode}:{handleDarkMode: any}) => {
   const darkmode = useSelector(selectDarkmode);    
   return (
     <div className={clsx("z-[1] w-full mt-[56px] flex fixed px-[58px] pt-6 pb-4", {
@@ -25,7 +25,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between">
           <Search />
           <Dropdown />
-          <Theme />
+          <Theme handleDarkMode={handleDarkMode} />
         </div>
       </div>
     </div>

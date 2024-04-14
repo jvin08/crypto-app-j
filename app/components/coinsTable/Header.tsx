@@ -5,7 +5,7 @@ import { selectDarkmode } from "../../lib/dynamicValuesSlice";
 const Header = () => {
   const darkmode = useSelector(selectDarkmode);
   return (
-    <div className={clsx("mt-20 mb-3")}>
+    <div className={clsx("mt-[88px] mb-2")}>
       <div className={clsx("flex justify-between px-7 text-xs",{
         "text-cryptodark-550": darkmode,
       })}>
@@ -19,7 +19,7 @@ const Header = () => {
         </div>
         <p className="w-1/5">24hVolume / Market Cap</p>
         <p className="w-1/5">Circulating / Total Supply</p>
-        <p className="text-center">Last 7d</p>
+        <p className="text-center mr-10">Last 7d</p>
       </div>
     </div>
   );

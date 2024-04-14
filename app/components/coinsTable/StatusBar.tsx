@@ -13,8 +13,8 @@ const StatusBar = ({ unitOne, unitTwo, index }: {unitOne: number, unitTwo: numbe
     <div className="w-1/5 ml-5">
       <p className="flex justify-between w-full" style={{color: coinColor}}><span>●{sign}{Volume}B</span><span>●{sign}{UnitTwo}B</span></p>
       <div className="relative">
-        <div className="absolute top-0 left-0 w-full h-1 rounded-sm px-px"style={{background: coinColor, opacity: 0.4}}></div>
-        <div className="top-0 left-0 h-1 rounded-sm z-50 px-px" style={{width: statusSize, background: coinColor}}></div>
+        <div className="absolute top-0 left-0 w-full h-1.5 rounded-sm px-px"style={{background: coinColor, opacity: 0.4}}></div>
+        <div className="top-0 left-0 h-1.5 rounded-sm z-50 px-px" style={{width: statusSize, background: coinColor}}></div>
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import clsx from "clsx";
 import { useSelector, useDispatch } from "react-redux";
 import { selectDarkmode, selectCoinOneSymbol, setCoinOneSymbol, setCoinTwoSymbol } from "@/app/lib/dynamicValuesSlice";
@@ -50,9 +50,6 @@ const Search = () => {
       setSearchTerm(e.target.value);
     }, 500);
   };
-  useEffect(() => {
-    searchTerm !== "" && setHidden(false);
-  }, [searchTerm]);
   return (
     <div className="ml-4 relative">
       <div className="absolute pointer-events-auto">
@@ -66,14 +63,14 @@ const Search = () => {
       </div>
       <input 
         type="text" 
-        placeholder="Search" 
+        placeholder="Search..." 
         value={searchTerm}
         onChange={handleChange}
         onClick={toggleHidden}
         onKeyDown={handleKeyDown}
-        className={clsx("pl-12 h-12 w-72 box-border rounded-md  border-[1px] border-cryptodark-170 text-sm focus:outline-none", {
+        className={clsx("pl-12 h-12 w-72 box-border rounded-md  text-sm focus:outline-none", {
           "bg-cryptoblue-200 focus:border-cryptoblue-900": !darkmode,
-          "bg-cryptodark-200 text-cryptodark-100 focus:border-cryptodark-620 focus:outline-none focus:shadow-inner": darkmode,
+          "bg-cryptodark-200 text-cryptodark-100 border-[1px] border-cryptodark-170 focus:outline-none focus:shadow-inner": darkmode,
         })} />
       {!hidden 
         && <SearchResults 

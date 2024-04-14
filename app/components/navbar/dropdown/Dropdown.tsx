@@ -47,11 +47,11 @@ const Dropdown = () => {
   };
   return (
     <div className="relative ml-5 text-xs" onClick={toggleHidden}>
-      <div className={clsx("flex items-center h-12 w-[108px] rounded-md border-[1px] px-4", {
-        "bg-cryptodark-200 border-cryptodark-170": darkmode,
+      <div className={clsx("flex items-center h-12 w-[108px] rounded-md px-4", {
+        "bg-cryptodark-200 border-cryptodark-170 border-[1px]": darkmode,
         "bg-cryptoblue-200": !darkmode,
       })}>
-        <p className={clsx("pl-1 pt-0.5 rounded-full w-5 h-5 font-bold", {
+        <p className={clsx("pl-[5px] pt-0.5 rounded-full w-5 h-5 font-bold", {
           "bg-cryptodark-100": darkmode,
           "text-cryptoblue-900": darkmode,
           "bg-cryptoblue-900": !darkmode,
@@ -67,8 +67,8 @@ const Dropdown = () => {
             strokeOpacity={1} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
       </div>
-      <ul ref={dropDownRef} className={clsx(`absolute left-0 top-0 border-[1px] rounded-md p-1 ${hidden} w-[108px]`, {
-        "bg-cryptodark-200 border-cryptodark-170": darkmode,
+      <ul ref={dropDownRef} className={clsx(`absolute left-0 top-0 rounded-md p-1 ${hidden} w-[108px]`, {
+        "bg-cryptodark-200 border-[1px] border-cryptodark-170": darkmode,
         "bg-cryptoblue-200": !darkmode,
       })}>
         {currencies.map((c)=>{

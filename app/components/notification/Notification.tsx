@@ -27,7 +27,7 @@ const Notification = () => {
     }
   }, [notify, dispatch, notification]);
   return (
-    <div className={clsx("notification right-4 z-[100] absolute w-[240px] rounded-md p-[1px] backdrop-blur-2", {
+    <div className={clsx("notification left-[calc(50%+408px)] z-[100] absolute w-[240px] rounded-md p-[1px] backdrop-blur-2", {
       "visible": isVisible,
       "bg-gradient-to-t from-cryptoblue-670 to-cryptoblue-650": !error,
       "bg-gradient-to-t from-cryptoblue-760 to-cryptoblue-750": error,

@@ -76,11 +76,11 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
       <div className="h-full overflow-hidden rounded" ref={emblaRef}>
         <div className={clsx("h-full flex touch-pan-y rounded", {
           "bg-cryptodark-400": darkmode,
-          "bg-cryptoblue-400": !darkmode,
+          "bg-cryptoblue-350": !darkmode,
         })}>
           {error!==undefined || isLoading
             ? carouselBackUpArray.map((backup, index) => (
-              <div key={backup+index} className={clsx("tracking-widest text-xs mx-1 h-full shrink-0 grow-0 w-[253px] min-w-0 p-[1px] relative rounded-[5px]", {
+              <div key={backup+index} className={clsx("tracking-widest text-xs first:ml-0 mx-1 h-full shrink-0 grow-0 w-[253px] min-w-0 relative rounded-[5px]", {
                 "bg-cryptodark-300": darkmode,
                 "bg-cryptodark-100": !darkmode,
               })}><SmallLoader /></div>))
