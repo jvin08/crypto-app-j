@@ -102,6 +102,18 @@ body {
     border-radius: 5px;
     height: 5rem;
   }
+    .loaderChart {
+    padding: 40px;
+    height: 404px;
+    border-radius: 10px;
+    width: 100%;
+    background: linear-gradient(to right, #252541 20%, #131322 40%, #0F0F1B 55%, #131322 70%, #252541 100%);
+    background-size: 200% auto;
+    animation: load 4s linear infinite;
+  }
+  .lower {
+    height: 303px;
+  }
   @keyframes load {
     to {
       background-position:-200% center;

@@ -12,12 +12,12 @@ const Time = dynamic(() => import("../components/coinsConverter/Time"), { ssr: f
 const Converter = () => {
   const darkmode = useSelector(selectDarkmode);
   return (
-    <div className={clsx("w-full pt-[56px] px-[58px]", {
-      "bg-cryptoblue-400": !darkmode,
+    <div className={clsx("w-[1296px] mx-auto pb-10 pt-[56px]", {
+      "bg-cryptoblue-350": !darkmode,
       "bg-cryptodark-400": darkmode,
     })}>
       <ButtonsBox />
-      <p className={clsx("text-sm mt-8",{
+      <p className={clsx("text-sm mt-10",{
         "text-cryptoblue-810": !darkmode,
         "text-cryptodark-550": darkmode,
       })}>Online currency convertor</p>

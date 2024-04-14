@@ -17,9 +17,9 @@ const ChartBox = ({Charts}: {Charts: any}) => {
       <div className="flex pt-10">
         <Charts range={days} />
       </div>
-      <div className={clsx("p-0.5 rounded-md flex w-fit mt-9",{
-        "bg-cryptodark-350": darkmode,
-        "bg-cryptoblue-200": !darkmode,
+      <div className={clsx("p-1 rounded-md flex w-fit mt-4",{
+        "bg-cryptodark-810": darkmode,
+        "bg-cryptoblue-450": !darkmode,
       })}>
         {units.map((unit: string, index)=>{
           return <CustomButton  
@@ -27,7 +27,7 @@ const ChartBox = ({Charts}: {Charts: any}) => {
             name={unit} 
             handleClick={(e)=>toggleActive(e, index)} 
             active={intervals[index] === days} 
-            width="w-16" 
+            width="w-[58px]" 
             padding="py-1" />;
         })}
       </div>

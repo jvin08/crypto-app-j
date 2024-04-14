@@ -25,7 +25,7 @@ const DropdownSearch = ({
   }) => {
   const dispatch = useDispatch();
   const currency = useSelector(selectCurrency);
-  const { data } = useGetSearchCoinsDataQuery(query);
+  const { data, isLoading } = useGetSearchCoinsDataQuery(query);
   const darkmode = useSelector(selectDarkmode);
   const coinOne = useSelector(selectCoinOneSymbol);
   const coinsForRender = data?.coins.slice(0,10);
@@ -65,37 +65,47 @@ const DropdownSearch = ({
     };
   },[toggleHidden, clearSearch]);
   return (
-    <div className={clsx("box-border text-sm w-72 left-0 top-10 border-cryptodark-800 border-[0.01rem] absolute z-50 rounded",{
-      "bg-cryptoblue-100 text-cryptoblue-500": !darkmode,
-      "bg-cryptodark-200 text-cryptodark-100": darkmode,
+    <div className={clsx("box-border text-sm w-72 left-0 top-[47px] absolute z-50 rounded-md",{
+      "bg-cryptoblue-200 text-cryptoblue-500": !darkmode,
+      "bg-cryptodark-200 text-cryptodark-100 border-cryptodark-170 border-[1px]": darkmode,
     })} ref={ref}>
-      {coinsForRender?.map((coin: Coin, idx: number) => {
-        const priceGoingUp = pricesStore[coin.id]?.[1];
-        return (
-          <div key={coin.id} className="first:pt-2 p-1">
-            <div 
-              className={clsx("flex items-center pl-3 py-1 hover:rounded-sm",{
-                "bg-cryptoblue-100 hover:bg-cryptoblue-400": !darkmode,
-                "hover:bg-cryptodark-400": darkmode,
-                "bg-cryptodark-400": idx === newIndex && darkmode,
-              })}
-              onClick={(e:React.MouseEvent<HTMLDivElement>)=>handleClickCoin(e, coin)} 
-              tabIndex={0}
-              ref={idx === newIndex ? itemRef : null}
-            >
-              {coin.thumb.includes("https") && <Image src={coin.thumb} alt={coin.name} width={20} height={20} className="mr-3"/>}
-              <p className="truncate pr-4">{coin.name}</p>
-              <svg className="ml-auto mr-0" transform={priceGoingUp ? "rotate(0)" : "rotate(180)"} width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M8.00065 6.33301L4.66732 9.66634H11.334L8.00065 6.33301Z" fill={priceGoingUp ? "#00B1A7" : "red"} fillOpacity={1}/>
-              </svg>
-              <p className={clsx("ml-1 mr-2 text-[0.65rem]",{
-                "text-cryptoblue-650": priceGoingUp,
-                "text-cryptoblue-750": !priceGoingUp,
-              })}>{pricesStore[coin.id]?.[0]?.toFixed(3)}</p>
+      {coinsForRender?.length === 0 || isLoading 
+        ? <div 
+          className={clsx("flex items-center h-12 pl-3 py-1 rounded-md",{
+            "bg-cryptoblue-200": !darkmode,
+            "bg-cryptodark-200": darkmode,
+          })}
+        >
+          <p className="ml-9 mr-2 text-xs">Loading...</p>
+        </div>
+        : coinsForRender?.map((coin: Coin, idx: number) => {
+          const priceGoingUp = pricesStore[coin.id]?.[1];
+          return (
+            <div key={coin.id} className="first:pt-2 p-1">
+              <div 
+                className={clsx("flex items-center pl-3 py-1 rounded-md hover:rounded-md",{
+                  "hover:bg-cryptodark-400": darkmode,
+                  "hover:bg-cryptodark-100": !darkmode,
+                  "bg-cryptodark-400": idx === newIndex && darkmode,
+                  "bg-cryptoblue-100": idx === newIndex && !darkmode,
+                })}
+                onClick={(e:React.MouseEvent<HTMLDivElement>)=>handleClickCoin(e, coin)} 
+                tabIndex={0}
+                ref={idx === newIndex ? itemRef : null}
+              >
+                {coin.thumb.includes("https") && <Image src={coin.thumb} alt={coin.name} width={20} height={20} className="mr-3"/>}
+                <p className="truncate pr-4">{coin.name}</p>
+                <svg className="ml-auto mr-0" transform={priceGoingUp ? "rotate(0)" : "rotate(180)"} width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8.00065 6.33301L4.66732 9.66634H11.334L8.00065 6.33301Z" fill={priceGoingUp ? "#00B1A7" : "red"} fillOpacity={1}/>
+                </svg>
+                <p className={clsx("ml-1 mr-2 text-[0.65rem]",{
+                  "text-cryptoblue-650": priceGoingUp,
+                  "text-cryptoblue-750": !priceGoingUp,
+                })}>{pricesStore[coin.id]?.[0]?.toFixed(3)}</p>
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Loader } from "../charts/Loader";
+import { ChartsLoader } from "./Loader";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -15,7 +15,7 @@ import {
 import {CrosshairPlugin} from "chartjs-plugin-crosshair";
 import { Line } from "react-chartjs-2";
 import { useGetCoinsIntervalDataQuery } from "../../lib/marketSlice";
-import { setError, setNotification, setShowNotification, selectCoinOneSymbol, selectCoinTwoSymbol, selectCurrency, selectDarkmode } from "../../lib/dynamicValuesSlice" ;
+import { setError, setNotification, setShowNotification, selectCoinOneSymbol, selectCoinTwoSymbol, selectCurrency, selectDarkmode, selectCompare } from "../../lib/dynamicValuesSlice" ;
 import { 
   fiveYearFormat ,
   oneDayFormat,
@@ -41,6 +41,7 @@ const Chart = ({range}:{range: number}) => {
   const defaultCoinTwo = coinTwo[0] === "" ? ["ethereum","eth"] : coinTwo;
   const currency = useSelector(selectCurrency);
   const darkmode = useSelector(selectDarkmode);
+  const compare = useSelector(selectCompare);
   const queryPart = `${coin[0]}/market_chart?vs_currency=${currency.label.toLowerCase()}&days=${range}`;
   const queryPartTwo = `${defaultCoinTwo[0]}/market_chart?vs_currency=${currency.label.toLowerCase()}&days=${range}`;
   const { data, error, isLoading } = useGetCoinsIntervalDataQuery(queryPart);
@@ -87,17 +88,17 @@ const Chart = ({range}:{range: number}) => {
   };
   return (<div className="flex w-full justify-between">
     {error || isLoading 
-      ? <div className={clsx("w-full mb-10 p-1 flex rounded-xl", {
+      ? <div className={clsx("w-full mb-10 flex rounded-xl", {
         "bg-cryptodark-350": darkmode,
         "bg-cryptoblue-100": !darkmode,
       })}>
-        <Loader />
+        <ChartsLoader dataOne={coin} dataTwo={coinTwo} compare={compare}  />
       </div>
-      : <div className={clsx("w-full mb-10  rounded-xl ", {
+      : <div className={clsx("w-full mb-10 h-[303px]  rounded-xl ", {
         "bg-cryptodark-350": darkmode,
         "bg-cryptoblue-100": !darkmode,
       })}>
-        <h2 className={clsx("ml-10 mt-5",{
+        <h2 className={clsx("ml-10 mt-8",{
           "text-cryptodark-100": darkmode,
           "text-cryptoblue-900": !darkmode,
         })}>{capitalize(coin[0])} ({coin[1].toUpperCase()}) <span 
@@ -105,9 +106,9 @@ const Chart = ({range}:{range: number}) => {
               "text-cryptodark-550 opacity-80": darkmode,
               "text-cryptoblue-900 opacity-70": !darkmode,
             })}>to</span> {capitalize(defaultCoinTwo[0])} ({defaultCoinTwo[1].toUpperCase()}) - {coinToCoinPrices?.[priceIndex || coinToCoinPrices.length-1]?.toFixed(5)}</h2>
-        <div className="h-64 p-10 pt-5 pl-7 relative">
+        <div className="h-64 p-10 pt-3 pl-7 pb-8 relative">
           <Line options={options} data={lineChartData} height={216} />
-          <div className={clsx("absolute border-b-4 w-[calc(100%-30px)] bottom-[43px]",{
+          <div className={clsx("absolute border-b-4 w-[1210px] left-[calc(50%-605px)] bottom-[55px]",{
             "border-b-cryptodark-100 ": !darkmode,
             "border-b-cryptodark-350": darkmode,
           })}></div>

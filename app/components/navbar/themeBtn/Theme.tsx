@@ -2,16 +2,17 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setDarkmode, selectDarkmode } from "@/app/lib/dynamicValuesSlice";
 import clsx from "clsx";
-const Theme = () => {
+const Theme = ({handleDarkMode}:{handleDarkMode: any}) => {
   const dispatch = useDispatch();
   const darkmode = useSelector(selectDarkmode);
   const handleClick = (e:any) => {
     e.preventDefault();
     dispatch(setDarkmode(!darkmode));
+    handleDarkMode(!darkmode);
   };
   return (
-    <div className={clsx("p-3.5 rounded-xl ml-5 h-12 w-12 cursor-pointer border-[1px]", {
-      "bg-cryptodark-200 border-cryptodark-170": darkmode, "bg-cryptoblue-200": !darkmode
+    <div className={clsx("p-3.5 rounded-xl ml-5 h-12 w-12 cursor-pointer", {
+      "bg-cryptodark-200 border-cryptodark-170 border-[1px]": darkmode, "bg-cryptoblue-200": !darkmode
     })} onClick={(e)=>handleClick(e)}>
       {
         darkmode 
