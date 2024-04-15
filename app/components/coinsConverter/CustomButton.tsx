@@ -13,7 +13,7 @@ const CustomButton = ({name, handleClick, active, width, padding}: Props) => {
   const darkmode = useSelector(selectDarkmode);
   const bgColor = active ? "bg-cryptoblue-600 text-cryptoblue-100" : "bg-cryptoblue-100";
   return (
-    <div className={clsx(`${width} rounded-md p-[1px] h-[45px]`, {
+    <div className={clsx(`${width} h-[45px] rounded-md p-[1px]`, {
       "bg-gradient-to-t from-cryptoblue-600 to-cryptoblue-800": active && !darkmode,
       "bg-gradient-to-t from-cryptodark-750 to-cryptodark-800": active && darkmode,
       "bg-cryptodark-150": !active && darkmode,

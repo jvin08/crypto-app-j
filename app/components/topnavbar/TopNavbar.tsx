@@ -29,7 +29,7 @@ export const TopNavbar: React.FC = () => {
   };
   return (
     <div className="fixed w-full z-10">
-      <div className={clsx("border-b-[1px] flex justify-center text-xs text-cryptoblue-100 py-[17.6px]",{
+      <div className={clsx("rounded-b-md border-b-[1px] flex justify-center text-xs text-cryptoblue-100 py-[17.6px]",{
         "bg-cryptodark-300 border-cryptodark-170": darkmode,
         "bg-cryptoblue-900 border-cryptoblue-820": !darkmode,
       })}>
