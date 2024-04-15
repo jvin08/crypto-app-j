@@ -23,7 +23,7 @@ const Portfolio = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header handleCoinAdded={handleCoinAdded} />
-      <div className={clsx("min-h-[calc(100vh-15rem)] pt-12",{
+      <div className={clsx("min-h-[calc(100vh-15rem)] pt-6",{
         "bg-cryptoblue-400": !darkmode,
         "bg-cryptodark-400": darkmode,
       })}>

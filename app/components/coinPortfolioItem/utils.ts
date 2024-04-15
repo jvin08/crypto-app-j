@@ -26,3 +26,6 @@ export const calculatePrice = (prices: number[][], purchaseDate: string) => {
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
+export const formatTime = (time: string) => {
+  return time.slice(5,7) + "." + time.slice(8,10) + "." + time.slice(0,4);
+};

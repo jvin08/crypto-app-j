@@ -16,14 +16,14 @@ const Header = ({handleCoinAdded}:{handleCoinAdded: ()=>void}) => {
     setShowCalculator(!showCalculator);
   };
   return (
-    <div className={clsx("flex justify-between items-center pt-6 mt-24",{
+    <div className={clsx("flex justify-between items-center mt-[128px]",{
       "text-cryptodark-100": darkmode,
       "text-cryptoblue-810": !darkmode,
     })}>
       Your statistics
-      <div className="grid grid-cols-2 gap-4">
-        <CustomButton name="Investments Calculator" handleClick={toggleCalculator} active={true} width="w-64" padding="py-2"/>
-        <CustomButton name="Add Asset" handleClick={toggleCoinSelect} active={true} width="w-64" padding="py-2"/>
+      <div className="grid grid-cols-2 gap-2">
+        <CustomButton name="Investments Calculator" handleClick={toggleCalculator} active={true} width="w-[244px]" padding="py-2"/>
+        <CustomButton name="Add Asset" handleClick={toggleCoinSelect} active={true} width="w-[244px]" padding="py-2"/>
       </div>
       {showCalculator && <Calculator toggleCalculator={toggleCalculator} />}
       {showCoinSelect && <CoinSelect toggleCoinSelect={toggleCoinSelect} onCoinAdded={handleCoinAdded}  id="" />}

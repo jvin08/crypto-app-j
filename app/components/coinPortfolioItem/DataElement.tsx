@@ -13,7 +13,7 @@ const DataElement = ({name, value, width}:{name: string, value: string, width: s
         })}>Gain</span> / <span className="text-cryptoblue-750">Loss</span></p> : 
         <p className="text-[11px] mb-1">{name}</p>}
       <p className={clsx("text-xs",{
-        "text-cryptoblue-650": Number(value) > 0 && darkmode,
+        "text-cryptoblue-650": darkmode,
         "text-cryptoblue-660": Number(value) > 0 && !darkmode,
         "text-cryptoblue-750": Number(value) < 0,
       })}>{value}</p>
