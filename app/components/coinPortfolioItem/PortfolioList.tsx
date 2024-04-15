@@ -52,7 +52,7 @@ const PortfolioList = ({forceUpdate, handleCoinAdded}:{forceUpdate:boolean, hand
           {
             coinData.map((coin:Coin) => {
               return (
-                <div key={coin.id} className="mb-5">
+                <div key={coin.id} className="mb-6">
                   {showDeleteModal && <DeleteModal toggleDeleteModal={toggleDeleteModal} gain={coinProfit} handleCoinAdded={handleCoinAdded} />}
                   <Link href={`/coin/${coin.coin}-${coin.id}`}>
                     <CoinCard storageData={coin} toggleDeleteModal={toggleDeleteModal} toggleEditModal={toggleCoinEdit}/>

@@ -5,7 +5,6 @@ import StatusBar from "./StatusBar";
 import CoinImage from "./CoinImage";
 import { ToolTipCoinCard }  from "./ToolTip";
 import clsx from "clsx";
-import { BackgroundGradient } from "./BackgroundGradient";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
 import { useGetOneCoinDataQuery, useGetCoinDataByDateQuery } from "../../lib/marketSlice";
@@ -28,53 +27,50 @@ const CoinCard = ({ storageData, toggleDeleteModal, toggleEditModal }:{ storageD
   };
   const coinData = [gainOrLoss, storageData.coin, storageData.id];
   return (
-    <BackgroundGradient  className={clsx("",{
+    <div  className={clsx("",{
       "bg-cryptoblue-200": !darkmode,
       "bg-cryptodark-350": darkmode,
-    })} outerStyle="relative p-0 group" rounded="">
+    })}>
       <div className={clsx("flex cursor-pointer h-[292px]",{
         "text-cryptodark-100": darkmode,
         "text-cryptodark-200": !darkmode,
       })}>
         <CoinImage data={storageData} />
-        <div className={clsx("w-[calc(80%+2rem)] p-8",{
+        <div className={clsx("w-[calc(80%+2rem)] p-8 pb-[26px]",{
           "bg-cryptodark-350": darkmode,
           "bg-cryptoblue-200": !darkmode,
         })}>
           <div className="h-[116px] border-b">
             <div className="flex justify-between mb-0 mt-[10px] rounded-[22px]">
               <h2 className="text-xl m-0 p-0">Market Price</h2>
-              <div className={clsx("pt-1 pl-1 w-[30px] h-[30px] rounded-sm cursor-pointer",{
-                "bg-[#3A3978] hover:border-cryptoblue-800 hover:border-[1px] box-border" : darkmode,
-                "bg-cryptoblue-800" : !darkmode,
-              })} >
+              <div className="-mr-4 -mb-4">
                 <ToolTipCoinCard name="Sell your coin" eventHandler={(e: any)=>toggleDeleteModal(e,coinData)}/>
               </div>
             </div>
             <div className="flex justify-between pb-4 mt-5">
-              <DataElement name="Current price:" value={coin.currentPrice} width="" />
-              <DataElement name="Price cgange 24h:" value={coin.priceChange} width="w-1/6" />
+              <DataElement name="Current price:" value={coin.currentPrice} width="w-1/12" />
+              <DataElement name="Price cgange 24h:" value={coin.priceChange} width="w-1/3" />
               <StatusBar name="Market Cap vs Volume:" width={coin.marketCapVol} />
-              <DataElement name="Circ supply vs max supply:" value={coin.circSupVsMaxSup.toFixed(2)}  width=""/>
+              <DataElement name="Circ supply vs max supply:" value={coin.circSupVsMaxSup.toFixed(2)}  width="w-1/4"/>
             </div>
           </div>
           <div>
-            <div className="flex justify-between mt-4 mb-2">
+            <div className="flex justify-between mt-8 mb-2">
               <h2 className="text-xl">Your coin</h2>
               <div className="-mr-4">
                 <ToolTipCoinCard name="Edit coin data" eventHandler={(e: any)=>toggleEditModal(e, storageData.id)} />
               </div>
             </div>
             <div className="flex justify-between">
-              <DataElement name="Coin amount:" value={storageData.amount} width="" />
-              <DataElement name="Amount value:" value={coin.amountValue} width="w-1/6" />
+              <DataElement name="Coin amount:" value={storageData.amount} width="w-1/12" />
+              <DataElement name="Amount value:" value={coin.amountValue} width="w-1/3" />
               <DataElement name="Gain / Loss:" value={gainOrLoss}  width="w-1/4"/>
-              <DataElement name="Purchase date:" value={formatTime(storageData.purchaseTime)}  width="" />
+              <DataElement name="Purchase date:" value={formatTime(storageData.purchaseTime)}  width="w-1/4" />
             </div>
           </div>
         </div>
       </div>
-    </BackgroundGradient>
+    </div>
   );
 };
 export default CoinCard;
