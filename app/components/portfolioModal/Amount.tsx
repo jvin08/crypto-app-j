@@ -24,7 +24,7 @@ const Amount = ({visible, toggleVisible, getAmount}:{visible: boolean, toggleVis
   }, [visible]);
   return (
     <div>
-      {!visible ? <div className={clsx("w-full text-xs flex justify-between py-2 px-2 rounded-sm",{
+      {!visible ? <div className={clsx("w-full text-base items-center flex justify-between h-11 px-4 rounded",{
         "bg-cryptoblue-200 text-cryptoblue-900": !darkmode,
         "bg-cryptodark-200 text-cryptodark-510": darkmode,
       })}
@@ -55,7 +55,7 @@ const Amount = ({visible, toggleVisible, getAmount}:{visible: boolean, toggleVis
           onChange={handleChange}
           onBlur={handleBlur}
           required
-          className={clsx("w-full pl-4 h-8 box-border rounded-sm text-xs focus:outline-none focus:border-[1px]", {
+          className={clsx("w-full pl-4 h-11 box-border rounded text-base focus:outline-none focus:border-[1px]", {
             "bg-cryptoblue-200": !darkmode,
             "bg-cryptodark-200 text-cryptodark-510 focus:border-cryptodark-800 focus:outline-none focus:shadow-inner": darkmode,
           })} 

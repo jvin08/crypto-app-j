@@ -10,7 +10,6 @@ import Search from "./Search";
 import Amount from "./Amount";
 import Date from "./Date";
 import BitcoinImg from "../../../public/bitcoin.png";
-import { BackgroundGradient } from "../coinPortfolioItem/BackgroundGradient";
 type Coin = {
   id: string,
   coin: string,
@@ -36,6 +35,7 @@ const CoinSelect = ({toggleCoinSelect, onCoinAdded, id}: {toggleCoinSelect: any,
   const [purchaseDate, setPurchaseDate] = useState(initialPurchaseDate);
   const activeSaveBtn = amount !== "" && purchaseTime !== "" && purchaseDate !== "" && selectedCoin[0] !== "";
   const dispatch = useDispatch();
+  const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
   const handleNotification = (message: string) => {
     dispatch(setNotification(message));
     dispatch(setShowNotification(""));
@@ -44,18 +44,10 @@ const CoinSelect = ({toggleCoinSelect, onCoinAdded, id}: {toggleCoinSelect: any,
     setCoinImage(coin.thumb);
     setSelectedCoin([coin.id, coin.symbol]);
   };
-  const toggleAmount = () => {
-    setInputAmount(!inputAmount);
-  };
-  const getAmount = (amount: string) => {
-    setAmount(amount);
-  };
-  const getPurchaseTime = (time: string) => {
-    setPurchaseTime(time);
-  };
-  const getPurchaseDate = (date: string) => {
-    setPurchaseDate(date);
-  };
+  const toggleAmount = () => setInputAmount(!inputAmount);
+  const getAmount = (amount: string) => setAmount(amount);
+  const getPurchaseTime = (time: string) => setPurchaseTime(time);
+  const getPurchaseDate = (date: string) => setPurchaseDate(date);
   const saveDataToLocalStorage = () => {
     const time = purchaseDate + "T" + purchaseTime;
     const newCoin = {
@@ -77,18 +69,18 @@ const CoinSelect = ({toggleCoinSelect, onCoinAdded, id}: {toggleCoinSelect: any,
   const crossColor = darkmode ? "white" : "black";
   return (
     <div className="fixed top-0 left-0 z-10 flex bg-cryptodark-900 bg-opacity-65 backdrop-blur-[1px] w-full h-full">
-      <BackgroundGradient animate={true} outerStyle="absolute left-[calc(50%-20rem)] top-[12rem] p-[1px] group" rounded="rounded-lg">
-        <div className={clsx("m-auto w-[40rem] h-[18rem] z-50 p-8 rounded-lg",{
+      <div className="absolute left-[calc(50%-443px)] top-[12rem] p-[1px] group">
+        <form className={clsx("m-auto w-[886px] h-[393px] z-50 p-[48px] rounded-[20px]",{
           "bg-cryptodark-400 text-cryptodark-100": darkmode,
           "bg-cryptoblue-100 text-cryptoblue-900": !darkmode,
         })}>
-          <div className="flex justify-between ">
+          <div className="flex justify-between text-xl items-center">
             {id ? <p>Edit coin data</p> : <p>Select coins</p>}
             <svg 
               className="cursor-pointer" 
               onClick={toggleCoinSelect}
-              width="20" 
-              height="20" 
+              width="24" 
+              height="24" 
               viewBox="0 0 24 24" 
               fill="none" 
               xmlns="http://www.w3.org/2000/svg"
@@ -98,21 +90,21 @@ const CoinSelect = ({toggleCoinSelect, onCoinAdded, id}: {toggleCoinSelect: any,
               <path d="M14.8319 14.8299L9.17188 9.16992" stroke={crossColor} strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </div>
-          <div className="flex justify-between h-5/6 mt-5 pb-3">
-            <div className={clsx(" w-[30%] flex-col pt-12 rounded",{
+          <div className="flex justify-between h-5/6 mt-8 pb-3">
+            <div className={clsx(" w-[297px] pt-[66px] rounded",{
               "bg-cryptodark-350": darkmode,
               "bg-cryptoblue-200": !darkmode,
             })}>
-              <div className={clsx("w-14 h-14 mx-auto rounded p-3 mb-2",{
+              <div className={clsx("w-16 h-16 mx-auto rounded p-[14.5px] mb-2",{
                 "bg-cryptodark-160" : darkmode,
                 "bg-cryptoblue-100": !darkmode,
               })}>
                 <Image src={coinImage} alt="coin-image" width={35} height={35} />
               </div>
-              <p className="text-center">{selectedCoin[0]?selectedCoin[0]:"Your Crypto"} ({selectedCoin[0]?selectedCoin[1]:"ABC"})</p>
+              <p className="text-center text-2xl mt-4">{selectedCoin[0] ? capitalize(selectedCoin[0]) : "Your Coin"} ({selectedCoin[0]?selectedCoin[1]:"ABC"})</p>
             </div>
-            <div className="w-[67%] text-xs flex flex-col justify-between"> 
-              {id ? <p className={clsx("w-full pl-2 pt-2 h-8 rounded-sm text-xs", {
+            <div className="w-[461px] text-base flex flex-col justify-between"> 
+              {id ? <p className={clsx("w-full pl-4 pt-3 h-11 rounded-sm", {
                 "bg-cryptoblue-200": !darkmode,
                 "bg-cryptodark-200 text-cryptodark-510": darkmode,
               })}>{selectedCoin[0][0].toUpperCase()+selectedCoin[0].slice(1)}</p> : <Search handleCoin={handleCoin} />}
@@ -124,8 +116,8 @@ const CoinSelect = ({toggleCoinSelect, onCoinAdded, id}: {toggleCoinSelect: any,
               </div>
             </div>
           </div>
-        </div>
-      </BackgroundGradient>
+        </form>
+      </div>
     </div>
   );
 };
