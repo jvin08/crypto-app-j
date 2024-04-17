@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
 const DataElement = ({name, value, width}:{name: string, value: string, width: string}) => {
   const darkmode = useSelector(selectDarkmode);
+  const formattedValue = Math.abs(Number(value));
   return (
     <div className={`flex flex-col items-center ${width}`}>
       {name.includes("Gain") ?
@@ -16,7 +17,7 @@ const DataElement = ({name, value, width}:{name: string, value: string, width: s
         "text-cryptoblue-650": darkmode,
         "text-cryptoblue-660": Number(value) > 0 && !darkmode,
         "text-cryptoblue-750": Number(value) < 0,
-      })}>{value}</p>
+      })}>{formattedValue}</p>
     </div>
   );
 };
