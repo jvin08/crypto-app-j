@@ -17,8 +17,8 @@ const Date = ({getTime, getDate}:{getTime: any, getDate: any}) => {
     getTime(e.target.value);
   };
   return (
-    <div>
-      {!visible ? <div className={clsx("w-full text-xs flex justify-between py-2 px-2 rounded-sm",{
+    <div className="text-base">
+      {!visible ? <div className={clsx("w-full flex justify-between h-11 px-4 items-center rounded",{
         "bg-cryptoblue-200 text-cryptoblue-900": !darkmode,
         "bg-cryptodark-200 text-cryptodark-510": darkmode,
       })}
@@ -41,15 +41,17 @@ const Date = ({getTime, getDate}:{getTime: any, getDate: any}) => {
           />
         </svg>
       </div> :
-        <div  className={clsx("w-full text-xs flex justify-between py-[6.5px] px-2 rounded-sm",{
+        <div  className={clsx("w-full flex justify-between h-11 px-4 rounded",{
           "bg-cryptoblue-200 text-cryptoblue-900": !darkmode,
           "bg-cryptodark-200 text-cryptodark-510": darkmode,
         })}> 
-          <input type="date" onChange={handleDate} required className={clsx("",{
+          <input type="date" onChange={handleDate} required className={clsx("cursor-pointer",{
             "bg-cryptodark-200": darkmode,
+            "bg-cryptoblue-200": !darkmode,
           })}/>
-          <input type="time" onChange={handleTime} required className={clsx("",{
+          <input type="time" onChange={handleTime} required className={clsx("cursor-pointer",{
             "bg-cryptodark-200": darkmode,
+            "bg-cryptoblue-200": !darkmode,
           })} />
         </div>  
       }

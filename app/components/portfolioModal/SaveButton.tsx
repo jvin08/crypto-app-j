@@ -18,9 +18,9 @@ const SaveButton = ({name, handleClick, active, width, padding}: Props) => {
       "bg-gradient-to-t from-cryptodark-750 to-cryptodark-800": active && darkmode,
       "bg-cryptodark-150": !active && darkmode,
     })}>
-      <button onClick={handleClick} className={clsx(`py-1.5 ${bgColor} text-[11px] w-full rounded ${padding}`,{
+      <button onClick={handleClick} disabled={!active} className={clsx(`h-11 ${bgColor} text-base w-full rounded-[5px] ${padding}`,{
         "bg-cryptoblue-600 text-cryptoblue-100": active && !darkmode,
-        "bg-cryptoblue-100": !active && !darkmode,
+        "bg-cryptoblue-200 text-cryptoblue-100": !active && !darkmode,
         "bg-cryptodark-750": active && darkmode,
         "bg-cryptodark-150 text-cryptoblue-500": !active && darkmode,
       })}>{name}</button>

@@ -27,8 +27,8 @@ const Search = ({handleCoin}:{handleCoin:any}) => {
     inputRef.current?.focus();
   }, [showSearch]);
   return (
-    <div className="relative w-full">
-      {!showSearch ? <div className={clsx("w-full text-xs flex justify-between py-2 px-2 rounded-sm",{
+    <div className="relative w-full text-base">
+      {!showSearch ? <div className={clsx("w-full items-center flex justify-between h-11 px-4 rounded",{
         "bg-cryptoblue-200 text-cryptoblue-900": !darkmode,
         "bg-cryptodark-200 text-cryptodark-510": darkmode,
       })}
@@ -58,7 +58,7 @@ const Search = ({handleCoin}:{handleCoin:any}) => {
             placeholder="e.g. Bitcoin" 
             value={searchTerm}
             onChange={handleChange}
-            className={clsx("w-full pl-4 h-8 box-border rounded-sm text-xs focus:outline-none focus:border-[1px]", {
+            className={clsx("w-full pl-4 h-11 box-border rounded focus:outline-none focus:border-[1px]", {
               "bg-cryptoblue-200": !darkmode,
               "bg-cryptodark-200 text-cryptodark-510 focus:border-cryptodark-800 focus:outline-none focus:shadow-inner": darkmode,
             })} 
