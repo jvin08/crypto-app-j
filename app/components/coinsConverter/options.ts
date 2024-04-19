@@ -66,13 +66,19 @@ export const options = {
     },
     x: {
       display: true,
+      beforeFit(axis: any) {
+        const lbs  = axis.chart.config._config.data.labels; 
+        const len  = lbs.length-1; 
+        axis.ticks.push({ value: len, label: lbs[len] });  
+      },
       ticks: {
-        maxTicksLimit: 14,
+        maxTicksLimit: 13,
         color: "#9B9AB6",
         fontColor: "white",
         fontSize: 8,
         backdropColor: "red",
         zeroLineColor: "transparent",
+        align: "inner" as "inner",
       },
       grid: {
         display: false, // Hide grid lines on X-axis
