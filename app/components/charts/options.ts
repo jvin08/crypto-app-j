@@ -1,3 +1,8 @@
+export function beforeFit(axis: any) {
+  const labels  = axis.chart.config._config.data.labels; 
+  const length  = labels.length-1; 
+  axis.ticks.push({ value: length, label: labels[length] });  
+}
 export const options = {
   onHover:{} as any,
   interaction: {
@@ -66,11 +71,7 @@ export const options = {
     },
     x: {
       display: true,
-      beforeFit(axis: any) {
-        const lbs  = axis.chart.config._config.data.labels; 
-        const len  = lbs.length-1; 
-        axis.ticks.push({ value: len, label: lbs[len] });  
-      },
+      beforeFit: beforeFit,
       ticks: {
         maxTicksLimit: 8,
         color: "#9B9AB6",
@@ -105,11 +106,7 @@ export const barOptions = {
       stacked: true,
       barPercentage: 0.6, // Adjust this value to control the width of the bars
       categoryPercentage: 0.59,// Adjust this value to lift the bars more from the x-axis
-      beforeFit(axis: any) {
-        const lbs  = axis.chart.config._config.data.labels; 
-        const len  = lbs.length-1; 
-        axis.ticks.push({ value: len, label: lbs[len] });  
-      },
+      beforeFit: beforeFit,
       ticks: {
         maxTicksLimit: 8, // Max number of X-axis ticks
         color: "#9B9AB6", // X-axis ticks color
