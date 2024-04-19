@@ -1,3 +1,4 @@
+import { beforeFit } from "../charts/options";
 export const options = {
   onHover:{} as any,
   interaction: {
@@ -66,13 +67,15 @@ export const options = {
     },
     x: {
       display: true,
+      beforeFit: beforeFit,
       ticks: {
-        maxTicksLimit: 14,
+        maxTicksLimit: 13,
         color: "#9B9AB6",
         fontColor: "white",
         fontSize: 8,
         backdropColor: "red",
         zeroLineColor: "transparent",
+        align: "inner" as "inner",
       },
       grid: {
         display: false, // Hide grid lines on X-axis
