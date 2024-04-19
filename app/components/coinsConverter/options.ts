@@ -1,3 +1,4 @@
+import { beforeFit } from "../charts/options";
 export const options = {
   onHover:{} as any,
   interaction: {
@@ -66,11 +67,7 @@ export const options = {
     },
     x: {
       display: true,
-      beforeFit(axis: any) {
-        const lbs  = axis.chart.config._config.data.labels; 
-        const len  = lbs.length-1; 
-        axis.ticks.push({ value: len, label: lbs[len] });  
-      },
+      beforeFit: beforeFit,
       ticks: {
         maxTicksLimit: 13,
         color: "#9B9AB6",
