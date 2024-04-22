@@ -5,6 +5,7 @@ import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
 import SearchResults from "./SearchResults";
 import { useRouter } from "next/navigation";
 import path from "path";
+
 const Search = () => {
   const router = useRouter();
   const [hidden, setHidden] = useState(true);
