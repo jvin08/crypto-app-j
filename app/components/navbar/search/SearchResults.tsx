@@ -7,6 +7,7 @@ import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
 import { useClickOutside } from "../../portfolioModal/hooks";
 import clsx from "clsx";
 import path from "path";
+
 type Coin = {
   name: string;
   id: string;
