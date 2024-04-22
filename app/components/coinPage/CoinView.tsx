@@ -73,7 +73,7 @@ const CoinView = ({coinId, id}:{coinId: string, id: string}) => {
           <BulletItem name="Max Supply" content={`${currencySign} ${addCommas(data?.market_data?.max_supply) || " n/a"} ${data?.symbol?.toUpperCase()}`} />
           <BulletItem name="Circulating Supply" content={`${currencySign} ${addCommas(Math.floor(data?.market_data?.circulating_supply))} ${data?.symbol?.toUpperCase()}`} />
           <div>
-            <p className="flex justify-between mb-3"><span className="text-xs text-cryptodark-630">● {curSupToMarket.includes(Infinity+"") ? " n/a" : curSupToMarket}%</span><span className="text-xs text-cryptodark-630">● {curSupToMarket.includes(Infinity+"") ? " n/a" : (100-Number(curSupToMarket)).toFixed(2)}%</span></p>
+            <p className="flex justify-between mb-3"><span className="text-xs text-cryptodark-630">● {curSupToMarket.includes(Infinity+"") ? " n/a" : curSupToMarket + "%"}</span><span className="text-xs text-cryptodark-630">● {curSupToMarket.includes(Infinity+"") ? " n/a" : (100-Number(curSupToMarket)).toFixed(2) + "%"}</span></p>
             <div className="relative w-full">
               <div className="absolute -bottom-1 w-full h-2 z-2 rounded-sm px-px bg-cryptodark-630 opacity-40"></div>
               <div className="absolute -bottom-1 h-2 rounded-sm z-2 px-px bg-cryptodark-630" style={{width: statusBarWidth + "%"}}></div>
