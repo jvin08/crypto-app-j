@@ -3,6 +3,7 @@ import { useClickOutside } from "../../portfolioModal/hooks";
 import clsx from "clsx";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
+
 const LoadingSearch = ({closeLoader}:{closeLoader: any}) => {
   const darkmode = useSelector(selectDarkmode);
   const ref = useClickOutside(()=>{
