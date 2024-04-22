@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import clsx from "clsx";
-import { useSelector, useDispatch } from "react-redux";
-import { selectDarkmode, selectCoinOneSymbol, setCoinOneSymbol, setCoinTwoSymbol } from "@/app/lib/dynamicValuesSlice";
+import { useSelector } from "react-redux";
+import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
 import SearchResults from "./SearchResults";
+import { useRouter } from "next/navigation";
+import path from "path";
+
 const Search = () => {
+  const router = useRouter();
   const [hidden, setHidden] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedOptionIndex, setSelectedOptionIndex] = useState<number>(0);
   const [coin, setCoin] = useState(["",""]);
   const darkmode = useSelector(selectDarkmode);
-  const coinOne = useSelector(selectCoinOneSymbol);
-  const dispatch = useDispatch();
   const toggleHidden = () => {
     setHidden(!hidden);
   };
@@ -19,6 +21,7 @@ const Search = () => {
     if(e.key === "Escape") {
       clearSearch();
       e.currentTarget.blur();
+      toggleHidden();
     }
     if (e.key === "ArrowDown") {
       e.preventDefault();
@@ -32,10 +35,10 @@ const Search = () => {
         return prevIndex - 1;
       });
     } else if (e.key === "Enter") {
+      e.currentTarget.blur();
+      router.push(path.join("/coin", coin[0]) + "market");
       toggleHidden();
       clearSearch();
-      dispatch(setCoinOneSymbol([coin[0], coin[1]]));
-      dispatch(setCoinTwoSymbol(coinOne));
     } 
   };
   const clearSearch = () => {
@@ -68,9 +71,11 @@ const Search = () => {
         onChange={handleChange}
         onClick={toggleHidden}
         onKeyDown={handleKeyDown}
-        className={clsx("pl-12 h-12 w-72 box-border rounded-md  text-sm focus:outline-none", {
+        className={clsx("pl-12 h-12 w-72 box-border text-sm focus:outline-none", {
           "bg-cryptoblue-200 focus:border-cryptoblue-900": !darkmode,
           "bg-cryptodark-200 text-cryptodark-100 border-[1px] border-cryptodark-170 focus:outline-none focus:shadow-inner": darkmode,
+          "rounded-md": hidden,
+          "rounded-t-md bg-gradient-to-r from-cryptodark-200 to-dark-140": !hidden
         })} />
       {!hidden 
         && <SearchResults 
