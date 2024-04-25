@@ -5,6 +5,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import { SmallLoader } from "../charts/Loader";
 import {
+  PrevButton,
   NextButton,
   usePrevNextButtons
 } from "./ArrowButtons";
@@ -44,7 +45,9 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     if (autoplayOptions.stopOnInteraction !== false) autoplayStop;
   }, [emblaApi]);
   const {
+    prevBtnDisabled,
     nextBtnDisabled,
+    onPrevButtonClick,
     onNextButtonClick
   } = usePrevNextButtons(emblaApi, onButtonClick);
   const queryPart = `${currency?.label.toLowerCase()}`;
@@ -123,9 +126,9 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
             ))}
         </div>
       </div>
-      {/* <div className="z-0 flex items-center absolute top-4 -left-[1.5%]">
+      <div className="z-0 flex items-center absolute top-4 -left-[2.5%]">
         <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
-      </div> */}
+      </div>
       <div className="z-0 flex items-center absolute top-4 -right-[2.5%]">
         <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
       </div>
