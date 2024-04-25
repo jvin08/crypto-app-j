@@ -40,7 +40,7 @@ const DropdownSearch = ({
     if(itemRef.current){
       handleCoin(data?.coins[newIndex]?.id, data?.coins[newIndex]?.symbol);
     }
-  },[newIndex, data]);
+  },[data, handleCoin, newIndex]);
   const dropDownRef = useClickOutside(()=>{
     closeDropdownMenu();
   });

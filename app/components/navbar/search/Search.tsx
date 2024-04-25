@@ -16,7 +16,7 @@ const Search = () => {
   const toggleHidden = () => {
     setHidden(!hidden);
   };
-  const handleCoin = useCallback((coinId: string, coinSymbol: string) => setCoin([coinId, coinSymbol]),[selectedOptionIndex]);
+  const handleCoin = useCallback((coinId: string, coinSymbol: string) => setCoin([coinId, coinSymbol]),[]);
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if(e.key === "Escape") {
       clearSearch();

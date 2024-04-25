@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setNotification, setShowNotification, setError } from "../../lib/dynamicValuesSlice";
 import {
@@ -61,11 +61,11 @@ export function Charts({range}:{range: number}) {
   const myData = data?.prices;
   const myDataTwo = dataTwo?.prices;
   const dispatch = useDispatch();
-  const handleNotification = (message: string) => {
+  const handleNotification = useCallback((message: string) => {
     dispatch(setError(true));
     dispatch(setNotification(message));
     dispatch(setShowNotification(""));
-  };
+  },[dispatch]);
   useEffect(() => {
     if(error){
       handleNotification("Error fetching data");
@@ -74,7 +74,7 @@ export function Charts({range}:{range: number}) {
       }, 4000);
       return () => clearTimeout(timer);
     }
-  }, [error, dispatch]);
+  }, [error, dispatch, handleNotification]);
   let volumeOne = data?.total_volumes.map((volume: number[])=>{
     return volume;
   });
