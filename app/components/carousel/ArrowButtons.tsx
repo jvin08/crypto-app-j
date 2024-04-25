@@ -54,7 +54,7 @@ export const usePrevNextButtons = (
 export const PrevButton: React.FC<PropType> = (props) => {
   const { children, ...restProps } = props;
   return (
-    <div className="rounded-full bg-gradient-to-t from-cryptodark-790 to-cryptoblue-850 opacity-80 p-px">
+    <div className="rounded-full bg-gradient-to-t from-cryptoblue-790 to-cryptodark-800 opacity-95 p-px shadow-cryptoblue-800 shadow-2xl">
       <button
         className="z-10 bg-cryptodark-850 opacity-80 rounded-full text-cryptoblue-100  items-center justify-center cursor-pointer w-12 h-12 bg-opacity-80 touch-manipulation inline-flex no-underline border-0"
         type="button"
