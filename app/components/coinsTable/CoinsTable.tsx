@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import {  selectCurrency } from "../../lib/dynamicValuesSlice";
 import { useGetTableCoinsDataQuery } from "@/app/lib/marketSlice";
 import Header from "./Header";
+
 const CoinsTable = () => {
   const [page, setPage] = useState(1);
   const [coins, setCoins] = useState<any[]>([]);

@@ -10,6 +10,7 @@ import Search from "./Search";
 import Amount from "./Amount";
 import Date from "./Date";
 import BitcoinImg from "../../../public/bitcoin.png";
+
 type Coin = {
   id: string,
   coin: string,
@@ -29,11 +30,12 @@ const CoinSelect = ({toggleCoinSelect, onCoinAdded, id}: {toggleCoinSelect: any,
   const [coinImage, setCoinImage] = useState(imageState);
   const initialAmount = id ? editedCoin.amount : "";
   const [amount, setAmount] = useState(initialAmount);
-  const initialPurchaseTime = id ? editedCoin.purchaseTime.slice(11) : "";
-  const [purchaseTime, setPurchaseTime] = useState(initialPurchaseTime);
-  const initialPurchaseDate = id ? editedCoin.purchaseTime.slice(0,11) : "";
-  const [purchaseDate, setPurchaseDate] = useState(initialPurchaseDate);
-  const activeSaveBtn = amount !== "" && purchaseTime !== "" && purchaseDate !== "" && selectedCoin[0] !== "";
+  const initInput = {
+    time: id ? editedCoin.purchaseTime.slice(11) : "",
+    date: id ? editedCoin.purchaseDate.slice(11) : "",
+  };
+  const [input, setInput] = useState(initInput);
+  const activeSaveBtn = amount !== "" && input.date !== "" && input.time !== "" && selectedCoin[0] !== "";
   const dispatch = useDispatch();
   const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
   const handleNotification = (message: string) => {
@@ -45,11 +47,13 @@ const CoinSelect = ({toggleCoinSelect, onCoinAdded, id}: {toggleCoinSelect: any,
     setSelectedCoin([coin.id, coin.symbol]);
   };
   const toggleAmount = () => setInputAmount(!inputAmount);
+  const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const {name, value} = e.target;
+    setInput({...input, [name]: value});
+  };
   const getAmount = (amount: string) => setAmount(amount);
-  const getPurchaseTime = (time: string) => setPurchaseTime(time);
-  const getPurchaseDate = (date: string) => setPurchaseDate(date);
   const saveDataToLocalStorage = () => {
-    const time = purchaseDate + "T" + purchaseTime;
+    const time = input.date + "T" + input.time;
     const newCoin = {
       coin: selectedCoin[0],
       symbol: selectedCoin[1],
@@ -109,7 +113,7 @@ const CoinSelect = ({toggleCoinSelect, onCoinAdded, id}: {toggleCoinSelect: any,
                 "bg-cryptodark-200 text-cryptodark-510": darkmode,
               })}>{selectedCoin[0][0].toUpperCase()+selectedCoin[0].slice(1)}</p> : <Search handleCoin={handleCoin} />}
               <Amount visible={inputAmount} toggleVisible={toggleAmount} getAmount={getAmount} />
-              <Date getTime={getPurchaseTime} getDate={getPurchaseDate} />
+              <Date inputHandler={inputHandler} />
               <div className="flex justify-between mt-1">
                 <SaveButton name="Cancel" handleClick={toggleCoinSelect} active={true} width="w-[calc(50%-8px)]" padding="py-1"/>
                 <SaveButton name="Save and Continue" handleClick={saveDataToLocalStorage} active={activeSaveBtn} width="w-1/2" padding="py-1"/>

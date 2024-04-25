@@ -10,6 +10,7 @@ import FirstCoin from "./FirstCoin";
 import SecondCoin from "./SecondCoin";
 import Notification from "../notification/Notification";
 import clsx from "clsx";
+
 export const TopNavbar: React.FC = () => {
   const currency = useSelector(selectCurrency);
   const darkmode = useSelector(selectDarkmode);

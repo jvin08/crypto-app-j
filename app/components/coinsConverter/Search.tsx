@@ -3,6 +3,7 @@ import clsx from "clsx";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
 import SearchResults from "./SearchResults";
+
 const Search = ({toggleSearch, coin}: {toggleSearch: ()=>void, coin: string}) => {
   const [hidden, setHidden] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");

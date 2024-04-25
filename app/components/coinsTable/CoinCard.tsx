@@ -6,6 +6,7 @@ import { clsx } from "clsx";
 import Image from "next/image";
 import StatusBar from "./StatusBar";
 import Chart from "./Chart";
+
 const CoinCard = ({coin, index}: {coin: any, index: number}) => {
   const darkmode = useSelector(selectDarkmode);
   const currency = useSelector(selectCurrency);

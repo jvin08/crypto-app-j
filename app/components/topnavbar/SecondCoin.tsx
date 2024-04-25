@@ -2,6 +2,7 @@ import React from "react";
 import StatusBar from "./StatusBar";
 import Image from "next/image";
 import Loading from "./Loading";
+
 const SecondCoin = ({ quantity, isLoading }: {quantity: number, isLoading: boolean}) => {
   const ethIMG = "https://assets.coingecko.com/coins/images/279/large/ethereum.png?1696501628";
   return (

@@ -1,6 +1,7 @@
 import React from "react";
 import { HeaderBackUp } from "../charts/Header";
 import { capitalize } from "../charts/utils";
+
 export const ChartsLoader = ({dataOne, dataTwo, compare} : {dataOne: string, dataTwo: string, compare: boolean}) => {
   const showCoinTwo = compare && dataTwo[0] !== "";
   return (

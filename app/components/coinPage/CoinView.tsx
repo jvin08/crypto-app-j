@@ -9,6 +9,7 @@ import { useGetOneCoinDataQuery, useGetCoinDataByDateQuery } from "../../lib/mar
 import { timeInterval, calculatePrice } from "../coinPortfolioItem/utils";
 import { useLocalStorage } from "../portfolioModal/hooks";
 import { addCommas } from "./utils";
+
 const CoinView = ({coinId, id}:{coinId: string, id: string}) => {
   const darkmode = useSelector(selectDarkmode);
   const currency = useSelector(selectCurrency);

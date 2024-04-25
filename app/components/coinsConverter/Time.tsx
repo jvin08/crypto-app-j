@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import clsx from "clsx";
+
 const Time = ({darkmode}: {darkmode: boolean}) => {
   const formattedDateTime = (time: Date) => time.toLocaleString("en-US", {
     year: "numeric",

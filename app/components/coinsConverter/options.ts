@@ -1,4 +1,5 @@
 import { beforeFit } from "../charts/options";
+
 export const options = {
   onHover:{} as any,
   interaction: {

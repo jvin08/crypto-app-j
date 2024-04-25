@@ -5,6 +5,7 @@ import { useGetSearchCoinsDataQuery, useGetTenCoinsPricesQuery } from "@/app/lib
 import { selectDarkmode, selectCurrency } from "@/app/lib/dynamicValuesSlice";
 import { useClickOutside } from "./hooks";
 import clsx from "clsx";
+
 type Coin = {
   name: string;
   id: string;

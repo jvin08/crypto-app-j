@@ -48,7 +48,7 @@ const DropdownSearch = ({
     coinsForRender?.length === 0 || isLoading ? <LoadingSearch closeLoader={closeDropdownMenu} />
       : <div className={clsx("box-border text-sm w-72 left-0 top-[47px] absolute z-50 rounded-b-md",{
         "bg-cryptoblue-200 text-cryptoblue-500": !darkmode,
-        "bg-gradient-to-r from-cryptodark-200 to-dark-140 text-cryptodark-100 border-cryptodark-170 border-[1px]": darkmode,
+        "bg-gradient-to-r from-cryptodark-200 to-cryptodark-350 text-cryptodark-100 border-cryptodark-170 border-[1px]": darkmode,
       })} ref={dropDownRef}>
         {coinsForRender?.map((coin: Coin, idx: number) => {
           return (

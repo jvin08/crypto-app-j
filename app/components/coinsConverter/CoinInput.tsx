@@ -5,6 +5,7 @@ import Price from "./Price";
 import Search from "./Search";
 import { useSelector } from "react-redux";
 import { selectCurrency } from "@/app/lib/dynamicValuesSlice";
+
 const CoinInput = ({header="You buy", darkmode, coin, price, image, inputValue, handleChange, margin }: {header: string, darkmode: boolean, coin: string[], price: number, image: string, inputValue:number, margin: string, handleChange: any }) => {
   const [showSearch, setShowSearch] = React.useState(false);
   const currency = useSelector(selectCurrency);

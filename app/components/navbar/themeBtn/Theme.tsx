@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setDarkmode, selectDarkmode } from "@/app/lib/dynamicValuesSlice";
 import clsx from "clsx";
+
 const Theme = ({handleDarkMode}:{handleDarkMode: any}) => {
   const dispatch = useDispatch();
   const darkmode = useSelector(selectDarkmode);

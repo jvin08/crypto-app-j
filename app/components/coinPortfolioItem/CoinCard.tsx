@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
 import { useGetOneCoinDataQuery, useGetCoinDataByDateQuery } from "../../lib/marketSlice";
 import { timeInterval, calculatePrice, formatTime } from "./utils";
+
 const CoinCard = ({ storageData, toggleDeleteModal, toggleEditModal }:{ storageData:any, toggleDeleteModal: any, toggleEditModal: any }) => {
   const darkmode = useSelector(selectDarkmode);
   const { data } = useGetOneCoinDataQuery(storageData.coin);

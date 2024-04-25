@@ -6,6 +6,7 @@ import PortfolioList from "../components/coinPortfolioItem/PortfolioList";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "../lib/dynamicValuesSlice";
 import clsx from "clsx";
+
 const Portfolio = () => {
   const darkmode = useSelector(selectDarkmode);
   const [forceUpdate, setForceUpdate] = useState(false);

@@ -1,6 +1,7 @@
 import React from "react";
 import { useGetCoinDataByDateQuery } from "../../lib/marketSlice";
 import { amountInvested, filterPrices } from "./utils";
+
 const SpentAmount = (
   {
     query, 

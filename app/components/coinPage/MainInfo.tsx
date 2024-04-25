@@ -6,6 +6,7 @@ import Image from "next/image";
 import { Triangle, Squares, SmallTriangle } from "./SVGComponents";
 import Link from "next/link";
 import { addCommas, isPositive } from "./utils";
+
 type MarketData = {
   price_change_24h: number, 
   price_change_24h_in_currency: {[key:string]: number}, 

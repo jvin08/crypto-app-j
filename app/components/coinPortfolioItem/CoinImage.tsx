@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
 import { CardContainer, CardBody, CardItem } from "./CoinImageWrapper";
 import { capitalize } from "./utils";
+
 const CoinImage = ({data}:{data:any}) => {
   const darkmode = useSelector(selectDarkmode);
   return (

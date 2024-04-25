@@ -1,5 +1,6 @@
 import { ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+
 export const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 export const timeInterval = (purchaseDate: string) => {
   const date = new Date(purchaseDate).getTime();

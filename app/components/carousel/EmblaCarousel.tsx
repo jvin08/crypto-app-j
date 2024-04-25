@@ -14,6 +14,7 @@ import {  useGetCoinsDataQuery } from "../../lib/marketSlice";
 import { selectDarkmode, selectCompare, selectCoinOneSymbol, selectCoinTwoSymbol, setCoinOneSymbol, setCoinTwoSymbol, selectCurrency } from "@/app/lib/dynamicValuesSlice";
 import { useCallback } from "react";
 import { uid } from "uid";
+
 type PropType = {
   options?: EmblaOptionsType
 }

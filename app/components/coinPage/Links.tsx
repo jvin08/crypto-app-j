@@ -4,6 +4,7 @@ import clsx from "clsx";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
 import { Squares } from "./SVGComponents";
+
 type Coin = {
   links: {blockchain_site:string[]}
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import EmblaCarousel from "./EmblaCarousel";
 import { EmblaOptionsType } from "embla-carousel";
+
 const OPTIONS: EmblaOptionsType = {
   align: "start",
   dragFree: true,

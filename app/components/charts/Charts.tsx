@@ -31,6 +31,7 @@ import { options, barOptions, getChartData, barChartData } from "./options";
 import { Header, VolumeHeader } from "./Header";  
 import { selectDarkmode } from "../../lib/dynamicValuesSlice";
 import clsx from "clsx";
+
 ChartJS.register(
   CategoryScale,
   LinearScale,

@@ -3,6 +3,7 @@ import Logo from "./logo";
 import clsx from "clsx";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
+
 const LogoName = () => {
   const darkmode = useSelector(selectDarkmode);
   return (

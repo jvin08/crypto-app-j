@@ -2,6 +2,7 @@ import React from "react";
 import clsx from "clsx";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
+
 const StatusBar = ({name, width}:{name: string, width: string}) => {
   const darkmode = useSelector(selectDarkmode);
   const statusWidth = Number(width) * 100 < 20 ? "0.5rem" : Number(width) * 100 >= 100 ? "4.7rem" : Number(width) * 100 + "%";

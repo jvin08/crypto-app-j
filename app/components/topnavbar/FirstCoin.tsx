@@ -2,6 +2,7 @@ import React from "react";
 import StatusBar from "./StatusBar";
 import Image from "next/image";
 import Loading from "./Loading";
+
 const FirstCoin = ({ quantity, isLoading }: {quantity: number, isLoading: boolean}) => {
   const btcIMG = "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1696501400";
   return (

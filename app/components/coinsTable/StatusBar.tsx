@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { selectCurrency } from "../../lib/dynamicValuesSlice";
+
 export const colors = ["#FFA500", "#6374C3", "#00B1A7", "#FFA500", "#FFD700", "#6374C3", "#00B1A7", "#FF6347", "#FF0000", "#FFD700"];
 const StatusBar = ({ unitOne, unitTwo, index }: {unitOne: number, unitTwo: number, index: number}) => {
   const sign = useSelector(selectCurrency).sign;

@@ -24,6 +24,7 @@ import {
 import { options, getChartData } from "./options"; 
 import clsx from "clsx";
 import { capitalize } from "../charts/utils";
+
 ChartJS.register(
   CategoryScale,
   LinearScale,

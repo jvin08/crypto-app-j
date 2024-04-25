@@ -3,6 +3,7 @@ import clsx from "clsx";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
 import SearchResults from "./SearchResults";
+
 const Search = ({handleCoin}:{handleCoin:any}) => {
   const [showSearch, setShowSearch] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");

@@ -1,6 +1,7 @@
 import React from "react";
 import { HeaderBackUp } from "./Header";
 import { capitalize } from "./utils";
+
 export const Loader = () => <div className="loader"/>;
 export const SmallLoader = () => <div className="loader small"/>;
 export const ChartsLoader = ({dataOne, dataTwo, compare} : {dataOne: string, dataTwo: string, compare: boolean}) => {

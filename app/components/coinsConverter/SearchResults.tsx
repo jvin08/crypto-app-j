@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useGetSearchCoinsDataQuery, useGetTenCoinsPricesQuery } from "@/app/lib/marketSlice";
 import { selectDarkmode, setCoinOneSymbol, setCoinTwoSymbol, selectCurrency } from "@/app/lib/dynamicValuesSlice";
 import clsx from "clsx";
+
 type Coin = {
   name: string;
   id: string;
