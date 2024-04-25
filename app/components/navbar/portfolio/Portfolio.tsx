@@ -5,6 +5,7 @@ import clsx from "clsx";
 import { useSelector, useDispatch } from "react-redux";
 import { selectDarkmode, setNotification, setShowNotification } from "@/app/lib/dynamicValuesSlice";
 import { usePathname } from "next/navigation";
+
 const Portfolio = () => {
   const darkmode = useSelector(selectDarkmode);
   const pathname = usePathname();

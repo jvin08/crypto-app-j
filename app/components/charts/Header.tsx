@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { selectDarkmode, selectCurrency } from "../../lib/dynamicValuesSlice";
 import clsx from "clsx";
+
 export const Header = ({dataOne, price, compare, priceDate } : {dataOne: string, price: number, compare: boolean, priceDate: string}) => {
   const darkmode = useSelector(selectDarkmode);
   const currency = useSelector(selectCurrency);

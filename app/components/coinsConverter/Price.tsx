@@ -1,5 +1,6 @@
 import React from "react";
 import clsx from "clsx";
+
 const Price = ({price, currency, darkMode, coin}:{price:number, currency: any, darkMode: boolean, coin: string[]}) => {
   return (
     <>

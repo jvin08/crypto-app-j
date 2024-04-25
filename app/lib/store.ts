@@ -1,6 +1,7 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { marketApi } from "./marketSlice";
 import  dynamicValuesReducer  from "./dynamicValuesSlice";
+
 const rootReducer = combineReducers({
   [marketApi.reducerPath]: marketApi.reducer,
   dynamicValues: dynamicValuesReducer,

@@ -2,6 +2,7 @@ import React, { MouseEventHandler } from "react";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
 import clsx from "clsx";
+
 type Props = {
     name: String,
     handleClick: MouseEventHandler,

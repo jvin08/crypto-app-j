@@ -7,6 +7,7 @@ import { setupStore } from "./lib/store";
 import { Provider } from "react-redux";
 import { TopNavbar } from "./components/topnavbar/TopNavbar";
 import clsx from "clsx";
+
 const inter = Inter({ subsets: ["latin"] });
 const store = setupStore();
 export default function RootLayout({
@@ -29,7 +30,9 @@ export default function RootLayout({
         })}> 
           <TopNavbar />
           <Navbar handleDarkMode={handleDarkmode} />
-          {children}
+          <div className="w-[1296px] mx-auto">
+            {children}
+          </div>
         </body>
       </Provider>
     </html>

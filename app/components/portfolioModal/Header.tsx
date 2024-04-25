@@ -5,6 +5,7 @@ import CustomButton from "./CustomButton";
 import clsx from "clsx";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
+
 const Header = ({handleCoinAdded}:{handleCoinAdded: ()=>void}) => {
   const [showCoinSelect, setShowCoinSelect] = useState(false);
   const [showCalculator, setShowCalculator] = useState(false);

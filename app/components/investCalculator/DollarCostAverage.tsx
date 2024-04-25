@@ -6,6 +6,7 @@ import clsx from "clsx";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
 import  { DateToolTip, ToolTip } from "./ToolTip";
+
 const DollarCostAverage = ({coin}:{coin: string}) => {
   const darkmode = useSelector(selectDarkmode);
   const [visibleInterval, setVisibleInterval] = useState(false);

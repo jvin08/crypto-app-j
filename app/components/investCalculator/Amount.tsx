@@ -2,6 +2,7 @@ import React, {useRef, useState, useEffect } from "react";
 import clsx from "clsx";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
+
 const Amount = ({visible, toggleVisible, getAmount, placeholder}:{visible: boolean, toggleVisible: ()=>void, getAmount:any, placeholder: string}) => {
   const darkmode = useSelector(selectDarkmode);
   const inputRef = useRef<HTMLInputElement>(null);

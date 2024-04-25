@@ -1,5 +1,6 @@
 import React from "react";
 import clsx from "clsx";
+
 const ReverseButton = ({flipCoins, darkMode}: {flipCoins: ()=>void, darkMode: boolean}) => {
   return (
     <div 

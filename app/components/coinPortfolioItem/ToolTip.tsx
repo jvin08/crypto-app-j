@@ -10,6 +10,7 @@ import {
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
 import { TooltipArrow } from "@radix-ui/react-tooltip";
+
 export const ToolTipCoinCard = ({name, eventHandler}:{name: string, eventHandler: any}) => {
   const darkmode = useSelector(selectDarkmode);
   const textColor = darkmode ? "white" : "black";

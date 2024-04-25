@@ -6,6 +6,7 @@ import { ToolTip, DateToolTip } from "./ToolTip";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
 import clsx from "clsx";
+
 const ValueCostAverage = ({coin}:{coin: string}) => {
   const darkmode = useSelector(selectDarkmode);
   //value cost averaging

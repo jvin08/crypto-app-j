@@ -10,6 +10,7 @@ import Head from "next/head";
 import clsx from "clsx";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "./lib/dynamicValuesSlice";
+
 const Home = () => {
   const darkmode = useSelector(selectDarkmode);
   return (

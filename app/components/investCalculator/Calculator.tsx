@@ -8,6 +8,7 @@ import DollarCostAverage from "./DollarCostAverage";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
 import { BackgroundGradient } from "../coinPortfolioItem/BackgroundGradient";
+
 const Calculator = ({toggleCalculator}:{toggleCalculator:()=>void}) => {
   const darkmode = useSelector(selectDarkmode);
   const [coinImage, setCoinImage] = useState(BitcoinImg);

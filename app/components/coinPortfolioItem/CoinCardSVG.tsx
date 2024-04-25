@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
+
 export const EditInfoSVG = () => {
   const darkmode = useSelector(selectDarkmode);
   const buttonColor = darkmode ? "#3A3978" : "#7878FA";

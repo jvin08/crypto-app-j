@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCurrency, selectCurrency, selectDarkmode } from "@/app/lib/dynamicValuesSlice";
 import { useClickOutside } from "../../portfolioModal/hooks";
 import clsx from "clsx";
+
 const currencies = [
   {
     id:1, 

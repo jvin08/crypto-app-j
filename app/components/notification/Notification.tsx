@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Check, Triangle } from "./CheckSVG";
 import clsx from "clsx";
 import { selectDarkmode, selectNotification, selectShowNotification, setShowNotification, selectError } from "@/app/lib/dynamicValuesSlice";
+
 const Notification = () => {
   const dispatch = useDispatch();
   const notification = useSelector(selectNotification);

@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";  
 import { useLocalStorage } from "../portfolioModal/hooks";
 import { BackgroundGradient } from "../coinPortfolioItem/BackgroundGradient";
+
 const DeleteModal = ({toggleDeleteModal, gain, handleCoinAdded}:{toggleDeleteModal: any, gain: string[], handleCoinAdded: ()=>void}) => {
   const [storedValue, setValue] = useLocalStorage();
   const deleteCoinFromLocalStorage = (id: string) => {

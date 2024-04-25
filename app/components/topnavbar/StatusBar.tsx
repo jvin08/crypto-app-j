@@ -1,4 +1,5 @@
 import React from "react";
+
 const StatusBar = ({ quantity }: {quantity: number}) => {
   const statusSize = Math.round( 0.53 * quantity) + "px";
   return (

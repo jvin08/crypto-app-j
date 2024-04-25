@@ -3,6 +3,7 @@ import CustomButton from "./CustomButton";
 import clsx from "clsx";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "../../lib/dynamicValuesSlice";
+
 const ChartBox = ({Charts}: {Charts: any}) => {
   const darkmode = useSelector(selectDarkmode);
   const [days, setDays ] = useState(1);

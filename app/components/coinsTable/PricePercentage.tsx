@@ -1,5 +1,6 @@
 import React from "react";
 import clsx from "clsx";
+
 const PricePercentage = ({price} : {price: number}) => {
   const isPositive = (number:number) => {
     return number > 0 ? true : false;

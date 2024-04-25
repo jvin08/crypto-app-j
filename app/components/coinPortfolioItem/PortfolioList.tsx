@@ -7,6 +7,7 @@ import clsx from "clsx";
 import Link from "next/link";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
+
 type Coin = {
   id: string,
   coin: string,

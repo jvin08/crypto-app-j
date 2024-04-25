@@ -19,6 +19,7 @@
     "@wojtekmaj/react-datetimerange-picker": "^5.5.0",
     "chart.js": "^4.4.1",
     "class-variance-authority": "^0.7.0",
+    "cloc": "^2.0.0-cloc",
     "clsx": "^2.1.0",
     "embla-carousel": "^8.0.0-rc21",
     "embla-carousel-autoplay": "^8.0.0-rc22",

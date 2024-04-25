@@ -9,6 +9,7 @@ import Theme from "./themeBtn/Theme";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
 import clsx from "clsx";
+
 const Navbar = ({handleDarkMode}:{handleDarkMode: any}) => {
   const darkmode = useSelector(selectDarkmode);    
   return (

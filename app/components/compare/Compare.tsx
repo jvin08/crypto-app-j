@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectDarkmode, setCompare, selectCompare, setCoinOneSymbol, setCoinTwoSymbol } from "@/app/lib/dynamicValuesSlice";
 import clsx from "clsx";
+
 const Compare = () => {
   const dispatch = useDispatch();
   const shouldCompare = useSelector(selectCompare);

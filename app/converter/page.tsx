@@ -8,6 +8,7 @@ import ChartBox from "../components/charts/ChartBox";
 import Chart from "../components/coinsConverter/Chart";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "../lib/dynamicValuesSlice";
+
 const Time = dynamic(() => import("../components/coinsConverter/Time"), { ssr: false });
 const Converter = () => {
   const darkmode = useSelector(selectDarkmode);

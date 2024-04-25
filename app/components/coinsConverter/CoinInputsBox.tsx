@@ -5,6 +5,7 @@ import clsx from "clsx";
 import { useSelector, useDispatch } from "react-redux";
 import { useGetOneCoinDataQuery } from "@/app/lib/marketSlice";
 import { selectCurrency, selectDarkmode, selectCoinOneSymbol, selectCoinTwoSymbol, setCoinOneSymbol, setCoinTwoSymbol } from "@/app/lib/dynamicValuesSlice";
+
 const CoinInputsBox = () => {
   const darkmode = useSelector(selectDarkmode);
   const currency = useSelector(selectCurrency);

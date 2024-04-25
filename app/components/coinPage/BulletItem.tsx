@@ -1,5 +1,6 @@
 import React from "react";
 import { Bullet } from "./SVGComponents";
+
 const BulletItem = ({name, content}:{name:string, content:string}) => {
   return (
     <div className="flex items-center justify-between mb-7">

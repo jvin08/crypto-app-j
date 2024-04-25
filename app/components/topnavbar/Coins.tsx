@@ -1,4 +1,5 @@
 import React from "react";
+
 const Coins = ({ quantity }: {quantity: number}) => {
   return (
     <div className="flex items-center">
