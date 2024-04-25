@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import clsx from "clsx";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
@@ -16,7 +16,7 @@ const Search = () => {
   const toggleHidden = () => {
     setHidden(!hidden);
   };
-  const handleCoin = (coinId: string, coinSymbol: string) => setCoin([coinId, coinSymbol]);
+  const handleCoin = useCallback((coinId: string, coinSymbol: string) => setCoin([coinId, coinSymbol]),[selectedOptionIndex]);
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if(e.key === "Escape") {
       clearSearch();
