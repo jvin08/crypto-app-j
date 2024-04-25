@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { ChartsLoader } from "./Loader";
 import {
@@ -51,11 +51,11 @@ const Chart = ({range}:{range: number}) => {
   const myData = data?.prices;
   const myDataTwo = dataTwo?.prices;
   const dispatch = useDispatch();
-  const handleNotification = (message: string) => {
+  const handleNotification = useCallback((message: string) => {
     dispatch(setError(true));
     dispatch(setNotification(message));
     dispatch(setShowNotification(""));
-  };
+  },[dispatch]);
   useEffect(() => {
     if(error){
       handleNotification("Error fetching data");
