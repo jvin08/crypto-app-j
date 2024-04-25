@@ -6,22 +6,18 @@ import Image from "next/image";
 import { Triangle, Squares, SmallTriangle } from "./SVGComponents";
 import Link from "next/link";
 import { addCommas, isPositive } from "./utils";
-
-type Price = {
-  [key: string]: number
+type MarketData = {
+  price_change_24h: number, 
+  price_change_24h_in_currency: {[key:string]: number}, 
+  current_price: {[key:string]: number},
 };
-
 type Coin = {
   image: {large: string},
   name: string,
   symbol: string,
-  links: {homepage: string[]},
-  market_data:{
-    price_change_24h: number, 
-    price_change_24h_in_currency?: Price, 
-    current_price?: Price,
-  }
-}
+  links: {homepage: string[]}
+  market_data:MarketData
+};
 const MainInfo = ({
   data, 
   currencySign, 
@@ -40,7 +36,7 @@ const MainInfo = ({
   currencyLabel:string
 }) => {
   const darkmode = useSelector(selectDarkmode);
-  const fontSize = data && data?.name.length > 20 ? "text-lg" : "text-2xl";
+  const fontSize = data?.name.length > 20 ? "text-lg" : "text-2xl";
   const priceChange = data?.market_data?.price_change_24h;
   const priceChangeDay = data?.market_data?.price_change_24h_in_currency?.[currencyLabel];
   const maxHistoricalPrice = maxPriceRange?.prices?.reduce((maxValue:number[], currArray:number[]) => {
@@ -53,7 +49,6 @@ const MainInfo = ({
     const [, minPrice] = minValue;
     return currPrice < minPrice ? [time, currPrice] : minValue;
   },[0,Infinity]);
-  const priceOption = isStorageInfo ? (priceChange || 0) : (priceChangeDay || 0);
   return (
     <div className={clsx("w-[564px] h-[461px] px-8 pt-10 pb-[57px] mr-8 rounded-xl",{
       "bg-cryptodark-300": darkmode,
@@ -87,11 +82,11 @@ const MainInfo = ({
         </div>
         <div className="">
           <div className="flex items-center mt-3">
-            <h1 className="text-4xl font-semibold mr-5">{currencySign} {addCommas(data?.market_data?.current_price?.[currencyLabel] || 0)}</h1>
+            <h1 className="text-4xl font-semibold mr-5">{currencySign} {addCommas(data?.market_data?.current_price?.[currencyLabel])}</h1>
             <p className="text-xl ml-0.5 mr-1">(24h)</p>
-            <SmallTriangle percentage={priceOption} />
+            <SmallTriangle percentage={isStorageInfo ? priceChange : priceChangeDay} />
             <p className="text-xl mr-0.5" 
-              style={{color: isPositive(priceOption) ? "#00B1A7" : "#FE2264"}}>
+              style={{color: isPositive(isStorageInfo ? priceChange : priceChangeDay) ? "#00B1A7" : "#FE2264"}}>
               {currencySign} {isStorageInfo 
                 ? Math.abs(Number(priceChange?.toFixed(4)))
                 : Math.abs(Number(priceChangeDay?.toFixed(4)))}
