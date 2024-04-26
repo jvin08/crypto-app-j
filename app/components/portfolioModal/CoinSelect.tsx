@@ -32,7 +32,7 @@ const CoinSelect = ({toggleCoinSelect, onCoinAdded, id}: {toggleCoinSelect: any,
   const [amount, setAmount] = useState(initialAmount);
   const initInput = {
     time: id ? editedCoin.purchaseTime.slice(11) : "",
-    date: id ? editedCoin.purchaseDate.slice(11) : "",
+    date: id ? editedCoin.purchaseTime.slice(0,10) : "",
   };
   const [input, setInput] = useState(initInput);
   const activeSaveBtn = amount !== "" && input.date !== "" && input.time !== "" && selectedCoin[0] !== "";
