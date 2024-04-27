@@ -26,7 +26,6 @@ const CoinCard = ({ storageData, toggleDeleteModal, toggleEditModal }:{ storageD
     circSupVsMaxSup: Number(data?.market_data.circulating_supply) / Number(data?.market_data.total_supply),
     amountValue: (data?.market_data.current_price.usd * storageData.amount).toFixed(2) + "",
   };
-  const coinData = [gainOrLoss, storageData.coin, storageData.id];
   return (
     <div  className={clsx("",{
       "bg-cryptoblue-200": !darkmode,
@@ -45,7 +44,7 @@ const CoinCard = ({ storageData, toggleDeleteModal, toggleEditModal }:{ storageD
             <div className="flex justify-between mb-0 mt-[10px] rounded-[22px]">
               <h2 className="text-xl m-0 p-0">Market Price</h2>
               <div className="-mr-4 -mb-4">
-                <ToolTipCoinCard name="Sell your coin" eventHandler={(e: any)=>toggleDeleteModal(e,coinData)}/>
+                <ToolTipCoinCard name="Delete coin" eventHandler={(e: any)=>toggleDeleteModal(e, storageData.id)}/>
               </div>
             </div>
             <div className="flex justify-between pb-4 mt-5">
