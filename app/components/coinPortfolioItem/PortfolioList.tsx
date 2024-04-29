@@ -21,16 +21,15 @@ const PortfolioList = ({forceUpdate, handleCoinAdded}:{forceUpdate:boolean, hand
   const [coinData, setCoinData] = useState([]);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showCoinEdit, setShowCoinEdit] = useState(false);
-  const [coinProfit, setCoinProfit] = useState(["","",""]);
   const [coinId, setCoinId] = useState("");
   const toggleCoinEdit = (e: MouseEvent, id: string) => {
     e && e.preventDefault();
     setCoinId(id);
     setShowCoinEdit((prev) => !prev);
   };
-  const toggleDeleteModal = (e: MouseEvent, profitData: string[]) => {
+  const toggleDeleteModal = (e: MouseEvent, id: string) => {
     e && e.preventDefault();
-    profitData && setCoinProfit([profitData[0], profitData[1], profitData[2]]);
+    setCoinId(id);
     setShowDeleteModal((prev) => !prev);
   };
   useEffect(() => {
@@ -49,12 +48,16 @@ const PortfolioList = ({forceUpdate, handleCoinAdded}:{forceUpdate:boolean, hand
           toggleCoinSelect={toggleCoinEdit} 
           onCoinAdded={handleCoinAdded} 
           id={coinId} />}
+        {showDeleteModal && <DeleteModal
+          toggleDeleteModal={toggleDeleteModal} 
+          id={coinId} 
+          handleCoinAdded={handleCoinAdded} />
+        }
         <div>
           {
             coinData.map((coin:Coin) => {
               return (
                 <div key={coin.id} className="mb-6">
-                  {showDeleteModal && <DeleteModal toggleDeleteModal={toggleDeleteModal} gain={coinProfit} handleCoinAdded={handleCoinAdded} />}
                   <Link href={`/coin/${coin.coin}-${coin.id}`}>
                     <CoinCard storageData={coin} toggleDeleteModal={toggleDeleteModal} toggleEditModal={toggleCoinEdit}/>
                   </Link>
@@ -65,7 +68,7 @@ const PortfolioList = ({forceUpdate, handleCoinAdded}:{forceUpdate:boolean, hand
         </div>
       </div> :
       (<div className="w-full flex">
-        <p className="m-auto">You portfolio is currently empty</p>
+        <p className="m-auto">Your portfolio is currently empty</p>
       </div>)
     }</>
   );
