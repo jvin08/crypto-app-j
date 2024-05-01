@@ -43,13 +43,15 @@ const DeleteModal = ({toggleDeleteModal, id, handleCoinAdded}:{toggleDeleteModal
               active={true}
               width="w-[10rem]"
               padding="px-auto py-3"
+              disabled={false}
             />
             <CustomButton
               name="Delete"
               handleClick={()=>deleteCoinFromLocalStorage(id)}
               active={true}
               width="w-[10rem]"
-              padding="px-auto py-3" 
+              padding="px-auto py-3"
+              disabled={false} 
             />
           </div>
         </div>
