@@ -17,10 +17,12 @@ const config: Config = {
         'cryptoblue': {
             100: '#FFFFFF',
             200: '#EBEBFD',
+            250: '#B0B0EB',
             300: '#FFFFFF',
             350: '#F3F5F9',
             400: '#E6E8EC',
             450: '#E4E5F9',
+            460: '#343046',
             500: '#9B9AB6',
             600: '#A5A4DA',
             650: '#01F1E3',

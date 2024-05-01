@@ -37,8 +37,8 @@ const Search = ({handleCoin}:{handleCoin:any}) => {
         {searchTerm==="" ? <p>Select Coin</p> : <p>{searchTerm}</p>}
         <svg 
           className="cursor-pointer" 
-          width="16" 
-          height="16" 
+          width="24" 
+          height="24" 
           viewBox="0 0 16 16" 
           fill="none" 
           xmlns="http://www.w3.org/2000/svg"
