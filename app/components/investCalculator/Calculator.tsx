@@ -25,7 +25,7 @@ const Calculator = ({toggleCalculator}:{toggleCalculator:()=>void}) => {
   };
   const VSACursor = showDCACalculator ? "cursor-pointer" : "cursor-not-allowed";
   const DCACursor = !showDCACalculator ? "cursor-pointer" : "cursor-not-allowed";
-  const formatSelectedCoin = selectedCoin[0].length > 20 ? capitalize(`${selectedCoin[0].slice(0, 20)}...`) : capitalize(selectedCoin[0]);
+  const formatSelectedCoinName = selectedCoin[0].length > 20 ? capitalize(`${selectedCoin[0].slice(0, 20)}...`) : capitalize(selectedCoin[0]);
   return (
     <div className="fixed top-0 left-0 z-10 flex bg-cryptodark-900 bg-opacity-65 backdrop-blur-[1px] w-full h-full overflow-auto">
       <div className="absolute left-[calc(50%-443px)] top-1 p-[1px] rounded-[2.1rem]">
@@ -62,7 +62,7 @@ const Calculator = ({toggleCalculator}:{toggleCalculator:()=>void}) => {
                   <Image src={coinImage} alt="coin" width={20} height={20}/>
                 </div>
               </div>
-              <p className="text-center text-base font-bold">{selectedCoin[0]?formatSelectedCoin:"Your Crypto"} ({selectedCoin[0]?selectedCoin[1]:"ABC"})</p>
+              <p className="text-center text-base font-bold">{selectedCoin[0]?formatSelectedCoinName:"Your Crypto"} ({selectedCoin[0]?selectedCoin[1]:"ABC"})</p>
             </div>
             <div className="w-[488px] text-xs flex flex-col justify-between"> 
               <Search handleCoin={handleCoin} />
