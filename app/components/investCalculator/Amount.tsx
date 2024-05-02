@@ -3,7 +3,7 @@ import clsx from "clsx";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
 
-const Amount = ({visible, toggleVisible, getAmount, placeholder}:{visible: boolean, toggleVisible: ()=>void, getAmount:any, placeholder: string}) => {
+const Amount = ({visible, onToggle, getAmount, name, placeholder}:{visible: boolean, onToggle: ()=>void, getAmount:any, name: string, placeholder: string}) => {
   const darkmode = useSelector(selectDarkmode);
   const inputRef = useRef<HTMLInputElement>(null);
   const [amount, setAmount] = useState("");
@@ -14,10 +14,10 @@ const Amount = ({visible, toggleVisible, getAmount, placeholder}:{visible: boole
     }
   };
   const handleBlur = () => {
-    toggleVisible();
+    onToggle();
     if(amount){
       setAmount(amount);
-      getAmount(amount);
+      getAmount(name, amount);
     }
   };
   useEffect(() => {
@@ -25,20 +25,20 @@ const Amount = ({visible, toggleVisible, getAmount, placeholder}:{visible: boole
   }, [visible]);
   return (
     <div>
-      {!visible ? <div className={clsx("w-full text-xs flex justify-center py-2 px-2 rounded-sm",{
-        "bg-cryptoblue-200 text-cryptoblue-900": !darkmode,
-        "bg-cryptodark-400 text-cryptodark-510": darkmode,
+      {!visible ? <div className={clsx("w-full h-[52px] text-base flex justify-end pt-[14px] pb-[13px] rounded-sm box-border border-b-[1px] border-cryptoblue-460",{
+        "bg-cryptoblue-350 text-cryptoblue-900": !darkmode,
+        "bg-cryptodark-300 text-cryptodark-510": darkmode,
       })}
       >
         {amount==="" ?  
           <svg 
             className="cursor-pointer" 
-            width="16" 
-            height="16" 
+            width="32" 
+            height="32" 
             viewBox="0 0 16 16" 
             fill="none" 
             xmlns="http://www.w3.org/2000/svg"
-            onClick={toggleVisible}
+            onClick={onToggle}
           >
             <path d="M7.99935 9.66699L11.3327 6.33366L4.66602 6.33366L7.99935 9.66699Z" 
               fill={clsx("",{
@@ -46,7 +46,7 @@ const Amount = ({visible, toggleVisible, getAmount, placeholder}:{visible: boole
                 "#3D3D7E": !darkmode,
               })}
             />
-          </svg> : <p onClick={toggleVisible}>{amount}</p>}
+          </svg> : <p onClick={onToggle}>{amount}</p>}
       </div> :
         <input 
           type="text" 
@@ -56,8 +56,8 @@ const Amount = ({visible, toggleVisible, getAmount, placeholder}:{visible: boole
           onChange={handleChange}
           onBlur={handleBlur}
           required
-          className={clsx("w-full pl-2 h-8 box-border rounded-sm text-[0.65rem] focus:outline-none focus:border-[1px]", {
-            "bg-cryptoblue-200": !darkmode,
+          className={clsx("w-full pr-2 h-[52px] box-border rounded-lg text-base focus:outline-none focus:border-[1px] text-center", {
+            "bg-cryptoblue-100": !darkmode,
             "bg-cryptodark-200 text-cryptodark-510 focus:border-cryptodark-800 focus:outline-none focus:shadow-inner": darkmode,
           })} 
         />

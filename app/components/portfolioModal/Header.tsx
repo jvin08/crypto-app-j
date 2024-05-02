@@ -23,8 +23,8 @@ const Header = ({handleCoinAdded}:{handleCoinAdded: ()=>void}) => {
     })}>
       Your statistics
       <div className="grid grid-cols-2 gap-2">
-        <CustomButton name="Investments Calculator" handleClick={toggleCalculator} active={true} width="w-[244px]" padding="py-2"/>
-        <CustomButton name="Add Asset" handleClick={toggleCoinSelect} active={true} width="w-[244px]" padding="py-2"/>
+        <CustomButton name="Investments Calculator" handleClick={toggleCalculator} active={true} width="w-[244px]" padding="py-2" disabled={false}/>
+        <CustomButton name="Add Asset" handleClick={toggleCoinSelect} active={true} width="w-[244px]" padding="py-2" disabled={false}/>
       </div>
       {showCalculator && <Calculator toggleCalculator={toggleCalculator} />}
       {showCoinSelect && <CoinSelect toggleCoinSelect={toggleCoinSelect} onCoinAdded={handleCoinAdded}  id="" />}

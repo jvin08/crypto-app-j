@@ -25,8 +25,8 @@ const SpentAmount = (
   const spentMoney = amountInvested(initialAmount, coinPrices, growRate);
   return (
     <>
-      <p className="py-2">{spentMoney[0]}</p>
-      <p className="py-2">{spentMoney[1]}</p>
+      <p className="pt-[14px] h-[52px] text-right border-b-[1px] border-cryptodark-160">{spentMoney[0]}</p>
+      <p className="pt-[14px] h-[52px] text-right">{spentMoney[1]}</p>
     </>
   );
 };
