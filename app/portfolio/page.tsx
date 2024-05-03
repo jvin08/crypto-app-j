@@ -15,7 +15,7 @@ const Portfolio = () => {
   };
   return (
     <div className={clsx("w-[1296px] py-9 pt-[56px] mx-auto mt-30", {
-      "bg-cryptoblue-400": !darkmode,
+      "bg-cryptoblue-350": !darkmode,
       "bg-cryptodark-400": darkmode,
     })}>
       <Head>
@@ -25,7 +25,7 @@ const Portfolio = () => {
       </Head>
       <Header handleCoinAdded={handleCoinAdded} />
       <div className={clsx("min-h-[calc(100vh-15rem)] pt-6",{
-        "bg-cryptoblue-400": !darkmode,
+        "bg-cryptoblue-350": !darkmode,
         "bg-cryptodark-400": darkmode,
       })}>
         <PortfolioList forceUpdate={forceUpdate} handleCoinAdded={handleCoinAdded} />
