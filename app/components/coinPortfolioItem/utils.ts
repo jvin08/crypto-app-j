@@ -1,5 +1,6 @@
 import { ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { useState, useEffect } from "react";
 
 export const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 export const timeInterval = (purchaseDate: string) => {
@@ -29,4 +30,15 @@ export function cn(...inputs: ClassValue[]) {
 }
 export const formatTime = (time: string) => {
   return time.slice(5,7) + "." + time.slice(8,10) + "." + time.slice(0,4);
+};
+export const useLocalStorage = (dependency: boolean) => {
+  const [coinData, setCoinData] = useState([]);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedData = localStorage.getItem("coins");
+      const parsedData = storedData ? JSON.parse(storedData) : [];
+      setCoinData(parsedData);
+    }
+  }, [dependency]);
+  return coinData;
 };

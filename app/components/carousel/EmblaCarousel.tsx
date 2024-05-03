@@ -73,9 +73,9 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
   const isCoinOne = (id: string) => id === coinOne[0];
   const isCoinTwo = (id: string) => id === coinTwo[0];
   return (
-    <div className={clsx("mt-6 w-full h-20 bg-cryptoblue-400 rounded",{
+    <div className={clsx("mt-6 w-full h-20 rounded",{
       "bg-cryptodark-400": darkmode,
-      "bg-cryptoblue-400": !darkmode,
+      "bg-cryptoblue-350": !darkmode,
     })}>
       <div className="h-full overflow-hidden rounded" ref={emblaRef}>
         <div className={clsx("h-full flex touch-pan-y rounded", {

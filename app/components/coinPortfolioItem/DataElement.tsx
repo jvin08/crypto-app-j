@@ -3,10 +3,11 @@ import React from "react";
 import clsx from "clsx";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
+import { formatTime } from "./utils";
 
-const DataElement = ({name, value, width}:{name: string, value: string, width: string}) => {
+export const DataElement = ({name, value, width}:{name: string, value: string, width: string}) => {
   const darkmode = useSelector(selectDarkmode);
-  const formattedValue = Math.abs(Number(value));
+  const colorRed = Number(value) < 0 && true;
   return (
     <div className={`flex flex-col items-center ${width}`}>
       {name.includes("Gain") ?
@@ -16,10 +17,22 @@ const DataElement = ({name, value, width}:{name: string, value: string, width: s
         <p className="text-[11px] mb-1">{name}</p>}
       <p className={clsx("text-xs",{
         "text-cryptoblue-650": darkmode,
-        "text-cryptoblue-660": Number(value) > 0 && !darkmode,
-        "text-cryptoblue-750": Number(value) < 0,
+        "text-cryptoblue-660": !darkmode,
+        "text-cryptoblue-750": colorRed,
+      })}>{value}</p>
+    </div>
+  );
+};
+export const PurchaseDate = ({name, value, width}:{name: string, value: string, width: string}) => {
+  const darkmode = useSelector(selectDarkmode);
+  const formattedValue = formatTime(value);
+  return (
+    <div className={`flex flex-col items-center ${width}`}>
+      <p className="text-[11px] mb-1 ml-auto">{name}</p>
+      <p className={clsx("text-xs ml-auto mr-2",{
+        "text-cryptoblue-650": darkmode,
+        "text-cryptoblue-660":  !darkmode,
       })}>{formattedValue}</p>
     </div>
   );
 };
-export default DataElement;
