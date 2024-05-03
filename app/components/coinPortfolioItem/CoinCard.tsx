@@ -51,10 +51,10 @@ const CoinCard = ({ storageData, toggleDeleteModal, toggleEditModal }:{ storageD
               </div>
             </div>
             <div className="flex justify-between pb-4 mt-5">
-              <DataElement name="Current price:" value={coin.currentPrice} width="w-1/12" />
-              <DataElement name="Price cgange 24h:" value={coin.priceChange} width="w-1/3 ml-auto" />
+              <DataElement name="Current price:" value={coin.currentPrice} customStyles="w-1/12" />
+              <DataElement name="Price cgange 24h:" value={coin.priceChange} customStyles="w-1/3 ml-auto" />
               <StatusBar name="Market Cap vs Volume:" width={coin.marketCapVol} />
-              <DataElement name="Circ supply vs max supply:" value={coin.circSupVsMaxSup.toFixed(2)}  width="w-[15%]"/>
+              <DataElement name="Circ supply vs max supply:" value={coin.circSupVsMaxSup.toFixed(2)}  customStyles="w-[15%]"/>
             </div>
           </div>
           <div>
@@ -65,10 +65,10 @@ const CoinCard = ({ storageData, toggleDeleteModal, toggleEditModal }:{ storageD
               </div>
             </div>
             <div className="flex justify-between">
-              <DataElement name="Coin amount:" value={storageData.amount} width="w-1/12" />
-              <DataElement name="Amount value:" value={coin.amountValue} width="w-1/3 ml-auto" />
-              <DataElement name="Gain / Loss:" value={gainOrLoss}  width="w-1/3"/>
-              <PurchaseDate name="Purchase date:" value={storageData.purchaseTime}  width="w-[15%]" />
+              <DataElement name="Coin amount:" value={storageData.amount} customStyles="w-1/12" />
+              <DataElement name="Amount value:" value={coin.amountValue} customStyles="w-1/3 ml-auto" />
+              <DataElement name="Gain / Loss:" value={gainOrLoss}  customStyles="w-1/3"/>
+              <PurchaseDate name="Purchase date:" value={storageData.purchaseTime}  customStyles="w-[15%]" />
             </div>
           </div>
         </div>
