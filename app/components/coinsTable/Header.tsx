@@ -14,7 +14,6 @@ const Header = ({handleSort}:HeaderProps) => {
     { name: "twentyFourHour", text: "24h%", style: "w-16 text-center mr-2 cursor-pointer"},
     { name: "sevenDay", text: "7d%", style: "w-16 text-center mr-10 cursor-pointer"}
   ];
-  //&#9650; arrow up
   const opacity = "opacity-0 hover:opacity-100";
   const pointer = "cursor-pointer";
   return (
