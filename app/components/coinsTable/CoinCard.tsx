@@ -6,8 +6,9 @@ import { clsx } from "clsx";
 import Image from "next/image";
 import StatusBar from "./StatusBar";
 import Chart from "./Chart";
+import { Coin } from "@/app/types/types";
 
-const CoinCard = ({coin, index}: {coin: any, index: number}) => {
+const CoinCard = ({coin, index}: {coin: Coin, index: number}) => {
   const darkmode = useSelector(selectDarkmode);
   const currency = useSelector(selectCurrency);
   return (
@@ -17,7 +18,7 @@ const CoinCard = ({coin, index}: {coin: any, index: number}) => {
         "text-cryptodark-400 bg-cryptoblue-100": !darkmode,
       })}>
         <div className="w-1/2 flex items-center">
-          <p className="mr-5">{index + 1}</p>
+          <p className="mr-5">{index}</p>
           <div className="relative w-8 h-8">
             <Image src={coin.image} alt={coin.name} fill sizes="32px, 32px" />
           </div>
