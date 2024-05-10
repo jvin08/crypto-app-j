@@ -64,7 +64,7 @@ const CoinsTable = () => {
         hasMore={true}
         loader={<h4>Loading...</h4>}
       >
-        {coins?.map((coin: Coin) => (                           //replace data with coins
+        {coins.map((coin: Coin) => (                           //replace data with coins
           <Link  key={coin.id} href={`/coin/${coin.id}market`}>
             <CoinCard coin={coin} index={coin.market_cap_rank} />
           </Link>
