@@ -68,7 +68,7 @@ const Dropdown = () => {
             strokeOpacity={1} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
       </div>
-      <ul ref={dropDownRef} className={clsx(`absolute left-0 top-0 rounded-md p-1 ${hidden} w-[108px]`, {
+      <ul ref={dropDownRef} className={clsx(`absolute left-0 z-50 top-0 rounded-md p-1 ${hidden} w-[108px]`, {
         "bg-cryptodark-200 border-[1px] border-cryptodark-170": darkmode,
         "bg-cryptoblue-200": !darkmode,
       })}>
