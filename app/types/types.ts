@@ -46,11 +46,6 @@ export type ParagraphProp = {
   text: string,
   style: string
 };
-// export type Query = {
-//   rank: string,
-//   volume: string,
-//   symbol: string
-// };
 export interface ColumnNameProps {
   props: ParagraphProp;
   sort: string;
