@@ -16,7 +16,7 @@ const LoadingSearch = ({closeLoader}:{closeLoader: any}) => {
     })} ref={ref}>
       <div 
         className={clsx("flex items-center h-12 pl-3 py-1 rounded-b-md",{
-          "bg-gradient-to-r from-cryptodark-200 to-dark-140": darkmode,
+          "bg-gradient-to-r from-cryptodark-200 to-cryptodark-350": darkmode,
         })}
       >
         <p className="ml-4 mr-2 text-sm text-cryptoblue-500 blinking-text">🌀 Loading...</p>

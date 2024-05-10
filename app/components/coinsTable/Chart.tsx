@@ -92,7 +92,7 @@ const Chart = ({data, index}:{data: number[], index: number}) => {
   };
   return (
     <div className="ml-8">
-      {isLoaded ? <Line options={options} data={chartData} width={100} height={60} /> : <div className="loading"></div>}
+      {isLoaded ? <Line options={options} data={chartData} width={100} height={60} /> : <div className="w-[100px]">n/a</div>}
     </div>
   );
 };

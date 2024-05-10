@@ -18,11 +18,12 @@ export type Coin = {
     price: number[]
   },
   name: string,
+  [key: string]: any
 }
-export type SortType = "rank" | "symbol" | "price" | "oneHour" | "twentyFourHour" | "sevenDay" | "volume" | "circulatingSupply";
-export const sortNames: Record<SortType, string> = {
-  rank: "market_cap_rank",
-  symbol: "symbol",
+export type SortType = "market_cap" | "id" | "price" | "oneHour" | "twentyFourHour" | "sevenDay" | "volume" | "circulatingSupply";
+export const sortNames = {
+  marketCap: "market_cap_rank",
+  id: "id",
   price: "current_price",
   oneHour: "price_change_percentage_1h_in_currency",
   twentyFourHour: "price_change_percentage_24h_in_currency",
@@ -32,9 +33,28 @@ export const sortNames: Record<SortType, string> = {
 };
 export type HeaderProps = {
   handleSort: React.MouseEventHandler<HTMLDivElement>;
+  sort: string,
+  order: string
 };
 export type ParagraphProps = {
-  name: SortType,
+  name: string,
   text: string,
   style: string
 }[];
+export type ParagraphProp = {
+  name: string,
+  text: string,
+  style: string
+};
+// export type Query = {
+//   rank: string,
+//   volume: string,
+//   symbol: string
+// };
+export interface ColumnNameProps {
+  props: ParagraphProp;
+  sort: string;
+  order: string;
+  visible: string;
+  opacity: string;
+}
