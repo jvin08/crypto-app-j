@@ -10,7 +10,8 @@ const SpentAmount = (
     initialAmount,
     days,
     startTime,
-    endTime
+    endTime,
+    getChartData
   }:{
     query:string, 
     growRate:number, 
@@ -19,10 +20,13 @@ const SpentAmount = (
     days: number | undefined
     startTime: string,
     endTime: string
+    getChartData: Function
   }) => {
   const { data } = useGetCoinDataByDateQuery(query);
   const coinPrices = filterPrices(data, days, interval, startTime, endTime);
   const spentMoney = amountInvested(initialAmount, coinPrices, growRate);
+  const chartData = spentMoney[2] as number[][];
+  getChartData(chartData);
   return (
     <>
       <p className="pt-[14px] h-[52px] text-right border-b-[1px] border-cryptodark-160">{spentMoney[0]}</p>

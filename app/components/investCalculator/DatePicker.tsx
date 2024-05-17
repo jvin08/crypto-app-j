@@ -7,7 +7,7 @@ import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
 const DatePicker = ({name, value, info, dateHandler}:{name: string, value: string, info: string, dateHandler: any}) => {
   const darkmode = useSelector(selectDarkmode);
   return (
-    <div className={clsx("flex items-center w-[245px] h-9 pl-3 pr-1 pt-[2px] mr-4 rounded-lg cursor-pointer",{
+    <div className={clsx("flex items-center w-[245px] h-9 pl-3 pr-1 mr-4 rounded-lg cursor-pointer",{
       "bg-cryptodark-350": darkmode,
       "bg-cryptoblue-350": !darkmode
     })}>

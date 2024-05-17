@@ -14,7 +14,7 @@ const CoinsTable = () => {
   const [sortQuery, setSortQuery] = useState(queries[0] + order);
   const [page, setPage] = useState(1);
   const [coins, setCoins] = useState<Coin[]>([]);
-  const [sort, setSort] = useState("rank");
+  const [sort, setSort] = useState("market_cap");
   const currency = useSelector(selectCurrency);
   const query = `page=${page}&order=${sortQuery}`;
   const queryCurrency = currency.label.toLowerCase();
@@ -50,7 +50,7 @@ const CoinsTable = () => {
     if(data && page === 1) {
       setCoins(data);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
   const fetchMoreData = () => {
     setPage(page + 1);
