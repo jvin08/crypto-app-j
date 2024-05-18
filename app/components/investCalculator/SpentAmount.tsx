@@ -24,15 +24,15 @@ const SpentAmount = (
   }) => {
   const { data } = useGetCoinDataByDateQuery(query);
   const coinPrices = filterPrices(data, days, interval, startTime, endTime);
-  const spentMoney = amountInvested(initialAmount, coinPrices, growRate);
-  const chartData = spentMoney[2] as number[][];
-  useEffect(()=>{
+  const define = amountInvested(initialAmount, coinPrices, growRate);
+  const chartData = define.investValuePerPeriod as number[][];
+  useEffect(() => {
     getChartData(chartData);
   },[chartData]);
   return (
     <>
-      <p className="pt-[14px] h-[52px] text-right border-b-[1px] border-cryptodark-160">{spentMoney[0]}</p>
-      <p className="pt-[14px] h-[52px] text-right">{spentMoney[1]}</p>
+      <p className="pt-[14px] h-[52px] text-right border-b-[1px] border-cryptodark-160">{define.spentAmount}</p>
+      <p className="pt-[14px] h-[52px] text-right">{define.lastValue}</p>
     </>
   );
 };
