@@ -82,8 +82,12 @@ export const options = {
 };
 export const getChartData = (data: number[][]) => {
   const borderWidth = 1.5;
-  const time = data.map((item:number[])=>formatStandardDate(new Date(item[1])));
-  const prices = data.map((item:number[])=>item[0]);
+  const [prices, time] = data.reduce(
+    (acc, [price,time])=>[
+      [...acc[0],price],
+      [...acc[1],formatStandardDate(new Date(time))]
+      ],
+      [[],[]] as [number[], string[]])
   return {
     labels: time,
     datasets: [
