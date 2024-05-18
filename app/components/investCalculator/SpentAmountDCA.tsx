@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useGetCoinDataByDateQuery } from "../../lib/marketSlice";
 import { filterPrices, amountInvestedDCA } from "./utils";
 
@@ -10,7 +10,8 @@ const SpentAmountDCA = (
     initialAmount,
     days,
     startTime,
-    endTime
+    endTime,
+    getChartData
   }:{
     query:string, 
     growAmount:number, 
@@ -18,15 +19,20 @@ const SpentAmountDCA = (
     initialAmount: number,
     days: number | undefined,
     startTime: string,
-    endTime: string
+    endTime: string,
+    getChartData: Function
   }) => {
   const { data } = useGetCoinDataByDateQuery(query);
   const coinPrices = filterPrices(data, days, interval, startTime, endTime);
-  const spentMoney = amountInvestedDCA(initialAmount, coinPrices, growAmount);
+  const define = amountInvestedDCA(initialAmount, coinPrices, growAmount);
+  const chartData = define.investValuePerPeriod as number[][];
+  useEffect(() => {
+    getChartData(chartData);
+  },[chartData]);
   return (
     <>
-      <p className="pt-[14px] h-[52px] text-right border-b-[1px] border-cryptodark-160">{spentMoney[0]}</p>
-      <p className="pt-[14px] h-[52px] text-right">{spentMoney[1]}</p>
+      <p className="pt-[14px] h-[52px] text-right border-b-[1px] border-cryptodark-160">{define.spentAmount}</p>
+      <p className="pt-[14px] h-[52px] text-right">{define.lastValue}</p>
     </>
   );
 };

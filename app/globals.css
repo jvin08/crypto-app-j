@@ -33,6 +33,7 @@ body {
   }
 } */
 .notification {
+  z-index: 1000;
   opacity: 0;
   transition: opacity 1s ease-in-out;
 }
@@ -131,4 +132,19 @@ body {
 
 .blinking-text {
   animation: blink 1.5s infinite ease-in-out;
+}
+@keyframes opening {
+  0% { width: 0; }
+  95% { width: 80%; }
+  100% { width: 87%; }
+}
+.openingchart {
+  animation: opening 2.5s ease-in;
+}
+@keyframes closing {
+  0% { width: 87%; }
+  100% { width: 0%; }
+}
+.closingchart {
+  animation: closing 2.5s ease-in-out;
 }
