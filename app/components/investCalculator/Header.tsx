@@ -7,7 +7,8 @@ export const Header = ({price, priceDate } : {price: number, priceDate: number})
   const darkmode = useSelector(selectDarkmode);
   const currency = useSelector(selectCurrency);
   const coinLastPrice = currency.sign + Number(price).toFixed(3);
-  const dateNow = new Date(priceDate).toLocaleString("default", { month: "long" }).slice(0,3) + " " + new Date(priceDate).getDate() + ", " + new Date(priceDate).getUTCFullYear();
+  const day = new Date(priceDate);
+  const dateNow = day.toLocaleString("default", { month: "long" }).slice(0,3) + " " + day.getDate() + ", " + day.getUTCFullYear();
   return (
     <div className="absolute left-3 top-5 text-left">
       <p className={clsx("text-2xl font-bold",{
