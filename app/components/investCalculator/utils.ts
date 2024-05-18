@@ -18,7 +18,11 @@ export const amountInvested = (initialAmount:number, coinPrices:number[][], grow
     actualGrowArray.push(newValue);
   }
   const growArrayWithTime = actualGrowArray.map((item, index) => [item, coinPrices?.[index][0]]);
-  return [Math.floor(spentAmount), Math.floor(actualGrowArray.slice(-1)?.[0]), growArrayWithTime];
+  return {
+    spentAmount: Math.floor(spentAmount), 
+    lastValue: Math.floor(actualGrowArray.slice(-1)?.[0]), 
+    investValuePerPeriod: growArrayWithTime
+  };
 };
 export const amountInvestedDCA = (initialAmount:number, coinPrices:number[][], growAmount: number) => {
   let spentAmount = Number(initialAmount);
@@ -30,7 +34,11 @@ export const amountInvestedDCA = (initialAmount:number, coinPrices:number[][], g
     growArray.push(newValue);
   }
   const growArrayWithTime = growArray.map((item, index) => [item, coinPrices?.[index][0]]);
-  return [Math.floor(spentAmount), Math.floor(growArray.slice(-1)[0]), growArrayWithTime];
+  return {
+    spentAmount: Math.floor(spentAmount), 
+    lastValue: Math.floor(growArray.slice(-1)[0]), 
+    investValuePerPeriod: growArrayWithTime
+  };
 };
 export const filterPrices = (
   data: any, 
