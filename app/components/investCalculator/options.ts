@@ -86,8 +86,8 @@ export const getChartData = (data: number[][]) => {
     (acc, [price,time])=>[
       [...acc[0],price],
       [...acc[1],formatStandardDate(new Date(time))]
-      ],
-      [[],[]] as [number[], string[]])
+    ],
+      [[],[]] as [number[], string[]]);
   return {
     labels: time,
     datasets: [
