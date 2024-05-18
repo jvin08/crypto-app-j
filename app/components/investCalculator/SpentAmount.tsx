@@ -28,7 +28,7 @@ const SpentAmount = (
   const chartData = define.investValuePerPeriod as number[][];
   useEffect(() => {
     getChartData(chartData);
-  },[chartData]);
+  },[chartData, getChartData]);
   return (
     <>
       <p className="pt-[14px] h-[52px] text-right border-b-[1px] border-cryptodark-160">{define.spentAmount}</p>
