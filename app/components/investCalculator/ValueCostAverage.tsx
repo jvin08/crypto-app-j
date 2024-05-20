@@ -94,7 +94,7 @@ const ValueCostAverage = ({coin}:{coin: string}) => {
           "bg-cryptoblue-350 text-cryptoblue-660": !darkmode,
         })}>Q-ty</p>
       </div>
-      <div className={`${openChart} overflow-hidden absolute top-30 left-[60px] h-[307.97px] z-[199]`}>
+      <div className={`${openChart} overflow-hidden absolute top-30 left-[70px] h-[307.97px] z-[199]`}>
         <Chart data={dataRef.current} coin={coin} />
       </div>
       <div className={clsx("text-base flex justify-between rounded-xl px-8 py-6 mb-8",{
