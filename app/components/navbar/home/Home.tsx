@@ -4,7 +4,7 @@ import clsx from "clsx";
 import { useSelector, useDispatch } from "react-redux";
 import { selectDarkmode, setNotification, setShowNotification } from "@/app/lib/dynamicValuesSlice";
 import { usePathname } from "next/navigation";
-import Icon, { SmallIcon } from "./Icon";
+import { Icon, SmallIcon } from "./Icon";
 import useWindowWidth from "../../hooks/hooks";
 
 const Home = () => {
