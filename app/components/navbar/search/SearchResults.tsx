@@ -18,12 +18,14 @@ const DropdownSearch = ({
   query, 
   toggleHidden, 
   clearSearch, 
+  toggleMobileSearch,
   index,
   handleCoin
 } : { 
     query: string, 
     toggleHidden: ()=>void, 
     clearSearch: ()=>void, 
+    toggleMobileSearch: ()=>void,
     index: number,
     handleCoin: any
   }) => {
@@ -35,6 +37,7 @@ const DropdownSearch = ({
   const closeDropdownMenu = () => {
     toggleHidden();
     clearSearch();
+    toggleMobileSearch();
   };
   useEffect(() => {
     if(itemRef.current){
@@ -46,7 +49,7 @@ const DropdownSearch = ({
   });
   return (
     coinsForRender?.length === 0 || isLoading ? <LoadingSearch closeLoader={closeDropdownMenu} />
-      : <div className={clsx("box-border text-sm w-72 left-0 top-[47px] absolute z-50 rounded-b-md",{
+      : <div className={clsx("box-border text-sm w-72 left-0 sm:-left-[205px] sm:w-[376px] top-[47px] absolute z-50 rounded-b-md pb-3",{
         "bg-cryptoblue-200 text-cryptoblue-500": !darkmode,
         "bg-gradient-to-r from-cryptodark-200 to-cryptodark-350 text-cryptodark-100 border-cryptodark-170 border-[1px]": darkmode,
       })} ref={dropDownRef}>
