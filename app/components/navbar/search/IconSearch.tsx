@@ -1,7 +1,7 @@
 import React from "react";
 import clsx from "clsx";
 
-const IconSearch = ({darkmode}:{darkmode:boolean}) => {
+export const IconSearch = ({darkmode}:{darkmode:boolean}) => {
   return (
     <svg className={clsx("absolute h-5 w-5 ml-4 mt-3.5 sm:left-[6px] sm:ml-1 sm:-mt-2", {
       "text-cryptoblue-900": !darkmode,
@@ -12,7 +12,6 @@ const IconSearch = ({darkmode}:{darkmode:boolean}) => {
     </svg>
   );
 };
-export default IconSearch;
 export const MobileSearch = ({darkmode}:{darkmode:boolean}) => {
   return (
     <svg  className={clsx("h-9 w-5", {
