@@ -4,7 +4,7 @@ import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
 import SearchResults from "./SearchResults";
 import { useRouter } from "next/navigation";
 import useWindowWidth from "../../hooks/hooks";
-import IconSearch, { MobileSearch } from "./IconSearch";
+import { IconSearch, MobileSearch } from "./IconSearch";
 import path from "path";
 import { MobileInput, DesktopInput } from "./Inputs";
 
