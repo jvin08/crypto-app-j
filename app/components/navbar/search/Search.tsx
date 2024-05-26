@@ -1,14 +1,18 @@
 import React, { useCallback, useState } from "react";
-import clsx from "clsx";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
 import SearchResults from "./SearchResults";
 import { useRouter } from "next/navigation";
+import useWindowWidth from "../../hooks/hooks";
+import { IconSearch, MobileSearch } from "./IconSearch";
 import path from "path";
+import { MobileInput, DesktopInput } from "./Inputs";
 
 const Search = () => {
   const router = useRouter();
+  const windowWidth = useWindowWidth();
   const [hidden, setHidden] = useState(true);
+  const [mobileSearch, setMobileSearch] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedOptionIndex, setSelectedOptionIndex] = useState<number>(0);
   const [coin, setCoin] = useState(["",""]);
@@ -16,12 +20,16 @@ const Search = () => {
   const toggleHidden = () => {
     setHidden(!hidden);
   };
+  const toggleMobileSearch = () => {
+    setMobileSearch(!mobileSearch);
+  };
   const handleCoin = useCallback((coinId: string, coinSymbol: string) => setCoin([coinId, coinSymbol]),[]);
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if(e.key === "Escape") {
       clearSearch();
       e.currentTarget.blur();
       toggleHidden();
+      toggleMobileSearch();
     }
     if (e.key === "ArrowDown") {
       e.preventDefault();
@@ -38,6 +46,7 @@ const Search = () => {
       e.currentTarget.blur();
       router.push(path.join("/coin", coin[0]) + "market");
       toggleHidden();
+      toggleMobileSearch();
       clearSearch();
     } 
   };
@@ -53,30 +62,37 @@ const Search = () => {
       setSearchTerm(e.target.value);
     }, 500);
   };
+  const smScreen = windowWidth < 391;
   return (
     <div className="ml-4 relative">
-      <div className="absolute pointer-events-auto">
-        <svg className={clsx("absolute h-5 w-5 ml-4 mt-3.5", {
-          "text-cryptoblue-900": !darkmode,
-          "text-cryptodark-100": darkmode,
-        })} viewBox="0 0 20 20" fill="currentColor">
-          <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" 
-            clipRule="evenodd" />
-        </svg>
-      </div>
-      <input 
-        type="text" 
-        placeholder="Search..." 
-        value={searchTerm}
-        onChange={handleChange}
-        onClick={toggleHidden}
-        onKeyDown={handleKeyDown}
-        className={clsx("pl-12 h-12 w-72 box-border text-sm focus:outline-none", {
-          "bg-cryptoblue-200 focus:border-cryptoblue-900": !darkmode,
-          "bg-cryptodark-200 text-cryptodark-100 border-[1px] border-cryptodark-170 focus:outline-none focus:shadow-inner": darkmode,
-          "rounded-md": hidden,
-          "rounded-t-md bg-gradient-to-r from-cryptodark-200 to-dark-140": !hidden
-        })} />
+      {smScreen
+        ? <button onClick={toggleMobileSearch} className="flex items-center">
+          <MobileSearch darkmode={darkmode} />
+        </button>
+        : <div className="absolute pointer-events-auto">
+          <IconSearch darkmode={darkmode} />
+        </div>}
+      {
+        smScreen
+          ? <MobileInput 
+            searchTerm={searchTerm}
+            handleChange={handleChange}
+            toggleHidden={toggleHidden}
+            handleKeyDown={handleKeyDown}
+            darkmode={darkmode}
+            hidden={hidden}
+            toggleMobileSearch={toggleMobileSearch}
+            showMobileSearch={mobileSearch}
+          /> 
+          : <DesktopInput 
+            searchTerm={searchTerm}
+            handleChange={handleChange}
+            toggleHidden={toggleHidden}
+            handleKeyDown={handleKeyDown}
+            darkmode={darkmode}
+            hidden={hidden}
+          />
+      }
       {!hidden 
         && <SearchResults 
           index={selectedOptionIndex} 
@@ -84,6 +100,7 @@ const Search = () => {
           toggleHidden={toggleHidden} 
           clearSearch={clearSearch}
           handleCoin={handleCoin}
+          toggleMobileSearch={toggleMobileSearch}
         />}
     </div>
   );

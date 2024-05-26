@@ -7,6 +7,9 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    screens: {
+      'sm': {'max':'390px'},
+    },
     colors: {
         'dark': {
           100: '#000000',

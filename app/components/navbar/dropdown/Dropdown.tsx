@@ -47,29 +47,38 @@ const Dropdown = () => {
     setHidden(prev => prev==="hidden" ? "" : "hidden");
   };
   return (
-    <div className="relative ml-5 text-xs" onClick={toggleHidden}>
-      <div className={clsx("flex items-center h-12 w-[108px] rounded-md px-4", {
-        "bg-cryptodark-200 border-cryptodark-170 border-[1px]": darkmode,
+    <div className="relative ml-5 sm:ml-3 text-xs" onClick={toggleHidden}>
+      <div className={clsx("flex items-center h-12 w-[108px] sm:w-[60px] sm:h-9 rounded-md px-4 sm:px-1", {
+        "bg-cryptodark-200 border-cryptodark-170 border-[1px] sm:bg-cryptodark-400 sm:border-none": darkmode,
         "bg-cryptoblue-200": !darkmode,
       })}>
-        <p className={clsx("pl-[5px] pt-0.5 rounded-full w-5 h-5 font-bold", {
+        <p className={clsx("pl-[5px] pt-0.5 rounded-full w-5 h-5 font-bold sm:hidden", {
           "bg-cryptodark-100": darkmode,
           "text-cryptoblue-900": darkmode,
           "bg-cryptoblue-900": !darkmode,
           "text-cryptodark-100": !darkmode,
         })}>{currency.sign}</p>
-        <p className={clsx("mx-2.5", {
+        <p className={clsx("mx-2.5 sm:ml-0 sm:text-sm", {
           "text-cryptoblue-900": !darkmode,
           "text-cryptodark-100": darkmode,
         })}>{currency.label}</p>
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg className="sm:absolute sm:left-[45px]"
+          width="14" 
+          height="14" 
+          viewBox="0 0 14 14" 
+          fill="none" 
+          xmlns="http://www.w3.org/2000/svg">
           <path d="M8.99976 4.50024L5.99988 7.50012L3 4.5" 
             stroke={darkmode ? "#FFFFFF" : "#4B5563"} 
-            strokeOpacity={1} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            strokeOpacity={1} 
+            strokeWidth="1.5" 
+            strokeLinecap="round" 
+            strokeLinejoin="round"
+          />
         </svg>
       </div>
-      <ul ref={dropDownRef} className={clsx(`absolute left-0 z-50 top-0 rounded-md p-1 ${hidden} w-[108px]`, {
-        "bg-cryptodark-200 border-[1px] border-cryptodark-170": darkmode,
+      <ul ref={dropDownRef} className={clsx(`absolute left-0 z-50 top-0 rounded-md p-1 ${hidden} w-[108px] sm:w-[60px]`, {
+        "bg-cryptodark-200 border-[1px] border-cryptodark-170 sm:border-none": darkmode,
         "bg-cryptoblue-200": !darkmode,
       })}>
         {currencies.map((c)=>{

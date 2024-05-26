@@ -12,7 +12,7 @@ const Theme = ({handleDarkMode}:{handleDarkMode: any}) => {
     handleDarkMode(!darkmode);
   };
   return (
-    <div className={clsx("p-3.5 rounded-xl ml-5 h-12 w-12 cursor-pointer", {
+    <div className={clsx("p-3.5 rounded-xl sm:rounded-md ml-5 sm:ml-2 sm:h-9 sm:w-9 sm:p-2 h-12 w-12 cursor-pointer", {
       "bg-cryptodark-200 border-cryptodark-170 border-[1px]": darkmode, "bg-cryptoblue-200": !darkmode
     })} onClick={(e)=>handleClick(e)}>
       {

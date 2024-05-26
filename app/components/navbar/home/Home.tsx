@@ -4,8 +4,11 @@ import clsx from "clsx";
 import { useSelector, useDispatch } from "react-redux";
 import { selectDarkmode, setNotification, setShowNotification } from "@/app/lib/dynamicValuesSlice";
 import { usePathname } from "next/navigation";
+import { Icon, SmallIcon } from "./Icon";
+import useWindowWidth from "../../hooks/hooks";
 
 const Home = () => {
+  const windowWidth = useWindowWidth();
   const darkmode = useSelector(selectDarkmode);
   const pathname = usePathname();
   const dispatch = useDispatch();
@@ -14,15 +17,33 @@ const Home = () => {
     dispatch(setShowNotification(""));
   };
   const active = pathname === "/";
-  return (
-    <div className="flex items-center ">
-      <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M20.5402 6.81969L14.7802 2.78969C13.2102 1.68969 10.8002 1.74969 9.29023 2.91969L4.28023 6.82969C3.28023 7.60969 2.49023 9.20969 2.49023 10.4697V17.3697C2.49023 19.9197 4.56023 21.9997 7.11023 21.9997H17.8902C20.4402 21.9997 22.5102 19.9297 22.5102 17.3797V10.5997C22.5102 9.24969 21.6402 7.58969 20.5402 6.81969ZM13.2502 17.9997C13.2502 18.4097 12.9102 18.7497 12.5002 18.7497C12.0902 18.7497 11.7502 18.4097 11.7502 17.9997V14.9997C11.7502 14.5897 12.0902 14.2497 12.5002 14.2497C12.9102 14.2497 13.2502 14.5897 13.2502 14.9997V17.9997Z"  
-          fill={
-            active && !darkmode ? "#353570": !active ?"#9B9AB6" :  "#FFFFFF" 
-          } 
-          fillOpacity={1} />
-      </svg>
+  const converter = pathname === "/converter";
+  const isMobile = windowWidth < 391;
+  return (isMobile ? 
+    <div>
+      {active || converter ? <div className={clsx("h-8 w-8 rounded-md p-[1px]", {
+        "bg-gradient-to-t from-cryptoblue-600 to-cryptoblue-800": !darkmode,
+        "bg-gradient-to-t from-cryptodark-750 to-cryptodark-800 shadow-2xl shadow-cryptoblue-800": darkmode,
+      })}>
+        <div  className={clsx("text-sm w-full h-full rounded-[5px] flex",{
+          "bg-cryptodark-750": darkmode,
+        })}>
+          <div className="m-auto">
+            <SmallIcon active={active || converter} darkmode={darkmode} />
+          </div>
+        </div>
+      </div>
+        : <Link className={clsx("text-sm flex justify-start items-center h-8 w-[106px] rounded-md",{
+          "bg-cryptodark-150" : darkmode,
+        })} href="/" onClick={()=>handleNotification("open home page")}>
+          <div className="ml-auto mr-2">
+            <SmallIcon active={active} darkmode={darkmode} />
+          </div>
+          <p className="mr-auto">Home</p>
+        </Link>}
+    </div>
+    : <div className="flex items-center">
+      <Icon active={active} darkmode={darkmode} />
       <Link className={clsx("ml-2.5 text-sm",{
         "text-cryptoblue-900" : active && !darkmode,
         "text-cryptoblue-500" : !active,
