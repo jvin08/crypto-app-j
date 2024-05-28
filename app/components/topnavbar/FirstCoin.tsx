@@ -6,7 +6,7 @@ import Loading from "./Loading";
 const FirstCoin = ({ quantity, isLoading }: {quantity: number, isLoading: boolean}) => {
   const btcIMG = "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1696501400";
   return (
-    <div className="flex items-center ml-10 sm:ml-4">
+    <div className="flex items-center ml-10">
       <Image
         src={btcIMG}
         width={20}

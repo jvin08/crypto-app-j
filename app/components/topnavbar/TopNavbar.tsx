@@ -29,8 +29,8 @@ export const TopNavbar: React.FC = () => {
     marketPercentageSecond: Math.floor(newData?.market_cap_percentage["eth"]),
   };
   return (
-    <div className="fixed w-full z-10 sm:overflow-x-auto sm:w-[700px]">
-      <div className={clsx("rounded-b-md border-b-[1px] flex justify-center text-xs text-cryptoblue-100 py-[17.6px] sm:w-[700px] sm:rounded-none",{
+    <div className="fixed w-full z-10 sm:overflow-x-auto sm:max-w-[850px] noScrollbar">
+      <div className={clsx("rounded-b-md border-b-[1px] flex justify-center text-xs text-cryptoblue-100 py-[17.6px] sm:w-[850px] sm:rounded-none",{
         "bg-cryptodark-300 border-cryptodark-170": darkmode,
         "bg-cryptoblue-900 border-cryptoblue-820": !darkmode,
       })}>

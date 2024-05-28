@@ -10,12 +10,12 @@ const LoadingSearch = ({closeLoader}:{closeLoader: any}) => {
     closeLoader();
   });
   return (
-    <div className={clsx("box-border text-sm w-72 left-0 sm:w-[376px] sm:-left-[205px] top-[47px] absolute z-50 rounded-b-md",{
+    <div className={clsx("box-border text-sm w-72 left-0 sm:w-[376px] sm:-left-[228px] top-[37px] absolute z-50 rounded-b-md",{
       "bg-cryptoblue-200 text-cryptoblue-500": !darkmode,
       "text-cryptodark-100 border-cryptodark-170 border-[1px]": darkmode,
     })} ref={ref}>
       <div 
-        className={clsx("flex items-center h-12 pl-3 py-1 rounded-b-md",{
+        className={clsx("flex items-center h-12 sm:h-10 pl-3 py-1 rounded-b-md",{
           "bg-gradient-to-r from-cryptodark-200 to-cryptodark-350": darkmode,
         })}
       >

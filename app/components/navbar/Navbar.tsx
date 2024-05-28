@@ -17,7 +17,7 @@ const Navbar = ({handleDarkMode}:{handleDarkMode: any}) => {
       "bg-cryptoblue-100": !darkmode,
       "bg-cryptodark-400": darkmode,
     })}>
-      <div className="w-[1296px] mx-auto flex items-center justify-between sm:w-full">
+      <div className="lg:max-w-[1296px] mx-auto flex items-center justify-between sm:max-w-[480px]">
         <LogoFull />
         <div className={clsx("flex items-center justify-between sm:p-1 sm:h-10  sm:w-[146px] sm:rounded-md",{
           "sm:bg-cryptodark-200": darkmode,

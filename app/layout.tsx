@@ -30,7 +30,7 @@ export default function RootLayout({
         })}> 
           <TopNavbar />
           <Navbar handleDarkMode={handleDarkmode} />
-          <div className="w-[1296px] mx-auto">
+          <div className="max-w-[1296px] sm:w-max-[480px] mx-auto sm:mx-0">
             {children}
           </div>
         </body>

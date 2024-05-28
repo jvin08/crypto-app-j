@@ -6,7 +6,7 @@ import Loading from "./Loading";
 const SecondCoin = ({ quantity, isLoading }: {quantity: number, isLoading: boolean}) => {
   const ethIMG = "https://assets.coingecko.com/coins/images/279/large/ethereum.png?1696501628";
   return (
-    <div className="flex items-center ml-10 sm:ml-2">
+    <div className="flex items-center ml-10">
       <Image
         src={ethIMG}
         width={20}
