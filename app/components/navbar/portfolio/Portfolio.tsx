@@ -13,7 +13,7 @@ const Portfolio = () => {
   const windowWidth = useWindowWidth();
   const pathname = usePathname();
   const active = pathname === "/portfolio";
-  const isMobile = windowWidth < 391;
+  const isMobile = windowWidth < 481;
   const dispatch = useDispatch();
   const handleNotification = (message: string) => {
     dispatch(setNotification(message));
@@ -34,7 +34,7 @@ const Portfolio = () => {
     </div> : <Link 
       href="/portfolio" 
       onClick={()=>handleNotification("Portfolio page opened")} 
-      className={clsx("text-sm flex justify-center items-center h-8 w-full rounded-md",{
+      className={clsx("text-sm flex justify-center items-center h-8 w-[108px] rounded-md",{
         "bg-cryptodark-150": darkmode,
       })}>
       <div className="ml-auto mr-2">

@@ -10,7 +10,7 @@ const OPTIONS: EmblaOptionsType = {
 };
 const Carousel = () => {
   return (
-    <div className="relative w-full">
+    <div className="relative w-full sm:max-w-[400px] sm:mx-auto">
       <EmblaCarousel  options={OPTIONS} />
     </div>
   );

@@ -4,6 +4,7 @@ import { EmblaOptionsType } from "embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import { SmallLoader } from "../charts/Loader";
+import useWindowWidth from "../hooks/hooks";
 import {
   PrevButton,
   NextButton,
@@ -29,6 +30,7 @@ interface Coin  {
     options?: EmblaOptionsType
 }
 const EmblaCarousel: React.FC<PropType> = (props) => {
+  const windowWidth = useWindowWidth();
   const darkmode = useSelector(selectDarkmode);
   const shouldCompare = useSelector(selectCompare);
   const { options } = props;
@@ -70,10 +72,15 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
       dispatch(setCoinTwoSymbol(["",""]));
     }
   };
+  const trimNumber = (priceString:string) => {
+    const price = Number(priceString);
+    return price < 1 ? price.toFixed(5) : price < 1000 ? price.toFixed(2) : Math.floor(price);
+  };
   const isCoinOne = (id: string) => id === coinOne[0];
   const isCoinTwo = (id: string) => id === coinTwo[0];
+  const isMobile = windowWidth < 481;
   return (
-    <div className={clsx("mt-6 w-full h-20 rounded",{
+    <div className={clsx("mt-6 w-full h-20 sm:h-[51px] rounded",{
       "bg-cryptodark-400": darkmode,
       "bg-cryptoblue-350": !darkmode,
     })}>
@@ -84,41 +91,43 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
         })}>
           {error!==undefined || isLoading
             ? carouselBackUpArray.map((backup, index) => (
-              <div key={backup+index} className={clsx("tracking-widest text-xs first:ml-0 mx-1 h-full shrink-0 grow-0 w-[253px] min-w-0 relative rounded-[5px]", {
+              <div key={backup+index} className={clsx("tracking-widest text-xs first:ml-0 mx-1 h-full shrink-0 grow-0 w-[253px] sm:w-[167px] min-w-0 relative rounded-[5px]", {
                 "bg-cryptodark-300": darkmode,
                 "bg-cryptodark-100": !darkmode,
               })}><SmallLoader /></div>))
             : data?.map((coin: Coin) => (
-              <div key={coin.id} className={clsx("tracking-widest text-xs mx-1 h-full shrink-0 grow-0 w-[253px] min-w-0 p-[1px] relative rounded-[5px]", {
+              <div key={coin.id} className={clsx("tracking-widest text-xs mx-1 h-full shrink-0 grow-0 w-[253px] sm:w-[167px] min-w-0 p-[1px] relative rounded-[5px]", {
                 "bg-gradient-to-t from-cryptoblue-600 to-cryptoblue-800": isCoinOne(coin.id) && !darkmode || isCoinTwo(coin.id) && !darkmode,
                 "bg-cryptoblue-100": !isCoinOne(coin.id) && !darkmode || !isCoinTwo(coin.id) && !darkmode,
                 "bg-gradient-to-t from-cryptodark-750 to-cryptodark-800": isCoinOne(coin.id) && darkmode || isCoinTwo(coin.id) && darkmode,
                 "bg-cryptodark-300": !isCoinOne(coin.id) && darkmode || !isCoinTwo(coin.id) && darkmode,
               })}>   
                 <div onClick={(e) => handleSelectedCoin(e, [coin.id,coin.symbol])} 
-                  className={clsx("flex items-center justify-center h-full w-full p-3 cursor-pointer -z-20 rounded select-none", {
+                  className={clsx("flex items-center justify-center sm:justify-between h-full w-full p-3 sm:p-2 sm:px-1 cursor-pointer -z-20 rounded select-none", {
                     "bg-cryptodark-300 text-cryptodark-100": !isCoinOne(coin.id) && darkmode || !isCoinTwo(coin.id) && darkmode,
                     "bg-cryptodark-750 text-cryptoblue-100": isCoinOne(coin.id) && darkmode || isCoinTwo(coin.id) && darkmode,
                     "bg-cryptoblue-600 text-cryptoblue-100": isCoinOne(coin.id) && !darkmode || isCoinTwo(coin.id) && !darkmode,                    
                   })}>
-                  <div className="h-16 mt-6">
+                  <div className="h-16 sm:h-6 mt-6 sm:mt-0 sm:ml-2 sm:mr-1">
                     <Image 
                       src={coin.image}
                       alt={coin.symbol}
-                      width={39.24}
-                      height={40}
+                      width={isMobile ? 23.24 : 39.24}
+                      height={isMobile ? 24 : 40}
                     />
                   </div>
-                  <div className="ml-4">
-                    <div>
-                      <p>{coin.name} ({coin.symbol.toUpperCase()})</p> 
+                  <div className="ml-4 sm:ml-1 sm:flex sm:justify-between">
+                    <div className="sm:flex sm:items-center sm:mr-2">
+                      <p>{!isMobile && coin.name} ({coin.symbol.toUpperCase()})</p> 
                     </div>
-                    <div className="flex">
-                      <p>{coin.current_price.toFixed(2) + " " + currency.label} </p>
-                      <svg transform={isPositive(coin.price_change_percentage_24h) ? "rotate(0)" : "rotate(180)"} width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M8.00065 6.33301L4.66732 9.66634H11.334L8.00065 6.33301Z" fill={isPositive(coin.price_change_percentage_24h) ? "#00B1A7" : "red"} fillOpacity={1}/>
-                      </svg>
-                      <p style={{color: isPositive(coin.price_change_percentage_24h) ? "#00B1A7" : "red"}}>{coin.price_change_percentage_24h.toFixed(2)}%</p>
+                    <div className="flex sm:flex-col sm:font-extralight">
+                      <p className="sm:text-right">{trimNumber(coin.current_price.toFixed(2)) + " " + currency[isMobile ? "sign" : "label"]} </p>
+                      <div className="flex">
+                        <svg transform={isPositive(coin.price_change_percentage_24h) ? "rotate(0)" : "rotate(180)"} width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M8.00065 6.33301L4.66732 9.66634H11.334L8.00065 6.33301Z" fill={isPositive(coin.price_change_percentage_24h) ? "#00B1A7" : "red"} fillOpacity={1}/>
+                        </svg>
+                        <p style={{color: isPositive(coin.price_change_percentage_24h) ? "#00B1A7" : "red"}}>{coin.price_change_percentage_24h.toFixed(2)}%</p>
+                      </div>
                     </div>
                   </div>
                 </div>              
@@ -126,10 +135,10 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
             ))}
         </div>
       </div>
-      <div className="z-0 flex items-center absolute top-4 -left-[2.5%]">
+      <div className="sm:hidden z-0 flex items-center absolute top-4 -left-[2.5%]">
         <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
       </div>
-      <div className="z-0 flex items-center absolute top-4 -right-[2.5%]">
+      <div className="sm:hidden z-0 flex items-center absolute top-4 -right-[2.5%]">
         <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
       </div>
     </div>

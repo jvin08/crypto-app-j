@@ -18,7 +18,7 @@ const Home = () => {
   };
   const active = pathname === "/";
   const converter = pathname === "/converter";
-  const isMobile = windowWidth < 391;
+  const isMobile = windowWidth < 481;
   return (isMobile ? 
     <div>
       {active || converter ? <div className={clsx("h-8 w-8 rounded-md p-[1px]", {

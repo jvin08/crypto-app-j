@@ -36,12 +36,12 @@ const Compare = () => {
     </>;
   };
   return (
-    <div className="flex justify-between text-sm mt-10 w-full">
-      <p className={clsx("pt-8",{
+    <div className="flex justify-between text-sm mt-10 sm:mt-6 w-full sm:min-w-[343px] sm:px-4 items-center">
+      <p className={clsx("pt-8 sm:py-0",{
         "text-cryptoblue-900": !darkmode,
         "text-cryptoblue-500": darkmode
       })}>Select the currency to view statistics</p>
-      <button  onClick={handleClick} className={clsx("flex items-center justify-center rounded-md py-3.5", {
+      <button  onClick={handleClick} className={clsx("flex items-center justify-center rounded-md py-3.5 sm:py-2 sm:h-10", {
         "bg-cryptoblue-100": !darkmode,
         "bg-cryptodark-150 text-cryptodark-100": darkmode,
         "w-48": shouldCompare,

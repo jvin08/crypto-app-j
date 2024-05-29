@@ -27,8 +27,8 @@ export const MobileInput = ({
     <div className={clsx("",{
       "hidden": !showMobileSearch
     })}>
-      <div className="">
-        <span className="absolute z-40 -left-[190px] top-[10px]">&#x1F50E;&#xFE0E;</span>
+      <div className="sm:absolute sm:-left-10 -top-[0px]">
+        <span className="absolute z-40 -left-[164px] top-1.5">&#x1F50E;&#xFE0E;</span>
         <input
           type="text" 
           placeholder="Search for a coin..."
@@ -36,14 +36,14 @@ export const MobileInput = ({
           onChange={handleChange}
           onClick={toggleHidden}
           onKeyDown={handleKeyDown}
-          className={clsx("pl-12 absolute -left-[205px] -top-0.5 h-12 w-[376px] z-30 box-border text-sm focus:outline-none", {
+          className={clsx("pl-12 absolute -left-[188px] -top-0.5 h-12 sm:h-10 w-[376px] z-30 box-border text-sm focus:outline-none", {
             "bg-cryptoblue-200 focus:border-cryptoblue-900": !darkmode,
             "bg-cryptodark-200 text-cryptodark-100 border-[1px] border-cryptodark-170 focus:outline-none focus:shadow-inner": darkmode,
             "rounded-md": hidden,
             "rounded-t-md bg-gradient-to-r from-cryptodark-200 to-dark-140": !hidden
           })} />
         <button 
-          className="absolute z-40 top-3 left-[140px] text-xs"
+          className="absolute z-40 top-2.5 left-[150px] text-xs"
           onClick={toggleMobileSearch}  
         >&#9587;</button>
       </div>

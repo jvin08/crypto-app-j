@@ -148,3 +148,7 @@ body {
 .closingchart {
   animation: closing 2.5s ease-in-out;
 }
+.noScrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
