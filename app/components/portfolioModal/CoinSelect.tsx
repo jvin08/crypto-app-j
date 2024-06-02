@@ -30,12 +30,11 @@ const CoinSelect = ({toggleCoinSelect, onCoinAdded, id}: {toggleCoinSelect: any,
   const [coinImage, setCoinImage] = useState(imageState);
   const initialAmount = id ? editedCoin.amount : "";
   const [amount, setAmount] = useState(initialAmount);
-  const initInput = {
+  const [input, setInput] = useState({
+    date: id ? editedCoin.purchaseTime.slice(0,11) : "",
     time: id ? editedCoin.purchaseTime.slice(11) : "",
-    date: id ? editedCoin.purchaseTime.slice(0,10) : "",
-  };
-  const [input, setInput] = useState(initInput);
-  const activeSaveBtn = amount !== "" && input.date !== "" && input.time !== "" && selectedCoin[0] !== "";
+  });
+  const activeSaveBtn = amount !== "" && input.time !== "" && input.date !== "" && selectedCoin[0] !== "";
   const dispatch = useDispatch();
   const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
   const handleNotification = (message: string) => {

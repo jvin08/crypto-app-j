@@ -14,7 +14,7 @@ const CoinsTable = () => {
   const [sortQuery, setSortQuery] = useState(queries[0] + order);
   const [page, setPage] = useState(1);
   const [coins, setCoins] = useState<Coin[]>([]);
-  const [sort, setSort] = useState("market_cap");
+  const [sort, setSort] = useState("id");
   const currency = useSelector(selectCurrency);
   const query = `page=${page}&order=${sortQuery}`;
   const queryCurrency = currency.label.toLowerCase();

@@ -1,5 +1,6 @@
 import React from "react";
 import clsx from "clsx";
+import useWindowWidth from "../../hooks/hooks";
 
 type MobileInputProps = {
   searchTerm: string;
@@ -23,6 +24,8 @@ export const MobileInput = ({
   showMobileSearch,
   toggleMobileSearch
 }:MobileInputProps) => {
+  const windowWidth = useWindowWidth();
+  const searchWidth = "sm:" + windowWidth;
   return (
     <div className={clsx("",{
       "hidden": !showMobileSearch
@@ -36,7 +39,7 @@ export const MobileInput = ({
           onChange={handleChange}
           onClick={toggleHidden}
           onKeyDown={handleKeyDown}
-          className={clsx("pl-12 absolute -left-[188px] -top-0.5 h-12 sm:h-10 w-[376px] z-30 box-border text-sm focus:outline-none", {
+          className={clsx(`${searchWidth} pl-12 absolute -left-[188px] -top-0.5 h-12 sm:h-10 w-[376px] z-30 box-border text-sm focus:outline-none`, {
             "bg-cryptoblue-200 focus:border-cryptoblue-900": !darkmode,
             "bg-cryptodark-200 text-cryptodark-100 border-[1px] border-cryptodark-170 focus:outline-none focus:shadow-inner": darkmode,
             "rounded-md": hidden,
