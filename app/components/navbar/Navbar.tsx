@@ -13,11 +13,11 @@ import clsx from "clsx";
 const Navbar = ({handleDarkMode}:{handleDarkMode: any}) => {
   const darkmode = useSelector(selectDarkmode);    
   return (
-    <div className={clsx("z-[2] w-full mt-[56px] flex fixed px-[58px] pt-6 sm:pt-4 pb-4 sm:px-4", {
+    <div className={clsx("z-[2] w-full mt-[56px] sm:mt-[55px] flex fixed px-[58px] pt-6 sm:pt-4 pb-4 sm:px-4", {
       "bg-cryptoblue-100": !darkmode,
       "bg-cryptodark-400": darkmode,
     })}>
-      <div className="lg:max-w-[1296px] mx-auto flex items-center justify-between sm:max-w-[480px]">
+      <div className="w-[1296px] mx-auto flex items-center justify-between sm:max-w-[480px]">
         <LogoFull />
         <div className={clsx("flex items-center justify-between sm:p-1 sm:h-10  sm:w-[146px] sm:rounded-md",{
           "sm:bg-cryptodark-200": darkmode,

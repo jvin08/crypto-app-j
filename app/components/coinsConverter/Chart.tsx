@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import useWindowWidth from "../hooks/hooks";
 import { ChartsLoader } from "./Loader";
 import {
   Chart as ChartJS,
@@ -38,6 +39,7 @@ ChartJS.register(
 );
 const Chart = ({range}:{range: number}) => { 
   const coin = useSelector(selectCoinOneSymbol);
+  const width = useWindowWidth();
   const coinTwo = useSelector(selectCoinTwoSymbol);
   const defaultCoinTwo = coinTwo[0] === "" ? ["ethereum","eth"] : coinTwo;
   const currency = useSelector(selectCurrency);
@@ -87,6 +89,8 @@ const Chart = ({range}:{range: number}) => {
   options.onHover = (event: any, price: any) => {
     price[0]?.index && setPriceIndex(price[0]?.index);
   };
+  const isMobile = width < 481;
+  options.scales.x.ticks.maxTicksLimit = isMobile ? 5 : 13;
   return (<div className="flex w-full justify-between">
     {error || isLoading 
       ? <div className={clsx("w-full mb-10 flex rounded-xl", {
@@ -95,21 +99,21 @@ const Chart = ({range}:{range: number}) => {
       })}>
         <ChartsLoader dataOne={coin} dataTwo={coinTwo} compare={compare}  />
       </div>
-      : <div className={clsx("w-full mb-10 h-[303px]  rounded-xl ", {
+      : <div className={clsx("w-full mb-10 h-[303px] sm:h-[223px]  rounded-xl ", {
         "bg-cryptodark-350": darkmode,
         "bg-cryptoblue-100": !darkmode,
       })}>
-        <h2 className={clsx("ml-10 mt-8",{
+        <h2 className={clsx("ml-10 mt-8 sm:ml-5 sm:mt-4 sm:text-xs",{
           "text-cryptodark-100": darkmode,
           "text-cryptoblue-900": !darkmode,
         })}>{capitalize(coin[0])} ({coin[1].toUpperCase()}) <span 
             className={clsx("",{
               "text-cryptodark-550 opacity-80": darkmode,
               "text-cryptoblue-900 opacity-70": !darkmode,
-            })}>to</span> {capitalize(defaultCoinTwo[0])} ({defaultCoinTwo[1].toUpperCase()}) - {coinToCoinPrices?.[priceIndex || coinToCoinPrices.length-1]?.toFixed(5)}</h2>
-        <div className="h-64 p-10 pt-3 pl-7 pb-8 relative">
-          <Line options={options} data={lineChartData} height={216} />
-          <div className={clsx("absolute border-b-4 w-[1210px] left-[calc(50%-605px)] bottom-[55px]",{
+            })}>to</span> {capitalize(defaultCoinTwo[0])} ({defaultCoinTwo[1].toUpperCase()}) - {coinToCoinPrices?.[priceIndex || coinToCoinPrices.length-1]?.toFixed(2)}</h2>
+        <div className="h-64 sm:h-44 p-10 sm:p-4 sm:pb-0 pt-3 pl-7 pb-8 relative">
+          <Line options={options} data={lineChartData} height={isMobile ? 136 : 216} />
+          <div className={clsx("absolute border-b-4 w-[1210px] sm:hidden left-[calc(50%-605px)] bottom-[55px]",{
             "border-b-cryptodark-100 ": !darkmode,
             "border-b-cryptodark-350": darkmode,
           })}></div>

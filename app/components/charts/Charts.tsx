@@ -1,6 +1,7 @@
 import React, {useCallback, useEffect, useState} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setNotification, setShowNotification, setError } from "../../lib/dynamicValuesSlice";
+import useWindowWidth from "../hooks/hooks";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -45,6 +46,7 @@ ChartJS.register(
   CrosshairPlugin,
 );
 export function Charts({range}:{range: number}) { 
+  const width = useWindowWidth();
   const coin = useSelector(selectCoinOneSymbol);
   const coinTwo = useSelector(selectCoinTwoSymbol);
   const compare = useSelector(selectCompare);
@@ -112,8 +114,10 @@ export function Charts({range}:{range: number}) {
   const coinTwoPrices = compare ? myDataTwo?.map((item:number[])=>{
     return item[1];
   }) : [];
-  const lineChartData = getChartData(timePoints, coinOnePrices, coinTwoPrices, coin[0], coinTwo[0]);
-  const barData = barChartData(barTimePoints, volumeOne, volumeTwo);
+  const chartHeight = width < 481 ? 120 : 216;
+  const isMobile = width < 481;
+  const lineChartData = getChartData(timePoints, coinOnePrices, coinTwoPrices, coin[0], coinTwo[0], isMobile);
+  const barData = barChartData(barTimePoints, volumeOne, volumeTwo, isMobile);
   const priceOne = getPriceFooterData(coinOnePrices, priceIndex);
   const priceTwo = compare ? getPriceFooterData(coinTwoPrices, priceIndex) : "";
   const todayVolume = getVolumeFooterData(volumeOne, volumeIndex);
@@ -127,28 +131,28 @@ export function Charts({range}:{range: number}) {
   };
   barOptions.animations = false;
   ChartJS.defaults.font.size = 9;
-  return (<div className="flex w-full justify-between">
+  return (<div className="flex w-full sm:flex-col justify-between">
     {error || isLoading 
       ? <ChartsLoader dataOne={coin} dataTwo={coinTwo} compare={compare} /> 
-      : <div className={clsx("w-[calc(50%-1rem)] mb-10  rounded-xl h-[404px]", {
+      : <div className={clsx("w-[calc(50%-1rem)] sm:w-full mb-10 sm:mb-2  rounded-xl h-[404px] sm:h-[224px]", {
         "bg-cryptodark-350": darkmode && !error && !isLoading,
         "bg-cryptoblue-100": !darkmode && !error && !isLoading,
       })}>
-        <div className={compare ? "p-10 relative" : "p-10 pb-12 relative"}>
+        <div className={compare ? "sm:p-4 p-10 relative" : "sm:p-4 p-10 sm:pb-4 pb-12 relative"}>
           <Header 
             dataOne={coin} 
             price={coinOnePrices?.[priceIndex] || coinOnePrices?.slice(-1)[0]} 
             compare={compare} 
             priceDate={data?.prices?.[priceIndex]?.[0] || data?.prices?.[data?.prices?.length-1]?.[0]}
           />
-          <div className={compare ? "h-[188px] -ml-3" : "-ml-3 h-[236px]"}>
-            <Line options={options} data={lineChartData} height={216} />
+          <div className={compare ? "h-[188px] sm:h-[122px] -ml-3 sm:ml-0" : "sm:ml-0 -ml-3 h-[236px] sm:h-[140px]"}>
+            <Line options={options} data={lineChartData} height={chartHeight} />
           </div>
           <div className="flex">
-            <p className={compare ? "mt-8 text-cryptoblue-900" : "hidden"}>
+            <p className={compare ? "mt-8 sm:mt-1 text-cryptoblue-900" : "hidden"}>
               <span className="tabular-nums text-[0.75rem] text-cryptoblue-800">{capitalize(coin[0]) + ` ${currency.sign}` + priceOne}</span>  
             </p>
-            <p className={showCoinTwo ? "mt-8 text-cryptoblue-900" : "hidden"}>
+            <p className={showCoinTwo ? "mt-8 sm:mt-1 text-cryptoblue-900" : "hidden"}>
               <span className="tabular-nums text-[0.75rem] text-cryptoblue-700 ml-5">{capitalize(coinTwo[0]) + ` ${currency.sign}` + priceTwo}</span> 
             </p>
           </div>
@@ -157,24 +161,24 @@ export function Charts({range}:{range: number}) {
     {error || isLoading 
       ? <ChartsLoader dataOne={coin} dataTwo={coinTwo} compare={compare} /> 
       : 
-      <div className={clsx("w-[calc(50%-1rem)] mb-10  rounded-xl ", {
+      <div className={clsx("w-[calc(50%-1rem)] sm:w-full mb-10 sm:mb-2  rounded-xl sm:h-[224px]", {
         "bg-cryptodark-300": darkmode,
         "bg-cryptoblue-100": !darkmode,
       })}>
-        <div className={compare ? "p-10 relative" : "p-10 pb-12 relative"}>
+        <div className={compare ? "sm:p-4 p-10 relative" : "sm:p-4 sm:pb-4 p-10 pb-12 relative"}>
           <VolumeHeader 
             volume={data?.total_volumes?.[volumeIndex] || data?.total_volumes?.[data?.total_volumes?.length-1]} 
             compare={compare}
             volumeDate={data?.total_volumes?.[volumeIndex]?.[0] || data?.total_volumes?.[data?.total_volumes?.length-1]?.[0]}
           />
-          <div className={compare ? "h-[188px] -ml-3" : "h-[236px] -ml-3"}>
-            <Bar options={barOptions} data={barData} height={216} />
+          <div className={compare ? "h-[188px] sm:h-[122px] -ml-3 sm:ml-0" : "sm:ml-0 -ml-3 h-[236px] sm:h-[140px]"}>
+            <Bar options={barOptions} data={barData} height={chartHeight} />
           </div>
           <div className="flex">
-            <p className={compare ? "mt-8 text-cryptoblue-900" : "hidden"}>
+            <p className={compare ? "mt-8 sm:mt-1 text-cryptoblue-900" : "hidden"}>
               <span className="tabular-nums text-[0.75rem] text-cryptoblue-800">{capitalize(coin[0]) + ` ${currency.sign}` + todayVolume + " bln"}</span>
             </p>
-            <p className={showCoinTwo ? "mt-8 text-cryptoblue-900" : "hidden"}>
+            <p className={showCoinTwo ? "mt-8 sm:mt-1 text-cryptoblue-900" : "hidden"}>
               <span className="tabular-nums text-[0.75rem] text-cryptoblue-700 ml-5">{capitalize(coinTwo[0]) + ` ${currency.sign}` + todayVolumeTwo + " bln"}</span>
             </p>
           </div>

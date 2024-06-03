@@ -42,7 +42,7 @@ const CoinInputsBox = () => {
     }
   };
   return (
-    <div className={clsx("flex w-full justify-between mt-6 mb-6 relative",{})}>
+    <div className={clsx("flex sm:flex-col w-full justify-between mt-6 sm:mt-0 mb-6 sm:mb-0 relative",{})}>
       <CoinInput 
         header="You buy" 
         darkmode={darkmode} 
@@ -51,7 +51,7 @@ const CoinInputsBox = () => {
         image={coinOne?.image?.large}
         inputValue={inputOne}
         handleChange={handleChangeOne}
-        margin="mr-3"
+        margin="mr-3 sm:mr-0"
       />
       <ReverseButton flipCoins={flipCoins} darkMode={darkmode} />
       <CoinInput 
@@ -62,7 +62,7 @@ const CoinInputsBox = () => {
         image={coinTwo?.image?.large} 
         inputValue={inputTwo}
         handleChange={handleChangeTwo}
-        margin="ml-3"
+        margin="ml-3 sm:ml-0"
       />
     </div>
   );

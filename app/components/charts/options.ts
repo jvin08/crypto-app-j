@@ -73,10 +73,11 @@ export const options = {
       display: true,
       beforeFit: beforeFit,
       ticks: {
-        maxTicksLimit: 8,
+        maxTicksLimit: 7,
         color: "#9B9AB6",
         fontSize: 8,
         align: "inner" as "inner",
+        padding: 0,
       },
       grid: {
         display: false, // Hide grid lines on X-axis
@@ -108,7 +109,7 @@ export const barOptions = {
       categoryPercentage: 0.59,// Adjust this value to lift the bars more from the x-axis
       beforeFit: beforeFit,
       ticks: {
-        maxTicksLimit: 8, // Max number of X-axis ticks
+        maxTicksLimit: 7, // Max number of X-axis ticks
         color: "#9B9AB6", // X-axis ticks color
         align: "inner" as "inner",
       },
@@ -157,8 +158,9 @@ export const barOptions = {
     },
   },
 };
-export const getChartData = (time: number[], prices: number[], pricesTwo: number[], coinOne: string, coinTwo: string) => {
+export const getChartData = (time: number[], prices: number[], pricesTwo: number[], coinOne: string, coinTwo: string, isMobile: boolean) => {
   const pricesTwoUpdated = coinTwo === "" ? [] : pricesTwo;
+  const gradientStop = isMobile ? 0.3 : 0.5;
   const borderWidth = 1.5;
   return {
     labels: time,
@@ -174,7 +176,7 @@ export const getChartData = (time: number[], prices: number[], pricesTwo: number
         backgroundColor: (context: any) => {
           const gradient = context.chart.ctx.createLinearGradient(0, 0, 0, 400);
           gradient.addColorStop(0, "#7878FA");
-          gradient.addColorStop(0.55, "rgba(120, 120, 250, 0)");
+          gradient.addColorStop(gradientStop, "rgba(120, 120, 250, 0)");
           return gradient;
         },
       },
@@ -196,9 +198,12 @@ export const getChartData = (time: number[], prices: number[], pricesTwo: number
     ],
   };
 };
-export const barChartData = (barTimePoints: string[], volumeOne: number[][], volumeTwo: number[][]) => {
+export const barChartData = (barTimePoints: string[], volumeOne: number[][], volumeTwo: number[][], isMobile: boolean) => {
   const period = volumeOne?.length;
   const borderWidth = 0; 
+  const gradientStop = isMobile ? 0.6 : 0.8;
+  const gradientStopTwo = isMobile ? 0.5 : 0.7;
+  const gradientStopThree = isMobile ? 0.4 : 0.6;
   return {
     labels: barTimePoints,
     datasets: [
@@ -214,7 +219,7 @@ export const barChartData = (barTimePoints: string[], volumeOne: number[][], vol
         backgroundColor: (context: any) => {
           const gradient = context.chart.ctx.createLinearGradient(0, 0, 0, 380);
           gradient.addColorStop(0, "#7878FA");
-          gradient.addColorStop((period > 746 ? 0.8 : period === 365 ? 0.7 : 0.6), "rgba(120, 120, 250, 0)");
+          gradient.addColorStop((period > 746 ? gradientStop : period === 365 ? gradientStopTwo : gradientStopThree), "rgba(120, 120, 250, 0)");
           return gradient;
         },
       },

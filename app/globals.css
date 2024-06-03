@@ -115,6 +115,11 @@ body {
 .lower {
   height: 303px;
 }
+@media (max-width: 480px) {
+  .lower {
+    height: 223px;
+  }
+}
 @keyframes load {
   to {
     background-position:-200% center;

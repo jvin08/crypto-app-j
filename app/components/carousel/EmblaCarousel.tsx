@@ -34,7 +34,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
   const darkmode = useSelector(selectDarkmode);
   const shouldCompare = useSelector(selectCompare);
   const { options } = props;
-  const [emblaRef, emblaApi] = useEmblaCarousel(options, [Autoplay({ delay: 3000, stopOnHover: true, loop: true, waitForTransition: true, speed: 2, })]);
+  const [emblaRef, emblaApi] = useEmblaCarousel(options, [Autoplay({ delay: 300000, stopOnHover: true, loop: false, waitForTransition: true, speed: 0, })]);
   const dispatch = useDispatch();
   const coinOne = useSelector(selectCoinOneSymbol);
   const coinTwo = useSelector(selectCoinTwoSymbol);
@@ -96,7 +96,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                 "bg-cryptodark-100": !darkmode,
               })}><SmallLoader /></div>))
             : data?.map((coin: Coin) => (
-              <div key={coin.id} className={clsx("tracking-widest text-xs mx-1 h-full shrink-0 grow-0 w-[253px] sm:w-[167px] min-w-0 p-[1px] relative rounded-[5px]", {
+              <div key={coin.id} className={clsx("sm:w-[49%] tracking-widest text-xs mx-1 sm:mx-0 sm:mr-[2%] h-full shrink-0 grow-0 w-[253px] min-w-0 p-[1px] relative rounded-[5px]", {
                 "bg-gradient-to-t from-cryptoblue-600 to-cryptoblue-800": isCoinOne(coin.id) && !darkmode || isCoinTwo(coin.id) && !darkmode,
                 "bg-cryptoblue-100": !isCoinOne(coin.id) && !darkmode || !isCoinTwo(coin.id) && !darkmode,
                 "bg-gradient-to-t from-cryptodark-750 to-cryptodark-800": isCoinOne(coin.id) && darkmode || isCoinTwo(coin.id) && darkmode,
@@ -108,7 +108,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                     "bg-cryptodark-750 text-cryptoblue-100": isCoinOne(coin.id) && darkmode || isCoinTwo(coin.id) && darkmode,
                     "bg-cryptoblue-600 text-cryptoblue-100": isCoinOne(coin.id) && !darkmode || isCoinTwo(coin.id) && !darkmode,                    
                   })}>
-                  <div className="h-16 sm:h-6 mt-6 sm:mt-0 sm:ml-2 sm:mr-1">
+                  <div className="h-16 sm:h-6 sm:w-6 mt-6 sm:mt-0 sm:ml-2 sm:mr-1">
                     <Image 
                       src={coin.image}
                       alt={coin.symbol}
@@ -116,9 +116,10 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                       height={isMobile ? 24 : 40}
                     />
                   </div>
+                  {isMobile && <p className="sm:-ml-3">{coin.symbol.toUpperCase()}</p>}
                   <div className="ml-4 sm:ml-1 sm:flex sm:justify-between">
-                    <div className="sm:flex sm:items-center sm:mr-2">
-                      <p>{!isMobile && coin.name} ({coin.symbol.toUpperCase()})</p> 
+                    <div className="sm:hidden">
+                      <p>{coin.name} ({coin.symbol.toUpperCase()})</p> 
                     </div>
                     <div className="flex sm:flex-col sm:font-extralight">
                       <p className="sm:text-right">{trimNumber(coin.current_price.toFixed(2)) + " " + currency[isMobile ? "sign" : "label"]} </p>

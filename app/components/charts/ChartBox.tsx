@@ -15,10 +15,10 @@ const ChartBox = ({Charts}: {Charts: any}) => {
   };
   return (
     <div >
-      <div className="flex pt-10">
+      <div className="flex pt-10 sm:pt-6">
         <Charts range={days} />
       </div>
-      <div className={clsx("p-1 rounded-md flex w-fit mt-4",{
+      <div className={clsx("p-1 rounded-md flex w-fit sm:w-full mt-4 sm:mt-0",{
         "bg-cryptodark-810": darkmode,
         "bg-cryptoblue-450": !darkmode,
       })}>
@@ -28,7 +28,7 @@ const ChartBox = ({Charts}: {Charts: any}) => {
             name={unit} 
             handleClick={(e)=>toggleActive(e, index)} 
             active={intervals[index] === days} 
-            width="w-[58px]" 
+            width="w-[58px] sm:w-full" 
             padding="py-1" />;
         })}
       </div>

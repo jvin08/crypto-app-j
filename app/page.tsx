@@ -14,7 +14,7 @@ import { selectDarkmode } from "./lib/dynamicValuesSlice";
 const Home = () => {
   const darkmode = useSelector(selectDarkmode);
   return (
-    <div className={clsx("max-w-[1296px] sm:max-w-[480px] pt-[56px] mx-auto", {
+    <div className={clsx("max-w-[1296px] sm:max-w-[480px] sm:px-4 pt-[56px] mx-auto", {
       "bg-cryptoblue-350": !darkmode,
       "bg-cryptodark-400": darkmode,
     })}>

@@ -11,7 +11,7 @@ const StatusBar = ({ unitOne, unitTwo, index }: {unitOne: number, unitTwo: numbe
   const status = ((Number(Volume) / Number(UnitTwo)) * 10).toFixed(2);
   const statusSize = Number(status) > 10 ? "10rem" : status + "rem";
   return (
-    <div className="w-1/5 ml-5">
+    <div className="w-1/5 ml-5 sm:hidden">
       <p className="flex justify-between w-full" style={{color: coinColor}}><span>●{sign}{Volume}B</span><span>●{sign}{UnitTwo}B</span></p>
       <div className="relative">
         <div className="absolute top-0 left-0 w-full h-1.5 rounded-sm px-px"style={{background: coinColor, opacity: 0.4}}></div>
