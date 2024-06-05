@@ -14,7 +14,7 @@ const Portfolio = () => {
     setForceUpdate((prev) => !prev);
   };
   return (
-    <div className={clsx("w-[1296px] py-9 pt-[56px] mx-auto mt-30", {
+    <div className={clsx("w-[1296px] sm:w-full sm:min-w-[340px] sm:px-4 py-9 pt-[56px] mx-auto mt-30", {
       "bg-cryptoblue-350": !darkmode,
       "bg-cryptodark-400": darkmode,
     })}>
@@ -24,7 +24,7 @@ const Portfolio = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header handleCoinAdded={handleCoinAdded} />
-      <div className={clsx("min-h-[calc(100vh-15rem)] pt-6",{
+      <div className={clsx("sm:h-screen min-h-[calc(100vh-15rem)] pt-6",{
         "bg-cryptoblue-350": !darkmode,
         "bg-cryptodark-400": darkmode,
       })}>

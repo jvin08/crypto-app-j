@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
+import { isPositive } from "../coinPage/utils";
 
 export const EditInfoSVG = () => {
   const darkmode = useSelector(selectDarkmode);
@@ -12,5 +13,23 @@ export const EditInfoSVG = () => {
       <path d="M19.8906 13.0498C20.3206 15.8098 22.5606 17.9198 25.3406 18.1998" stroke="white" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
       <path d="M11 30H29" stroke="white" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
+  );
+};
+export const Triangle = ({percentage}:{percentage:number}) => {
+  return (
+    <>
+      <svg transform={isPositive(percentage) ? "rotate(0)" : "rotate(180)"} width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8.00065 6.33301L4.66732 9.66634H11.334L8.00065 6.33301Z" fill={isPositive(percentage) ? "#00B1A7" : "#FE2264"} fillOpacity={1}/>
+      </svg>
+    </>
+  );
+};
+export const MobTriangle = ({percentage}:{percentage:number}) => {
+  return (
+    <>
+      <svg transform={isPositive(percentage) ? "rotate(0)" : "rotate(180)"} width="11" height="9" viewBox="0 0 11 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fillRule="evenodd" clipRule="evenodd" fill={isPositive(percentage) ? "#00B1A7" : "#FE2264"}  d="M4.64061 1.24808C5.03643 0.654343 5.90888 0.654342 6.30471 1.24808L10.4362 7.4453C10.8792 8.10985 10.4028 9 9.60414 9H1.34117C0.542478 9 0.0660865 8.10985 0.509123 7.4453L4.64061 1.24808Z"/>
+      </svg>
+    </>
   );
 };

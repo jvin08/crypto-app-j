@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import clsx from "clsx";
 import { useSelector, useDispatch } from "react-redux";
@@ -10,15 +10,22 @@ import useWindowWidth from "../../hooks/hooks";
 
 const Portfolio = () => {
   const darkmode = useSelector(selectDarkmode);
-  const windowWidth = useWindowWidth();
   const pathname = usePathname();
   const active = pathname === "/portfolio";
-  const isMobile = windowWidth < 481;
   const dispatch = useDispatch();
   const handleNotification = (message: string) => {
     dispatch(setNotification(message));
     dispatch(setShowNotification(""));
   };
+  const [isClient, setIsClient] = useState(false);
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+  const windowWidth = useWindowWidth();
+  const isMobile = windowWidth < 481;
+  if (!isClient) {
+    return <div className="text-xs h-8 w-8 rounded-md p-[1px] bg-cryptodark-510">Loading...</div>;
+  }
   return (isMobile ?
     (active ? <div className={clsx("h-8 w-8 rounded-md p-[1px]", {
       "bg-gradient-to-t from-cryptoblue-600 to-cryptoblue-800": !darkmode,

@@ -26,7 +26,7 @@
     "embla-carousel-react": "^8.0.0-rc21",
     "framer-motion": "^11.0.14",
     "lucide-react": "^0.366.0",
-    "next": "14.1.0",
+    "next": "^14.2.3",
     "next-redux-wrapper": "^8.1.0",
     "next-themes": "^0.3.0",
     "react": "^18",

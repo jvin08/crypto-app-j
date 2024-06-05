@@ -49,7 +49,7 @@ const DropdownSearch = ({
   });
   return (
     coinsForRender?.length === 0 || isLoading ? <LoadingSearch closeLoader={closeDropdownMenu} />
-      : <div className={clsx("box-border text-sm w-72 left-0  sm:w-[376px] sm:-left-[228px] sm:top-[37px] top-[47px] absolute z-50 rounded-b-md pb-3",{
+      : <div className={clsx("box-border text-sm w-72 left-0  sm:w-[94%] sm:left-[3%] sm:top-[110px] top-[47px] absolute z-50 rounded-b-md pb-3",{
         "bg-cryptoblue-200 text-cryptoblue-500": !darkmode,
         "bg-gradient-to-r from-cryptodark-200 to-cryptodark-350 text-cryptodark-100 border-cryptodark-170 border-[1px]": darkmode,
       })} ref={dropDownRef}>

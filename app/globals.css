@@ -103,6 +103,17 @@ body {
   border-radius: 5px;
   height: 5rem;
 }
+.navbar {
+  min-height: 40px;
+  height: 40px;
+  border-radius: 6px;
+}
+.time {
+  min-height: 16px;
+  height: 16px;
+  border-radius: 6px;
+  width: 50%;
+}
 .loaderChart {
   padding: 40px;
   height: 404px;

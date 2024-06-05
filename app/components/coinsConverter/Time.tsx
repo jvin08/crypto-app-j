@@ -12,21 +12,26 @@ const Time = ({darkmode}: {darkmode: boolean}) => {
     hour12: false // Use 24-hour format
   });
   const [currentTime, setCurrentTime] = useState(new Date());
+  const [isClient, setIsClient] = useState(false);
   const updateTime = () => {
     setCurrentTime(new Date());
   };
   useEffect(() => {
+    setIsClient(true);
     updateTime();
     const intervalId = setInterval(updateTime, 1000);
     return () => clearInterval(intervalId);
   },[]);
+  if (!isClient) {
+    return <p className="loader time text-xs"></p>;
+  }
   return (
-    <div className={clsx("text-xs",{
+    <p className={clsx("text-xs",{
       "text-cryptoblue-810 opacity-[.8]": !darkmode,
       "text-cryptodark-510": darkmode,
     })}>
       {formattedDateTime(currentTime)}
-    </div>
+    </p>
   );
 };
 export default Time;

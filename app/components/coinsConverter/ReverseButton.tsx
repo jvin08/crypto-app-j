@@ -4,7 +4,7 @@ import clsx from "clsx";
 const ReverseButton = ({flipCoins, darkMode}: {flipCoins: ()=>void, darkMode: boolean}) => {
   return (
     <div 
-      className={clsx("absolute top-[calc(50%-24px)] sm:top-[calc(50%-12px)] sm:border-[7px] sm:rounded-full left-[calc(50%-24px)] cursor-pointer hover:opacity-60",{
+      className={clsx("absolute sm:top-[calc(50%-22px)] sm:border-[7px] sm:rounded-full top-[calc(50%-24px)]  left-[calc(50%-24px)] cursor-pointer hover:opacity-60",{
         "border-cryptoblue-900": !darkMode,
         "border-cryptodark-400": darkMode,
       })}
