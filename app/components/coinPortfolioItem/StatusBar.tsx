@@ -27,7 +27,8 @@ const StatusBar = ({name, width}:{name: string, width: string}) => {
 };
 export const MobileStatusBar = ({name, width}:{name: string, width: string}) => {
   const darkmode = useSelector(selectDarkmode);
-  const statusWidth = Number(width) * 100 < 20 ? "0.5rem" : Number(width) * 100 >= 100 ? "4.7rem" : Number(width) * 100 + "%";
+  const percentageWidth = Number(width) * 100;
+  const statusWidth = percentageWidth < 20 ? "0.5rem" : percentageWidth >= 100 ? "4.7rem" : `${percentageWidth}%`;
   return (
     <div className="w-full pt-3">
       <div className="flex items-center">
