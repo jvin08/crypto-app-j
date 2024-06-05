@@ -1,2 +1,0 @@
-press start run timer
-when timer run show user button in less than a second to unlock a scooter
