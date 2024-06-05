@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from "react";
+import { createPortal } from "react-dom";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
 import SearchResults from "./SearchResults";
@@ -72,36 +73,42 @@ const Search = () => {
         : <div className="absolute pointer-events-auto">
           <IconSearch darkmode={darkmode} />
         </div>}
-      {
-        smScreen
-          ? <MobileInput 
-            searchTerm={searchTerm}
-            handleChange={handleChange}
-            toggleHidden={toggleHidden}
-            handleKeyDown={handleKeyDown}
-            darkmode={darkmode}
-            hidden={hidden}
-            toggleMobileSearch={toggleMobileSearch}
-            showMobileSearch={mobileSearch}
-          /> 
-          : <DesktopInput 
-            searchTerm={searchTerm}
-            handleChange={handleChange}
-            toggleHidden={toggleHidden}
-            handleKeyDown={handleKeyDown}
-            darkmode={darkmode}
-            hidden={hidden}
-          />
+      {smScreen
+        ? (createPortal(<MobileInput 
+          searchTerm={searchTerm}
+          handleChange={handleChange}
+          toggleHidden={toggleHidden}
+          handleKeyDown={handleKeyDown}
+          darkmode={darkmode}
+          hidden={hidden}
+          toggleMobileSearch={toggleMobileSearch}
+          showMobileSearch={mobileSearch}
+        />, document.body))
+        : <DesktopInput 
+          searchTerm={searchTerm}
+          handleChange={handleChange}
+          toggleHidden={toggleHidden}
+          handleKeyDown={handleKeyDown}
+          darkmode={darkmode}
+          hidden={hidden}
+        />
       }
       {!hidden 
-        && <SearchResults 
+        && (smScreen ? (createPortal(<SearchResults 
           index={selectedOptionIndex} 
           query={searchTerm} 
           toggleHidden={toggleHidden} 
           clearSearch={clearSearch}
           handleCoin={handleCoin}
           toggleMobileSearch={toggleMobileSearch}
-        />}
+        />, document.body)) : <SearchResults 
+          index={selectedOptionIndex} 
+          query={searchTerm} 
+          toggleHidden={toggleHidden} 
+          clearSearch={clearSearch}
+          handleCoin={handleCoin}
+          toggleMobileSearch={toggleMobileSearch}
+        />)}
     </div>
   );
 };

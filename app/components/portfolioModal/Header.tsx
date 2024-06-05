@@ -17,7 +17,7 @@ const Header = ({handleCoinAdded}:{handleCoinAdded: ()=>void}) => {
     setShowCalculator(!showCalculator);
   };
   return (
-    <div className={clsx("flex justify-between items-center mt-[128px]",{
+    <div className={clsx("flex justify-between items-center mt-[128px] sm:hidden",{
       "text-cryptodark-100": darkmode,
       "text-cryptoblue-810": !darkmode,
     })}>

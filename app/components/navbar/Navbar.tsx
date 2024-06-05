@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import  LogoFull  from "./logo/logoFull";
 import  Home from "./home/Home";
 import Portfolio from "./portfolio/Portfolio";
@@ -11,7 +11,21 @@ import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
 import clsx from "clsx";
 
 const Navbar = ({handleDarkMode}:{handleDarkMode: any}) => {
-  const darkmode = useSelector(selectDarkmode);    
+  const darkmode = useSelector(selectDarkmode); 
+  const [isClient, setIsClient] = useState(false);
+  useEffect(() => {
+    setIsClient(true);
+  },[]);
+  if(!isClient){
+    return (
+      <div className={clsx("z-[2] w-full mt-[56px] sm:mt-[55px] flex fixed px-[58px] pt-6 sm:pt-4 pb-4 sm:px-4", {
+        "bg-cryptoblue-100": !darkmode,
+        "bg-cryptodark-400": darkmode,
+      })}>
+        <div className="loader navbar"></div>
+      </div>
+    );
+  }   
   return (
     <div className={clsx("z-[2] w-full mt-[56px] sm:mt-[55px] flex fixed px-[58px] pt-6 sm:pt-4 pb-4 sm:px-4", {
       "bg-cryptoblue-100": !darkmode,
