@@ -46,7 +46,7 @@ export const CardContainer = ({
     <MouseEnterContext.Provider value={[isMouseEntered, setIsMouseEntered]}>
       <div
         className={cn(
-          "flex justify-center items-center w-1/5",{
+          "flex justify-center items-center sm:w-full w-1/5 sm:h-[180px]",{
             containerClassName,
             "bg-cryptodark-300": darkmode,
             "bg-cryptoblue-100": !darkmode,

@@ -75,7 +75,8 @@ const CoinCardMobile = ({ storageData }:{ storageData:any }) => {
           <MobileStatusBar name="Market Cap vs Volume:" width={coin.marketCapVol} />
         </MobileDataElement>
         <MobileDataElement>
-          <div>Circ supply vs mark supply</div>
+          <p className="mt-3 text-base text-cryptoblue-650">{(coin.circSupVsMaxSup * 100)?.toFixed(2)}%</p>
+          <p>Circ sup vs mkt sup</p>
         </MobileDataElement>
       </div>
     </div>

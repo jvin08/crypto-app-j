@@ -9,11 +9,11 @@ import { capitalize } from "./utils";
 const CoinImage = ({data}:{data:any}) => {
   const darkmode = useSelector(selectDarkmode);
   return (
-    <CardContainer className={clsx("w-40 m-8 rounded-2xl font-bold text-xl text-center", {
+    <CardContainer className={clsx("sm:w-full w-40 m-8 rounded-2xl font-bold text-xl text-center", {
       "bg-cryptodark-300": darkmode,
       "bg-cryptoblue-100": !darkmode,
     })}>
-      <CardBody className={clsx("w-40 h-48 flex flex-col justify-center items-center",{
+      <CardBody className={clsx("sm:w-full w-40 sm:h-[180px] h-48 flex flex-col justify-center items-center",{
         "bg-cryptodark-300": darkmode,
         "bg-cryptoblue-100": !darkmode,
       })}>

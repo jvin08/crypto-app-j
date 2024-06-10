@@ -11,11 +11,11 @@ export const DataElement = ({name, value, customStyles}:{name: string, value: st
   return (
     <div className={`flex flex-col items-center ${customStyles}`}>
       {name.includes("Gain") ?
-        <p className="text-[11px] mb-1"><span className={clsx("text-cryptoblue-650",{
+        <p className="text-[11px] mb-1 sm:mt-4 sm:text-left sm:w-full"><span className={clsx("text-cryptoblue-650",{
           "text-cryptoblue-660 font-bold": !darkmode,
         })}>Gain</span> / <span className="text-cryptoblue-750">Loss</span></p> : 
-        <p className="text-[11px] mb-1">{name}</p>}
-      <p className={clsx("text-xs",{
+        <p className="text-[11px] mb-1 sm:mt-4 sm:text-left sm:w-full">{name}</p>}
+      <p className={clsx("text-xs sm:text-left sm:w-full",{
         "text-cryptoblue-650": darkmode,
         "text-cryptoblue-660": !darkmode,
         "text-cryptoblue-750": isNegative,
@@ -27,19 +27,18 @@ export const PurchaseDate = ({name, value, customStyles}:{name: string, value: s
   const darkmode = useSelector(selectDarkmode);
   const formattedValue = formatTime(value);
   return (
-    <div className={`flex flex-col sm:flex-row items-center ${customStyles}`}>
-      <p className="text-[11px] mb-1 ml-auto sm:mb-0 sm:ml-0">{name}</p>
-      <p className={clsx("text-xs ml-auto sm:ml-2 mr-2",{
+    <div className={`flex flex-col sm:w-full sm:mt-4 items-center ${customStyles}`}>
+      <p className="text-[11px] mb-1 ml-auto sm:mb-0 sm:ml-0 sm:mr-auto">{name}</p>
+      <p className={clsx("text-xs sm:ml-0 sm:mr-auto ml-auto mr-2",{
         "text-cryptoblue-650": darkmode,
         "text-cryptoblue-660":  !darkmode,
       })}>{formattedValue}</p>
     </div>
   );
 };
-
-export const MobileDataElement = ({children}: Readonly<{
+export const MobileDataElement = ({children}: {
   children: React.ReactNode;
-}>) => {
+}) => {
   const darkmode = useSelector(selectDarkmode);
   return (
     <div className={clsx("text-xs text-left pl-3 rounded-lg border h-[68px]",{

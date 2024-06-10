@@ -7,10 +7,10 @@ const StatusBar = ({name, width}:{name: string, width: string}) => {
   const darkmode = useSelector(selectDarkmode);
   const statusWidth = Number(width) * 100 < 20 ? "0.5rem" : Number(width) * 100 >= 100 ? "4.7rem" : Number(width) * 100 + "%";
   return (
-    <div className="w-1/3">
-      <p className="text-[11px] mb-1 text-center">{name}</p>
+    <div className="sm:w-full sm:mt-4 w-1/3">
+      <p className="text-[11px] mb-1 text-center sm:text-left">{name}</p>
       <div className="flex items-center">
-        <p className={clsx("text-xs w-[45%] text-right mr-1",{
+        <p className={clsx("text-xs w-[30%] sm:text-left text-right mr-1",{
           "text-cryptoblue-100": darkmode,
           "text-cryptodark-200": !darkmode,
         })}>{(Number(width) * 100).toFixed(2)}%</p>

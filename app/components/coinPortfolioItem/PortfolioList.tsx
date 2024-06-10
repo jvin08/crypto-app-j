@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import CoinCard from "./CoinCard";
-import CoinCardMobile from "./CoinCardMobile";
 import CoinSelect from "../portfolioModal/CoinSelect";
 import DeleteModal from "../portfolioDeleteModal/DeleteModal";
 import clsx from "clsx";
@@ -9,7 +8,6 @@ import Link from "next/link";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
 import { useLocalStorage } from "./utils";
-import useWindowWidth from "../hooks/hooks";
 
 type Coin = {
   id: string,
@@ -22,7 +20,6 @@ type Coin = {
 const PortfolioList = ({forceUpdate, handleCoinAdded}:{forceUpdate:boolean, handleCoinAdded: ()=>void}) => {
   const darkmode = useSelector(selectDarkmode);
   const coinData = useLocalStorage(forceUpdate);
-  const width = useWindowWidth();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showCoinEdit, setShowCoinEdit] = useState(false);
   const [coinId, setCoinId] = useState("");
@@ -36,7 +33,6 @@ const PortfolioList = ({forceUpdate, handleCoinAdded}:{forceUpdate:boolean, hand
     setCoinId(id);
     setShowDeleteModal((prev) => !prev);
   };
-  const isMobile = width < 481;
   return (
     <>{coinData.length > 0 ? 
       <div className={clsx("mt-5 sm:w-full",{
@@ -51,21 +47,17 @@ const PortfolioList = ({forceUpdate, handleCoinAdded}:{forceUpdate:boolean, hand
           id={coinId} 
           handleCoinAdded={handleCoinAdded} />
         }
-        <div className="sm:mt-16">
+        <div className="sm:mt-1">
           {
             coinData.map((coin:Coin) => {
               return (
                 <div key={coin.id} className="mb-6">
                   <Link href={`/coin/${coin.coin}-${coin.id}`}>
-                    {isMobile 
-                      ? <CoinCardMobile
-                        storageData={coin} 
-                      /> 
-                      : <CoinCard 
-                        storageData={coin} 
-                        toggleDeleteModal={toggleDeleteModal} 
-                        toggleEditModal={toggleCoinEdit}
-                      />}
+                    <CoinCard 
+                      storageData={coin} 
+                      toggleDeleteModal={toggleDeleteModal} 
+                      toggleEditModal={toggleCoinEdit}
+                    />
                   </Link>
                 </div>
               );

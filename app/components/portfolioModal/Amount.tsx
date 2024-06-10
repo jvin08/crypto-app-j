@@ -25,7 +25,7 @@ const Amount = ({visible, toggleVisible, getAmount}:{visible: boolean, toggleVis
   }, [visible]);
   return (
     <div>
-      {!visible ? <div className={clsx("w-full text-base items-center flex justify-between h-11 px-4 rounded",{
+      {!visible ? <div className={clsx("sm:mb-2 sm:mt-2 w-full text-base items-center flex justify-between h-11 px-4 rounded",{
         "bg-cryptoblue-200 text-cryptoblue-900": !darkmode,
         "bg-cryptodark-200 text-cryptodark-510": darkmode,
       })}
