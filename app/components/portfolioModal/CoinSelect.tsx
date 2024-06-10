@@ -72,12 +72,12 @@ const CoinSelect = ({toggleCoinSelect, onCoinAdded, id}: {toggleCoinSelect: any,
   const crossColor = darkmode ? "white" : "black";
   return (
     <div className="fixed top-0 left-0 z-10 flex bg-cryptodark-900 bg-opacity-65 backdrop-blur-[1px] w-full h-full">
-      <div className="absolute left-[calc(50%-443px)] top-[12rem] p-[1px] group">
-        <form className={clsx("m-auto w-[886px] h-[393px] z-50 p-[48px] rounded-[20px]",{
+      <div className="absolute sm:w-[90%] sm:left-[5%] left-[calc(50%-443px)] sm:top-5 top-[12rem] p-[1px] group">
+        <form className={clsx("m-auto sm:w-full w-[886px] sm:h-[630px] h-[393px] z-50 sm:p-4 p-[48px] rounded-[20px]",{
           "bg-cryptodark-400 text-cryptodark-100": darkmode,
           "bg-cryptoblue-100 text-cryptoblue-900": !darkmode,
         })}>
-          <div className="flex justify-between text-xl items-center">
+          <div className="flex justify-between sm:text-lg text-xl items-center">
             {id ? <p>Edit coin data</p> : <p>Select coins</p>}
             <svg 
               className="cursor-pointer" 
@@ -93,8 +93,8 @@ const CoinSelect = ({toggleCoinSelect, onCoinAdded, id}: {toggleCoinSelect: any,
               <path d="M14.8319 14.8299L9.17188 9.16992" stroke={crossColor} strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </div>
-          <div className="flex justify-between h-5/6 mt-8 pb-3">
-            <div className={clsx(" w-[297px] pt-[66px] rounded",{
+          <div className="flex sm:flex-col sm:justify-center justify-between h-5/6 sm:mt-1 mt-8 pb-3">
+            <div className={clsx("sm:m-auto sm:w-full w-[297px] sm:pt-8 pt-[66px] rounded",{
               "bg-cryptodark-350": darkmode,
               "bg-cryptoblue-200": !darkmode,
             })}>
@@ -104,18 +104,18 @@ const CoinSelect = ({toggleCoinSelect, onCoinAdded, id}: {toggleCoinSelect: any,
               })}>
                 <Image src={coinImage} alt="coin-image" width={35} height={35} />
               </div>
-              <p className="text-center text-2xl mt-4">{selectedCoin[0] ? capitalize(selectedCoin[0]) : "Your Coin"} ({selectedCoin[0]?selectedCoin[1]:"ABC"})</p>
+              <p className="text-center sm:text-lg text-2xl sm:mt-1 sm:mb-3 mt-4">{selectedCoin[0] ? capitalize(selectedCoin[0]) : "Your Coin"} ({selectedCoin[0]?selectedCoin[1]:"ABC"})</p>
             </div>
-            <div className="w-[461px] text-base flex flex-col justify-between"> 
-              {id ? <p className={clsx("w-full pl-4 pt-3 h-11 rounded-sm", {
+            <div className="sm:w-full w-[461px] text-base flex flex-col justify-between"> 
+              {id ? <p className={clsx("sm:mb-2 w-full pl-4 pt-3 h-11 rounded-sm", {
                 "bg-cryptoblue-200": !darkmode,
                 "bg-cryptodark-200 text-cryptodark-510": darkmode,
               })}>{selectedCoin[0][0].toUpperCase()+selectedCoin[0].slice(1)}</p> : <Search handleCoin={handleCoin} />}
               <Amount visible={inputAmount} toggleVisible={toggleAmount} getAmount={getAmount} />
               <Date inputHandler={inputHandler} />
-              <div className="flex justify-between mt-1">
-                <SaveButton name="Cancel" handleClick={toggleCoinSelect} active={true} width="w-[calc(50%-8px)]" padding="py-1"/>
-                <SaveButton name="Save and Continue" handleClick={saveDataToLocalStorage} active={activeSaveBtn} width="w-1/2" padding="py-1"/>
+              <div className="flex sm:flex-col-reverse justify-between sm:mt-4 mt-1">
+                <SaveButton name="Cancel" handleClick={toggleCoinSelect} active={true} width="sm:w-full w-[calc(50%-8px)]" padding="py-1"/>
+                <SaveButton name="Save and Continue" handleClick={saveDataToLocalStorage} active={activeSaveBtn} width="sm:w-full w-1/2" padding="py-1"/>
               </div>
             </div>
           </div>

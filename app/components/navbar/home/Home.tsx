@@ -37,7 +37,7 @@ const Home = () => {
           "bg-cryptodark-150" : darkmode,
         })} href="/" onClick={()=>handleNotification("open home page")}>
           <div className="ml-auto mr-2">
-            <SmallIcon active={active} darkmode={darkmode} />
+            <Icon active={active} darkmode={darkmode} />
           </div>
           <p className="mr-auto">Home</p>
         </Link>}

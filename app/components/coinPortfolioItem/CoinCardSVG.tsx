@@ -15,6 +15,18 @@ export const EditInfoSVG = () => {
     </svg>
   );
 };
+export const EditMobileInfoSVG = () => {
+  const darkmode = useSelector(selectDarkmode);
+  const buttonColor = darkmode ? "#3A3978" : "#7878FA";
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="24" height="24" rx="4" fill={buttonColor} />
+      <path d="M12.8396 6.4008L7.36624 12.1941C7.15958 12.4141 6.95958 12.8475 6.91958 13.1475L6.67291 15.3075C6.58624 16.0875 7.14624 16.6208 7.91958 16.4875L10.0662 16.1208C10.3662 16.0675 10.7862 15.8475 10.9929 15.6208L16.4662 9.82746C17.4129 8.82746 17.8396 7.68746 16.3662 6.29413C14.8996 4.91413 13.7862 5.4008 12.8396 6.4008Z" stroke="white" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M11.9258 7.36719C12.2124 9.20719 13.7058 10.6139 15.5591 10.8005" stroke="white" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M6 18.666H18" stroke="white" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  );
+};
 export const Triangle = ({percentage}:{percentage:number}) => {
   return (
     <>

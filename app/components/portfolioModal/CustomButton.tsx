@@ -15,7 +15,7 @@ const CustomButton = ({name, handleClick, active, width, padding, disabled}: Pro
   const darkmode = useSelector(selectDarkmode);
   const bgColor = active ? "bg-cryptoblue-600 text-cryptoblue-100" : "bg-cryptoblue-100";
   return (
-    <div className={clsx(`${width} rounded-md p-[1px] h-[45px]`, {
+    <div className={clsx(`${width} rounded-md p-[1px] h-[45px] sm:h-[43px]`, {
       "bg-gradient-to-t from-cryptoblue-600 to-cryptoblue-800": active && !darkmode,
       "bg-gradient-to-t from-cryptodark-750 to-cryptodark-800": active && darkmode,
     })}>
@@ -28,4 +28,33 @@ const CustomButton = ({name, handleClick, active, width, padding, disabled}: Pro
     </div>
   );
 };
-export default CustomButton;
+type MobileProps = {
+  name: String,
+  handleClick: MouseEventHandler,
+  active: boolean,
+  width: string,
+  padding: string,
+  disabled: boolean,
+  children?: React.ReactNode,
+}
+export const MobileCustomButton = ({handleClick, active, width, padding, disabled, children}: MobileProps) => {
+  const darkmode = useSelector(selectDarkmode);
+  const bgColor = active ? "bg-cryptoblue-600 text-cryptoblue-100" : "bg-cryptoblue-100";
+  return (
+    <div className={clsx(`${width} rounded-full p-[1px] h-14 ml-3`, {
+      "bg-gradient-to-t from-cryptoblue-600 to-cryptoblue-800": active && !darkmode,
+      "bg-gradient-to-t from-cryptodark-750 to-cryptodark-800": active && darkmode,
+    })}>
+      <button onClick={handleClick} disabled={disabled} className={clsx(`${bgColor} flex items-center justify-center text-xl w-full h-full rounded-full ${padding}`,{
+        "bg-cryptoblue-600 text-cryptoblue-100": active && !darkmode,
+        "bg-cryptoblue-100": !active && !darkmode,
+        "bg-cryptodark-750": active && darkmode,
+        "bg-cryptodark-150 text-cryptoblue-100": !active && darkmode,
+      })}>
+        {children}
+      </button>
+    </div>
+  );
+};
+
+export default CustomButton;        
