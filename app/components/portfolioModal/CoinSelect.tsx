@@ -107,7 +107,7 @@ const CoinSelect = ({toggleCoinSelect, onCoinAdded, id}: {toggleCoinSelect: any,
               <p className="text-center sm:text-lg text-2xl sm:mt-1 sm:mb-3 mt-4">{selectedCoin[0] ? capitalize(selectedCoin[0]) : "Your Coin"} ({selectedCoin[0]?selectedCoin[1]:"ABC"})</p>
             </div>
             <div className="sm:w-full w-[461px] text-base flex flex-col justify-between"> 
-              {id ? <p className={clsx("sm:mb-2 w-full pl-4 pt-3 h-11 rounded-sm", {
+              {id ? <p className={clsx("w-full pl-4 pt-3 h-11 rounded-sm", {
                 "bg-cryptoblue-200": !darkmode,
                 "bg-cryptodark-200 text-cryptodark-510": darkmode,
               })}>{selectedCoin[0][0].toUpperCase()+selectedCoin[0].slice(1)}</p> : <Search handleCoin={handleCoin} />}

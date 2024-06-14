@@ -10,7 +10,7 @@ const Coin = ({ params } : { params : { coinId: string }}) => {
   const coinId = params.coinId.endsWith("market") ? params.coinId.slice(0,-6) : params.coinId.slice(0,-12);
   const storageId = params.coinId.endsWith("market") ? "" : params.coinId.slice(-11);
   return (
-    <div className={clsx("pt-[184px]",{
+    <div className={clsx("sm:pt-[144px] pt-[184px]",{
       "bg-cryptodark-400": darkmode,
       "bg-cryptoblue-400": !darkmode,
     })}>

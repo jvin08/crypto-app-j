@@ -32,12 +32,12 @@ const CoinView = ({coinId, id}:{coinId: string, id: string}) => {
   const rank = data?.market_data?.market_cap_rank;
   const isStorageInfo = id !== "" ? true : false;
   return (
-    <div className="pb-10">
+    <div className="pb-10 sm:mx-4">
       {isStorageInfo 
-        ? <h2 className="mb-10 text-xl">Portfolio/Your&apos;s {data?.name} summary</h2>
-        : <h2 className="mb-10 text-xl">Market / {data?.name} summary</h2>
+        ? <h2 className="mb-10 sm:text-lg text-xl">Portfolio/Your&apos;s {data?.name} summary</h2>
+        : <h2 className="mb-10 sm:text-lg text-xl">Market / {data?.name} summary</h2>
       }
-      <div className={clsx("flex mb-8",{
+      <div className={clsx("flex sm:flex-col mb-8",{
         "bg-cryptodark-400 text-cryptodark-100": darkmode,
         "text-cryptoblue-910": !darkmode,
       })}>
@@ -50,16 +50,16 @@ const CoinView = ({coinId, id}:{coinId: string, id: string}) => {
           rank={rank}
           currencyLabel={currencyLabel}
         />
-        <div className="w-3/5">
-          <p className={clsx("text-sm mb-4",{
+        <div className="sm:w-full w-3/5 sm:mt-6">
+          <p className={clsx("text-sm mb-6",{
             "text-cryptodark-400 font-light": !darkmode,
             "font-thin": darkmode,
           })}>{data?.description.en.slice(0,1600)}...</p>
           <Links data={data} />
         </div>
       </div>
-      <div className="flex flex-wrap justify-between border-t-[1px] border-cryptoblue-100">
-        <div className={clsx("mt-8 px-8 py-10 w-[calc(50%-12px)] h-[216px] rounded-xl ",{
+      <div className="flex sm:flex-col flex-wrap justify-between border-t-[1px] border-cryptoblue-100">
+        <div className={clsx("mt-8 px-8 sm:py-8 py-10 sm:w-full w-[calc(50%-12px)] sm:h-72 h-[216px] rounded-xl ",{
           "bg-cryptodark-300 text-cryptodark-100": darkmode,
           "bg-cryptoblue-100": !darkmode,
         })}>
@@ -67,7 +67,7 @@ const CoinView = ({coinId, id}:{coinId: string, id: string}) => {
           <BulletItem name="Volume 24h" content={`${currencySign} ${addCommas(volume24hours)}`} />
           <BulletItem name="Volume/Market" content={volVsCap} />
         </div>
-        <div  className={clsx("mt-8 px-8 py-10 w-[calc(50%-12px)] h-[216px] rounded-xl ",{
+        <div  className={clsx("sm:mt-6 mt-8 px-8 sm:py-8 py-10 sm:w-full w-[calc(50%-12px)] sm:h-[280px] h-[216px] rounded-xl ",{
           "bg-cryptodark-300 text-cryptodark-100": darkmode,
           "bg-cryptoblue-100": !darkmode,
         })}>
@@ -81,7 +81,7 @@ const CoinView = ({coinId, id}:{coinId: string, id: string}) => {
             </div>
           </div>
         </div>
-        <div className={clsx("mt-6 px-8 py-10 w-[calc(50%-12px)] h-[160px] rounded-xl ",{
+        <div className={clsx("mt-6 px-8 sm:py-8 py-10 sm:w-full w-[calc(50%-12px)] sm:h-52 h-[160px] rounded-xl",{
           "bg-cryptodark-300 text-cryptodark-100": darkmode,
           "bg-cryptoblue-100": !darkmode,
         })}>

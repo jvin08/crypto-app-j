@@ -21,8 +21,8 @@ const DeleteModal = ({toggleDeleteModal, id, handleCoinAdded}:{toggleDeleteModal
   const darkmode = useSelector(selectDarkmode);
   return (
     <div className="fixed top-0 left-0 z-10 flex bg-cryptodark-900 bg-opacity-45 backdrop-blur-[1px] w-full h-full">
-      <div className="absolute left-[calc(50%-15rem)] top-[12rem] rounded-[20px]">
-        <div className={clsx("m-auto w-[30rem] z-50 p-12 rounded-[20px] text-xl",{
+      <div className="absolute sm:left-0 left-[calc(50%-15rem)] sm:top-[116px] top-[12rem] sm:px-4 rounded-[20px]">
+        <div className={clsx("m-auto sm:w-full sm:px-6 w-[30rem] z-50 p-12 rounded-[20px] text-xl",{
           "bg-cryptodark-400 text-cryptodark-100": darkmode,
           "bg-cryptoblue-100": !darkmode,
         })}>
@@ -36,12 +36,12 @@ const DeleteModal = ({toggleDeleteModal, id, handleCoinAdded}:{toggleDeleteModal
             </div>
           </div>
           <p className="text-center text-cryptoblue-500">{coinName} ({coinSymbol})</p>
-          <div className="flex items-center justify-evenly mt-5">
+          <div className="flex sm:flex-col-reverse sm:justify-between sm:h-24 items-center justify-evenly mt-5">
             <CustomButton 
               name="Cancel"
               handleClick={toggleDeleteModal}
               active={true}
-              width="w-[10rem]"
+              width="sm:w-full w-[10rem]"
               padding="px-auto py-3"
               disabled={false}
             />
@@ -49,7 +49,7 @@ const DeleteModal = ({toggleDeleteModal, id, handleCoinAdded}:{toggleDeleteModal
               name="Delete"
               handleClick={()=>deleteCoinFromLocalStorage(id)}
               active={true}
-              width="w-[10rem]"
+              width="sm:w-full w-[10rem]"
               padding="px-auto py-3"
               disabled={false} 
             />
