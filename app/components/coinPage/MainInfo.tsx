@@ -51,7 +51,7 @@ const MainInfo = ({
     return currPrice < minPrice ? [time, currPrice] : minValue;
   },[0,Infinity]);
   return (
-    <div className={clsx("w-[564px] h-[461px] px-8 pt-10 pb-[57px] mr-8 rounded-xl",{
+    <div className={clsx("sm:w-full w-[564px] sm:px-4 px-8 pt-10 pb-[57px] mr-8 rounded-xl",{
       "bg-cryptodark-300": darkmode,
       "bg-cryptoblue-100": !darkmode,
     })}>
@@ -83,10 +83,10 @@ const MainInfo = ({
         </div>
         <div className="">
           <div className="flex items-center mt-3">
-            <h1 className="text-4xl font-semibold mr-5">{currencySign} {addCommas(data?.market_data?.current_price?.[currencyLabel])}</h1>
+            <h1 className="text-4xl sm:text-2xl font-semibold mr-5">{currencySign} {addCommas(data?.market_data?.current_price?.[currencyLabel])}</h1>
             <p className="text-xl ml-0.5 mr-1">(24h)</p>
             <SmallTriangle percentage={isStorageInfo ? priceChange : priceChangeDay} />
-            <p className="text-xl mr-0.5" 
+            <p className="sm:text-base text-xl mr-0.5" 
               style={{color: isPositive(isStorageInfo ? priceChange : priceChangeDay) ? "#00B1A7" : "#FE2264"}}>
               {currencySign} {isStorageInfo 
                 ? Math.abs(Number(priceChange?.toFixed(4)))
@@ -105,11 +105,11 @@ const MainInfo = ({
         </div>
       </div>
       <div className="flex items-center justify-between mt-8">
-        <div className="ml-1 flex items-center">
+        <div className="-ml-1 flex items-center">
           <Triangle color="#00B1A7" angle="0" />
-          <p className="text-xl p-0 ml-4">All time high: </p>
+          <p className="text-xl p-0 sm:ml-3 ml-4">All time high: </p>
         </div>  
-        <p className="text-2xl p-0">{currencySign} {maxHistoricalPrice?.[1]?.toFixed(4)}</p>
+        <p className="sm:text-xl text-2xl p-0">{currencySign} {maxHistoricalPrice?.[1]?.toFixed(4)}</p>
       </div>
       <p className={clsx("text-base font-extralight text-cryptodark-510",{
         "text-cryptodark-510": darkmode,
@@ -118,9 +118,9 @@ const MainInfo = ({
       <div className="flex items-center justify-between mt-6">
         <div className="ml-1 flex items-center">
           <Triangle color="#FE2264" angle="180" />
-          <p className="text-xl p-0 ml-4">All time low: </p>
+          <p className="text-xl p-0 ml-2">All time low: </p>
         </div>  
-        <p className="text-2xl p-0">{currencySign} {minHistoricalPrice?.[1]?.toFixed(4)}</p>
+        <p className="text-2xl sm:text-xl p-0">{currencySign} {minHistoricalPrice?.[1]?.toFixed(4)}</p>
       </div>
       <p className={clsx("text-base font-extralight text-cryptodark-510",{
         "text-cryptodark-510": darkmode,

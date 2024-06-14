@@ -33,6 +33,7 @@ const Portfolio = () => {
     })}>
       <div  className={clsx("text-sm w-full h-full rounded-[5px] flex",{
         "bg-cryptodark-750": darkmode,
+        "bg-cryptoblue-600 text-cryptoblue-100": !darkmode,
       })}>
         <div className="m-auto">
           <SmallIcon active={active} darkmode={darkmode} />
@@ -43,6 +44,7 @@ const Portfolio = () => {
       onClick={()=>handleNotification("Portfolio page opened")} 
       className={clsx("text-sm flex justify-center items-center h-8 w-[108px] rounded-md",{
         "bg-cryptodark-150": darkmode,
+        "bg-cryptoblue-100": !darkmode,
       })}>
       <div className="ml-auto mr-2">
         <SmallIcon active={active} darkmode={darkmode} />

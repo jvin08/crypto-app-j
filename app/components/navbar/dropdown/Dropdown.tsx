@@ -47,10 +47,10 @@ const Dropdown = () => {
     setHidden(prev => prev==="hidden" ? "" : "hidden");
   };
   return (
-    <div className="relative ml-5 sm:ml-3 text-xs" onClick={toggleHidden}>
+    <div className="relative ml-5 sm:ml-2 text-xs" onClick={toggleHidden}>
       <div className={clsx("flex items-center h-12 w-[108px] sm:w-[60px] sm:h-9 rounded-md px-4 sm:px-1", {
         "bg-cryptodark-200 border-cryptodark-170 border-[1px] sm:bg-cryptodark-400 sm:border-none": darkmode,
-        "bg-cryptoblue-200": !darkmode,
+        "sm:bg-cryptoblue-100 bg-cryptoblue-200": !darkmode,
       })}>
         <p className={clsx("pl-[5px] pt-0.5 rounded-full w-5 h-5 font-bold sm:hidden", {
           "bg-cryptodark-100": darkmode,
@@ -62,7 +62,7 @@ const Dropdown = () => {
           "text-cryptoblue-900": !darkmode,
           "text-cryptodark-100": darkmode,
         })}>{currency.label}</p>
-        <svg className="sm:absolute sm:left-[45px]"
+        <svg className="sm:absolute sm:left-[40px]"
           width="14" 
           height="14" 
           viewBox="0 0 14 14" 

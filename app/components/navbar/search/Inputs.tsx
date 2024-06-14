@@ -30,7 +30,7 @@ export const MobileInput = ({
     <div className={clsx("",{
       "hidden": !showMobileSearch
     })}>
-      <div className="sm:absolute left-[3%] top-[73px] w-[94%]">
+      <div className="sm:fixed left-[3%] top-[73px] w-[94%] z-40">
         <span className="absolute z-40 left-[5%] top-1.5">&#x1F50E;&#xFE0E;</span>
         <input
           type="text" 
@@ -39,11 +39,11 @@ export const MobileInput = ({
           onChange={handleChange}
           onClick={toggleHidden}
           onKeyDown={handleKeyDown}
-          className={clsx(`${searchWidth} pl-12 absolute left-0 -top-0.5 h-12 sm:h-10 w-full z-30 box-border text-sm focus:outline-none`, {
+          className={clsx(`${searchWidth} rounded-t-md pl-12 absolute left-0 -top-0.5 h-12 sm:h-10 w-full z-30 box-border text-sm focus:outline-none`, {
             "bg-cryptoblue-200 focus:border-cryptoblue-900": !darkmode,
             "bg-cryptodark-200 text-cryptodark-100 border-[1px] border-cryptodark-170 focus:outline-none focus:shadow-inner": darkmode,
             "rounded-md": hidden,
-            "rounded-t-md bg-gradient-to-r from-cryptodark-200 to-dark-140": !hidden
+            "bg-gradient-to-r from-cryptodark-200 to-cryptodark-170": darkmode && !hidden
           })} />
         <button 
           className="absolute z-40 top-2.5 left-[90%] text-xs"
@@ -73,11 +73,11 @@ export const DesktopInput = ({searchTerm, handleChange, toggleHidden, handleKeyD
         onChange={handleChange}
         onClick={toggleHidden}
         onKeyDown={handleKeyDown}
-        className={clsx("pl-12 h-12 w-72 box-border text-sm focus:outline-none", {
+        className={clsx("rounded-t-md pl-12 h-12 w-72 box-border text-sm focus:outline-none", {
           "bg-cryptoblue-200 focus:border-cryptoblue-900": !darkmode,
           "bg-cryptodark-200 text-cryptodark-100 border-[1px] border-cryptodark-170 focus:outline-none focus:shadow-inner": darkmode,
           "rounded-md": hidden,
-          "rounded-t-md bg-gradient-to-r from-cryptodark-200 to-dark-140": !hidden
+          "bg-gradient-to-r from-cryptodark-200 to-dark-140": darkmode && !hidden
         })} />
     </div>
   );
