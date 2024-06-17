@@ -67,42 +67,42 @@ const Table = ({
         <Amount placeholder="Minimum %1" name="growRate" visible={showGrowInput} onToggle={toggleGrowRate} getAmount={amountHandler} /> 
       </div>
       {showSpentAmount && isVCA && <SpentAmount 
-          query={query} 
-          growRate={state.growRate} 
-          interval={state.interval}
-          initialAmount={state.investment}
-          days={days}
-          startTime={state.startDateTime}
-          endTime={state.endDateTime}
-          getChartData={getChartData}
-          innerStyle={innerStyle}
-          outerStyle={outerStyle}
-        />}
-        {showSpentAmount && !isVCA && <SpentAmountDCA query={query} 
-            growRate={state.growRate} 
-            interval={state.interval}
-            initialAmount={state.investment}
-            days={days}
-            startTime={state.startDateTime}
-            endTime={state.endDateTime}
-            getChartData={getChartData}
-            innerStyle={innerStyle}
-            outerStyle={outerStyle}/>
-        }
-        {!showSpentAmount && <>
-          <div className={outerStyle + " sm:h-[93px]"}>
-            <div className={innerStyle + " sm:h-14"}>
-              <p>Total amount spent on investments, $</p><ToolTip text={info.total} />
-            </div>
-            <p className="sm:h-10 h-[52px] text-right pr-3 flex items-center">$</p> 
+        query={query} 
+        growRate={state.growRate} 
+        interval={state.interval}
+        initialAmount={state.investment}
+        days={days}
+        startTime={state.startDateTime}
+        endTime={state.endDateTime}
+        getChartData={getChartData}
+        innerStyle={innerStyle}
+        outerStyle={outerStyle}
+      />}
+      {showSpentAmount && !isVCA && <SpentAmountDCA query={query} 
+        growRate={state.growRate} 
+        interval={state.interval}
+        initialAmount={state.investment}
+        days={days}
+        startTime={state.startDateTime}
+        endTime={state.endDateTime}
+        getChartData={getChartData}
+        innerStyle={innerStyle}
+        outerStyle={outerStyle}/>
+      }
+      {!showSpentAmount && <>
+        <div className={outerStyle + " sm:h-[93px]"}>
+          <div className={innerStyle + " sm:h-14"}>
+            <p>Total amount spent on investments, $</p><ToolTip text={info.total} />
           </div>
-          <div className="relative w-full flex sm:items-start justify-between items-center sm:flex-col h-[52px] sm:h-[82px]">
-            <div className={innerStyle + " sm:h-14"}>
-              <p>Coins value, $</p><ToolTip text={info.value} />
-            </div>
-            <p className="sm:h-10 h-[52px] text-right pr-3 flex items-center">$</p> 
+          <p className="sm:h-10 h-[52px] text-right pr-3 flex items-center">$</p> 
+        </div>
+        <div className="relative w-full flex sm:items-start justify-between items-center sm:flex-col h-[52px] sm:h-[82px]">
+          <div className={innerStyle + " sm:h-14"}>
+            <p>Coins value, $</p><ToolTip text={info.value} />
           </div>
-        </>
+          <p className="sm:h-10 h-[52px] text-right pr-3 flex items-center">$</p> 
+        </div>
+      </>
       }
     </div>
   );
