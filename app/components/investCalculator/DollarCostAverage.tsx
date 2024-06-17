@@ -113,34 +113,6 @@ const DollarCostAverage = ({coin}:{coin: string}) => {
           query={query}
           rowThreeName="Funds added per interval, $"
         />
-        {/* <div className="w-[83%] h-[260px]">
-          <p className={pStyle}>Contribution interval, days <ToolTip text={info.interval} /></p>
-          <p className={pStyle}>Initial investment, $ <ToolTip text={info.initial} /></p>
-          <p className={pStyle}>Investment added each interval, $  <ToolTip text={info.amountPerInterval} /></p>
-          <p className={pStyle}>Total amount spent on investments, $<ToolTip text={info.total} /></p>
-          <p className={pStyleLast}>Coins value, $<ToolTip text={info.value} /></p>
-        </div>
-        <div className="text-center w-[17%] h-[260px]">
-          <Amount placeholder="Minimum 1d." name="interval" visible={visibleInterval} onToggle={displayInterval} getAmount={amountHandler} />
-          <Amount placeholder="Minimum $1" name="investment" visible={showInvestment} onToggle={displayInvestment} getAmount={amountHandler} />
-          <Amount placeholder="Minimum %1" name="growAmount" visible={showGrowInput} onToggle={toggleGrowRate} getAmount={amountHandler} />
-          {shouldRenderSpentAmount ? 
-            <SpentAmountDCA 
-              query={query} 
-              growAmount={state.growAmount} 
-              interval={state.interval}
-              initialAmount={state.investment}
-              days={days}
-              startTime={state.startDateTime}
-              endTime={state.endDateTime}
-              getChartData={getChartData}
-            /> : 
-            <>
-              <p className="pt-[14px] h-[52px] border-b-[1px] box-border border-cryptodark-160 text-right pr-3">$</p>
-              <p className="pt-[14px] h-[52px] text-right pr-3">$</p>
-            </> 
-          }
-        </div> */}
       </div>
       <CustomButton name="Calculate (DCA)" handleClick={calculateDCA} active={true} disabled={false} width="w-full" padding="" />
     </div>
