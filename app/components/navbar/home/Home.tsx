@@ -35,7 +35,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-        : <Link className={clsx("text-sm flex justify-start items-center h-8 w-[106px] rounded-md",{
+        : <Link className={clsx("text-sm flex justify-start items-center h-8 w-[108px] rounded-md",{
           "bg-cryptodark-150" : darkmode,
           "bg-cryptoblue-100" : !darkmode,
         })} href="/" onClick={()=>handleNotification("open home page")}>

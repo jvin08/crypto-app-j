@@ -1,14 +1,12 @@
 import React, { useState, useRef, useCallback, ChangeEvent } from "react";
 import { timeInterval, info, formattedDateTime } from "./utils";
-import Amount from "./Amount";
 import DatePicker from "./DatePicker";
-import SpentAmountDCA from "./SpentAmountDCA";
-import { ToolTip } from "./ToolTip";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
 import clsx from "clsx";
 import CustomButton from "../portfolioModal/CustomButton";
 import Chart from "./Chart";
+import Table from "./Table";
 
 const DollarCostAverage = ({coin}:{coin: string}) => {
   const dataRef = useRef([[0, 0]]);
@@ -18,7 +16,7 @@ const DollarCostAverage = ({coin}:{coin: string}) => {
     endDateTime:  formattedDateTime(new Date()).replace("T", " "),
     interval: 0,
     investment: 0,
-    growAmount: 0,
+    growRate: 0,
     showChart: false
   });
   const [visibleInterval, setVisibleInterval] = useState(false);
@@ -31,10 +29,10 @@ const DollarCostAverage = ({coin}:{coin: string}) => {
   const query = `${coin}/market_chart?vs_currency=usd&days=${days}`;
   const allowFetchData = coin !== "" 
     && state.startDateTime !== ""
-    && state.growAmount !== 0 
+    && state.growRate !== 0 
     && state.investment !== 0 
     && state.interval !== 0;
-  const [shouldRenderSpentAmount, setShouldRenderSpentAmount] = useState(false);
+  const [showSpentAmount, setShowSpentAmount] = useState(false);
   const displayInterval = () => {setVisibleInterval(!visibleInterval);};
   const displayInvestment = () => {setShowInvestment(!showInvestment);};
   const toggleGrowRate = () => {setShowGrowInput(!showGrowInput);};
@@ -46,7 +44,7 @@ const DollarCostAverage = ({coin}:{coin: string}) => {
     updateState(name, amount);
   };
   const calculateDCA = () => {
-    allowFetchData && setShouldRenderSpentAmount(true);
+    allowFetchData && setShowSpentAmount(true);
   };
   const getChartData = useCallback((data: number[][]) => {
     dataRef.current = data;
@@ -56,13 +54,11 @@ const DollarCostAverage = ({coin}:{coin: string}) => {
       updateState("showChart", !state.showChart);
     }
   };
-  const pStyle = "flex items-center h-[52px] border-b-[1px] box-border border-cryptoblue-460 pt-[14px] pb-[13px] relative";
-  const pStyleLast = "border-cryptoblue-460 pt-[14px] pb-[13px] relative";
   const openChart = state.showChart ? "openingchart" : "w-0";
   const notAllowed = dataRef.current.length === 1 ? "not-allowed" : "pointer";
   return (
     <div className=" w-full mb-8">
-      <div className="flex relative text-base mb-4">
+      <div className="flex sm:flex-col relative text-base mb-4">
         <button className={clsx("py-2 px-auto h-9 w-[83px] mr-4 rounded-lg text-sm font-semibold",{
           "bg-cryptodark-350 text-cryptoblue-650": darkmode,
           "bg-cryptoblue-350 text-cryptoblue-660": !darkmode,
@@ -89,7 +85,7 @@ const DollarCostAverage = ({coin}:{coin: string}) => {
           dateHandler={dateHandler} 
           info={info.endDate}
         />
-        <p className={clsx("py-2 h-9 w-[83px] text-center ml-auto rounded-lg text-sm text-cryptoblue-650",{
+        <p className={clsx("sm:hidden py-2 h-9 w-[83px] text-center ml-auto rounded-lg text-sm text-cryptoblue-650",{
           "bg-cryptodark-350 ": darkmode,
           "bg-cryptoblue-350": !darkmode,
         })}>Q-ty</p>
@@ -101,34 +97,22 @@ const DollarCostAverage = ({coin}:{coin: string}) => {
         "bg-cryptodark-300": darkmode,
         "bg-cryptoblue-350": !darkmode,
       })}>
-        <div className="w-[83%] h-[260px]">
-          <p className={pStyle}>Contribution interval, days <ToolTip text={info.interval} /></p>
-          <p className={pStyle}>Initial investment, $ <ToolTip text={info.initial} /></p>
-          <p className={pStyle}>Investment added each interval, $  <ToolTip text={info.amountPerInterval} /></p>
-          <p className={pStyle}>Total amount spent on investments, $<ToolTip text={info.total} /></p>
-          <p className={pStyleLast}>Coins value, $<ToolTip text={info.value} /></p>
-        </div>
-        <div className="text-center w-[17%] h-[260px]">
-          <Amount placeholder="Minimum 1d." name="interval" visible={visibleInterval} onToggle={displayInterval} getAmount={amountHandler} />
-          <Amount placeholder="Minimum $1" name="investment" visible={showInvestment} onToggle={displayInvestment} getAmount={amountHandler} />
-          <Amount placeholder="Minimum %1" name="growAmount" visible={showGrowInput} onToggle={toggleGrowRate} getAmount={amountHandler} />
-          {shouldRenderSpentAmount ? 
-            <SpentAmountDCA 
-              query={query} 
-              growAmount={state.growAmount} 
-              interval={state.interval}
-              initialAmount={state.investment}
-              days={days}
-              startTime={state.startDateTime}
-              endTime={state.endDateTime}
-              getChartData={getChartData}
-            /> : 
-            <>
-              <p className="pt-[14px] h-[52px] border-b-[1px] box-border border-cryptodark-160 text-right pr-3">$</p>
-              <p className="pt-[14px] h-[52px] text-right pr-3">$</p>
-            </> 
-          }
-        </div>
+        <Table 
+          name="Dollar cost averaging"
+          visibleInterval={visibleInterval}
+          displayInterval={displayInterval}
+          amountHandler={amountHandler}
+          showInvestment={showInvestment}
+          displayInvestment={displayInvestment}
+          showGrowInput={showGrowInput}
+          toggleGrowRate={toggleGrowRate}
+          state={state}
+          getChartData={getChartData}
+          showSpentAmount={showSpentAmount}
+          days={days}
+          query={query}
+          rowThreeName="Funds added per interval, $"
+        />
       </div>
       <CustomButton name="Calculate (DCA)" handleClick={calculateDCA} active={true} disabled={false} width="w-full" padding="" />
     </div>

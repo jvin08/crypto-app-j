@@ -42,7 +42,7 @@ const Portfolio = () => {
     </div> : <Link 
       href="/portfolio" 
       onClick={()=>handleNotification("Portfolio page opened")} 
-      className={clsx("text-sm flex justify-center items-center h-8 w-[108px] rounded-md",{
+      className={clsx("text-sm flex justify-center items-center h-8 w-[100px] rounded-md",{
         "bg-cryptodark-150": darkmode,
         "bg-cryptoblue-100": !darkmode,
       })}>

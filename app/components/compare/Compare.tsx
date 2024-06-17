@@ -36,7 +36,7 @@ const Compare = () => {
     </>;
   };
   return (
-    <div className="flex justify-between text-sm mt-10 sm:mt-6 w-full sm:min-w-[343px] items-center">
+    <div className="flex justify-between text-sm mt-10 sm:mt-6 w-full items-center">
       <p className={clsx("pt-8 sm:py-0",{
         "text-cryptoblue-900": !darkmode,
         "text-cryptoblue-500": darkmode
