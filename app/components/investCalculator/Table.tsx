@@ -66,8 +66,7 @@ const Table = ({
         </div>
         <Amount placeholder="Minimum %1" name="growRate" visible={showGrowInput} onToggle={toggleGrowRate} getAmount={amountHandler} /> 
       </div>
-      {showSpentAmount 
-        ? (isVCA ? <SpentAmount 
+      {showSpentAmount && isVCA && <SpentAmount 
           query={query} 
           growRate={state.growRate} 
           interval={state.interval}
@@ -78,8 +77,8 @@ const Table = ({
           getChartData={getChartData}
           innerStyle={innerStyle}
           outerStyle={outerStyle}
-        /> 
-          : <SpentAmountDCA query={query} 
+        />}
+        {showSpentAmount && !isVCA && <SpentAmountDCA query={query} 
             growRate={state.growRate} 
             interval={state.interval}
             initialAmount={state.investment}
@@ -88,8 +87,9 @@ const Table = ({
             endTime={state.endDateTime}
             getChartData={getChartData}
             innerStyle={innerStyle}
-            outerStyle={outerStyle}/>)
-        : <>
+            outerStyle={outerStyle}/>
+        }
+        {!showSpentAmount && <>
           <div className={outerStyle + " sm:h-[93px]"}>
             <div className={innerStyle + " sm:h-14"}>
               <p>Total amount spent on investments, $</p><ToolTip text={info.total} />
