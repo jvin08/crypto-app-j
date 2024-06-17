@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useGetCoinDataByDateQuery } from "../../lib/marketSlice";
-import { amountInvested, filterPrices } from "./utils";
+import { amountInvested, filterPrices, info } from "./utils";
+import { ToolTip } from "./ToolTip";
 
 const SpentAmount = (
   {
@@ -11,7 +12,9 @@ const SpentAmount = (
     days,
     startTime,
     endTime,
-    getChartData
+    getChartData,
+    innerStyle,
+    outerStyle
   }:{
     query:string, 
     growRate:number, 
@@ -19,8 +22,10 @@ const SpentAmount = (
     initialAmount: number,
     days: number | undefined
     startTime: string,
-    endTime: string
-    getChartData: Function
+    endTime: string,
+    getChartData: Function,
+    innerStyle: string,
+    outerStyle: string
   }) => {
   const { data } = useGetCoinDataByDateQuery(query);
   const coinPrices = filterPrices(data, days, interval, startTime, endTime);
@@ -31,8 +36,18 @@ const SpentAmount = (
   },[chartData, getChartData]);
   return (
     <>
-      <p className="pt-[14px] h-[52px] text-right border-b-[1px] border-cryptodark-160">{define.spentAmount}</p>
-      <p className="pt-[14px] h-[52px] text-right">{define.lastValue}</p>
+      <div className={outerStyle + " sm:h-[93px]"}>
+        <div className={innerStyle + " sm:h-14"}>
+          <p>Total amount spent on investments</p><ToolTip text={info.total} />
+        </div>
+        <p className="sm:h-10 h-[52px] text-right pr-3 flex items-center">{define.spentAmount}</p> 
+      </div>
+      <div className="relative w-full flex sm:items-start justify-between items-center sm:flex-col h-[52px] sm:h-[82px]">
+        <div className={innerStyle + " sm:h-14"}>
+          <p>Coins value, $</p><ToolTip text={info.value} />
+        </div>
+        <p className="sm:h-10 h-[52px] text-right pr-3 flex items-center">{define.lastValue}</p> 
+      </div>
     </>
   );
 };

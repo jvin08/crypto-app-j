@@ -65,7 +65,7 @@ const Search = () => {
   };
   const smScreen = windowWidth < 481;
   return (
-    <div className="ml-4 relative sm:max-w-[480px] sm:-left-0">
+    <div className="sm:ml-2 ml-4 relative sm:max-w-[480px] sm:-left-0">
       {smScreen
         ? <button onClick={toggleMobileSearch} className="flex items-center">
           <MobileSearch darkmode={darkmode} />
