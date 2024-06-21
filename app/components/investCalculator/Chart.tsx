@@ -16,6 +16,7 @@ import { options } from "./options";
 import { getChartData } from "./options";
 import { Line } from "react-chartjs-2";
 import { Header } from "./Header";
+import useWindowWidth from "../hooks/hooks";
 
 ChartJS.register(
   CategoryScale,
@@ -28,6 +29,7 @@ ChartJS.register(
 );
 const Chart = ({data}:{data:number[][], coin: string}) => {
   const darkmode = useSelector(selectDarkmode);
+  const width = useWindowWidth();
   const lineChartData = getChartData(data);
   const [ priceIndex, setPriceIndex ] = React.useState<number>(data?.length - 1);
   options.onHover = (event: any, price: any) => {
@@ -38,8 +40,9 @@ const Chart = ({data}:{data:number[][], coin: string}) => {
   const lastValue = data?.slice(-1)[0].at(0) as number;
   const curTime = data?.[priceIndex].at(1) as number;
   const lastTime = data?.slice(-1)[0].at(1) as number;
+  const isMobile = width < 481;
   return (
-    <div className={clsx("w-[746.01px] mt-10 h-[260px] z-[222] text-center text-2xl",{
+    <div className={clsx("sm:w-full w-[746.01px] mt-10 sm:mt-0 sm:h-[440px] h-[260px] z-[222] text-center text-2xl",{
       "bg-cryptodark-300": darkmode,
       "bg-cryptoblue-350": !darkmode,
     })}>
@@ -47,7 +50,10 @@ const Chart = ({data}:{data:number[][], coin: string}) => {
         price={curValue || lastValue} 
         priceDate={curTime || lastTime}
       />
-      <Line options={options} data={lineChartData} height={260} />
+      <div className="sm:h-[300px] h-[260px] -mt-4 sm:mt-24">
+        <Line options={options} data={lineChartData} height={isMobile ? 300 : 260} />
+      </div>
+      
     </div>
   );
 };

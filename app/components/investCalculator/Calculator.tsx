@@ -30,9 +30,9 @@ const Calculator = ({toggleCalculator}:{toggleCalculator:()=>void}) => {
   const formatSelectedCoinName = selectedCoin[0].length > 20 ? capitalize(`${selectedCoin[0].slice(0, 20)}...`) : capitalize(selectedCoin[0]);
   const isMobile = width < 481;
   return (
-    <div className="fixed top-0 left-0 z-10 flex bg-cryptodark-900 bg-opacity-65 backdrop-blur-[1px] w-full sm:h-fit h-full">
+    <div className="absolute top-0 left-0 z-10 flex bg-cryptodark-900 bg-opacity-65 backdrop-blur-[1px] w-full sm:h-fit h-full">
       <div className="absolute sm:left-0 left-[calc(50%-443px)] sm:top-0 top-1 p-[1px] rounded-[2.1rem]">
-        <div className={clsx("sm:w-full w-[886px] sm:h-[1000px] h-[810px] z-50 sm:pt-6 pt-10 sm:p-4 p-12 rounded-[20px] sm:overflow-y-auto",{
+        <div className={clsx("sm:w-full w-[886px] sm:h-[1000px] h-[810px] z-50 sm:pt-6 pt-10 sm:p-4 p-12 rounded-[20px] sm:overflow-y-visible sm:overflow-x-hidden",{
           "bg-cryptodark-400 text-cryptodark-100": darkmode,
           "bg-cryptodark-100 text-cryptoblue-900": !darkmode,
         })}>

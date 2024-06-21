@@ -57,9 +57,9 @@ const DollarCostAverage = ({coin}:{coin: string}) => {
   const openChart = state.showChart ? "openingchart" : "w-0";
   const notAllowed = dataRef.current.length === 1 ? "not-allowed" : "pointer";
   return (
-    <div className=" w-full mb-8">
+    <div className=" w-full mb-8 sm:relative">
       <div className="flex sm:flex-col relative text-base mb-4">
-        <button className={clsx("py-2 px-auto h-9 w-[83px] mr-4 rounded-lg text-sm font-semibold",{
+        <button className={clsx("py-2 px-auto h-9 w-[83px] mr-4 sm:mb-2 rounded-lg text-sm font-semibold",{
           "bg-cryptodark-350 text-cryptoblue-650": darkmode,
           "bg-cryptoblue-350 text-cryptoblue-660": !darkmode,
         })}
@@ -90,7 +90,10 @@ const DollarCostAverage = ({coin}:{coin: string}) => {
           "bg-cryptoblue-350": !darkmode,
         })}>Q-ty</p>
       </div>
-      <div className={`${openChart} overflow-hidden absolute top-30 left-[60px] h-[307.97px] z-[199]`}>
+      <div className={clsx(`${openChart} overflow-hidden absolute sm:top-[162px] top-30 sm:left-5 left-[70px] sm:h-[450px] sm:pt-70 h-[307.97px] z-[199]`,{
+        "bg-cryptodark-300": darkmode,
+        "bg-cryptoblue-350": !darkmode,
+      })}>
         <Chart data={dataRef.current} coin={coin} />
       </div>
       <div className={clsx("text-base flex justify-between rounded-xl px-8 py-6 mb-8",{
