@@ -10,9 +10,9 @@ export const Header = ({price, priceDate } : {price: number, priceDate: number})
   const day = new Date(priceDate);
   const dateNow = day.toLocaleString("default", { month: "long" }).slice(0,3) + " " + day.getDate() + ", " + day.getUTCFullYear();
   return (
-    <div className="absolute left-3 top-5 text-left">
+    <div className="absolute left-3 sm:top-[30px] top-5 text-left">
       <p className={clsx("text-2xl font-bold",{
-        "text-cryptodark-100": darkmode,
+        "text-cryptodark-100 bg-cryptodark-300": darkmode,
         "text-cryptodark-400": !darkmode,
       })}>Total: {coinLastPrice}</p>
       <p className={clsx("text-sm tabular-nums mt-2",{

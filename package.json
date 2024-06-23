@@ -16,7 +16,6 @@
     "@radix-ui/react-tooltip": "^1.0.7",
     "@reduxjs/toolkit": "^2.1.0",
     "@types/react-redux": "^7.1.33",
-    "@wojtekmaj/react-datetimerange-picker": "^5.5.0",
     "chart.js": "^4.4.1",
     "class-variance-authority": "^0.7.0",
     "cloc": "^2.0.0-cloc",

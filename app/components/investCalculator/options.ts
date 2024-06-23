@@ -1,4 +1,4 @@
-import { formatStandardDate } from "../charts/utils";
+import { formatStandardDate } from "./utils";
 
 export const options = {
   onHover:{} as any,
@@ -69,7 +69,7 @@ export const options = {
     x: {
       display: true,
       ticks: {
-        maxTicksLimit: 8,
+        maxTicksLimit: 5,
         color: "#9B9AB6",
         fontSize: 8,
         align: "inner" as "inner",

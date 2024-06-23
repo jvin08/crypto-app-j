@@ -33,7 +33,7 @@ export const amountInvestedDCA = (initialAmount:number, coinPrices:number[][], g
     spentAmount += Number(growAmount);
     growArray.push(newValue);
   }
-  const growArrayWithTime = growArray.map((item, index) => [item, coinPrices?.[index][0]]);
+  const growArrayWithTime = growArray.map((item, index) => [item, coinPrices?.[index]?.[0]]);
   return {
     spentAmount: Math.floor(spentAmount), 
     lastValue: Math.floor(growArray.slice(-1)[0]), 
@@ -91,3 +91,6 @@ export const formattedDateTime = (date: Date) => {
   const localDate = new Date(currentDate.getTime() - (offset * 60000));
   return localDate.toISOString().slice(0, 16);
 };
+export function formatStandardDate(date: Date) {
+  return new Intl.DateTimeFormat("en", { day: "2-digit", month: "2-digit" }).format(date);
+}
