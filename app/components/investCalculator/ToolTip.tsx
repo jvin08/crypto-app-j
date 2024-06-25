@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
 import clsx from "clsx";
+import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
 
 export const ToolTip = ({text}:{text: string}) => {
   const darkmode = useSelector(selectDarkmode);
@@ -26,5 +27,33 @@ export const DateToolTip = ({text}:{text: string}) => {
         "bg-cryptoblue-250 text-cryptoblue-100": !darkmode
       })}>?</button>
     </div>
+  );
+};
+export const ToolTipMui = ({text}:{text: string}) => {
+  const darkmode = useSelector(selectDarkmode);
+  return (
+    <Tooltip 
+      title={text} 
+      arrow 
+      placement="top" 
+      enterTouchDelay={0}
+      leaveDelay={700}
+      slotProps={{
+        popper: {
+          sx: {
+            [`&.${tooltipClasses.popper}[data-popper-placement*="top"] .${tooltipClasses.tooltip}`]:
+              {
+                marginBottom: "5px",
+              },
+          },
+        },
+      }}>
+      <div>
+        <button  className={clsx("px-[3px] h-5 w-5 text-base leading-3 rounded-full",{
+          "bg-cryptoblue-100 text-cryptoblue-460": darkmode,
+          "bg-cryptoblue-250 text-cryptoblue-100": !darkmode
+        })}>?</button>
+      </div>
+    </Tooltip>
   );
 };

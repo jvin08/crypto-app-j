@@ -38,13 +38,13 @@ const SpentAmount = (
     <>
       <div className={outerStyle + " sm:h-[93px]"}>
         <div className={innerStyle + " sm:h-14"}>
-          <p>Total amount spent on investments</p><ToolTip text={info.total} />
+          <p className="mr-2">Total amount spent on investments</p><ToolTip text={info.total} />
         </div>
         <p className="sm:h-10 h-[52px] text-right pr-3 flex items-center">{define.spentAmount}</p> 
       </div>
       <div className="relative w-full flex sm:items-start justify-between items-center sm:flex-col h-[52px] sm:h-[82px]">
         <div className={innerStyle + " sm:h-14"}>
-          <p>Coins value, $</p><ToolTip text={info.value} />
+          <p className="mr-2">Coins value, $</p><ToolTip text={info.value} />
         </div>
         <p className="sm:h-10 h-[52px] text-right pr-3 flex items-center">{define.lastValue}</p> 
       </div>

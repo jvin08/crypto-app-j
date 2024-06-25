@@ -54,7 +54,7 @@ const DollarCostAverage = ({coin}:{coin: string}) => {
       updateState("showChart", !state.showChart);
     }
   };
-  const openChart = state.showChart ? "openingchart" : "w-0";
+  const openChart = state.showChart ? "z-50" : "-z-[999]";
   const notAllowed = dataRef.current.length === 1 ? "not-allowed" : "pointer";
   return (
     <div className=" w-full mb-8 sm:relative">
@@ -90,7 +90,7 @@ const DollarCostAverage = ({coin}:{coin: string}) => {
           "bg-cryptoblue-350": !darkmode,
         })}>Q-ty</p>
       </div>
-      <div className={clsx(`${openChart} overflow-hidden absolute sm:top-[162px] top-30 sm:left-5 left-[70px] sm:h-[450px] sm:pt-70 h-[307.97px] z-[199]`,{
+      <div className={clsx(`${openChart} sm:w-[87%] w-[85%] overflow-hidden absolute sm:top-[162px] top-30 sm:left-5 left-[70px] sm:h-[450px] sm:pt-70 h-[307.97px]`,{
         "bg-cryptodark-300": darkmode,
         "bg-cryptoblue-350": !darkmode,
       })}>

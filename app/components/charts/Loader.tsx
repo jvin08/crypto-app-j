@@ -7,8 +7,8 @@ export const SmallLoader = () => <div className="loader small"/>;
 export const ChartsLoader = ({dataOne, dataTwo, compare} : {dataOne: string, dataTwo: string, compare: boolean}) => {
   const showCoinTwo = compare && dataTwo[0] !== "";
   return (
-    <div className="w-[calc(50%-1rem)] mb-10  rounded-xl h-[404px]">
-      <div className="loaderChart">
+    <div className="sm:w-full w-[calc(50%-1rem)] sm:mb-2 mb-10  rounded-xl sm:h-[224px] h-[404px]">
+      <div className="sm:h-[224px] loaderChart">
         <HeaderBackUp dataOne={dataOne} compare={compare} />
         <div className="flex">
           <p className={compare ? "mt-64 text-cryptoblue-900" : "hidden"}>
