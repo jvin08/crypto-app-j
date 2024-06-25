@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import clsx from "clsx";
-import { DateToolTip } from "./ToolTip";
+import { ToolTipMui } from "./ToolTip";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
 import CalendarIcon from "./CalendarIcon";
@@ -12,7 +12,6 @@ const DatePicker = ({name, value, info, dateHandler}:{name: string, value: strin
     if(dateRef.current){
       (dateRef.current as any).showPicker();
       (dateRef.current as any).focus();
-
     }
   };
   return (
@@ -39,7 +38,7 @@ const DatePicker = ({name, value, info, dateHandler}:{name: string, value: strin
           ref={dateRef}
         />
       </div>
-      <div className="relative pr-2 sm:mr-8 sm:ml-auto"><DateToolTip text={info} /></div>
+      <div className="relative pr-2 sm:mr-8 sm:ml-auto"><ToolTipMui text={info} /></div>
     </div>
   );
 };

@@ -42,7 +42,7 @@ const Chart = ({data}:{data:number[][], coin: string}) => {
   const lastTime = data?.slice(-1)[0].at(1) as number;
   const isMobile = width < 481;
   return (
-    <div className={clsx("sm:w-full w-[746.01px] mt-10 sm:mt-0 sm:h-[440px] h-[260px] z-[222] text-center text-2xl",{
+    <div className={clsx("sm:w-full w-[746.01px] mt-10 sm:mt-0 sm:h-[440px] h-[260px] text-center text-2xl",{
       "bg-cryptodark-300": darkmode,
       "bg-cryptoblue-350": !darkmode,
     })}>

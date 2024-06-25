@@ -43,7 +43,7 @@ const DropdownSearch = ({query, toggleSearch, clearSearch, handleCoin} : {
   };
   const showBorder = coinsForRender !== undefined && coinsForRender.length > 0;
   return (
-    <div className={clsx("box-border text-sm w-[19.5rem] left-0 top-9 absolute z-50 rounded-sm",{
+    <div className={clsx("box-border text-sm w-full left-0 top-[42px] absolute z-50 rounded-sm",{
       "bg-cryptoblue-100 text-cryptoblue-500": !darkmode,
       "bg-cryptodark-200 text-cryptodark-100": darkmode,
       "border-cryptodark-800 border-[0.01rem]": showBorder,

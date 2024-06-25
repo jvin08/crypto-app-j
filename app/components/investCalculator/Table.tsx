@@ -1,6 +1,6 @@
 import React from "react";
 import Amount from "./Amount";
-import { ToolTip } from "./ToolTip";
+import { ToolTipMui } from "./ToolTip";
 import { info } from "./utils";
 import SpentAmount from "./SpentAmount";
 import SpentAmountDCA from "./SpentAmountDCA";
@@ -50,19 +50,19 @@ const Table = ({
     <div className="w-full sm:h-[430px] h-[260px]">
       <div className={outerStyle + " sm:h-[82px]"}>
         <div className={innerStyle + " sm:h-10"}>
-          <p>Contribution interval, days</p> <ToolTip text={info.interval} />
+          <p className="mr-2">Contribution interval, days</p> <ToolTipMui text={info.interval} />
         </div>
         <Amount placeholder="Minimum 1d." name="interval" visible={visibleInterval} onToggle={displayInterval} getAmount={amountHandler} />
       </div> 
       <div className={outerStyle + " sm:h-[82px]"}>
         <div className={innerStyle + " sm:h-10"}>
-          <p>Initial investment, $</p> <ToolTip text={info.initial} />
+          <p className="mr-2">Initial investment, $</p> <ToolTipMui text={info.initial} />
         </div>
         <Amount placeholder="Minimum $1" name="investment" visible={showInvestment} onToggle={displayInvestment} getAmount={amountHandler} /> 
       </div>
       <div className={outerStyle + " sm:h-[82px]"}>
         <div className={innerStyle + " sm:h-10"}>
-          <p>{rowThreeName} </p> <ToolTip text={info.groWRate} />
+          <p className="mr-2">{rowThreeName} </p> <ToolTipMui text={info.groWRate} />
         </div>
         <Amount placeholder="Minimum %1" name="growRate" visible={showGrowInput} onToggle={toggleGrowRate} getAmount={amountHandler} /> 
       </div>
@@ -92,13 +92,13 @@ const Table = ({
       {!showSpentAmount && <>
         <div className={outerStyle + " sm:h-[93px]"}>
           <div className={innerStyle + " sm:h-14"}>
-            <p>Total amount spent on investments, $</p><ToolTip text={info.total} />
+            <p className="mr-2">Total amount spent on investments</p><ToolTipMui text={info.total} />
           </div>
           <p className="sm:h-10 h-[52px] text-right pr-3 flex items-center">$</p> 
         </div>
         <div className="relative w-full flex sm:items-start justify-between items-center sm:flex-col h-[52px] sm:h-[82px]">
           <div className={innerStyle + " sm:h-14"}>
-            <p>Coins value, $</p><ToolTip text={info.value} />
+            <p className="mr-2">Coins value, $</p><ToolTipMui text={info.value} />
           </div>
           <p className="sm:h-10 h-[52px] text-right pr-3 flex items-center">$</p> 
         </div>
