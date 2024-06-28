@@ -1,11 +1,20 @@
 // Need to use the React-specific entry point to import createApi
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery, BaseQueryFn, BaseQueryApi } from "@reduxjs/toolkit/query/react";
 
+const baseQueryCoinGecko = fetchBaseQuery({ baseUrl: "https://api.coingecko.com/api/v3/" });
+const baseQueryAlternative = fetchBaseQuery({ baseUrl: "https://api.alternative.me/" });
+const customBaseQuery:BaseQueryFn = async (args: string, api: BaseQueryApi, extraOptions: any) => {
+  if(typeof args === "string" && args.includes("fng")) {
+    return baseQueryAlternative(args, api, extraOptions);
+  }else{
+    return baseQueryCoinGecko(args, api, extraOptions);
+  }
+};
 const apiKey = `x_cg_demo_api_key=${process.env.NEXT_PUBLIC_x_cg_demo_api_key}`;
 // Define a service using a base URL and expected endpoints
 export const marketApi = createApi({
   reducerPath: "marketApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "https://api.coingecko.com/api/v3/"}),
+  baseQuery: customBaseQuery, //fetchBaseQuery({ baseUrl: "https://api.coingecko.com/api/v3/"}),
   endpoints: (builder) => ({
     getMarketData: builder.query({
       query: () => "global",
@@ -31,6 +40,9 @@ export const marketApi = createApi({
     getCoinDataByDate: builder.query({
       query: (query) => `coins/${query}&${apiKey}`
     }),
+    getFearAndGreedData: builder.query({
+      query: () => "fng/",
+    }),
   }),
 });
 export const { 
@@ -42,4 +54,5 @@ export const {
   useGetTenCoinsPricesQuery,
   useGetOneCoinDataQuery,
   useGetCoinDataByDateQuery,
+  useGetFearAndGreedDataQuery,
 } = marketApi;

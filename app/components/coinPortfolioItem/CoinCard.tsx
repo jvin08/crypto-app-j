@@ -3,7 +3,7 @@ import React from "react";
 import { DataElement, PurchaseDate } from "./DataElement";
 import StatusBar from "./StatusBar";
 import CoinImage from "./CoinImage";
-import { ToolTipCoinCard }  from "./ToolTip";
+import { ToolTipMui }  from "./ToolTip";
 import clsx from "clsx";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
@@ -47,7 +47,7 @@ const CoinCard = ({ storageData, toggleDeleteModal, toggleEditModal }:{ storageD
             <div className="flex justify-between mb-0 mt-[10px] rounded-[22px]">
               <h2 className="text-xl m-0 p-0">Market Price</h2>
               <div className="-mr-4 -mb-4">
-                <ToolTipCoinCard name="Delete coin" eventHandler={(e: any)=>toggleDeleteModal(e, storageData.id)}/>
+                <ToolTipMui text="Delete coin" eventHandler={(e: any)=>toggleDeleteModal(e, storageData.id)} marginBottom="8px"/>
               </div>
             </div>
             <div className="sm:h-[146px] sm:grid sm:grid-cols-2 flex justify-between sm:pb-0 pb-4 mt-5">
@@ -61,7 +61,7 @@ const CoinCard = ({ storageData, toggleDeleteModal, toggleEditModal }:{ storageD
             <div className="flex justify-between mt-7 mb-2">
               <h2 className="text-xl">Your coin</h2>
               <div className="-mr-4">
-                <ToolTipCoinCard name="Edit coin data" eventHandler={(e: any)=>toggleEditModal(e, storageData.id)} />
+                <ToolTipMui text="Edit coin data" eventHandler={(e: any)=>toggleEditModal(e, storageData.id)} marginBottom="25px"/>
               </div>
             </div>
             <div className="sm:h-[146px] sm:grid sm:grid-cols-2 flex justify-between">

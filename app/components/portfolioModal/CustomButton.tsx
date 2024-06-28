@@ -4,7 +4,7 @@ import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
 import clsx from "clsx";
 
 type Props = {
-    name: String,
+    name: string,
     handleClick: MouseEventHandler,
     active: boolean,
     width: string,
@@ -29,7 +29,7 @@ const CustomButton = ({name, handleClick, active, width, padding, disabled}: Pro
   );
 };
 type MobileProps = {
-  name: String,
+  name: string,
   handleClick: MouseEventHandler,
   active: boolean,
   width: string,
