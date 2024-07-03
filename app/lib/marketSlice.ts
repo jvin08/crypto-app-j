@@ -41,7 +41,7 @@ export const marketApi = createApi({
       query: (query) => `coins/${query}&${apiKey}`
     }),
     getFearAndGreedData: builder.query({
-      query: () => "fng/",
+      query: (query) => `fng/?limit=${query}`,
     }),
   }),
 });

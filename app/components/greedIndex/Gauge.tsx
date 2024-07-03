@@ -5,15 +5,15 @@ const GaugeComponent = dynamic(() => import("react-gauge-component"), { ssr: fal
 const Gauge = ({greedIndex}:{greedIndex:any}) => {
   return (
     <GaugeComponent
-      type="semicircle"
+      type="radial"
       arc={{
         width: 0.15,
         padding: 0.0015,
-        cornerRadius: 1,
+        cornerRadius: 7,
         // gradient: true,
         subArcs: [
           {
-            limit: 20,
+            limit: 24,
             color: "#ea8228",
             showTick: false,
             tooltip: {
@@ -22,7 +22,7 @@ const Gauge = ({greedIndex}:{greedIndex:any}) => {
             },
           },
           {
-            limit: 40,
+            limit: 47,
             color: "#efb421",
             showTick: false,
             tooltip: {
@@ -30,7 +30,7 @@ const Gauge = ({greedIndex}:{greedIndex:any}) => {
             }
           },
           {
-            limit: 60,
+            limit: 55,
             color: "#f3d51b",
             showTick: false,
             tooltip: {
@@ -38,7 +38,7 @@ const Gauge = ({greedIndex}:{greedIndex:any}) => {
             }
           },
           {
-            limit: 80, color: "#99e225", showTick: false,
+            limit: 75, color: "#99e225", showTick: false,
             tooltip: {
               text: "Greed!"
             }
