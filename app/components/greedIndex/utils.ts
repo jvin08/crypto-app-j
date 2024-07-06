@@ -26,3 +26,7 @@ export const toolTipInfo = (number: number) => {
   if (number >= 25) return info.fear;
   return info.extremeFear;
 };
+export const calculateHoursLeft = (hours:number) => {
+  const adjustHours = 18 - hours < 0 ? 18 - hours + 24 : 18 - hours;
+  return adjustHours < 10 ? "0" + adjustHours : adjustHours;
+};
