@@ -8,7 +8,7 @@ export function formatStandardDate(date: Date) {
   return new Intl.DateTimeFormat("en", { day: "2-digit", month: "short" }).format(date);
 }
 export function fiveYearFormat(date: Date) {
-  const month = date.getMonth() + 1; // Month is zero-based
+  const month = date.getMonth() + 1;
   const year = date.getFullYear();
   return `${month.toString().padStart(2, "0")}/${year.toString().slice(-2)}`;
 }

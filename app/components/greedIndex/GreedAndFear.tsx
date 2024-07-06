@@ -6,6 +6,8 @@ import { useGetFearAndGreedDataQuery } from "@/app/lib/marketSlice";
 import Gauge from "./Gauge";
 import HistoricalData from "./HistoricalData";
 import Image from "next/image";
+import NextUpdate from "./NextUpdate";
+import GreedChartBox from "./GreedChartBox";
 
 const GreedAndFear = ({toggleGreedIndex}:{toggleGreedIndex: ()=>void }) => {
   const darkmode = useSelector(selectDarkmode);
@@ -40,7 +42,7 @@ const GreedAndFear = ({toggleGreedIndex}:{toggleGreedIndex: ()=>void }) => {
               "bg-cryptodark-350": darkmode,
               "bg-cryptoblue-200": !darkmode,
             })}>
-              <div className={clsx("relative m-4 mt-6 rounded-md",{
+              <div className={clsx("relative m-4 rounded-md",{
                 "bg-cryptodark-160" : darkmode,
                 "bg-cryptoblue-100": !darkmode,
               })}>
@@ -52,14 +54,16 @@ const GreedAndFear = ({toggleGreedIndex}:{toggleGreedIndex: ()=>void }) => {
               "bg-cryptodark-350" : darkmode,
               "bg-cryptoblue-200": !darkmode,
             })}> 
-              
+              <GreedChartBox  />
             </div>
           </div>
           <div className="flex sm:flex-col sm:justify-center justify-between">
             <div className={clsx("w-[332px] rounded",{
               "bg-cryptodark-350": darkmode,
               "bg-cryptoblue-200": !darkmode,
-            })}></div>
+            })}>
+              <NextUpdate />
+            </div>
             <div className={clsx("w-[461px] ml-4 rounded",{
               "bg-cryptodark-350": darkmode,
               "bg-cryptoblue-200": !darkmode,

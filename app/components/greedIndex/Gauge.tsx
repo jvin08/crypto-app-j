@@ -58,13 +58,13 @@ const Gauge = ({greedIndex}:{greedIndex:any}) => {
         elastic: true,
       }}
       labels={{
-        valueLabel: { formatTextValue: value => value + " " },
+        valueLabel: { formatTextValue: value => value + "",
+          style: {
+            fontSize: 24,
+          },
+        },
         tickLabels: {
           hideMinMax: true,
-          // valueConfig: { formatTextValue: value => value + " ", fontSize: 10 },
-          // ticks: [
-          //   { value: greedIndex },
-          // ],
         }
       }}
       value={greedIndex}
