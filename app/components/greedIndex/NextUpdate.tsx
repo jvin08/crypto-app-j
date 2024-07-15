@@ -16,7 +16,7 @@ const NextUpdate = () => {
   return (
     <div className="flex flex-col justify-center items-center h-full">
       <p className="mt-auto mb-1 text-base font-bold">The next update will happen in:</p>
-      <p className="mb-auto mt-1  tabular-nums font-extralight">{adjustHours} hours, {59 - minutes < 10 ? "0" + (59 - minutes) : 59 - minutes} minutes, {59 - time < 10 ? "0" + (59 - time) : 59 - time} seconds</p>
+      <p className="mb-auto mt-1  tabular-nums font-extralight">{adjustHours} hours, {59 - minutes} minutes, {59 - time} seconds</p>
     </div>
   );
 };

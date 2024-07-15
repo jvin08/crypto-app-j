@@ -17,7 +17,7 @@ export const options = {
   plugins: {
     tooltip: {
       backgroundColor: "rgba(0, 0, 0, 0)",
-      titleColor: "#7878FA",
+      titleColor: "#FFFFFF",
       titleFont: {
         family: "Arial",
         size: 12,
