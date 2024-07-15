@@ -20,7 +20,7 @@ export const options = {
   plugins: {
     tooltip: {
       backgroundColor: "rgba(0, 0, 0, 0)",
-      titleColor: "#7878FA",
+      titleColor: "#FFF",
       titleFont: {
         family: "Arial",
         size: 12,
@@ -41,7 +41,7 @@ export const options = {
     },
     crosshair: {
       line: {
-        color: "#7878FA",
+        color: "#FFF",
         dashPattern: [5, 5],
         width: 0.25,
       },
@@ -71,7 +71,7 @@ export const options = {
     },
     x: {
       display: true,
-      beforeFit: beforeFit,
+      // beforeFit: beforeFit,
       ticks: {
         maxTicksLimit: 7,
         color: "#9B9AB6",

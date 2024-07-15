@@ -12,7 +12,7 @@ const HistoricalData = ({data}:{data:any}) => {
   const colorLastWeek = color(lastWeekData);
   const colorLastMonth = color(lastMonthData);
   return (
-    <div className="flex justify-between p-4 px-10 text-cryptoblue-460">
+    <div className="flex justify-between p-4 px-[26px] text-cryptoblue-460">
       <div className="text-sm sm:text-base w-full">
         <ToolTip text={toolTipInfo(todayData)}>
           <p className={`cursor-help rounded-lg mt-0 p-1 px-3 flex ${colorToday}`}>Now: <span className="ml-auto">{todayData}</span></p>

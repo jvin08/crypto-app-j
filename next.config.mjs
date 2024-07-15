@@ -18,6 +18,11 @@ const nextConfig = {
                 hostname: 'cryptoicons.co',
                 port: '',
             },
+            {
+                protocol: 'https',
+                hostname: 'api.alternative.me',
+                port: '',
+            }
     ]
     },
   };
