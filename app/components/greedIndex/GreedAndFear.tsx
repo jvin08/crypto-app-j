@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import clsx from "clsx";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
@@ -10,10 +10,13 @@ import NextUpdate from "./NextUpdate";
 import GreedChartBox from "./GreedChartBox";
 
 const GreedAndFear = ({toggleGreedIndex}:{toggleGreedIndex: ()=>void }) => {
+  const [activeIndex, setActiveIndex] = useState<number>(0);
+  const [days, setDays ] = useState(7);
   const darkmode = useSelector(selectDarkmode);
   const crossColor = darkmode ? "white" : "black";
-  const { data } = useGetFearAndGreedDataQuery(31);
-  const todayData = data?.data[0]?.value;
+  const { data } = useGetFearAndGreedDataQuery(days);
+  const todayData = data?.data[activeIndex]?.value;
+  const date = new Date(data?.data[activeIndex]?.timestamp * 1000).toDateString().slice(4);
   return (
     <div className="fixed top-0 left-0 z-10 flex bg-cryptodark-900 bg-opacity-65 backdrop-blur-[1px] w-full h-full">
       <div className="absolute sm:w-[90%] sm:left-[5%] left-[calc(50%-443px)] sm:top-5 top-[1rem] p-[1px] group">
@@ -47,14 +50,15 @@ const GreedAndFear = ({toggleGreedIndex}:{toggleGreedIndex: ()=>void }) => {
                 "bg-cryptoblue-100": !darkmode,
               })}>
                 <Image className="absolute left-1/2 -ml-3 top-1/2" src="/bitcoin.svg" width={25} height={25} alt="Greed Index" />
-                <Gauge greedIndex={todayData}/>
+                <Gauge greedIndex={todayData} />
+                <p className="absolute left-1/2 -ml-9 bottom-2 text-xs">{date}</p>
               </div>
             </div>
             <div className={clsx("sm:w-full w-[461px] text-base flex flex-col justify-between ml-4 rounded",{
               "bg-cryptodark-350" : darkmode,
               "bg-cryptoblue-200": !darkmode,
             })}> 
-              <GreedChartBox  />
+              <GreedChartBox  handleIndex={setActiveIndex} handleRange={setDays} days={days}/>
             </div>
           </div>
           <div className="flex sm:flex-col sm:justify-center justify-between">
@@ -68,7 +72,7 @@ const GreedAndFear = ({toggleGreedIndex}:{toggleGreedIndex: ()=>void }) => {
               "bg-cryptodark-350": darkmode,
               "bg-cryptoblue-200": !darkmode,
             })}>
-              <HistoricalData data={data} />
+              <HistoricalData />
             </div>
           </div>
         </form>
