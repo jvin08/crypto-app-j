@@ -1,18 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import CustomButton from "../charts/CustomButton";
 import clsx from "clsx";
 import { useSelector } from "react-redux";
 import { selectDarkmode } from "@/app/lib/dynamicValuesSlice";
 import GreedChart from "./GreedChart";
 
-const GreedChartBox = () => {
+const GreedChartBox = ({handleIndex, handleRange, days}:{handleIndex:Function, handleRange: Function, days:number}) => {
   const units = ["7D", "14D", "1M", "1Q", "1Y", "5Y"];
-  const [days, setDays ] = useState(7);
   const darkmode = useSelector(selectDarkmode);
   const intervals = [7, 14, 31, 93, 365, 1825];
   const toggleActive = (e: any, index: number) => {
     e.preventDefault();
-    setDays(intervals[index]);
+    handleRange(intervals[index]);
   };
   return (
     <div>
@@ -31,7 +30,7 @@ const GreedChartBox = () => {
         })}
       </div>
       <div>
-        <GreedChart range={days} />
+        <GreedChart range={days} handleIndex={handleIndex} />
       </div>
     </div>
   );

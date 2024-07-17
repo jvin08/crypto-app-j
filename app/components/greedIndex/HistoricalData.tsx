@@ -1,8 +1,10 @@
 import React from "react";
 import { ToolTip } from "./ToolTip";
 import { color, toolTipInfo } from "./utils";
+import { useGetFearAndGreedDataQuery } from "@/app/lib/marketSlice";
 
-const HistoricalData = ({data}:{data:any}) => {
+const HistoricalData = () => {
+  const { data } = useGetFearAndGreedDataQuery(31);
   const todayData = data?.data[0]?.value;
   const yesterdayData = data?.data[1]?.value;
   const lastWeekData = data?.data[7]?.value;

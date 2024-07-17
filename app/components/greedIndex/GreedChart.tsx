@@ -29,12 +29,15 @@ ChartJS.register(
   Legend,
   CrosshairPlugin,
 );
-const GreedChart = ({range}:{range:number}) => {
+const GreedChart = ({range, handleIndex}:{range:number, handleIndex:Function}) => {
   const { data } = useGetFearAndGreedDataQuery(range);
   const dateAdjuster = range === 1825 ? fiveYearFormat : formatStandardDate;
   const times = data?.data.map((item: any) => dateAdjuster(new Date(item.timestamp * 1000)));
   const values = data?.data.map((item: any) => Number(item.value));
   const chartData = getChartData(times, values);
+  options.onHover = (event: any, activeElements: any) => {
+    handleIndex(activeElements?.[0]?.index || 0);
+  };
   return (
     <div className={"sm:ml-0 mt-6 w-[410px] mx-auto ml-6 h-[180px] sm:h-[140px]"}>
       <Line options={options} data={chartData} height={180} />
