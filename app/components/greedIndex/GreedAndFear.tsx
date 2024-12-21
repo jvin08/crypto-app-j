@@ -18,9 +18,9 @@ const GreedAndFear = ({toggleGreedIndex}:{toggleGreedIndex: ()=>void }) => {
   const todayData = data?.data[activeIndex]?.value;
   const date = new Date(data?.data[activeIndex]?.timestamp * 1000).toDateString().slice(4);
   return (
-    <div className="fixed top-0 left-0 z-10 flex bg-cryptodark-900 bg-opacity-65 backdrop-blur-[1px] w-full h-full">
-      <div className="absolute sm:w-[90%] sm:left-[5%] left-[calc(50%-443px)] sm:top-5 top-[1rem] p-[1px] group">
-        <form className={clsx("m-auto sm:w-full w-full sm:h-[630px] z-50 sm:p-4 p-[48px] rounded-[20px] border-[1px] border-cryptodark-350",{
+    <div className="fixed top-0 left-0 z-10 flex bg-cryptodark-900 bg-opacity-65 backdrop-blur-[1px] w-full h-full sm:overflow-y-scroll">
+      <div className="absolute sm:w-full sm:left-0 left-[calc(50%-443px)] sm:top-0 top-[1rem] p-[1px] group">
+        <form className={clsx("m-auto w-full sm:flex sm:flex-col z-50 sm:p-4 p-[48px] rounded-[20px] border-[1px] border-cryptodark-350 sm:h-full",{
           "bg-cryptodark-400 text-cryptodark-100": darkmode,
           "bg-cryptoblue-100 text-cryptoblue-900": !darkmode,
         })}>
@@ -54,7 +54,7 @@ const GreedAndFear = ({toggleGreedIndex}:{toggleGreedIndex: ()=>void }) => {
                 <p className="absolute left-1/2 -ml-9 bottom-2 text-xs">{date}</p>
               </div>
             </div>
-            <div className={clsx("sm:w-full w-[461px] text-base flex flex-col justify-between ml-4 rounded",{
+            <div className={clsx("sm:w-full w-[461px] text-base flex flex-col justify-between sm:ml-0 ml-4 rounded",{
               "bg-cryptodark-350" : darkmode,
               "bg-cryptoblue-200": !darkmode,
             })}> 
@@ -62,13 +62,13 @@ const GreedAndFear = ({toggleGreedIndex}:{toggleGreedIndex: ()=>void }) => {
             </div>
           </div>
           <div className="flex sm:flex-col sm:justify-center justify-between">
-            <div className={clsx("w-[332px] rounded",{
+            <div className={clsx("sm:w-full w-[332px] rounded",{
               "bg-cryptodark-350": darkmode,
               "bg-cryptoblue-200": !darkmode,
             })}>
               <NextUpdate />
             </div>
-            <div className={clsx("w-[461px] ml-4 rounded",{
+            <div className={clsx("sm:w-full w-[461px] sm:ml-0 ml-4 rounded",{
               "bg-cryptodark-350": darkmode,
               "bg-cryptoblue-200": !darkmode,
             })}>

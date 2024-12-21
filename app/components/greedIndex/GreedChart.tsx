@@ -39,7 +39,7 @@ const GreedChart = ({range, handleIndex}:{range:number, handleIndex:Function}) =
     handleIndex(activeElements?.[0]?.index || 0);
   };
   return (
-    <div className={"sm:ml-0 mt-6 w-[410px] mx-auto ml-6 h-[180px] sm:h-[140px]"}>
+    <div className={"sm:ml-0 mt-6 sm:w-full w-[410px] mx-auto ml-6 h-[180px] sm:h-[140px]"}>
       <Line options={options} data={chartData} height={180} />
     </div>
   );
