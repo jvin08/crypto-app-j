@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import  LogoFull  from "./logo/logoFull";
-import  Home from "./home/Home";
+import LogoFull  from "./logo/logoFull";
+import Home from "./home/Home";
 import Portfolio from "./portfolio/Portfolio";
 import Search from "./search/Search";
 import Dropdown from "./dropdown/Dropdown";

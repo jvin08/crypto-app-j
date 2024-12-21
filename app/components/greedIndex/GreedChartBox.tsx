@@ -15,7 +15,7 @@ const GreedChartBox = ({handleIndex, handleRange, days}:{handleIndex:Function, h
   };
   return (
     <div>
-      <div className={clsx("p-1 rounded-md flex w-fit sm:w-full ml-6 mt-4 sm:mt-0",{
+      <div className={clsx("p-1 rounded-md flex w-fit sm:w-full sm:ml-0 ml-6 mt-4 sm:mt-0",{
         "bg-cryptodark-810": darkmode,
         "bg-cryptoblue-450": !darkmode,
       })}>

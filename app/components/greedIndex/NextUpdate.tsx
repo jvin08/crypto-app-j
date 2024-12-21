@@ -14,7 +14,7 @@ const NextUpdate = () => {
     return () => clearInterval(interval);
   }, [time]);
   return (
-    <div className="flex flex-col justify-center items-center h-full">
+    <div className="flex flex-col justify-center items-center sm:w-full h-full">
       <p className="mt-auto mb-1 text-base font-bold">The next update will happen in:</p>
       <p className="mb-auto mt-1  tabular-nums font-extralight">{adjustHours} hours, {59 - minutes} minutes, {59 - time} seconds</p>
     </div>
